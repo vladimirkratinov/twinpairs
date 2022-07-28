@@ -22,22 +22,37 @@ class ViewController: UIViewController {
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()
     var activatedCards = [String]()
+    
 //    var cardList = ["Bat", "Bat",
 //                    "Bones", "Bones",
 //                    "Cauldron", "Cauldron",
 //        ]
     
-    var cardList = ["Bat", "Bat",
-                    "Bones", "Bones",
-                    "Cauldron", "Cauldron",
-                    "Skull", "Skull",
-                    "Ghost",  "Ghost",
-                    "Pumpkin", "Pumpkin",
-                    "Eye", "Eye",
-                    "Dracula", "Dracula",
-                    "Spider", "Spider",
-                    "Cobweb", "Cobweb"
+    var cardList = [
+        "Bat", "Bat",
+        "Bones", "Bones",
+        "Cauldron", "Cauldron",
+        "Skull", "Skull",
+        "Ghost",  "Ghost",
+        "Pumpkin", "Pumpkin",
+        "Eye", "Eye",
+        "Dracula", "Dracula",
+        "Spider", "Spider",
+        "Cobweb", "Cobweb"
         ]
+    
+//    var cardList = [
+//        "egg", "egg",
+//        "location", "location",
+//        "pig", "pig",
+//        "pikachu", "pikachu",
+//        "pokeballs1", "pokeballs1",
+//        "pokeballs2", "pokeballs2",
+//        "pokeballs3", "pokeballs3",
+//        "pokeballs4", "pokeballs4",
+//        "pokemon-trainer", "pokemon-trainer",
+//        "psyduck", "psyduck"
+//    ]
     
     var pairList = [String]()
     
@@ -72,8 +87,12 @@ class ViewController: UIViewController {
     
     override func loadView() {
         view = UIView()
-//        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.white
         self.view = view
+        
+        buttonsView = UIView()
+        buttonsView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buttonsView)
         
         timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -177,9 +196,46 @@ class ViewController: UIViewController {
 //        setupButtons(rowCounter: 2, columnCounter: 3, widthCounter: 130, heightCounter: 180)
 //        setupButtons(rowCounter: 5, columnCounter: 4, widthCounter: 100, heightCounter: 140)
         
+        rowCounter = 5
+        columnCounter = 4
+        widthCounter = 100
+        heightCounter = 140
+        
+//        rowCounter = 4
+//        columnCounter = 3
+//        widthCounter = 130
+//        heightCounter = 180
+        
+        for row in 0..<rowCounter {
+            for column in 0..<columnCounter {
+                cardButton = UIButton(type: .system)
+                cardButton.setTitleColor(UIColor.clear, for: .normal)
+                cardButton.layer.borderWidth = 3
+                cardButton.layer.cornerRadius = 10
+                cardButton.layer.borderColor = UIColor.systemBrown.cgColor
+                cardButton.tintColor = UIColor.orange
+                cardButton.setImage(UIImage(named: "Spider"), for: .normal)
+                cardButton.imageView?.contentMode = .scaleAspectFit
+                cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)
+                cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
+                cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+                let frame = CGRect(x: column * widthCounter, y: row * heightCounter, width: widthCounter, height: heightCounter)
+                cardButton.frame = frame
+                
+                cardButtons.append(cardButton)
+                buttonsView.addSubview(cardButton)
+            }
+        }
+        
         //MARK: - Constraints:
         
         NSLayoutConstraint.activate([
+            buttonsView.widthAnchor.constraint(equalToConstant: 400),
+            buttonsView.heightAnchor.constraint(equalToConstant: 800),
+            buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 3),
+            buttonsView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20),
+            
             timeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             
@@ -206,7 +262,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         loadLevel()
     }
     
@@ -280,7 +337,7 @@ class ViewController: UIViewController {
     //MARK: - LoadLevel:
     
     func loadLevel() {
-        timeCounter = 3
+        timeCounter = 60
         cardCounter = 0
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -302,7 +359,7 @@ class ViewController: UIViewController {
             for i in 0..<cardButtons.count {
                 cardButtons[i].setTitle(shuffledList[i], for: .normal)
                 cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
-                cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 10)  //debug title size
+                cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 0.1)  //debug title size
             }
         }
     }
@@ -320,24 +377,9 @@ class ViewController: UIViewController {
     //MARK: - nextLevel:
     
     func nextLevel() {
-        cardList = ["Bat", "Bat",
-                    "Bones", "Bones",
-                    "Cauldron", "Cauldron",
-                    "Skull", "Skull",
-                    "Ghost",  "Ghost",
-                    "Pumpkin", "Pumpkin",
-                    "Eye", "Eye",
-                    "Dracula", "Dracula",
-                    "Spider", "Spider",
-                    "Cobweb", "Cobweb"
-        ]
-        print(cardList)
-        print(cardList.count)
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.updateUI()
+//            self.updateUI()
         }
-        
         
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
@@ -356,7 +398,6 @@ class ViewController: UIViewController {
             self.activatedButtons.removeAll()
             
             self.loadLevel()
-            
             
             //reset cards color:
             for card in self.cardButtons {
@@ -437,7 +478,7 @@ class ViewController: UIViewController {
     //MARK: - backToMenuButtonTapped:
     
     @objc func backToMenuButtonTapped(_ sender: UIButton) {
-        
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     //MARK: - cardTapped:
@@ -448,7 +489,7 @@ class ViewController: UIViewController {
         if !activatedButtons.contains(sender) {
             guard let imageName = sender.titleLabel?.text else { return }
             
-            let image = UIImage(named: imageName)
+            let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
             sender.tintColor = UIColor.black
             sender.setImage(image, for: .normal)
             sender.setTitle(nil, for: .normal)
@@ -570,8 +611,8 @@ class ViewController: UIViewController {
                     
                 }
                 
+                //kill pulsate animation:
                 DispatchQueue.main.asyncAfter(deadline: .now() + syncDisableAnimation) {
-                    //kill pulsate animation:
                     //SYNC with kill animation!!!
                     self.activatedButtons.last?.pulsateRemove()
                     self.activatedButtons.first?.pulsateRemove()

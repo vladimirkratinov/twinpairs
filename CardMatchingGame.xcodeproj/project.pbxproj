@@ -14,6 +14,7 @@
 		F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71193922890C5F000BC1DAA /* Assets.xcassets */; };
 		F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */; };
 		F711939E28910ECE00BC1DAA /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711939D28910ECE00BC1DAA /* UIButtonExtensions.swift */; };
+		F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711BF28289238C300C3E0E8 /* MenuController.swift */; };
 		F73A75A528920848003D81D5 /* SetupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A75A428920848003D81D5 /* SetupButtons.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		F71193952890C5F000BC1DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F71193972890C5F000BC1DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F711939D28910ECE00BC1DAA /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		F711BF28289238C300C3E0E8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		F73A75A428920848003D81D5 /* SetupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 				F71193892890C5EF00BC1DAA /* AppDelegate.swift */,
 				F711938B2890C5EF00BC1DAA /* SceneDelegate.swift */,
 				F711938D2890C5EF00BC1DAA /* ViewController.swift */,
+				F711BF28289238C300C3E0E8 /* MenuController.swift */,
 				F73A75A428920848003D81D5 /* SetupButtons.swift */,
 				F711939D28910ECE00BC1DAA /* UIButtonExtensions.swift */,
 				F711938F2890C5EF00BC1DAA /* Main.storyboard */,
@@ -148,6 +151,7 @@
 				F711939E28910ECE00BC1DAA /* UIButtonExtensions.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F73A75A528920848003D81D5 /* SetupButtons.swift in Sources */,
+				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
