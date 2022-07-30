@@ -29,12 +29,7 @@ class ViewController: UIViewController {
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()
     var activatedCards = [String]()
-    
-//    var cardList = ["Bat", "Bat",
-//                    "Bones", "Bones",
-//                    "Cauldron", "Cauldron",
-//        ]
-    
+        
     var cardList = [
         "Bat", "Bat",
         "Bones", "Bones",
@@ -48,22 +43,9 @@ class ViewController: UIViewController {
         "Cobweb", "Cobweb"
         ]
     
-//    var cardList = [
-//        "egg", "egg",
-//        "location", "location",
-//        "pig", "pig",
-//        "pikachu", "pikachu",
-//        "pokeballs1", "pokeballs1",
-//        "pokeballs2", "pokeballs2",
-//        "pokeballs3", "pokeballs3",
-//        "pokeballs4", "pokeballs4",
-//        "pokemon-trainer", "pokemon-trainer",
-//        "psyduck", "psyduck"
-//    ]
-    
     var pairList = [String]()
     
-    var mutedGeneral: Bool = Bool()
+    var mutedGeneral = Bool()
     
     var timeLabel: UILabel!
     var flipsLabel: UILabel!
@@ -88,13 +70,11 @@ class ViewController: UIViewController {
         }
     }
     
-    var syncDisableAnimation: Double = 0
+    var syncDisableAnimation = 0.0
     var cardCounter = 0
     
     var timer: Timer!
     var timerCards: Timer!
-    
-    var isGameOver = false
     
     override func loadView() {
         view = UIView()
@@ -791,4 +771,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
