@@ -58,7 +58,6 @@ class ViewController: UIViewController {
             pairsLabel.text = "Pairs: \(pairsCounter)"
         }
     }
-    
     var timeCounter: Int = 0 {
         didSet {
             timeLabel.text = "Time: \(timeCounter)"
@@ -74,7 +73,6 @@ class ViewController: UIViewController {
     var cardCounter = 0
     
     var timer: Timer!
-    var timerCards: Timer!
     
     override func loadView() {
         view = UIView()
@@ -152,14 +150,6 @@ class ViewController: UIViewController {
         restartButton.layer.cornerRadius = 10
         restartButton.isUserInteractionEnabled = true
         restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
-        //shadows {
-//        restartButton.layer.shadowColor = UIColor.black.cgColor
-//        restartButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        restartButton.layer.shadowRadius = 1
-//        restartButton.layer.shadowOpacity = 1.0
-//        restartButton.layer.shouldRasterize = true
-//        restartButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
         view.addSubview(restartButton)
         
         backToMenuButton = UIButton()
@@ -229,18 +219,10 @@ class ViewController: UIViewController {
         //shadows }
         view.addSubview(muteButton)
         
-//        setupButtons(rowCounter: 2, columnCounter: 3, widthCounter: 130, heightCounter: 180)
-//        setupButtons(rowCounter: 5, columnCounter: 4, widthCounter: 100, heightCounter: 140)
-        
         rowCounter = 5
         columnCounter = 4
         widthCounter = 100
         heightCounter = 140
-        
-//        rowCounter = 4
-//        columnCounter = 3
-//        widthCounter = 130
-//        heightCounter = 180
         
         for row in 0..<rowCounter {
             for column in 0..<columnCounter {
@@ -318,7 +300,6 @@ class ViewController: UIViewController {
         //audioFX:
         DispatchQueue.main.async {
             try? self.audioFX.playBackgroundMusic(file: "creepy", type: "mp3")
-            
             if self.mutedGeneral {
                 self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: "volumeLevel")
             } else {
@@ -368,50 +349,14 @@ class ViewController: UIViewController {
         }
     }
     
-    //MARK: - setupButtons:
-    
-    func setupButtons(rowCounter: Int, columnCounter: Int, widthCounter: Int, heightCounter: Int) {
-        buttonsView = UIView()
-        buttonsView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buttonsView)
-        
-        for row in 0..<rowCounter {
-            for column in 0..<columnCounter {
-                cardButton = UIButton(type: .system)
-                cardButton.setTitleColor(UIColor.clear, for: .normal)
-                cardButton.layer.borderWidth = 3
-                cardButton.layer.cornerRadius = 10
-                cardButton.layer.borderColor = UIColor.systemBrown.cgColor
-                cardButton.tintColor = UIColor.orange
-                cardButton.setImage(UIImage(named: "Spider"), for: .normal)
-                cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
-                cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
-                let frame = CGRect(x: column * widthCounter, y: row * heightCounter, width: widthCounter, height: heightCounter)
-                cardButton.frame = frame
-                
-                cardButtons.append(cardButton)
-                buttonsView.addSubview(cardButton)
-            }
-        }
-        
-        NSLayoutConstraint.activate([
-            buttonsView.widthAnchor.constraint(equalToConstant: 400),
-            buttonsView.heightAnchor.constraint(equalToConstant: 800),
-            buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 3),
-            buttonsView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20),
-            ])
-    }
-    
     //MARK: - LoadLevel:
     
     func loadLevel() {
+        //setup time for timer:
         timeCounter = 60
-        cardCounter = 0
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.setupTimer()
-        }
+        //reset card counter:
+        cardCounter = 0
         
         //sync Kill pulsate animation & isUserInteractionEnabled
         syncDisableAnimation = 1.6
@@ -421,8 +366,12 @@ class ViewController: UIViewController {
         //create pair list:
         pairList = cardList
         
+        //shuffle card list:
         let shuffledList = cardList.shuffled()
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.setupTimer()
+        }
         //button names list:
         if cardButtons.count == cardList.count {
             for i in 0..<cardButtons.count {
@@ -431,16 +380,6 @@ class ViewController: UIViewController {
                 cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 0.1)   //debug title size
 //                cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
-        }
-    }
-    
-    //MARK: - updateUI:
-    
-    func updateUI() {
-        DispatchQueue.main.async {
-            self.buttonsView.removeFromSuperview()
-            self.cardButton.removeFromSuperview()
-            self.setupButtons(rowCounter: 5, columnCounter: 4, widthCounter: 100, heightCounter: 140)
         }
     }
     
