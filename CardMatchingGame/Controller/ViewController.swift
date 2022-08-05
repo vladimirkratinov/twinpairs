@@ -20,7 +20,11 @@ class ViewController: UIViewController {
         
         UI.setupSubviews()
         UI.setupConstraints()
-        setupButtons(rows: 5, columns: 4, width: 97, height: 140)
+        
+        //timer to load and get the width & height properties!
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.setupButtons(rows: 2, columns: 2)
+        }
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         UI.backToMenuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
@@ -33,7 +37,13 @@ class ViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        loadLevel()
+        //timer to load and get the width & height properties!
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            let testWidth = self.UI.buttonsView.frame.width
+            print(testWidth)
+            
+            self.loadLevel()
+        }
         
         //debugging Constraints:
         UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
@@ -87,27 +97,63 @@ class ViewController: UIViewController {
         //sync Kill pulsate animation & isUserInteractionEnabled
         prop.syncDisableAnimation = 1.6
         
-        //create pair list:
-        prop.pairList = prop.cardList
-        
-        //shuffle card list:
-        let shuffledList = prop.cardList.shuffled()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
         }
-        //button names list:
-        print("prop.cardButtons Count: \(prop.cardButtons.count)")
-        print("prop.cardList Count: \(prop.cardList.count)")
         
+        //if same amount card buttons and cardlist:
         if prop.cardButtons.count == prop.cardList.count {
+            
+            //create pair list:
+            prop.pairList = prop.cardList
+            
+            //shuffle card list:
+            let shuffledList = prop.cardList.shuffled()
+            
             for i in 0..<prop.cardButtons.count {
                 prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
                 prop.cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
                 prop.cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
                 prop.cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
-//            print("prop.cardButtons.count = prop.cardList.count")
+                
+            //button names list:
+            print("prop.cardButtons Count: \(prop.cardButtons.count)")
+            print("prop.cardList Count: \(prop.cardList.count)")
+            
+        } else {
+            //create lower amounts of card list:
+            prop.lowerAmmountOfCardsList = prop.cardList
+            
+            //remove other cards, if less then 20
+            let sum = prop.cardList.count - prop.cardButtons.count
+            
+            //BUG ??? Range requires lowerBound <= upperBound
+            for _ in 0..<sum {
+                if sum > 0 {
+                    prop.lowerAmmountOfCardsList.removeLast()
+                } else {
+                    break
+                }
+            }
+            print(prop.lowerAmmountOfCardsList)
+            
+            //create pair list:
+            prop.pairList = prop.lowerAmmountOfCardsList
+            
+            //shuffle card list:
+            let shuffledList = prop.lowerAmmountOfCardsList.shuffled()
+            
+            for i in 0..<prop.cardButtons.count {
+                prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
+                prop.cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
+                prop.cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
+                prop.cardButtons[i].setImage(nil, for: .normal)                              //debug image
+            }
+            
+            //button names list:
+            print("prop.cardButtons Count: \(prop.cardButtons.count)")
+            print("lowerAmmountOfCardsList Count: \(prop.lowerAmmountOfCardsList.count)")
         }
     }
     
@@ -123,6 +169,10 @@ class ViewController: UIViewController {
             self.UI.gameOverLabel.pulsate()
         })
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
+            
+        }
+        
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             //invalidateTimer:
@@ -132,8 +182,11 @@ class ViewController: UIViewController {
             
             self.prop.activatedCards.removeAll()
             self.prop.activatedButtons.removeAll()
+            self.prop.cardButtons.removeAll()           //!!!!fixed bug - reset cardButtons array!!!!
             
+            self.setupButtons(rows: 5, columns: 4)
             self.loadLevel()
+            
             
             //reset cards color:
             for card in self.prop.cardButtons {
@@ -143,7 +196,8 @@ class ViewController: UIViewController {
                     card.isEnabled = true
                     card.tintColor = UIColor.systemOrange
                     card.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-                    card.setImage(UIImage(named: "Spider"), for: .normal)
+//                    card.setImage(UIImage(named: "Spider"), for: .normal)
+                    card.setImage(nil, for: .normal)                            //debug image
                 })
             }
         }
@@ -435,7 +489,14 @@ class ViewController: UIViewController {
     
     //MARK: - Setup Buttons:
     
-    fileprivate func setupButtons(rows: Int, columns: Int, width: Int, height: Int) {
+    fileprivate func setupButtons(rows: Int, columns: Int) {
+        let rawWidth = UI.buttonsView.frame.width
+        let resultWidth = Int(rawWidth) / columns
+        
+        let rawHeight = UI.buttonsView.frame.height
+        let resultHeight = Int(rawHeight) / rows
+        
+        
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
@@ -448,7 +509,7 @@ class ViewController: UIViewController {
                 cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
                 cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
-                cardButton.frame = CGRect(x: column * width, y: row * height, width: width, height: height)
+                cardButton.frame = CGRect(x: column * resultWidth, y: row * resultHeight, width: resultWidth, height: resultHeight)
                 
                 UI.buttonsView.addSubview(cardButton)
                 prop.cardButtons.append(cardButton)

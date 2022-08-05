@@ -28,6 +28,7 @@ struct Properties {
     var activatedButtons = [UIButton]()
     var activatedCards = [String]()
     var pairList = [String]()
+    var lowerAmmountOfCardsList = [String]()
     var mutedGeneral = Bool()
     
     var syncDisableAnimation = 0.0

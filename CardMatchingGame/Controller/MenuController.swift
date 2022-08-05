@@ -62,7 +62,7 @@ class MenuController: UIViewController {
         
         pokemonButton = UIButton()
         pokemonButton.translatesAutoresizingMaskIntoConstraints = false
-        pokemonButton.alpha = 0.2
+        pokemonButton.alpha = 0
         pokemonButton.setTitle("Pokemon", for: .normal)
         pokemonButton.setTitleColor(UIColor.black, for: .normal)
         pokemonButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 30)
@@ -82,7 +82,7 @@ class MenuController: UIViewController {
         
         partyButton = UIButton()
         partyButton.translatesAutoresizingMaskIntoConstraints = false
-        partyButton.alpha = 0.2
+        partyButton.alpha = 0
         partyButton.setTitle("Party", for: .normal)
         partyButton.setTitleColor(UIColor.black, for: .normal)
         partyButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 30)
@@ -102,7 +102,7 @@ class MenuController: UIViewController {
         
         otherButton = UIButton()
         otherButton.translatesAutoresizingMaskIntoConstraints = false
-        otherButton.alpha = 0.2
+        otherButton.alpha = 0
         otherButton.setTitle("Other", for: .normal)
         otherButton.setTitleColor(UIColor.black, for: .normal)
         otherButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 30)
@@ -122,7 +122,7 @@ class MenuController: UIViewController {
         
         time1Button = UIButton()
         time1Button.translatesAutoresizingMaskIntoConstraints = false
-        time1Button.alpha = 1
+        time1Button.alpha = 0
         time1Button.setTitle("60", for: .normal)
         time1Button.setTitleColor(UIColor.black, for: .normal)
         time1Button.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 30)
@@ -144,7 +144,7 @@ class MenuController: UIViewController {
         
         time2Button = UIButton()
         time2Button.translatesAutoresizingMaskIntoConstraints = false
-        time2Button.alpha = 1
+        time2Button.alpha = 0
         time2Button.setTitle("120", for: .normal)
         time2Button.setTitleColor(UIColor.black, for: .normal)
         time2Button.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 30)

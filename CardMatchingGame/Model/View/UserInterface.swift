@@ -35,7 +35,7 @@ class UserInterface: UIView {
     var buttonsView: UIView = {
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsView.layer.borderWidth = 3
+        buttonsView.layer.borderWidth = 0
         return buttonsView
     }()
     
@@ -197,7 +197,11 @@ class UserInterface: UIView {
         muteButton.layer.borderWidth = 3
         muteButton.layer.cornerRadius = 10
         muteButton.isUserInteractionEnabled = true
-        muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
+        if muteButton.backgroundColor == nil {
+            muteButton.backgroundColor = UIColor.systemPink
+        } else {
+            muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
+        }
         //shadows {
         muteButton.layer.shadowColor = UIColor.black.cgColor
         muteButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -230,10 +234,10 @@ class UserInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
+            buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10),
             buttonsView.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
             buttonsView.trailingAnchor.constraint(equalTo: myView.layoutMarginsGuide.trailingAnchor),
-            buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -5),
+            buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -20),
 
             timeLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
@@ -259,11 +263,11 @@ class UserInterface: UIView {
             backToMenuButton.widthAnchor.constraint(equalToConstant: 150),
 
             menuButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: -100),
-            menuButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor),
+            menuButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -5),
             menuButton.widthAnchor.constraint(equalToConstant: 150),
 
             muteButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: 100),
-            muteButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor),
+            muteButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -5),
             muteButton.widthAnchor.constraint(equalToConstant: 150),
         ])
     }
