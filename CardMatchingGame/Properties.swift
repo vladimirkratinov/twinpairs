@@ -7,6 +7,9 @@
 
 import UIKit
 
+struct Properties {
+}
+
 var cardList: [String] = [
     "Bat", "Bat",
     "Bones", "Bones",

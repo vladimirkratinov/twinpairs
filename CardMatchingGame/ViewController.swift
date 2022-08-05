@@ -12,9 +12,9 @@ class ViewController: UIViewController {
     
     var audioFX = AudioFX()
     let UI = UserInterface()
+    let prop = Properties()
     let defaults = UserDefaults.standard
     
-    var cardButton = UIButton()
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()
     var activatedCards = [String]()
@@ -49,37 +49,12 @@ class ViewController: UIViewController {
         
         UI.setupSubviews()
         UI.setupConstraints()
+        setupButtons(rows: 5, columns: 4, width: 97, height: 140)
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         UI.backToMenuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
         UI.menuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
         UI.muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
-        
-        let rowCounter = 5
-        let columnCounter = 4
-        let widthCounter = 97
-        let heightCounter = 140
-        
-        for row in 0..<rowCounter {
-            for column in 0..<columnCounter {
-                cardButton = UIButton(type: .system)
-                cardButton.layer.borderWidth = 3
-                cardButton.layer.cornerRadius = 10
-                cardButton.layer.borderColor = UIColor.systemBrown.cgColor
-                cardButton.tintColor = UIColor.darkGray
-                cardButton.setImage(UIImage(named: "Spider"), for: .normal)
-                cardButton.imageView?.contentMode = .scaleAspectFit
-                cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
-                cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
-                cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
-                
-                let frame = CGRect(x: column * widthCounter, y: row * heightCounter, width: widthCounter, height: heightCounter)
-                cardButton.frame = frame
-                
-                UI.buttonsView.addSubview(cardButton)
-                cardButtons.append(cardButton)
-            }
-        }
     }
     
     override func viewDidLoad() {
@@ -161,7 +136,7 @@ class ViewController: UIViewController {
                 cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
                 cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
-            print("cardButtons.count = cardList.count")
+//            print("cardButtons.count = cardList.count")
         }
     }
     
@@ -488,6 +463,29 @@ class ViewController: UIViewController {
         if pairList.isEmpty {
             print("PAIR LIST IS EMPTY")
             nextLevel()
+        }
+    }
+    
+    //MARK: - Setup Buttons:
+    
+    fileprivate func setupButtons(rows: Int, columns: Int, width: Int, height: Int) {
+        for row in 0..<rows {
+            for column in 0..<columns {
+                let cardButton = UIButton(type: .system)
+                cardButton.layer.borderWidth = 3
+                cardButton.layer.cornerRadius = 10
+                cardButton.layer.borderColor = UIColor.systemBrown.cgColor
+                cardButton.tintColor = UIColor.darkGray
+                cardButton.setImage(UIImage(named: "Spider"), for: .normal)
+                cardButton.imageView?.contentMode = .scaleAspectFit
+                cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
+                cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
+                cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+                cardButton.frame = CGRect(x: column * width, y: row * height, width: width, height: height)
+                
+                UI.buttonsView.addSubview(cardButton)
+                cardButtons.append(cardButton)
+            }
         }
     }
 }

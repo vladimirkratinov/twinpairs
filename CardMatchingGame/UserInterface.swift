@@ -227,7 +227,7 @@ class UserInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 5),
+            buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
             buttonsView.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
             buttonsView.trailingAnchor.constraint(equalTo: myView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -5),
