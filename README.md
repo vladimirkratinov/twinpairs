@@ -2,13 +2,20 @@
 Match Pair is a memory game where you need to match pairs of cards. 
 Playing is very simple - you turn over one card and then try to find a matching card.
 
-For now Halloween level is ready; 🎃
+- Halloween level is ready 🎃
 
-- Optimized for iPhone 12 Pro Max!
+# How to play
+Try to match the cards with its respective pair with as few moves as possible.
+
+* Reveal cards by clicking on them
+* Only two cards can be revealed at a time
+* If the symbols on the cards do not match the cards will revert to the original position
+* If the symbols match the revealed cards will remain open
+* Game is successfully completed when all pairs of cards have been matched to each other
 
 # Features: 🚀
 
-* Different levels (in progress...)
+* Different levels in progress
 * Custom design
 * Animations
 * Sound effects
