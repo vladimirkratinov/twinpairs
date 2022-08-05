@@ -11,222 +11,57 @@ import AVFoundation
 class ViewController: UIViewController {
     
     var audioFX = AudioFX()
+    let UI = UserInterface()
     let defaults = UserDefaults.standard
     
-    var cardButton: UIButton!
-    var restartButton: UIButton!
-    var backToMenuButton: UIButton!
-    var menuButton: UIButton!
-    var muteButton: UIButton!
-    
-    var buttonsView: UIView!
-    
-    var widthCounter = Int()         //130
-    var heightCounter = Int()        //180
-    var rowCounter = Int()
-    var columnCounter = Int()
-    
+    var cardButton = UIButton()
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()
     var activatedCards = [String]()
-        
-    var cardList = [
-        "Bat", "Bat",
-        "Bones", "Bones",
-        "Cauldron", "Cauldron",
-        "Skull", "Skull",
-        "Ghost",  "Ghost",
-        "Pumpkin", "Pumpkin",
-        "Eye", "Eye",
-        "Dracula", "Dracula",
-        "Spider", "Spider",
-        "Cobweb", "Cobweb"
-        ]
     
     var pairList = [String]()
     
     var mutedGeneral = Bool()
     
-    var timeLabel: UILabel!
-    var flipsLabel: UILabel!
-    var gameOverLabel: UILabel!
-    var nextLevelLabel: UILabel!
-    var pairsLabel: UILabel!
-    
     var pairsCounter: Int = 0 {
         didSet {
-            pairsLabel.text = "Pairs: \(pairsCounter)"
+            UI.pairsLabel.text = "Pairs: \(pairsCounter)"
         }
     }
     var timeCounter: Int = 0 {
         didSet {
-            timeLabel.text = "Time: \(timeCounter)"
+            UI.timeLabel.text = "Time: \(timeCounter)"
         }
     }
     var flipsCounter: Int = 0 {
         didSet {
-            flipsLabel.text = "Flips: \(flipsCounter)"
+            UI.flipsLabel.text = "Flips: \(flipsCounter)"
         }
     }
-    
+
     var syncDisableAnimation = 0.0
     var cardCounter = 0
     
     var timer: Timer!
     
     override func loadView() {
-        view = UIView()
-        view.backgroundColor = UIColor.white
-        self.view = view
+        view = UI.myView
         
-        buttonsView = UIView()
-        buttonsView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buttonsView)
+        UI.setupSubviews()
+        UI.setupConstraints()
         
-        timeLabel = UILabel()
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.textAlignment = .left
-        timeLabel.text = "Time: \(timeCounter)"
-        timeLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
-        view.addSubview(timeLabel)
+        UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
+        UI.backToMenuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
+        UI.menuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
+        UI.muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
         
-        flipsLabel = UILabel()
-        flipsLabel.translatesAutoresizingMaskIntoConstraints = false
-        flipsLabel.textAlignment = .right
-        flipsLabel.text = "Flips: 0"
-        flipsLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
-        view.addSubview(flipsLabel)
-        
-        pairsLabel = UILabel()
-        pairsLabel.translatesAutoresizingMaskIntoConstraints = false
-        pairsLabel.textAlignment = .right
-        pairsLabel.text = "Pairs: "
-        pairsLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
-        view.addSubview(pairsLabel)
-        
-        gameOverLabel = UILabel()
-        gameOverLabel.alpha = 0
-        gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameOverLabel.textAlignment = .center
-        gameOverLabel.text = "GAME OVER!"
-        gameOverLabel.font = UIFont(name: "Baskerville-SemiBold", size: 55)
-        gameOverLabel.textColor = UIColor.yellow
-        //shadows {
-        gameOverLabel.layer.shadowColor = UIColor.black.cgColor
-        gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        gameOverLabel.layer.shadowRadius = 1
-        gameOverLabel.layer.shadowOpacity = 1.0
-        gameOverLabel.layer.shouldRasterize = true
-        gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
-        view.addSubview(gameOverLabel)
-        
-        nextLevelLabel = UILabel()
-        nextLevelLabel.alpha = 0
-        nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
-        nextLevelLabel.textAlignment = .center
-        nextLevelLabel.text = "NEXT LEVEL!"
-        nextLevelLabel.font = UIFont(name: "Baskerville-SemiBold", size: 45)
-        nextLevelLabel.textColor = UIColor.green
-        //shadows {
-        nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
-        nextLevelLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        nextLevelLabel.layer.shadowRadius = 1
-        nextLevelLabel.layer.shadowOpacity = 1.0
-        nextLevelLabel.layer.shouldRasterize = true
-        nextLevelLabel.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
-        view.addSubview(nextLevelLabel)
-        
-        restartButton = UIButton()
-        restartButton.alpha = 0
-        restartButton.translatesAutoresizingMaskIntoConstraints = false
-        restartButton.setTitle(" Restart ", for: .normal)
-        restartButton.backgroundColor = UIColor.red
-        restartButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
-        restartButton.setTitleColor(UIColor.black, for: .normal)
-        restartButton.layer.borderColor = UIColor.black.cgColor
-        restartButton.layer.borderWidth = 3
-        restartButton.layer.cornerRadius = 10
-        restartButton.isUserInteractionEnabled = true
-        restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
-        view.addSubview(restartButton)
-        
-        backToMenuButton = UIButton()
-        backToMenuButton.isHidden = true
-        backToMenuButton.alpha = 0
-        backToMenuButton.translatesAutoresizingMaskIntoConstraints = false
-        backToMenuButton.setTitle(" Menu ", for: .normal)
-        backToMenuButton.backgroundColor = UIColor.systemPink
-        backToMenuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
-        backToMenuButton.setTitleColor(UIColor.black, for: .normal)
-        backToMenuButton.layer.borderColor = UIColor.black.cgColor
-        backToMenuButton.layer.borderWidth = 3
-        backToMenuButton.layer.cornerRadius = 10
-        backToMenuButton.isUserInteractionEnabled = true
-        backToMenuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
-        //shadows {
-        backToMenuButton.layer.shadowColor = UIColor.black.cgColor
-        backToMenuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        backToMenuButton.layer.shadowRadius = 1
-        backToMenuButton.layer.shadowOpacity = 1.0
-        backToMenuButton.layer.shouldRasterize = true
-        backToMenuButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
-        view.addSubview(backToMenuButton)
-        
-        menuButton = UIButton()
-        menuButton.alpha = 1
-        menuButton.translatesAutoresizingMaskIntoConstraints = false
-        menuButton.setTitle(" Back ", for: .normal)
-        menuButton.backgroundColor = UIColor.systemPink
-        menuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
-        menuButton.setTitleColor(UIColor.black, for: .normal)
-        menuButton.layer.borderColor = UIColor.black.cgColor
-        menuButton.layer.borderWidth = 3
-        menuButton.layer.cornerRadius = 10
-        menuButton.isUserInteractionEnabled = true
-        menuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
-        //shadows {
-        menuButton.layer.shadowColor = UIColor.black.cgColor
-        menuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        menuButton.layer.shadowRadius = 1
-        menuButton.layer.shadowOpacity = 1.0
-        menuButton.layer.shouldRasterize = true
-        menuButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
-        view.addSubview(menuButton)
-        
-        muteButton = UIButton()
-        muteButton.alpha = 1
-        muteButton.translatesAutoresizingMaskIntoConstraints = false
-        muteButton.setTitle(" Mute ", for: .normal)
-        muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
-        muteButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
-        muteButton.setTitleColor(UIColor.black, for: .normal)
-        muteButton.layer.borderColor = UIColor.black.cgColor
-        muteButton.layer.borderWidth = 3
-        muteButton.layer.cornerRadius = 10
-        muteButton.isUserInteractionEnabled = true
-        muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
-        //shadows {
-        muteButton.layer.shadowColor = UIColor.black.cgColor
-        muteButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        muteButton.layer.shadowRadius = 1
-        muteButton.layer.shadowOpacity = 1.0
-        muteButton.layer.shouldRasterize = true
-        muteButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
-        view.addSubview(muteButton)
-        
-        rowCounter = 5
-        columnCounter = 4
-        widthCounter = 100
-        heightCounter = 140
+        let rowCounter = 5
+        let columnCounter = 4
+        let widthCounter = 97
+        let heightCounter = 140
         
         for row in 0..<rowCounter {
             for column in 0..<columnCounter {
-                
                 cardButton = UIButton(type: .system)
                 cardButton.layer.borderWidth = 3
                 cardButton.layer.cornerRadius = 10
@@ -237,54 +72,14 @@ class ViewController: UIViewController {
                 cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
                 cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+                
                 let frame = CGRect(x: column * widthCounter, y: row * heightCounter, width: widthCounter, height: heightCounter)
                 cardButton.frame = frame
-
-                buttonsView.addSubview(cardButton)
+                
+                UI.buttonsView.addSubview(cardButton)
                 cardButtons.append(cardButton)
             }
         }
-        
-        //MARK: - Constraints:
-        
-        NSLayoutConstraint.activate([
-            buttonsView.widthAnchor.constraint(equalToConstant: 400),
-            buttonsView.heightAnchor.constraint(equalToConstant: 800),
-            buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 3),
-            buttonsView.topAnchor.constraint(equalTo: view.topAnchor, constant: 110),
-            buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20),
-            
-            timeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            
-            flipsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            flipsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            
-            pairsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            pairsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            gameOverLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameOverLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            nextLevelLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nextLevelLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            restartButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
-            restartButton.widthAnchor.constraint(equalToConstant: 150),
-            
-            backToMenuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
-            backToMenuButton.widthAnchor.constraint(equalToConstant: 150),
-            
-            menuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100),
-            menuButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
-            menuButton.widthAnchor.constraint(equalToConstant: 150),
-            
-            muteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100),
-            muteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
-            muteButton.widthAnchor.constraint(equalToConstant: 150),
-        ])
     }
     
     override func viewDidLoad() {
@@ -318,23 +113,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setGradientBackground()
+        UI.setGradientBackground()
     }
-    
-    func setGradientBackground() {
-       let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-       gradientLayer.colors = [
-        UIColor.systemPink.cgColor,
-        UIColor.systemOrange.cgColor,
-        UIColor.systemRed.cgColor
-       ]
-//       gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-//       gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-//       gradientLayer.locations = [1,0]
-       
-       self.view.layer.insertSublayer(gradientLayer, at: 0)
-     }
     
     func setupTimer() {
         //set up Timer:
@@ -361,8 +141,6 @@ class ViewController: UIViewController {
         //sync Kill pulsate animation & isUserInteractionEnabled
         syncDisableAnimation = 1.6
         
-        //create card list:
-        
         //create pair list:
         pairList = cardList
         
@@ -373,13 +151,17 @@ class ViewController: UIViewController {
             self.setupTimer()
         }
         //button names list:
+        print("cardButtons Count: \(cardButtons.count)")
+        print("cardList Count: \(cardList.count)")
+        
         if cardButtons.count == cardList.count {
             for i in 0..<cardButtons.count {
                 cardButtons[i].setTitle(shuffledList[i], for: .normal)
                 cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
-                cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 0.1)   //debug title size
-//                cardButtons[i].setImage(nil, for: .normal)                              //debug image
+                cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
+                cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
+            print("cardButtons.count = cardList.count")
         }
     }
     
@@ -390,13 +172,13 @@ class ViewController: UIViewController {
         try? audioFX.playFX(file: "victory", type: "wav")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            self.updateUI()
+            //            self.updateUI()
         }
         
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
-            self.nextLevelLabel.alpha = 1
-            self.gameOverLabel.pulsate()
+            self.UI.nextLevelLabel.alpha = 1
+            self.UI.gameOverLabel.pulsate()
         })
         
         //reset level:
@@ -404,7 +186,7 @@ class ViewController: UIViewController {
             //invalidateTimer:
             self.timer.invalidate()
             
-            self.nextLevelLabel.alpha = 0
+            self.UI.nextLevelLabel.alpha = 0
             
             self.activatedCards.removeAll()
             self.activatedButtons.removeAll()
@@ -423,7 +205,6 @@ class ViewController: UIViewController {
                 })
             }
         }
-        
     }
     
     //MARK: - GameOver:
@@ -435,16 +216,16 @@ class ViewController: UIViewController {
         try? audioFX.playFX(file: "gameOver", type: "wav")
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
-            self.gameOverLabel.alpha = 1
-            self.backToMenuButton.alpha = 1
-            self.restartButton.alpha = 1
-            self.gameOverLabel.pulsate()
-            self.restartButton.pulsate()
+            self.UI.gameOverLabel.alpha = 1
+            self.UI.backToMenuButton.alpha = 1
+            self.UI.restartButton.alpha = 1
+            self.UI.gameOverLabel.pulsate()
+            self.UI.restartButton.pulsate()
         })
         
         //restart and menu button animations:
-        UIView.transition(with: backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
-        UIView.transition(with: restartButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
+        UIView.transition(with: self.UI.backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
+        UIView.transition(with: self.UI.restartButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
         
         //cards animations:
         for card in cardButtons {
@@ -464,7 +245,7 @@ class ViewController: UIViewController {
         timer.invalidate()
         
         //animation:
-        restartButton.flash()
+        UI.restartButton.flash()
         
         //audioFX:
         try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
@@ -476,9 +257,9 @@ class ViewController: UIViewController {
         
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.gameOverLabel.alpha = 0
-            self.backToMenuButton.alpha = 0
-            self.restartButton.alpha = 0
+            self.UI.gameOverLabel.alpha = 0
+            self.UI.backToMenuButton.alpha = 0
+            self.UI.restartButton.alpha = 0
             self.flipsCounter = 0
             self.pairsCounter = 0
             
