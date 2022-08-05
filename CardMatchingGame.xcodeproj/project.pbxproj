@@ -17,7 +17,6 @@
 		F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711BF28289238C300C3E0E8 /* MenuController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* UserInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
-		F76275E72894B4CC00266D59 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76275E62894B4CC00266D59 /* CardButton.swift */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
 		F781AD7F28931C40002993E7 /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory.wav */; };
@@ -43,7 +42,6 @@
 		F711BF28289238C300C3E0E8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		F76275E62894B4CC00266D59 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		F781AD7A28931C40002993E7 /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
@@ -89,13 +87,8 @@
 			children = (
 				F71193892890C5EF00BC1DAA /* AppDelegate.swift */,
 				F711938B2890C5EF00BC1DAA /* SceneDelegate.swift */,
-				F711938D2890C5EF00BC1DAA /* ViewController.swift */,
-				F760AF6A289C6EA2007ABE11 /* UserInterface.swift */,
-				F76275E62894B4CC00266D59 /* CardButton.swift */,
-				F711BF28289238C300C3E0E8 /* MenuController.swift */,
-				F760AF6C289C7CE8007ABE11 /* Properties.swift */,
-				F781AD7728931921002993E7 /* AudioFX.swift */,
-				F711939D28910ECE00BC1DAA /* Extensions.swift */,
+				F7815855289CBA8F0016A41D /* Model */,
+				F7815853289CBA7C0016A41D /* Controller */,
 				F711938F2890C5EF00BC1DAA /* Main.storyboard */,
 				F71193922890C5F000BC1DAA /* Assets.xcassets */,
 				F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */,
@@ -103,6 +96,34 @@
 				F781AD8328931C4F002993E7 /* AudioFX */,
 			);
 			path = CardMatchingGame;
+			sourceTree = "<group>";
+		};
+		F7815853289CBA7C0016A41D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F711938D2890C5EF00BC1DAA /* ViewController.swift */,
+				F711BF28289238C300C3E0E8 /* MenuController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F7815854289CBA850016A41D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F760AF6A289C6EA2007ABE11 /* UserInterface.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F7815855289CBA8F0016A41D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F760AF6C289C7CE8007ABE11 /* Properties.swift */,
+				F781AD7728931921002993E7 /* AudioFX.swift */,
+				F711939D28910ECE00BC1DAA /* Extensions.swift */,
+				F7815854289CBA850016A41D /* View */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F781AD8328931C4F002993E7 /* AudioFX */ = {
@@ -207,7 +228,6 @@
 				F781AD7828931921002993E7 /* AudioFX.swift in Sources */,
 				F711938E2890C5EF00BC1DAA /* ViewController.swift in Sources */,
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
-				F76275E72894B4CC00266D59 /* CardButton.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,

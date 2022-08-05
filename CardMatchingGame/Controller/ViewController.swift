@@ -12,37 +12,8 @@ class ViewController: UIViewController {
     
     var audioFX = AudioFX()
     let UI = UserInterface()
-    let prop = Properties()
+    var prop = Properties()
     let defaults = UserDefaults.standard
-    
-    var cardButtons = [UIButton]()
-    var activatedButtons = [UIButton]()
-    var activatedCards = [String]()
-    
-    var pairList = [String]()
-    
-    var mutedGeneral = Bool()
-    
-    var pairsCounter: Int = 0 {
-        didSet {
-            UI.pairsLabel.text = "Pairs: \(pairsCounter)"
-        }
-    }
-    var timeCounter: Int = 0 {
-        didSet {
-            UI.timeLabel.text = "Time: \(timeCounter)"
-        }
-    }
-    var flipsCounter: Int = 0 {
-        didSet {
-            UI.flipsLabel.text = "Flips: \(flipsCounter)"
-        }
-    }
-
-    var syncDisableAnimation = 0.0
-    var cardCounter = 0
-    
-    var timer: Timer!
     
     override func loadView() {
         view = UI.myView
@@ -70,7 +41,7 @@ class ViewController: UIViewController {
         //audioFX:
         DispatchQueue.main.async {
             try? self.audioFX.playBackgroundMusic(file: "creepy", type: "mp3")
-            if self.mutedGeneral {
+            if self.prop.mutedGeneral {
                 self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: "volumeLevel")
             } else {
                 self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: "volumeLevel")
@@ -93,12 +64,12 @@ class ViewController: UIViewController {
     
     func setupTimer() {
         //set up Timer:
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if self.timeCounter > 0 {
-                self.timeCounter -= 1
+        prop.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.UI.timeCounter > 0 {
+                self.UI.timeCounter -= 1
             } else {
                 //GAME OVER:
-                timer.invalidate()
+                self.prop.timer.invalidate()
                 self.gameOver()
             }
         }
@@ -108,35 +79,35 @@ class ViewController: UIViewController {
     
     func loadLevel() {
         //setup time for timer:
-        timeCounter = 60
+        UI.timeCounter = 60
         
         //reset card counter:
-        cardCounter = 0
+        prop.cardCounter = 0
         
         //sync Kill pulsate animation & isUserInteractionEnabled
-        syncDisableAnimation = 1.6
+        prop.syncDisableAnimation = 1.6
         
         //create pair list:
-        pairList = cardList
+        prop.pairList = prop.cardList
         
         //shuffle card list:
-        let shuffledList = cardList.shuffled()
+        let shuffledList = prop.cardList.shuffled()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
         }
         //button names list:
-        print("cardButtons Count: \(cardButtons.count)")
-        print("cardList Count: \(cardList.count)")
+        print("prop.cardButtons Count: \(prop.cardButtons.count)")
+        print("prop.cardList Count: \(prop.cardList.count)")
         
-        if cardButtons.count == cardList.count {
-            for i in 0..<cardButtons.count {
-                cardButtons[i].setTitle(shuffledList[i], for: .normal)
-                cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
-                cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
-                cardButtons[i].setImage(nil, for: .normal)                              //debug image
+        if prop.cardButtons.count == prop.cardList.count {
+            for i in 0..<prop.cardButtons.count {
+                prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
+                prop.cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
+                prop.cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
+                prop.cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
-//            print("cardButtons.count = cardList.count")
+//            print("prop.cardButtons.count = prop.cardList.count")
         }
     }
     
@@ -145,10 +116,6 @@ class ViewController: UIViewController {
     func nextLevel() {
         //audioFX:
         try? audioFX.playFX(file: "victory", type: "wav")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //            self.updateUI()
-        }
         
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
@@ -159,17 +126,17 @@ class ViewController: UIViewController {
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             //invalidateTimer:
-            self.timer.invalidate()
+            self.prop.timer.invalidate()
             
             self.UI.nextLevelLabel.alpha = 0
             
-            self.activatedCards.removeAll()
-            self.activatedButtons.removeAll()
+            self.prop.activatedCards.removeAll()
+            self.prop.activatedButtons.removeAll()
             
             self.loadLevel()
             
             //reset cards color:
-            for card in self.cardButtons {
+            for card in self.prop.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
                     card.pulsateRemove()
                     card.alpha = 1
@@ -186,7 +153,7 @@ class ViewController: UIViewController {
     
     func gameOver() {
         //reset timer:
-        timer.invalidate()
+        prop.timer.invalidate()
         //audioFX:
         try? audioFX.playFX(file: "gameOver", type: "wav")
         //labels animations:
@@ -203,7 +170,7 @@ class ViewController: UIViewController {
         UIView.transition(with: self.UI.restartButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
         
         //cards animations:
-        for card in cardButtons {
+        for card in prop.cardButtons {
             card.pulsateRemove()
             
             UIButton.animate(withDuration: 1, animations: {
@@ -217,7 +184,7 @@ class ViewController: UIViewController {
     //MARK: - restartTapped:
     
     @objc func restartTapped(_ sender: UIButton) {
-        timer.invalidate()
+        prop.timer.invalidate()
         
         //animation:
         UI.restartButton.flash()
@@ -225,8 +192,8 @@ class ViewController: UIViewController {
         //audioFX:
         try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
         
-        activatedCards.removeAll()
-        activatedButtons.removeAll()
+        prop.activatedCards.removeAll()
+        prop.activatedButtons.removeAll()
         
         loadLevel()
         
@@ -235,11 +202,11 @@ class ViewController: UIViewController {
             self.UI.gameOverLabel.alpha = 0
             self.UI.backToMenuButton.alpha = 0
             self.UI.restartButton.alpha = 0
-            self.flipsCounter = 0
-            self.pairsCounter = 0
+            self.UI.flipsCounter = 0
+            self.UI.pairsCounter = 0
             
             //reset cards color:
-            for card in self.cardButtons {
+            for card in self.prop.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
                     card.alpha = 1
                     card.isEnabled = true
@@ -258,7 +225,7 @@ class ViewController: UIViewController {
         sender.flash()
         //set UserDefaults:
         var muted = defaults.bool(forKey: "isMuted")
-        mutedGeneral = muted   //set mutedGeneral - to have an access in viewDidLoad() to control volume level
+        prop.mutedGeneral = muted   //set prop.mutedGeneral - to have an access in viewDidLoad() to control volume level
         
         //audioFX:
         try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
@@ -313,7 +280,7 @@ class ViewController: UIViewController {
         try? audioFX.playFX(file: AudioFXName.flip1.rawValue, type: "wav")
         
         //flip card:
-        if !activatedButtons.contains(sender) {
+        if !prop.activatedButtons.contains(sender) {
             guard let imageName = sender.titleLabel?.text else { return }
             
             let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
@@ -328,11 +295,11 @@ class ViewController: UIViewController {
             //flip animation:
             UIView.transition(with: sender, duration: 0.8, options: .transitionFlipFromRight, animations: nil, completion: nil)
             
-            activatedCards.append(imageName)
-            activatedButtons.append(sender)
+            prop.activatedCards.append(imageName)
+            prop.activatedButtons.append(sender)
             
-            cardCounter += 1    //0 - 2
-            flipsCounter += 1
+            prop.cardCounter += 1    //0 - 2
+            UI.flipsCounter += 1
             
         } else {
             //flip back:
@@ -351,39 +318,39 @@ class ViewController: UIViewController {
             }
             
             //reset cards:
-            activatedButtons.removeLast()
-            activatedCards.removeLast()
+            prop.activatedButtons.removeLast()
+            prop.activatedCards.removeLast()
             
             //reset counter:
-            cardCounter = 0
+            prop.cardCounter = 0
             
         }
-        print(activatedCards)
+        print(prop.activatedCards)
         
         //auto-disable cards after 2 clicked:
-        if cardCounter == 2 {
+        if prop.cardCounter == 2 {
             
             //SYNC with kill animation!!!
-            for card in cardButtons {
+            for card in prop.cardButtons {
                 card.isUserInteractionEnabled = false
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + syncDisableAnimation) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + prop.syncDisableAnimation) {
                     card.isUserInteractionEnabled = true
                 }
             }
             
             //check for duplicates (to avoid self-match with 1 item in array):
-            if activatedCards.last == activatedCards.first && activatedCards.count > 1 {
+            if prop.activatedCards.last == prop.activatedCards.first && prop.activatedCards.count > 1 {
                 //match cards!
                 print("BINGO")
                 
-                //remove from pairList: (to sort pairs for next level)
-                pairsCounter += 1
+                //remove from prop.pairList: (to sort pairs for next level)
+                UI.pairsCounter += 1
                 if let cardName = sender.titleLabel?.text {
                     print("\(cardName) removed from list")
-                    pairList.removeAll { $0 == cardName }
-                    print(pairList)
-                    print(pairList.count)
+                    prop.pairList.removeAll { $0 == cardName }
+                    print(prop.pairList)
+                    print(prop.pairList.count)
                 }
                 
                 //audioFX1:
@@ -393,28 +360,28 @@ class ViewController: UIViewController {
                     //audioFX2:
                     try? self.audioFX.playFX(file: AudioFXName.matchIgnite.rawValue, type: "wav")
                     //animation:
-                    UIView.transition(with: self.activatedButtons.last!, duration: 1, options: .transitionCurlUp, animations: {
-                        self.activatedButtons.last?.alpha = 0
+                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 1, options: .transitionCurlUp, animations: {
+                        self.prop.activatedButtons.last?.alpha = 0
                     } ) { finished in
-                        self.activatedButtons.last?.isHidden = true
-                        self.activatedButtons.last?.alpha = 1
+                        self.prop.activatedButtons.last?.isHidden = true
+                        self.prop.activatedButtons.last?.alpha = 1
                     }
                     
-                    UIView.transition(with: self.activatedButtons.first!, duration: 1, options: .transitionCurlUp, animations: {
-                        self.activatedButtons.first?.alpha = 0
+                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 1, options: .transitionCurlUp, animations: {
+                        self.prop.activatedButtons.first?.alpha = 0
                     } ) { finished in
-                        self.activatedButtons.first?.isHidden = true
-                        self.activatedButtons.first?.alpha = 1
+                        self.prop.activatedButtons.first?.isHidden = true
+                        self.prop.activatedButtons.first?.alpha = 1
                     }
                     
                     //reset cards:
-                    self.activatedCards.removeAll()
-                    self.activatedButtons.removeAll()
+                    self.prop.activatedCards.removeAll()
+                    self.prop.activatedButtons.removeAll()
                     
                     //reset card list:
                     
                     //reset counter:
-                    self.cardCounter = 0
+                    self.prop.cardCounter = 0
                 }
             } else {
                 //not match:
@@ -426,41 +393,41 @@ class ViewController: UIViewController {
                     try? self.audioFX.playFX(file: AudioFXName.flip2.rawValue, type: "wav")
                     
                     //animations:
-                    UIView.transition(with: self.activatedButtons.last!, duration: 0.7, options: .transitionFlipFromTop, animations: nil, completion: nil)
+                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionFlipFromTop, animations: nil, completion: nil)
                     
-                    UIView.transition(with: self.activatedButtons.first!, duration: 0.7, options: .transitionFlipFromBottom, animations: nil, completion: nil)
+                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 0.7, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //hide images:
-                    self.activatedButtons.last!.setImage(UIImage(named: "Spider"), for: .normal)
-                    self.activatedButtons.first!.setImage(UIImage(named: "Spider"), for: .normal)
+                    self.prop.activatedButtons.last!.setImage(UIImage(named: "Spider"), for: .normal)
+                    self.prop.activatedButtons.first!.setImage(UIImage(named: "Spider"), for: .normal)
                     
                     //change image color:
-                    self.activatedButtons.last!.tintColor = UIColor.orange
-                    self.activatedButtons.first!.tintColor = UIColor.orange
+                    self.prop.activatedButtons.last!.tintColor = UIColor.orange
+                    self.prop.activatedButtons.first!.tintColor = UIColor.orange
                     
                     //reset background color:
-                    self.activatedButtons.last!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-                    self.activatedButtons.first!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
+                    self.prop.activatedButtons.last!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
+                    self.prop.activatedButtons.first!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
                     
                 }
                 
                 //kill pulsate animation:
-                DispatchQueue.main.asyncAfter(deadline: .now() + syncDisableAnimation) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + prop.syncDisableAnimation) {
                     //SYNC with kill animation!!!
-                    self.activatedButtons.last?.pulsateRemove()
-                    self.activatedButtons.first?.pulsateRemove()
+                    self.prop.activatedButtons.last?.pulsateRemove()
+                    self.prop.activatedButtons.first?.pulsateRemove()
                     
                     //reset cards:
-                    self.activatedCards.removeAll()
-                    self.activatedButtons.removeAll()
+                    self.prop.activatedCards.removeAll()
+                    self.prop.activatedButtons.removeAll()
                     
                     //reset counter:
-                    self.cardCounter = 0
+                    self.prop.cardCounter = 0
                 }
             }
         }
         
-        if pairList.isEmpty {
+        if prop.pairList.isEmpty {
             print("PAIR LIST IS EMPTY")
             nextLevel()
         }
@@ -484,7 +451,7 @@ class ViewController: UIViewController {
                 cardButton.frame = CGRect(x: column * width, y: row * height, width: width, height: height)
                 
                 UI.buttonsView.addSubview(cardButton)
-                cardButtons.append(cardButton)
+                prop.cardButtons.append(cardButton)
             }
         }
     }

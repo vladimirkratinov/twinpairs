@@ -8,6 +8,23 @@
 import UIKit
 
 class UserInterface: UIView {
+    let prop = Properties()
+    
+    var pairsCounter: Int = 0 {
+        didSet {
+            pairsLabel.text = "Pairs: \(pairsCounter)"
+        }
+    }
+    var timeCounter: Int = 0 {
+        didSet {
+            timeLabel.text = "Time: \(timeCounter)"
+        }
+    }
+    var flipsCounter: Int = 0 {
+        didSet {
+            flipsLabel.text = "Flips: \(flipsCounter)"
+        }
+    }
     
     var myView: UIView = {
         let myView = UIView()
@@ -21,20 +38,6 @@ class UserInterface: UIView {
         buttonsView.layer.borderWidth = 3
         return buttonsView
     }()
-    
-//    var cardButton: UIButton = {
-//        let cardButton = UIButton(type: .system)
-//        cardButton.layer.borderWidth = 10
-//        cardButton.layer.cornerRadius = 10
-//        cardButton.layer.borderColor = UIColor.systemBrown.cgColor
-//        cardButton.tintColor = UIColor.darkGray
-//        cardButton.setImage(UIImage(named: "Spider"), for: .normal)
-//        cardButton.imageView?.contentMode = .scaleAspectFit
-//        cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
-//        cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
-//        
-//        return cardButton
-//    }()
     
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
