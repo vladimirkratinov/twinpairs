@@ -9,6 +9,7 @@ import UIKit
 
 class UserInterface: UIView {
     let prop = Properties()
+    let defaults = UserDefaults.standard
     
     var pairsCounter: Int = 0 {
         didSet {
@@ -37,6 +38,17 @@ class UserInterface: UIView {
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
         buttonsView.layer.borderWidth = 0
         return buttonsView
+    }()
+    
+    var statisticsView: UIView = {
+        let statisticsView = UIView()
+        statisticsView.alpha = 0
+        statisticsView.layer.borderColor = UIColor.black.cgColor
+        statisticsView.layer.borderWidth = 1
+        statisticsView.layer.cornerRadius = 10
+        statisticsView.translatesAutoresizingMaskIntoConstraints = false
+        statisticsView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        return statisticsView
     }()
     
     func setGradientBackground() {
@@ -72,6 +84,30 @@ class UserInterface: UIView {
         flipsLabel.text = "Flips: 0"
         flipsLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
         return flipsLabel
+    }()
+    
+    var statisticsLabel: UILabel = {
+        let statisticsLabel = UILabel()
+        statisticsLabel.alpha = 1
+        statisticsLabel.translatesAutoresizingMaskIntoConstraints = false
+        statisticsLabel.textAlignment = .center
+        statisticsLabel.numberOfLines = 5
+        statisticsLabel.text = "statistics"
+        statisticsLabel.textColor = UIColor.gray
+        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+        return statisticsLabel
+    }()
+    
+    var bestResultLabel: UILabel = {
+        let bestResultLabel = UILabel()
+        bestResultLabel.alpha = 1
+        bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
+        bestResultLabel.textColor = UIColor.darkGray
+        bestResultLabel.textAlignment = .center
+        bestResultLabel.numberOfLines = 5
+        bestResultLabel.text = "best results"
+        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        return bestResultLabel
     }()
 
     var gameOverLabel: UILabel = {
@@ -197,11 +233,7 @@ class UserInterface: UIView {
         muteButton.layer.borderWidth = 3
         muteButton.layer.cornerRadius = 10
         muteButton.isUserInteractionEnabled = true
-        if muteButton.backgroundColor == nil {
-            muteButton.backgroundColor = UIColor.systemPink
-        } else {
-            muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
-        }
+        muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
         //shadows {
         muteButton.layer.shadowColor = UIColor.black.cgColor
         muteButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -217,10 +249,15 @@ class UserInterface: UIView {
     
     func setupSubviews() {
         myView.addSubview(buttonsView)
+        myView.addSubview(statisticsView)
         
         myView.addSubview(timeLabel)
         myView.addSubview(flipsLabel)
         myView.addSubview(pairsLabel)
+        
+        statisticsView.addSubview(bestResultLabel)
+        statisticsView.addSubview(statisticsLabel)
+        
         myView.addSubview(gameOverLabel)
         myView.addSubview(nextLevelLabel)
         
@@ -238,6 +275,11 @@ class UserInterface: UIView {
             buttonsView.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
             buttonsView.trailingAnchor.constraint(equalTo: myView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -20),
+            
+            statisticsView.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 20),
+            statisticsView.leadingAnchor.constraint(equalTo: buttonsView.leadingAnchor, constant: 20),
+            statisticsView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -20),
+            statisticsView.bottomAnchor.constraint(equalTo: gameOverLabel.topAnchor),
 
             timeLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
@@ -247,6 +289,12 @@ class UserInterface: UIView {
 
             pairsLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
             pairsLabel.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
+            
+            statisticsLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 10),
+            statisticsLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
+
+            bestResultLabel.centerYAnchor.constraint(equalTo: statisticsView.centerYAnchor, constant: 10),
+            bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
 
             gameOverLabel.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
             gameOverLabel.centerYAnchor.constraint(equalTo: myView.centerYAnchor),

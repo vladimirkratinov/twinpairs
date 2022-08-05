@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         //timer to load and get the width & height properties!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.setupButtons(rows: 2, columns: 2)
+            self.setupButtons(rows: 4, columns: 3)
         }
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
@@ -35,10 +35,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("default pairs: \(defaults.integer(forKey: "pairs"))")
+        print("default flips: \(defaults.integer(forKey: "flips"))")
+        
         navigationController?.navigationBar.isHidden = true
         
-        //timer to load and get the width & height properties!
+        //timer to load and get the width & height properties! (cheating)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            
             let testWidth = self.UI.buttonsView.frame.width
             print(testWidth)
             
@@ -89,7 +93,16 @@ class ViewController: UIViewController {
     
     func loadLevel() {
         //setup time for timer:
-        UI.timeCounter = 60
+        UI.timeCounter = 10
+//        UI.pairsCounter = 5
+//        UI.flipsCounter = 10
+        
+        //reset UserDefaults:
+//        resetStatisticsUserDefaults()
+        
+        //total time for statistics:
+        prop.totalTime += UI.timeCounter
+        print("total time: \(prop.totalTime)")
         
         //reset card counter:
         prop.cardCounter = 0
@@ -99,6 +112,7 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
+            self.gameOver()                                             //debug GameOver screen
         }
         
         //if same amount card buttons and cardlist:
@@ -213,11 +227,35 @@ class ViewController: UIViewController {
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.UI.gameOverLabel.alpha = 1
+            self.UI.statisticsView.alpha = 1
             self.UI.backToMenuButton.alpha = 1
             self.UI.restartButton.alpha = 1
             self.UI.gameOverLabel.pulsate()
             self.UI.restartButton.pulsate()
         })
+        
+        //update UI:
+        DispatchQueue.main.async {
+            self.UI.statisticsLabel.text = "Your Results: \n Time: \(self.prop.totalTime) Pairs: \(self.UI.pairsCounter) Flips: \(self.UI.flipsCounter)"
+            
+            self.UI.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: KeysForStatistics.time.rawValue)) \n Found Pairs: \(self.defaults.integer(forKey: KeysForStatistics.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: KeysForStatistics.flips.rawValue))"
+        }
+        
+        //set defaults for statistics:
+        defaults.set(prop.totalTime, forKey: "time")
+        
+        //update defaults if result is better:
+        if UI.pairsCounter > defaults.integer(forKey: KeysForStatistics.pairs.rawValue) {
+            defaults.set(UI.pairsCounter, forKey: "pairs")
+            defaults.set(UI.flipsCounter, forKey: "flips")
+            print("defaults updated!")
+        } else {
+            print("defaults are NOT updated!")
+        }
+        
+        
+        print("default pairs: \(defaults.integer(forKey: "pairs"))")
+        print("default flips: \(defaults.integer(forKey: "flips"))")
         
         //restart and menu button animations:
         UIView.transition(with: self.UI.backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -254,6 +292,7 @@ class ViewController: UIViewController {
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.UI.gameOverLabel.alpha = 0
+            self.UI.statisticsView.alpha = 0
             self.UI.backToMenuButton.alpha = 0
             self.UI.restartButton.alpha = 0
             self.UI.flipsCounter = 0
@@ -515,5 +554,11 @@ class ViewController: UIViewController {
                 prop.cardButtons.append(cardButton)
             }
         }
+    }
+    
+    fileprivate func resetStatisticsUserDefaults() {
+        defaults.set(UI.pairsCounter, forKey: "pairs")
+        defaults.set(UI.timeCounter, forKey: "time")
+        defaults.set(UI.flipsCounter, forKey: "flips")
     }
 }

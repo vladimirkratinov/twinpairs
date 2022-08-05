@@ -33,6 +33,7 @@ struct Properties {
     
     var syncDisableAnimation = 0.0
     var cardCounter = 0
+    var totalTime = 0
     var timer: Timer!
 }
 

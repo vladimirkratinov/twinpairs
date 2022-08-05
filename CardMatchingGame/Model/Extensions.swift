@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum KeysForStatistics: String {
+    case time = "time"
+    case pairs = "pairs"
+    case flips = "flips"
+}
+
 //MARK: - UIButton
 
 extension UIButton {
