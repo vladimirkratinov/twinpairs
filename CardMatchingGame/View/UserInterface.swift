@@ -116,7 +116,7 @@ class UserInterface: UIView {
         gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
         gameOverLabel.textAlignment = .center
         gameOverLabel.text = "GAME OVER!"
-        gameOverLabel.font = UIFont(name: "Baskerville-SemiBold", size: 55)
+        gameOverLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 55)
         gameOverLabel.textColor = UIColor.yellow
         //shadows {
         gameOverLabel.layer.shadowColor = UIColor.black.cgColor
@@ -311,11 +311,11 @@ class UserInterface: UIView {
             backToMenuButton.widthAnchor.constraint(equalToConstant: 150),
 
             menuButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: -100),
-            menuButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -5),
+            menuButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -10),
             menuButton.widthAnchor.constraint(equalToConstant: 150),
 
             muteButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: 100),
-            muteButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -5),
+            muteButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -10),
             muteButton.widthAnchor.constraint(equalToConstant: 150),
         ])
     }

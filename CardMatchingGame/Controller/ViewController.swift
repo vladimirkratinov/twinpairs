@@ -27,38 +27,38 @@ class ViewController: UIViewController {
         }
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
-        UI.backToMenuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
-        UI.menuButton.addTarget(self, action: #selector(backToMenuButtonTapped), for: .touchUpInside)
+        UI.backToMenuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        UI.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         UI.muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("default pairs: \(defaults.integer(forKey: "pairs"))")
-        print("default flips: \(defaults.integer(forKey: "flips"))")
+        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
+        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         navigationController?.navigationBar.isHidden = true
         
         //timer to load and get the width & height properties! (cheating)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             
-            let testWidth = self.UI.buttonsView.frame.width
-            print(testWidth)
+            let widthButtonsView = self.UI.buttonsView.frame.width
+            print("ButtonsView width: \(widthButtonsView)")
             
             self.loadLevel()
         }
         
-        //debugging Constraints:
-        UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        //debugging Constraints error message:
+//        UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
         //audioFX:
         DispatchQueue.main.async {
             try? self.audioFX.playBackgroundMusic(file: "creepy", type: "mp3")
             if self.prop.mutedGeneral {
-                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: "volumeLevel")
+                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
             } else {
-                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: "volumeLevel")
+                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
             }
         }
     }
@@ -76,24 +76,11 @@ class ViewController: UIViewController {
         UI.setGradientBackground()
     }
     
-    func setupTimer() {
-        //set up Timer:
-        prop.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if self.UI.timeCounter > 0 {
-                self.UI.timeCounter -= 1
-            } else {
-                //GAME OVER:
-                self.prop.timer.invalidate()
-                self.gameOver()
-            }
-        }
-    }
-    
     //MARK: - LoadLevel:
     
     func loadLevel() {
         //setup time for timer:
-        UI.timeCounter = 10
+        UI.timeCounter = 60
 //        UI.pairsCounter = 5
 //        UI.flipsCounter = 10
         
@@ -112,7 +99,7 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
-            self.gameOver()                                             //debug GameOver screen
+//            self.gameOver()                                             //debug GameOver screen
         }
         
         //if same amount card buttons and cardlist:
@@ -175,17 +162,13 @@ class ViewController: UIViewController {
     
     func nextLevel() {
         //audioFX:
-        try? audioFX.playFX(file: "victory", type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.victory.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
             self.UI.nextLevelLabel.alpha = 1
             self.UI.gameOverLabel.pulsate()
         })
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
-            
-        }
         
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -196,11 +179,10 @@ class ViewController: UIViewController {
             
             self.prop.activatedCards.removeAll()
             self.prop.activatedButtons.removeAll()
-            self.prop.cardButtons.removeAll()           //!!!!fixed bug - reset cardButtons array!!!!
+            self.prop.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
             
             self.setupButtons(rows: 5, columns: 4)
             self.loadLevel()
-            
             
             //reset cards color:
             for card in self.prop.cardButtons {
@@ -223,7 +205,7 @@ class ViewController: UIViewController {
         //reset timer:
         prop.timer.invalidate()
         //audioFX:
-        try? audioFX.playFX(file: "gameOver", type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.gameOver.rawValue, type: AudioTypeKey.wav.rawValue)
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.UI.gameOverLabel.alpha = 1
@@ -238,24 +220,23 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             self.UI.statisticsLabel.text = "Your Results: \n Time: \(self.prop.totalTime) Pairs: \(self.UI.pairsCounter) Flips: \(self.UI.flipsCounter)"
             
-            self.UI.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: KeysForStatistics.time.rawValue)) \n Found Pairs: \(self.defaults.integer(forKey: KeysForStatistics.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: KeysForStatistics.flips.rawValue))"
+            self.UI.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: StatisticsKey.time.rawValue)) \n Found Pairs: \(self.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
         }
         
         //set defaults for statistics:
-        defaults.set(prop.totalTime, forKey: "time")
+        defaults.set(prop.totalTime, forKey: StatisticsKey.time.rawValue)
         
         //update defaults if result is better:
-        if UI.pairsCounter > defaults.integer(forKey: KeysForStatistics.pairs.rawValue) {
-            defaults.set(UI.pairsCounter, forKey: "pairs")
-            defaults.set(UI.flipsCounter, forKey: "flips")
+        if UI.pairsCounter > defaults.integer(forKey: StatisticsKey.pairs.rawValue) {
+            defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
+            defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
             print("defaults updated!")
         } else {
             print("defaults are NOT updated!")
         }
         
-        
-        print("default pairs: \(defaults.integer(forKey: "pairs"))")
-        print("default flips: \(defaults.integer(forKey: "flips"))")
+        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
+        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         //restart and menu button animations:
         UIView.transition(with: self.UI.backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -276,13 +257,14 @@ class ViewController: UIViewController {
     //MARK: - restartTapped:
     
     @objc func restartTapped(_ sender: UIButton) {
+        //reset timer:
         prop.timer.invalidate()
         
         //animation:
         UI.restartButton.flash()
         
         //audioFX:
-        try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         prop.activatedCards.removeAll()
         prop.activatedButtons.removeAll()
@@ -317,50 +299,56 @@ class ViewController: UIViewController {
         //animation:
         sender.flash()
         //set UserDefaults:
-        var muted = defaults.bool(forKey: "isMuted")
+        var muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
         prop.mutedGeneral = muted   //set prop.mutedGeneral - to have an access in viewDidLoad() to control volume level
         
         //audioFX:
-        try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         if muted {
             //set UserDefaults:
-            defaults.setColor(color: UIColor.systemPink, forKey: "myColor")
-            defaults.set(false, forKey: "isMuted")
-            defaults.set(0.1, forKey: "volumeLevel")
+            defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.myColor.rawValue)
+            defaults.set(false, forKey: AudioKey.isMuted.rawValue)
+            defaults.set(0.1, forKey: AudioKey.volumeLevel.rawValue)
             
             //get UserDefaults:
-            muted = defaults.bool(forKey: "isMuted")
-            sender.backgroundColor = defaults.colorForKey(key: "myColor")
-            audioFX.backgroundMusic?.volume = defaults.float(forKey: "volumeLevel")
+            muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
+            sender.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
+            audioFX.backgroundMusic?.volume = defaults.float(forKey: AudioKey.volumeLevel.rawValue)
         } else {
             //set UserDefaults:
-            defaults.setColor(color: UIColor.gray, forKey: "myColor")
-            defaults.set(true, forKey: "isMuted")
-            defaults.set(0, forKey: "volumeLevel")
+            defaults.setColor(color: UIColor.gray, forKey: ColorKey.myColor.rawValue)
+            defaults.set(true, forKey: AudioKey.isMuted.rawValue)
+            defaults.set(0, forKey: AudioKey.volumeLevel.rawValue)
             
             //get UserDefaults:
-            muted = defaults.bool(forKey: "isMuted")
-            sender.backgroundColor = defaults.colorForKey(key: "myColor")
-            audioFX.backgroundMusic?.volume = defaults.float(forKey: "volumeLevel")
+            muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
+            sender.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
+            audioFX.backgroundMusic?.volume = defaults.float(forKey: AudioKey.volumeLevel.rawValue)
         }
     }
     
-    //MARK: - backToMenuButtonTapped:
+    //MARK: - menuButtonTapped:
     
-    @objc func backToMenuButtonTapped(_ sender: UIButton) {
+    @objc func menuButtonTapped(_ sender: UIButton) {
         //animation:
         sender.flash()
         
         //audioFX:
-        try? audioFX.playFX(file: AudioFXName.tinyButtonPress.rawValue, type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = 0.3
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            //reset timer:
+            if self.prop.timer != nil {
+                self.prop.timer.invalidate()
+                print("timer invalidated!")
+            }
+            
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.popToRootViewController(animated: false)
         }
@@ -370,7 +358,7 @@ class ViewController: UIViewController {
     
     @objc func cardTapped(_ sender: UIButton) {
         //audioFX:
-        try? audioFX.playFX(file: AudioFXName.flip1.rawValue, type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //flip card:
         if !prop.activatedButtons.contains(sender) {
@@ -403,7 +391,7 @@ class ViewController: UIViewController {
             UIView.transition(with: sender, duration: 0.8, options: .transitionFlipFromLeft, animations: nil, completion: nil)
             
             //audioFX
-            try? audioFX.playFX(file: AudioFXName.flip2.rawValue, type: "wav")
+            try? audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
             
             //kill pulse animation:
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
@@ -423,7 +411,7 @@ class ViewController: UIViewController {
         //auto-disable cards after 2 clicked:
         if prop.cardCounter == 2 {
             
-            //SYNC with kill animation!!!
+            //SYNC UserInteractionEnabled with Kill animation:
             for card in prop.cardButtons {
                 card.isUserInteractionEnabled = false
                 
@@ -451,7 +439,8 @@ class ViewController: UIViewController {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
-                    try? self.audioFX.playFX(file: AudioFXName.matchIgnite.rawValue, type: "wav")
+                    try? self.audioFX.playFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
+                    
                     //animation:
                     UIView.transition(with: self.prop.activatedButtons.last!, duration: 1, options: .transitionCurlUp, animations: {
                         self.prop.activatedButtons.last?.alpha = 0
@@ -476,6 +465,9 @@ class ViewController: UIViewController {
                     //reset counter:
                     self.prop.cardCounter = 0
                 }
+                
+                //MARK: - Not Match:
+                
             } else {
                 //not match:
                 print("NOT MATCH")
@@ -483,7 +475,7 @@ class ViewController: UIViewController {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     //audioFX:
-                    try? self.audioFX.playFX(file: AudioFXName.flip2.rawValue, type: "wav")
+                    try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //animations:
                     UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -526,6 +518,21 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - Setup Timer:
+    
+    func setupTimer() {
+        //set up Timer:
+        prop.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.UI.timeCounter > 0 {
+                self.UI.timeCounter -= 1
+            } else {
+                //GAME OVER:
+                self.prop.timer.invalidate()
+                self.gameOver()
+            }
+        }
+    }
+    
     //MARK: - Setup Buttons:
     
     fileprivate func setupButtons(rows: Int, columns: Int) {
@@ -557,8 +564,8 @@ class ViewController: UIViewController {
     }
     
     fileprivate func resetStatisticsUserDefaults() {
-        defaults.set(UI.pairsCounter, forKey: "pairs")
-        defaults.set(UI.timeCounter, forKey: "time")
-        defaults.set(UI.flipsCounter, forKey: "flips")
+        defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
+        defaults.set(UI.timeCounter, forKey: StatisticsKey.time.rawValue)
+        defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
     }
 }

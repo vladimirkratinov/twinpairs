@@ -237,7 +237,7 @@ class MenuController: UIViewController {
         
         sender.flash()
         
-        try? audioFX.playFX(file: AudioFXName.buttonPress.rawValue, type: "wav")
+        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
 
         let transition = CATransition()
         transition.duration = 0.5
