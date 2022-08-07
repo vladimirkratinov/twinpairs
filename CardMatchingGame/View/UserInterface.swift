@@ -51,6 +51,8 @@ class UserInterface: UIView {
         return statisticsView
     }()
     
+    //MARK: - Set Gradient Bachround:
+    
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gameView.bounds
@@ -60,8 +62,12 @@ class UserInterface: UIView {
 //            UIColor.systemOrange.cgColor,
 //            UIColor.systemRed.cgColor
             
-            UIColor.systemGreen.cgColor,
-            UIColor.systemTeal.cgColor,
+//            UIColor.systemGreen.cgColor,
+//            UIColor.systemTeal.cgColor,
+//            UIColor.systemBrown.cgColor
+            
+            UIColor.systemBlue.cgColor,
+            UIColor.systemGray.cgColor,
             UIColor.systemBrown.cgColor
         ]
         gameView.layer.insertSublayer(gradientLayer, at: 0)
@@ -104,7 +110,7 @@ class UserInterface: UIView {
         statisticsLabel.numberOfLines = 5
         statisticsLabel.text = "statistics"
         statisticsLabel.textColor = UIColor.gray
-        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
         return statisticsLabel
     }()
     
@@ -116,7 +122,7 @@ class UserInterface: UIView {
         bestResultLabel.textAlignment = .center
         bestResultLabel.numberOfLines = 5
         bestResultLabel.text = "best results"
-        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
         return bestResultLabel
     }()
 
@@ -277,10 +283,16 @@ class UserInterface: UIView {
             buttonsView.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -20),
             
-            statisticsView.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 20),
+            statisticsView.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 5),
             statisticsView.leadingAnchor.constraint(equalTo: buttonsView.leadingAnchor, constant: 20),
             statisticsView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -20),
-            statisticsView.bottomAnchor.constraint(equalTo: gameOverLabel.topAnchor),
+            statisticsView.bottomAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 10),
+            
+            statisticsLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 10),
+            statisticsLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
+
+            bestResultLabel.topAnchor.constraint(equalTo: statisticsLabel.bottomAnchor, constant: 0),
+            bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
 
             timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
@@ -290,12 +302,6 @@ class UserInterface: UIView {
 
             pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
             pairsLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
-            
-            statisticsLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 10),
-            statisticsLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
-
-            bestResultLabel.centerYAnchor.constraint(equalTo: statisticsView.centerYAnchor, constant: 10),
-            bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
 
             gameOverLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             gameOverLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),

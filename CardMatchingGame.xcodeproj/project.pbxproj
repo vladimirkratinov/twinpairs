@@ -396,7 +396,7 @@
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Match Pair Game";
+				INFOPLIST_KEY_CFBundleDisplayName = "Card Match";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -427,7 +427,7 @@
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Match Pair Game";
+				INFOPLIST_KEY_CFBundleDisplayName = "Card Match";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

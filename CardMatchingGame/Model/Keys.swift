@@ -8,7 +8,7 @@
 import Foundation
 
 enum ImageKey: String {
-    case backImage = "PostalMark3Small"
+    case backImage = "Back1Medium"
 }
 
 enum FontKey: String {

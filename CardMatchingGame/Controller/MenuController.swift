@@ -36,6 +36,7 @@ class MenuController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        MI.setGradientBackground()
         
         //animation:
         MI.backgroundImageView.pulsateSlow()
@@ -66,5 +67,21 @@ class MenuController: UIViewController {
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
+        
+        //reset Defaults:
+        resetStatisticsUserDefaults()
+        
+    }
+    
+    fileprivate func resetStatisticsUserDefaults() {
+        let defaults = UserDefaults.standard
+        defaults.set(UI.timeCounter, forKey: StatisticsKey.time.rawValue)
+        defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
+        defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
+        
+        print("defaults RESET!")
+        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
+        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
+        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
     }
 }

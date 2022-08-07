@@ -11,39 +11,13 @@ let UI = UserInterface()
 
 struct Properties {
     
-//    var cardList = [
-//        "Bat", "Bat",
-//        "Bones", "Bones",
-//        "Cauldron", "Cauldron",
-//        "Skull", "Skull",
-//        "Ghost",  "Ghost",
-//        "Pumpkin", "Pumpkin",
-//        "Eye", "Eye",
-//        "Dracula", "Dracula",
-//        "Spider", "Spider",
-//        "Cobweb", "Cobweb"
-//    ]
-    
-//    var cardList = [
-//                "egg", "egg",
-//                "location", "location",
-//                "pig", "pig",
-//                "pikachu", "pikachu",
-//                "pokeballs1", "pokeballs1",
-//                "pokeballs2", "pokeballs2",
-//                "pokeballs3", "pokeballs3",
-//                "pokeballs4", "pokeballs4",
-//                "pokemon-trainer", "pokemon-trainer",
-//                "psyduck", "psyduck"
-//            ]
-    
     var cardList = [
         "argentina","argentina",
         "canada","canada",
         "HK","HK",
-        "nz1","nz1",
+        "japan","japan",
         "nz2","nz2",
-        "nz3","nz3",
+        "knie","knie",
         "papua","papua",
         "US","US",
         "UK","UK",
@@ -60,9 +34,14 @@ struct Properties {
     var mutedGeneral = Bool()
     
     var timer: Timer!
-
+    
     var cardCounter = 0
     var totalTime = 0
+    var standardTimeCounter = 120
+    var gameIsOver = false
+    
+    var rows = 3
+    var columns = 2
     
     var flipAnimationTime = 0.4
     var flipBackAnimationTime = 0.4
@@ -74,7 +53,8 @@ struct Properties {
     
     var userInterfaceFontSize: CGFloat = 0
     
-    var debugFontSize: CGFloat = 20
+    //cards FontSize and Color:
+    var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
     

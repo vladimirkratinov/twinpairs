@@ -11,7 +11,6 @@ class MenuInterface: UIView {
     
     var menuView: UIView = {
         let menuView = UIView()
-        menuView.backgroundColor = UIColor.red
         return menuView
     }()
 
@@ -99,5 +98,25 @@ class MenuInterface: UIView {
             otherButton.heightAnchor.constraint(equalToConstant: 50),
             otherButton.widthAnchor.constraint(equalToConstant: 120),
         ])
+    }
+    
+    func setGradientBackground() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = menuView.bounds
+        gradientLayer.colors = [
+            
+//            UIColor.systemPink.cgColor,
+//            UIColor.systemOrange.cgColor,
+//            UIColor.systemRed.cgColor
+            
+//            UIColor.systemGreen.cgColor,
+//            UIColor.systemTeal.cgColor,
+//            UIColor.systemBrown.cgColor
+            
+            UIColor.systemBlue.cgColor,
+            UIColor.systemGray.cgColor,
+            UIColor.systemBrown.cgColor
+        ]
+        menuView.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

@@ -23,8 +23,7 @@ class ViewController: UIViewController {
         
         //timer to load and get the width & height properties!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.setupButtons(rows: 4, columns: 3)
-//            self.setupButtons(rows: 2, columns: 2)
+            self.setupButtons(rows: self.prop.rows, columns: self.prop.columns)
         }
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
@@ -36,16 +35,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
         print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
         print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         navigationController?.navigationBar.isHidden = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         //timer to load and get the width & height properties! (cheating)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             
             let widthButtonsView = self.UI.buttonsView.frame.width
             print("ButtonsView width: \(widthButtonsView)")
+            
+            //setup time:
+            self.UI.timeCounter = self.prop.standardTimeCounter
+            //total time for statistics:
+            self.prop.totalTime = self.UI.timeCounter
+            print("total time: \(self.prop.totalTime)")
             
             self.loadLevel()
         }
@@ -80,24 +87,15 @@ class ViewController: UIViewController {
     //MARK: - LoadLevel:
     
     func loadLevel() {
-        //setup time for timer:
-        UI.timeCounter = 120
-//        UI.pairsCounter = 5
-//        UI.flipsCounter = 10
-        
-        //reset UserDefaults:
-//        resetStatisticsUserDefaults()
-        
-        //total time for statistics:
-        prop.totalTime += UI.timeCounter
-        print("total time: \(prop.totalTime)")
-        
         //reset card counter:
         prop.cardCounter = 0
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
-//            self.gameOver()                                                 //debug GameOver screen
+            
+            if self.prop.gameIsOver {
+                self.gameOver()              //debug gameOver
+            }
         }
         
         //MARK: - if Cards = 20
@@ -184,7 +182,17 @@ class ViewController: UIViewController {
             self.prop.activatedButtons.removeAll()
             self.prop.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
             
-            self.setupButtons(rows: 5, columns: 4)
+            //update timeCounter:
+            if self.UI.timeCounter > 10 {
+                self.UI.timeCounter -= 10
+            }
+            
+            //update level:
+            if self.prop.rows < 5 && self.prop.columns < 4 {
+                self.prop.rows += 1
+                self.prop.columns += 1
+            }
+            self.setupButtons(rows: self.prop.rows, columns: self.prop.columns)
             self.loadLevel()
             
             //reset cards color:
@@ -193,10 +201,6 @@ class ViewController: UIViewController {
                     card.pulsateRemove()
                     card.alpha = 1
                     card.isEnabled = true
-//                    card.tintColor = UIColor.systemOrange
-//                    card.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-//                    card.setImage(UIImage(named: "Spider"), for: .normal)
-//                    card.setImage(nil, for: .normal)                            //debug image
                 })
             }
         }
@@ -221,16 +225,14 @@ class ViewController: UIViewController {
         
         //update statistics UI:
         DispatchQueue.main.async {
-            self.UI.statisticsLabel.text = "Your Results: \n Time: \(self.prop.totalTime) Pairs: \(self.UI.pairsCounter) Flips: \(self.UI.flipsCounter)"
+            self.UI.statisticsLabel.text = "Your Result: \n Total Time: \(self.prop.totalTime) sec. \n Found Pairs: \(self.UI.pairsCounter) \n Total Flips: \(self.UI.flipsCounter) \n ------------------------------"
             
-            self.UI.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: StatisticsKey.time.rawValue)) \n Found Pairs: \(self.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
+            self.UI.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: StatisticsKey.time.rawValue)) sec. \n Found Pairs: \(self.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
         }
-        
-        //set defaults for statistics:
-        defaults.set(prop.totalTime, forKey: StatisticsKey.time.rawValue)
         
         //update defaults if result is better:
         if UI.pairsCounter > defaults.integer(forKey: StatisticsKey.pairs.rawValue) {
+            defaults.set(prop.totalTime, forKey: StatisticsKey.time.rawValue)
             defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
             defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
             print("defaults updated!")
@@ -238,6 +240,7 @@ class ViewController: UIViewController {
             print("defaults are NOT updated!")
         }
         
+        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
         print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
         print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
@@ -271,6 +274,12 @@ class ViewController: UIViewController {
         
         prop.activatedCards.removeAll()
         prop.activatedButtons.removeAll()
+        
+        //setup time:
+        self.UI.timeCounter = self.prop.standardTimeCounter
+        //total time for statistics:
+        self.prop.totalTime = self.UI.timeCounter
+        print("total time: \(self.prop.totalTime)")
         
         loadLevel()
         
@@ -442,8 +451,6 @@ class ViewController: UIViewController {
                     print(prop.pairList.count)
                 }
                 
-                //audioFX1:
-                
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
@@ -472,7 +479,10 @@ class ViewController: UIViewController {
                     self.prop.activatedCards.removeAll()
                     self.prop.activatedButtons.removeAll()
                     
-                    //reset card list:
+                    //add bonus time to totalTime:
+                    self.UI.timeCounter += 5
+                    self.prop.totalTime += 5
+                    print("total time changed to: \(self.prop.totalTime)")
                     
                     //reset counter:
                     self.prop.cardCounter = 0
@@ -571,13 +581,5 @@ class ViewController: UIViewController {
                 prop.cardButtons.append(cardButton)
             }
         }
-    }
-    
-    //MARK: - Reset Statistics:
-    
-    fileprivate func resetStatisticsUserDefaults() {
-        defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
-        defaults.set(UI.timeCounter, forKey: StatisticsKey.time.rawValue)
-        defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
     }
 }
