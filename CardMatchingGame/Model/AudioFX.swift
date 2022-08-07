@@ -13,6 +13,7 @@ struct AudioFX {
     let defaults = UserDefaults.standard
     var audioFX: AVAudioPlayer?
     var backgroundMusic: AVAudioPlayer?
+    var gameStateFX: AVAudioPlayer?
     
     mutating func stopMusic() {
         backgroundMusic?.stop()
@@ -29,8 +30,25 @@ struct AudioFX {
         do {
             audioFX = try AVAudioPlayer(contentsOf: url)
             audioFX?.volume = 0.2
-            audioFX?.stop()
             audioFX?.play()
+        } catch {
+            print("\(file).\(type) was not found.")
+            throw AudioError.FileNotExist
+        }
+    }
+    
+    mutating func playGameStateFX(file: String, type: String) throws {
+        
+        enum AudioError: Error {
+            case FileNotExist
+        }
+        
+        guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
+        let url = URL(fileURLWithPath: pathToSound)
+        do {
+            gameStateFX = try AVAudioPlayer(contentsOf: url)
+            gameStateFX?.volume = 0.2
+            gameStateFX?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist

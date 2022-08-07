@@ -30,6 +30,7 @@
 		F781AD8C28935088002993E7 /* buttonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8B28935088002993E7 /* buttonPress.wav */; };
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
+		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		F781AD8B28935088002993E7 /* buttonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonPress.wav; sourceTree = "<group>"; };
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				F760AF6A289C6EA2007ABE11 /* UserInterface.swift */,
+				F7E53529289F6AE10019B770 /* MenuInterface.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,
+				F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */,
 				F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

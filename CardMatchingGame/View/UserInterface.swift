@@ -27,10 +27,10 @@ class UserInterface: UIView {
         }
     }
     
-    var myView: UIView = {
-        let myView = UIView()
-        myView.backgroundColor = UIColor.red
-        return myView
+    var gameView: UIView = {
+        let gameView = UIView()
+        gameView.backgroundColor = UIColor.red
+        return gameView
     }()
     
     var buttonsView: UIView = {
@@ -53,17 +53,18 @@ class UserInterface: UIView {
     
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = myView.bounds
+        gradientLayer.frame = gameView.bounds
         gradientLayer.colors = [
-            UIColor.systemPink.cgColor,
-            UIColor.systemOrange.cgColor,
-            UIColor.systemRed.cgColor
+            
+//            UIColor.systemPink.cgColor,
+//            UIColor.systemOrange.cgColor,
+//            UIColor.systemRed.cgColor
+            
+            UIColor.systemGreen.cgColor,
+            UIColor.systemTeal.cgColor,
+            UIColor.systemBrown.cgColor
         ]
-        //       gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        //       gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        //       gradientLayer.locations = [1,0]
-
-        myView.layer.insertSublayer(gradientLayer, at: 0)
+        gameView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     //MARK: - Labels:
@@ -72,9 +73,18 @@ class UserInterface: UIView {
         let timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.textAlignment = .left
-        timeLabel.text = "Time: "
-        timeLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
+        timeLabel.text = "Time: 0"
+        timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return timeLabel
+    }()
+    
+    var pairsLabel: UILabel = {
+        let pairsLabel = UILabel()
+        pairsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pairsLabel.textAlignment = .right
+        pairsLabel.text = "Pairs: 0"
+        pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return pairsLabel
     }()
 
     var flipsLabel: UILabel = {
@@ -82,7 +92,7 @@ class UserInterface: UIView {
         flipsLabel.translatesAutoresizingMaskIntoConstraints = false
         flipsLabel.textAlignment = .right
         flipsLabel.text = "Flips: 0"
-        flipsLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
+        flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return flipsLabel
     }()
     
@@ -116,7 +126,7 @@ class UserInterface: UIView {
         gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
         gameOverLabel.textAlignment = .center
         gameOverLabel.text = "GAME OVER!"
-        gameOverLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 55)
+        gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
         gameOverLabel.textColor = UIColor.yellow
         //shadows {
         gameOverLabel.layer.shadowColor = UIColor.black.cgColor
@@ -135,7 +145,7 @@ class UserInterface: UIView {
         nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         nextLevelLabel.textAlignment = .center
         nextLevelLabel.text = "NEXT LEVEL!"
-        nextLevelLabel.font = UIFont(name: "Baskerville-SemiBold", size: 45)
+        nextLevelLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 45)
         nextLevelLabel.textColor = UIColor.green
         //shadows {
         nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
@@ -147,15 +157,6 @@ class UserInterface: UIView {
         //shadows }
         return nextLevelLabel
     }()
-
-    var pairsLabel: UILabel = {
-        let pairsLabel = UILabel()
-        pairsLabel.translatesAutoresizingMaskIntoConstraints = false
-        pairsLabel.textAlignment = .right
-        pairsLabel.text = "Pairs: 0"
-        pairsLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
-        return pairsLabel
-    }()
     
     //MARK: - Buttons:
     
@@ -165,7 +166,7 @@ class UserInterface: UIView {
         restartButton.translatesAutoresizingMaskIntoConstraints = false
         restartButton.setTitle(" Restart ", for: .normal)
         restartButton.backgroundColor = UIColor.red
-        restartButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
+        restartButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         restartButton.setTitleColor(UIColor.black, for: .normal)
         restartButton.layer.borderColor = UIColor.black.cgColor
         restartButton.layer.borderWidth = 3
@@ -181,7 +182,7 @@ class UserInterface: UIView {
         backToMenuButton.translatesAutoresizingMaskIntoConstraints = false
         backToMenuButton.setTitle(" Menu ", for: .normal)
         backToMenuButton.backgroundColor = UIColor.systemPink
-        backToMenuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
+        backToMenuButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         backToMenuButton.setTitleColor(UIColor.black, for: .normal)
         backToMenuButton.layer.borderColor = UIColor.black.cgColor
         backToMenuButton.layer.borderWidth = 3
@@ -204,7 +205,7 @@ class UserInterface: UIView {
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.setTitle(" Back ", for: .normal)
         menuButton.backgroundColor = UIColor.systemPink
-        menuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
+        menuButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         menuButton.setTitleColor(UIColor.black, for: .normal)
         menuButton.layer.borderColor = UIColor.black.cgColor
         menuButton.layer.borderWidth = 3
@@ -227,13 +228,13 @@ class UserInterface: UIView {
         muteButton.alpha = 1
         muteButton.translatesAutoresizingMaskIntoConstraints = false
         muteButton.setTitle(" Mute ", for: .normal)
-        muteButton.titleLabel?.font = UIFont(name: "Baskerville-Bold", size: 25)
+        muteButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         muteButton.setTitleColor(UIColor.black, for: .normal)
         muteButton.layer.borderColor = UIColor.black.cgColor
         muteButton.layer.borderWidth = 3
         muteButton.layer.cornerRadius = 10
         muteButton.isUserInteractionEnabled = true
-        muteButton.backgroundColor = defaults.colorForKey(key: "myColor")
+        muteButton.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
         //shadows {
         muteButton.layer.shadowColor = UIColor.black.cgColor
         muteButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -248,23 +249,23 @@ class UserInterface: UIView {
     //MARK: - Subview:
     
     func setupSubviews() {
-        myView.addSubview(buttonsView)
-        myView.addSubview(statisticsView)
+        gameView.addSubview(buttonsView)
+        gameView.addSubview(statisticsView)
         
-        myView.addSubview(timeLabel)
-        myView.addSubview(flipsLabel)
-        myView.addSubview(pairsLabel)
+        gameView.addSubview(timeLabel)
+        gameView.addSubview(flipsLabel)
+        gameView.addSubview(pairsLabel)
         
         statisticsView.addSubview(bestResultLabel)
         statisticsView.addSubview(statisticsLabel)
         
-        myView.addSubview(gameOverLabel)
-        myView.addSubview(nextLevelLabel)
+        gameView.addSubview(gameOverLabel)
+        gameView.addSubview(nextLevelLabel)
         
-        myView.addSubview(restartButton)
-        myView.addSubview(backToMenuButton)
-        myView.addSubview(menuButton)
-        myView.addSubview(muteButton)
+        gameView.addSubview(restartButton)
+        gameView.addSubview(backToMenuButton)
+        gameView.addSubview(menuButton)
+        gameView.addSubview(muteButton)
     }
     
     //MARK: - Constraints:
@@ -272,8 +273,8 @@ class UserInterface: UIView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10),
-            buttonsView.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
-            buttonsView.trailingAnchor.constraint(equalTo: myView.layoutMarginsGuide.trailingAnchor),
+            buttonsView.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
+            buttonsView.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -20),
             
             statisticsView.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 20),
@@ -281,14 +282,14 @@ class UserInterface: UIView {
             statisticsView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -20),
             statisticsView.bottomAnchor.constraint(equalTo: gameOverLabel.topAnchor),
 
-            timeLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: myView.layoutMarginsGuide.leadingAnchor),
+            timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
 
-            flipsLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
-            flipsLabel.trailingAnchor.constraint(equalTo: myView.layoutMarginsGuide.trailingAnchor),
+            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            flipsLabel.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
 
-            pairsLabel.topAnchor.constraint(equalTo: myView.layoutMarginsGuide.topAnchor),
-            pairsLabel.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
+            pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            pairsLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
             statisticsLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 10),
             statisticsLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
@@ -296,27 +297,27 @@ class UserInterface: UIView {
             bestResultLabel.centerYAnchor.constraint(equalTo: statisticsView.centerYAnchor, constant: 10),
             bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
 
-            gameOverLabel.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
-            gameOverLabel.centerYAnchor.constraint(equalTo: myView.centerYAnchor),
+            gameOverLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
+            gameOverLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
 
-            nextLevelLabel.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
-            nextLevelLabel.centerYAnchor.constraint(equalTo: myView.centerYAnchor),
+            nextLevelLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
+            nextLevelLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
 
-            restartButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
-            restartButton.centerYAnchor.constraint(equalTo: myView.centerYAnchor, constant: 100),
-            restartButton.widthAnchor.constraint(equalToConstant: 150),
+            restartButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
+            restartButton.centerYAnchor.constraint(equalTo: gameView.centerYAnchor, constant: 100),
+            restartButton.widthAnchor.constraint(equalToConstant: 120),
 
-            backToMenuButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor),
+            backToMenuButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
-            backToMenuButton.widthAnchor.constraint(equalToConstant: 150),
+            backToMenuButton.widthAnchor.constraint(equalToConstant: 120),
 
-            menuButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: -100),
-            menuButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -10),
-            menuButton.widthAnchor.constraint(equalToConstant: 150),
+            menuButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor, constant: -100),
+            menuButton.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: -10),
+            menuButton.widthAnchor.constraint(equalToConstant: 120),
 
-            muteButton.centerXAnchor.constraint(equalTo: myView.centerXAnchor, constant: 100),
-            muteButton.bottomAnchor.constraint(equalTo: myView.layoutMarginsGuide.bottomAnchor, constant: -10),
-            muteButton.widthAnchor.constraint(equalToConstant: 150),
+            muteButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor, constant: 100),
+            muteButton.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: -10),
+            muteButton.widthAnchor.constraint(equalToConstant: 120),
         ])
     }
 }

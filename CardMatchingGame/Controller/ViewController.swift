@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     override func loadView() {
-        view = UI.myView
+        view = UI.gameView
         
         UI.setupSubviews()
         UI.setupConstraints()
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         //timer to load and get the width & height properties!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.setupButtons(rows: 4, columns: 3)
+//            self.setupButtons(rows: 2, columns: 2)
         }
         
         UI.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
@@ -80,7 +81,7 @@ class ViewController: UIViewController {
     
     func loadLevel() {
         //setup time for timer:
-        UI.timeCounter = 60
+        UI.timeCounter = 120
 //        UI.pairsCounter = 5
 //        UI.flipsCounter = 10
         
@@ -94,16 +95,17 @@ class ViewController: UIViewController {
         //reset card counter:
         prop.cardCounter = 0
         
-        //sync Kill pulsate animation & isUserInteractionEnabled
-        prop.syncDisableAnimation = 1.6
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setupTimer()
-//            self.gameOver()                                             //debug GameOver screen
+//            self.gameOver()                                                 //debug GameOver screen
         }
+        
+        //MARK: - if Cards = 20
         
         //if same amount card buttons and cardlist:
         if prop.cardButtons.count == prop.cardList.count {
+            print("Cards = 20!")
+            print("Cards: \(prop.cardList.count)")
             
             //create pair list:
             prop.pairList = prop.cardList
@@ -111,11 +113,9 @@ class ViewController: UIViewController {
             //shuffle card list:
             let shuffledList = prop.cardList.shuffled()
             
+            //set title:
             for i in 0..<prop.cardButtons.count {
                 prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
-                prop.cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
-                prop.cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
-                prop.cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
                 
             //button names list:
@@ -123,6 +123,10 @@ class ViewController: UIViewController {
             print("prop.cardList Count: \(prop.cardList.count)")
             
         } else {
+            
+            //MARK: - If Cards < 20
+            print("Cards < 20!")
+            
             //create lower amounts of card list:
             prop.lowerAmmountOfCardsList = prop.cardList
             
@@ -133,8 +137,6 @@ class ViewController: UIViewController {
             for _ in 0..<sum {
                 if sum > 0 {
                     prop.lowerAmmountOfCardsList.removeLast()
-                } else {
-                    break
                 }
             }
             print(prop.lowerAmmountOfCardsList)
@@ -145,11 +147,9 @@ class ViewController: UIViewController {
             //shuffle card list:
             let shuffledList = prop.lowerAmmountOfCardsList.shuffled()
             
+            //set title:
             for i in 0..<prop.cardButtons.count {
                 prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
-                prop.cardButtons[i].setTitleColor(UIColor.white, for: .normal)               //debug title color
-                prop.cardButtons[i].titleLabel?.font = UIFont(name: "Helvetica", size: 20)   //debug title size
-                prop.cardButtons[i].setImage(nil, for: .normal)                              //debug image
             }
             
             //button names list:
@@ -172,6 +172,9 @@ class ViewController: UIViewController {
         
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //remove old subview:
+            self.UI.buttonsView.subviews.forEach { $0.removeFromSuperview() }
+            
             //invalidateTimer:
             self.prop.timer.invalidate()
             
@@ -190,10 +193,10 @@ class ViewController: UIViewController {
                     card.pulsateRemove()
                     card.alpha = 1
                     card.isEnabled = true
-                    card.tintColor = UIColor.systemOrange
-                    card.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
+//                    card.tintColor = UIColor.systemOrange
+//                    card.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
 //                    card.setImage(UIImage(named: "Spider"), for: .normal)
-                    card.setImage(nil, for: .normal)                            //debug image
+//                    card.setImage(nil, for: .normal)                            //debug image
                 })
             }
         }
@@ -205,7 +208,7 @@ class ViewController: UIViewController {
         //reset timer:
         prop.timer.invalidate()
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.gameOver.rawValue, type: AudioTypeKey.wav.rawValue)
+        try? audioFX.playGameStateFX(file: AudioFileKey.gameOver.rawValue, type: AudioTypeKey.wav.rawValue)
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.UI.gameOverLabel.alpha = 1
@@ -216,7 +219,7 @@ class ViewController: UIViewController {
             self.UI.restartButton.pulsate()
         })
         
-        //update UI:
+        //update statistics UI:
         DispatchQueue.main.async {
             self.UI.statisticsLabel.text = "Your Results: \n Time: \(self.prop.totalTime) Pairs: \(self.UI.pairsCounter) Flips: \(self.UI.flipsCounter)"
             
@@ -280,14 +283,13 @@ class ViewController: UIViewController {
             self.UI.flipsCounter = 0
             self.UI.pairsCounter = 0
             
-            //reset cards color:
+            //reset cards:
             for card in self.prop.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
+                    let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                    card.setBackgroundImage(backgroundImage, for: .normal)
                     card.alpha = 1
                     card.isEnabled = true
-                    card.tintColor = UIColor.darkGray
-                    card.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-                    card.setImage(UIImage(named: "Spider"), for: .normal)
                 })
             }
         }
@@ -300,7 +302,9 @@ class ViewController: UIViewController {
         sender.flash()
         //set UserDefaults:
         var muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
-        prop.mutedGeneral = muted   //set prop.mutedGeneral - to have an access in viewDidLoad() to control volume level
+        
+        //set to have an access in viewDidLoad() to control volume level
+        prop.mutedGeneral = muted
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
@@ -342,12 +346,15 @@ class ViewController: UIViewController {
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             //reset timer:
             if self.prop.timer != nil {
                 self.prop.timer.invalidate()
                 print("timer invalidated!")
             }
+            
+            //remove old subview:
+            self.UI.buttonsView.subviews.forEach { $0.removeFromSuperview() }
             
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.popToRootViewController(animated: false)
@@ -363,18 +370,14 @@ class ViewController: UIViewController {
         //flip card:
         if !prop.activatedButtons.contains(sender) {
             guard let imageName = sender.titleLabel?.text else { return }
-            
-            let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
-            sender.tintColor = UIColor.black
-            sender.setImage(image, for: .normal)
-            sender.setTitle(nil, for: .normal)
-            sender.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(0.3)
+            let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
+            sender.setBackgroundImage(image, for: .normal)
             
             //pulse animation:
             sender.pulsate()
             
             //flip animation:
-            UIView.transition(with: sender, duration: 0.8, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
             
             prop.activatedCards.append(imageName)
             prop.activatedButtons.append(sender)
@@ -383,18 +386,21 @@ class ViewController: UIViewController {
             UI.flipsCounter += 1
             
         } else {
+            
+            //MARK: - Flip Back
+            
             //flip back:
-            sender.tintColor = UIColor.orange
-            sender.setImage(UIImage(named: "Spider"), for: .normal)
-            sender.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
+            let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+            sender.setBackgroundImage(backgroundImage, for: .normal)
+            
             //flip back animation:
-            UIView.transition(with: sender, duration: 0.8, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
             
             //audioFX
             try? audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
             
             //kill pulse animation:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + prop.flipAnimationTime) {
                 sender.pulsateRemove()
             }
             
@@ -420,6 +426,8 @@ class ViewController: UIViewController {
                 }
             }
             
+            //MARK: - Match:
+            
             //check for duplicates (to avoid self-match with 1 item in array):
             if prop.activatedCards.last == prop.activatedCards.first && prop.activatedCards.count > 1 {
                 //match cards!
@@ -439,22 +447,26 @@ class ViewController: UIViewController {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
-                    try? self.audioFX.playFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
+                    try? self.audioFX.playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //animation:
-                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 1, options: .transitionCurlUp, animations: {
-                        self.prop.activatedButtons.last?.alpha = 0
-                    } ) { finished in
-                        self.prop.activatedButtons.last?.isHidden = true
-                        self.prop.activatedButtons.last?.alpha = 1
-                    }
+                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        self.prop.activatedButtons.last?.alpha = 0.3
+                        self.prop.activatedButtons.last?.isEnabled = false
+                        self.prop.activatedButtons.last?.pulsateRemove()
+                    })
                     
-                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 1, options: .transitionCurlUp, animations: {
-                        self.prop.activatedButtons.first?.alpha = 0
-                    } ) { finished in
-                        self.prop.activatedButtons.first?.isHidden = true
-                        self.prop.activatedButtons.first?.alpha = 1
-                    }
+                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        self.prop.activatedButtons.first?.alpha = 0.3
+                        self.prop.activatedButtons.first?.isEnabled = false
+                        self.prop.activatedButtons.first?.pulsateRemove()
+                    })
+                    
+                    //default animation: (old)
+//                    self.prop.activatedButtons.first?.alpha = 0
+//                } ) { finished in
+//                    self.prop.activatedButtons.first?.isHidden = true
+//                    self.prop.activatedButtons.first?.alpha = 1
                     
                     //reset cards:
                     self.prop.activatedCards.removeAll()
@@ -473,27 +485,19 @@ class ViewController: UIViewController {
                 print("NOT MATCH")
                 
                 //timer to show both cards:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + prop.timeToShowBothCards) {
                     //audioFX:
                     try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //animations:
-                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionFlipFromTop, animations: nil, completion: nil)
+                    UIView.transition(with: self.prop.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)
                     
-                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 0.7, options: .transitionFlipFromBottom, animations: nil, completion: nil)
+                    UIView.transition(with: self.prop.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
-                    //hide images:
-                    self.prop.activatedButtons.last!.setImage(UIImage(named: "Spider"), for: .normal)
-                    self.prop.activatedButtons.first!.setImage(UIImage(named: "Spider"), for: .normal)
-                    
-                    //change image color:
-                    self.prop.activatedButtons.last!.tintColor = UIColor.orange
-                    self.prop.activatedButtons.first!.tintColor = UIColor.orange
-                    
-                    //reset background color:
-                    self.prop.activatedButtons.last!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-                    self.prop.activatedButtons.first!.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!).withAlphaComponent(1)
-                    
+                    //show card cover:
+                    let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                    self.prop.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
+                    self.prop.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
                 
                 //kill pulsate animation:
@@ -542,26 +546,34 @@ class ViewController: UIViewController {
         let rawHeight = UI.buttonsView.frame.height
         let resultHeight = Int(rawHeight) / rows
         
-        
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
-                cardButton.layer.borderWidth = 3
+                let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                cardButton.setBackgroundImage(backgroundImage, for: .normal)
+                cardButton.setTitleColor(prop.debugFontColor, for: .normal)
+                cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)
+                cardButton.layer.borderWidth = 0
                 cardButton.layer.cornerRadius = 10
                 cardButton.layer.borderColor = UIColor.systemBrown.cgColor
-                cardButton.tintColor = UIColor.darkGray
-                cardButton.setImage(UIImage(named: "Spider"), for: .normal)
-                cardButton.imageView?.contentMode = .scaleAspectFit
-                cardButton.imageView?.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)       //scale Size
-                cardButton.backgroundColor = UIColor(patternImage: UIImage(named: "CardBack")!)
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
                 cardButton.frame = CGRect(x: column * resultWidth, y: row * resultHeight, width: resultWidth, height: resultHeight)
+                //shadows {
+                cardButton.titleLabel?.layer.shadowColor = UIColor.black.cgColor
+                cardButton.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
+                cardButton.titleLabel?.layer.shadowRadius = 2
+                cardButton.titleLabel?.layer.shadowOpacity = 2
+                cardButton.titleLabel?.layer.shouldRasterize = true
+                cardButton.titleLabel?.layer.rasterizationScale = UIScreen.main.scale
+                //shadows }
                 
                 UI.buttonsView.addSubview(cardButton)
                 prop.cardButtons.append(cardButton)
             }
         }
     }
+    
+    //MARK: - Reset Statistics:
     
     fileprivate func resetStatisticsUserDefaults() {
         defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)

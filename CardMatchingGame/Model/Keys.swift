@@ -7,6 +7,14 @@
 
 import Foundation
 
+enum ImageKey: String {
+    case backImage = "PostalMark3Small"
+}
+
+enum FontKey: String {
+    case FuturaExtraBold = "Futura-CondensedExtraBold"
+}
+
 enum StatisticsKey: String {
     case time = "time"
     case pairs = "pairs"
