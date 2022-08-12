@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         navigationController?.navigationBar.isHidden = true
+        //disable gestures:
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         //timer to load and get the width & height properties! (cheating)
@@ -60,9 +61,9 @@ class ViewController: UIViewController {
         //debugging Constraints error message:
 //        UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
-        //audioFX:
+        //Background AudioFX:
         DispatchQueue.main.async {
-            try? self.audioFX.playBackgroundMusic(file: "creepy", type: "mp3")
+            try? self.audioFX.playBackgroundMusic(file: AudioFileKey.SnowfallButterfiles.rawValue, type: AudioTypeKey.mp3.rawValue)
             if self.prop.mutedGeneral {
                 self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
             } else {
@@ -102,7 +103,6 @@ class ViewController: UIViewController {
         
         //if same amount card buttons and cardlist:
         if prop.cardButtons.count == prop.cardList.count {
-            print("Cards = 20!")
             print("Cards: \(prop.cardList.count)")
             
             //create pair list:
@@ -123,7 +123,6 @@ class ViewController: UIViewController {
         } else {
             
             //MARK: - If Cards < 20
-            print("Cards < 20!")
             
             //create lower amounts of card list:
             prop.lowerAmmountOfCardsList = prop.cardList
@@ -456,6 +455,9 @@ class ViewController: UIViewController {
                     //audioFX2:
                     try? self.audioFX.playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
                     
+                    //haptics:
+                    HapticsManager.shared.vibrate(for: .success)
+                    
                     //animation:
                     UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
                         self.prop.activatedButtons.last?.alpha = 0.3
@@ -498,6 +500,9 @@ class ViewController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + prop.timeToShowBothCards) {
                     //audioFX:
                     try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
+                    
+                    //haptics:
+                    HapticsManager.shared.vibrate(for: .error)
                     
                     //animations:
                     UIView.transition(with: self.prop.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)

@@ -66,9 +66,14 @@ class UserInterface: UIView {
 //            UIColor.systemTeal.cgColor,
 //            UIColor.systemBrown.cgColor
             
-            UIColor.systemBlue.cgColor,
-            UIColor.systemGray.cgColor,
-            UIColor.systemBrown.cgColor
+//            UIColor.systemBlue.cgColor,
+//            UIColor.systemGray.cgColor,
+//            UIColor.systemBrown.cgColor,
+            
+            UIColor(red: 0.11, green: 0.82, blue: 0.63, alpha: 1.00).cgColor, //Wild Carribean Green
+            UIColor(red: 0.34, green: 0.40, blue: 0.45, alpha: 1.00).cgColor, //Fuel Town
+            UIColor(red: 0.06, green: 0.67, blue: 0.52, alpha: 1.00).cgColor, //Dark Mountain Meadow
+            
         ]
         gameView.layer.insertSublayer(gradientLayer, at: 0)
     }

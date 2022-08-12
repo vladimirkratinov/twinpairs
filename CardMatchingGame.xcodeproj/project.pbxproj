@@ -31,6 +31,9 @@
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
+		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
+		F7EDF98828A636D2009CA17B /* Snowfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98628A636D2009CA17B /* Snowfall.mp3 */; };
+		F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,9 @@
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
+		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		F7EDF98628A636D2009CA17B /* Snowfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Snowfall.mp3; sourceTree = "<group>"; };
+		F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ceremonial.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,7 @@
 				F781AD7728931921002993E7 /* AudioFX.swift */,
 				F711939D28910ECE00BC1DAA /* Extensions.swift */,
 				F79BF3C6289F1EDC00A8C51F /* Keys.swift */,
+				F7EDF98228A634D2009CA17B /* HapticsManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -141,6 +148,8 @@
 		F781AD8328931C4F002993E7 /* AudioFX */ = {
 			isa = PBXGroup;
 			children = (
+				F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */,
+				F7EDF98628A636D2009CA17B /* Snowfall.mp3 */,
 				F781AD7C28931C40002993E7 /* creepy.mp3 */,
 				F781AD8428931CC5002993E7 /* flip1.wav */,
 				F781AD8628934D67002993E7 /* flip2.wav */,
@@ -218,6 +227,7 @@
 				F781AD8028931C40002993E7 /* match.wav in Resources */,
 				F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */,
 				F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */,
+				F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */,
 				F781AD8728934D67002993E7 /* flip2.wav in Resources */,
 				F781AD8528931CC5002993E7 /* flip1.wav in Resources */,
 				F774F5BB289D0C14006D5AF5 /* spark.sks in Resources */,
@@ -225,6 +235,7 @@
 				F781AD8128931C40002993E7 /* creepy.mp3 in Resources */,
 				F781AD7F28931C40002993E7 /* victory.wav in Resources */,
 				F71193912890C5EF00BC1DAA /* Main.storyboard in Resources */,
+				F7EDF98828A636D2009CA17B /* Snowfall.mp3 in Resources */,
 				F781AD8C28935088002993E7 /* buttonPress.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +253,7 @@
 				F711938E2890C5EF00BC1DAA /* ViewController.swift in Sources */,
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
+				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
 				F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,

@@ -13,14 +13,14 @@ struct Properties {
     
     var cardList = [
         "argentina","argentina",
-        "canada","canada",
+        "nz2","nz2",
         "HK","HK",
         "japan","japan",
-        "nz2","nz2",
         "knie","knie",
         "papua","papua",
         "US","US",
         "UK","UK",
+        "canada","canada",
         "USSR","USSR",
     ]
 
@@ -51,10 +51,10 @@ struct Properties {
         flipBackAnimationTime + timeToShowBothCards
     }
     
-    var userInterfaceFontSize: CGFloat = 0
+    var userInterfaceFontSize: CGFloat = 10
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 25
     var debugFontColor: UIColor = UIColor.white
     
     
