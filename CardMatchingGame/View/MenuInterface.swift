@@ -16,9 +16,10 @@ class MenuInterface: UIView {
 
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.2
-        backgroundImageView.image = UIImage(named: "psyduck")
-        backgroundImageView.contentMode = .scaleAspectFit
+        backgroundImageView.alpha = 0.4
+//        backgroundImageView.image = UIImage(named: "psyduck")
+        backgroundImageView.image = UIImage(named: "LaunchScreen2")
+        backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()
@@ -113,9 +114,13 @@ class MenuInterface: UIView {
 //            UIColor.systemTeal.cgColor,
 //            UIColor.systemBrown.cgColor
             
-            UIColor.systemBlue.cgColor,
-            UIColor.systemGray.cgColor,
-            UIColor.systemBrown.cgColor
+//            UIColor.systemBlue.cgColor,
+//            UIColor.systemGray.cgColor,
+//            UIColor.systemBrown.cgColor,
+            
+            UIColor(red: 0.11, green: 0.82, blue: 0.63, alpha: 1.00).cgColor, //Wild Carribean Green
+            UIColor(red: 0.06, green: 0.67, blue: 0.52, alpha: 1.00).cgColor, //Dark Mountain Meadow
+            UIColor(red: 0.34, green: 0.40, blue: 0.45, alpha: 1.00).cgColor, //Fuel Town
         ]
         menuView.layer.insertSublayer(gradientLayer, at: 0)
     }

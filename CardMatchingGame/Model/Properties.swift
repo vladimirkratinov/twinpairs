@@ -11,6 +11,10 @@ let UI = UserInterface()
 
 struct Properties {
     
+    //cards FontSize and Color:
+    var debugFontSize: CGFloat = 0
+    var debugFontColor: UIColor = UIColor.white
+    
     var cardList = [
         "argentina","argentina",
         "nz2","nz2",
@@ -52,12 +56,6 @@ struct Properties {
     }
     
     var userInterfaceFontSize: CGFloat = 10
-    
-    //cards FontSize and Color:
-    var debugFontSize: CGFloat = 25
-    var debugFontColor: UIColor = UIColor.white
-    
-    
 }
 
 
