@@ -17,8 +17,6 @@
 		F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711BF28289238C300C3E0E8 /* MenuController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
-		F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */; };
-		F774F5BB289D0C14006D5AF5 /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = F774F5BA289D0C14006D5AF5 /* spark.sks */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
 		F781AD7F28931C40002993E7 /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory.wav */; };
@@ -30,6 +28,7 @@
 		F781AD8C28935088002993E7 /* buttonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8B28935088002993E7 /* buttonPress.wav */; };
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
+		F7835BFE28A76EFD00081C6B /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BFD28A76EFD00081C6B /* Animations.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
 		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
@@ -50,8 +49,6 @@
 		F711BF28289238C300C3E0E8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleScene.swift; sourceTree = "<group>"; };
-		F774F5BA289D0C14006D5AF5 /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		F781AD7A28931C40002993E7 /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
@@ -64,6 +61,7 @@
 		F781AD8B28935088002993E7 /* buttonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonPress.wav; sourceTree = "<group>"; };
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		F7835BFD28A76EFD00081C6B /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
 		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 				F711938F2890C5EF00BC1DAA /* Main.storyboard */,
 				F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */,
 				F71193922890C5F000BC1DAA /* Assets.xcassets */,
-				F774F5BA289D0C14006D5AF5 /* spark.sks */,
 				F71193972890C5F000BC1DAA /* Info.plist */,
 			);
 			path = CardMatchingGame;
@@ -138,12 +135,12 @@
 			isa = PBXGroup;
 			children = (
 				F760AF6C289C7CE8007ABE11 /* Properties.swift */,
-				F7835BF528A71D3D00081C6B /* Palette.swift */,
-				F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */,
-				F781AD7728931921002993E7 /* AudioFX.swift */,
-				F711939D28910ECE00BC1DAA /* Extensions.swift */,
 				F79BF3C6289F1EDC00A8C51F /* Keys.swift */,
+				F7835BF528A71D3D00081C6B /* Palette.swift */,
+				F711939D28910ECE00BC1DAA /* Extensions.swift */,
+				F781AD7728931921002993E7 /* AudioFX.swift */,
 				F7EDF98228A634D2009CA17B /* HapticsManager.swift */,
+				F7835BFD28A76EFD00081C6B /* Animations.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,7 +230,6 @@
 				F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */,
 				F781AD8728934D67002993E7 /* flip2.wav in Resources */,
 				F781AD8528931CC5002993E7 /* flip1.wav in Resources */,
-				F774F5BB289D0C14006D5AF5 /* spark.sks in Resources */,
 				F781AD7E28931C40002993E7 /* gameOver.wav in Resources */,
 				F781AD8128931C40002993E7 /* creepy.mp3 in Resources */,
 				F781AD7F28931C40002993E7 /* victory.wav in Resources */,
@@ -257,8 +253,8 @@
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,
+				F7835BFE28A76EFD00081C6B /* Animations.swift in Sources */,
 				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
-				F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,
 				F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */,

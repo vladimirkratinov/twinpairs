@@ -15,8 +15,8 @@ struct Properties {
     var debugFontSize: CGFloat = 25
     var debugFontColor: UIColor = UIColor.white
     
-    var rows = 4
-    var columns = 3
+    var rows = 5
+    var columns = 4
     
     var cardList = [
         "argentina","argentina",

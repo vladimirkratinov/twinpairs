@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum CoinsKey: String {
+    case coins = "Coins"
+}
+
 enum ImageKey: String {
     case backImage = "Back1Medium"
 }

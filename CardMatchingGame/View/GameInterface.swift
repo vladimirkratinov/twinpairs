@@ -13,11 +13,24 @@ class GameInterface: UIView {
     let palette = Palette()
     let defaults = UserDefaults.standard
     
-    var pairsCounter: Int = 0 {
+    var flipsCounter: Int = 0 {
+        didSet {
+            flipsLabel.text = "♠️ \(flipsCounter)"
+        }
+    }
+    
+    var pairsCounter: Int = 9 {
         didSet {
             pairsLabel.text = "🃏 \(pairsCounter)"
         }
     }
+    
+    var coins: Int = UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue) {
+        didSet {
+            coinLabel.text = "🪙\(coins)"
+        }
+    }
+    
     var timeCounter: Int = 0 {
         didSet {
 //            let (m,s) = secToMinSec(timeCounter)
@@ -42,12 +55,6 @@ class GameInterface: UIView {
     
     func secToMinSec(_ seconds: Int) -> (Int, Int) {
         return ((seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    
-    var flipsCounter: Int = 0 {
-        didSet {
-            flipsLabel.text = "♠️ \(flipsCounter)"
-        }
     }
     
     //MARK: - Views:
@@ -95,20 +102,12 @@ class GameInterface: UIView {
     lazy var settingsView: UIView = {
         let settingsView = UIView()
         settingsView.translatesAutoresizingMaskIntoConstraints = false
-        settingsView.alpha = 1
+        settingsView.alpha = 0
         settingsView.layer.borderWidth = 5
         settingsView.layer.cornerRadius = 20
         settingsView.backgroundColor = UIColor.brown
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
-    }()
-    
-    lazy var settingsBackgroundView: UIView = {
-        let settingsBackgroundView = UIView()
-        settingsBackgroundView.alpha = 0.3
-        settingsBackgroundView.backgroundColor = UIColor.black
-        settingsBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        return settingsBackgroundView
     }()
     
     lazy var settingsMusic: UILabel = {
@@ -138,7 +137,7 @@ class GameInterface: UIView {
         return settingsVibration
     }()
 
-    var muteMusicButton: UIButton = {
+    lazy var muteMusicButton: UIButton = {
         let muteMusicButton = UIButton()
         let defaults = UserDefaults.standard
         muteMusicButton.alpha = 1
@@ -160,10 +159,10 @@ class GameInterface: UIView {
         return muteMusicButton
     }()
     
-    var muteSoundButton: UIButton = {
+    lazy var muteSoundButton: UIButton = {
         let muteSoundButton = UIButton()
         let defaults = UserDefaults.standard
-        muteSoundButton.alpha = 1
+        muteSoundButton.alpha = 0.3
         muteSoundButton.translatesAutoresizingMaskIntoConstraints = false
         muteSoundButton.setTitle(" Mute ", for: .normal)
         muteSoundButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -182,10 +181,10 @@ class GameInterface: UIView {
         return muteSoundButton
     }()
     
-    var muteVibrationButton: UIButton = {
+    lazy var muteVibrationButton: UIButton = {
         let muteVibrationButton = UIButton()
         let defaults = UserDefaults.standard
-        muteVibrationButton.alpha = 1
+        muteVibrationButton.alpha = 0.3
         muteVibrationButton.translatesAutoresizingMaskIntoConstraints = false
         muteVibrationButton.setTitle(" Mute ", for: .normal)
         muteVibrationButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -204,7 +203,7 @@ class GameInterface: UIView {
         return muteVibrationButton
     }()
     
-    var quitButton: UIButton = {
+    lazy var quitButton: UIButton = {
         let quitButton = UIButton()
         quitButton.alpha = 1
         quitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -216,20 +215,18 @@ class GameInterface: UIView {
         quitButton.layer.borderWidth = 3
         quitButton.layer.cornerRadius = 10
         quitButton.isUserInteractionEnabled = true
-        //shadows {
         quitButton.layer.shadowColor = UIColor.black.cgColor
         quitButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         quitButton.layer.shadowRadius = 1
         quitButton.layer.shadowOpacity = 1.0
         quitButton.layer.shouldRasterize = true
         quitButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
         return quitButton
     }()
     
-    var rateButton: UIButton = {
+    lazy var rateButton: UIButton = {
         let rateButton = UIButton()
-        rateButton.alpha = 1
+        rateButton.alpha = 0.3
         rateButton.translatesAutoresizingMaskIntoConstraints = false
         rateButton.setTitle(" Rate Us ", for: .normal)
         rateButton.backgroundColor = UIColor.systemGreen
@@ -248,7 +245,7 @@ class GameInterface: UIView {
         return rateButton
     }()
     
-    //MARK: - Labels:
+    //MARK: - UI Labels:
 
     var timeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -259,11 +256,20 @@ class GameInterface: UIView {
         return timeLabel
     }()
     
+    var coinLabel: UILabel = {
+        let coinLabel = UILabel()
+        coinLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.textAlignment = .left
+        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
+        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return coinLabel
+    }()
+    
     var pairsLabel: UILabel = {
         let pairsLabel = UILabel()
         pairsLabel.translatesAutoresizingMaskIntoConstraints = false
         pairsLabel.textAlignment = .right
-        pairsLabel.text = ""
+        pairsLabel.text = "🃏"
         pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return pairsLabel
     }()
@@ -272,12 +278,14 @@ class GameInterface: UIView {
         let flipsLabel = UILabel()
         flipsLabel.translatesAutoresizingMaskIntoConstraints = false
         flipsLabel.textAlignment = .right
-        flipsLabel.text = ""
+        flipsLabel.text = "♠️"
         flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return flipsLabel
     }()
     
-    var statisticsLabel: UILabel = {
+    //MARK: - Statistics Label:
+    
+    lazy var statisticsLabel: UILabel = {
         let statisticsLabel = UILabel()
         statisticsLabel.alpha = 1
         statisticsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -289,7 +297,7 @@ class GameInterface: UIView {
         return statisticsLabel
     }()
     
-    var bestResultLabel: UILabel = {
+    lazy var bestResultLabel: UILabel = {
         let bestResultLabel = UILabel()
         bestResultLabel.alpha = 1
         bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -301,7 +309,9 @@ class GameInterface: UIView {
         return bestResultLabel
     }()
 
-    var gameOverLabel: UILabel = {
+    //MARK: - Pop-up Label:
+    
+    lazy var gameOverLabel: UILabel = {
         let gameOverLabel = UILabel()
         gameOverLabel.alpha = 0
         gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -309,18 +319,16 @@ class GameInterface: UIView {
         gameOverLabel.text = "GAME OVER!"
         gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
         gameOverLabel.textColor = UIColor.yellow
-        //shadows {
         gameOverLabel.layer.shadowColor = UIColor.black.cgColor
         gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
         gameOverLabel.layer.shadowRadius = 1
         gameOverLabel.layer.shadowOpacity = 1.0
         gameOverLabel.layer.shouldRasterize = true
         gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
         return gameOverLabel
     }()
 
-    var nextLevelLabel: UILabel = {
+    lazy var nextLevelLabel: UILabel = {
         let nextLevelLabel = UILabel()
         nextLevelLabel.alpha = 0
         nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -328,15 +336,30 @@ class GameInterface: UIView {
         nextLevelLabel.text = "NEXT LEVEL!"
         nextLevelLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 45)
         nextLevelLabel.textColor = UIColor.green
-        //shadows {
         nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
         nextLevelLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
         nextLevelLabel.layer.shadowRadius = 1
         nextLevelLabel.layer.shadowOpacity = 1.0
         nextLevelLabel.layer.shouldRasterize = true
         nextLevelLabel.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
         return nextLevelLabel
+    }()
+    
+    lazy var plusCoinsAnimationsLabel: UILabel = {
+        let plusCoinsAnimationsLabel = UILabel()
+        plusCoinsAnimationsLabel.alpha = 0
+        plusCoinsAnimationsLabel.translatesAutoresizingMaskIntoConstraints = false
+        plusCoinsAnimationsLabel.textAlignment = .center
+        plusCoinsAnimationsLabel.text = "+1 Coin!"
+        plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 30)
+        plusCoinsAnimationsLabel.textColor = UIColor.yellow
+        plusCoinsAnimationsLabel.layer.shadowColor = UIColor.black.cgColor
+        plusCoinsAnimationsLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
+        plusCoinsAnimationsLabel.layer.shadowRadius = 1
+        plusCoinsAnimationsLabel.layer.shadowOpacity = 1.0
+        plusCoinsAnimationsLabel.layer.shouldRasterize = true
+        plusCoinsAnimationsLabel.layer.rasterizationScale = UIScreen.main.scale
+        return plusCoinsAnimationsLabel
     }()
     
     //MARK: - Buttons:
@@ -356,7 +379,7 @@ class GameInterface: UIView {
         return settingsButton
     }()
     
-    var restartButton: UIButton = {
+    lazy var restartButton: UIButton = {
         let restartButton = UIButton()
         restartButton.alpha = 0
         restartButton.translatesAutoresizingMaskIntoConstraints = false
@@ -371,7 +394,7 @@ class GameInterface: UIView {
         return restartButton
     }()
 
-    var backToMenuButton: UIButton = {
+    lazy var backToMenuButton: UIButton = {
         let backToMenuButton = UIButton()
         backToMenuButton.isHidden = false
         backToMenuButton.alpha = 0
@@ -384,14 +407,12 @@ class GameInterface: UIView {
         backToMenuButton.layer.borderWidth = 3
         backToMenuButton.layer.cornerRadius = 10
         backToMenuButton.isUserInteractionEnabled = true
-        //shadows {
         backToMenuButton.layer.shadowColor = UIColor.black.cgColor
         backToMenuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         backToMenuButton.layer.shadowRadius = 1
         backToMenuButton.layer.shadowOpacity = 1.0
         backToMenuButton.layer.shouldRasterize = true
         backToMenuButton.layer.rasterizationScale = UIScreen.main.scale
-        //shadows }
         return backToMenuButton
     }()
     
@@ -402,6 +423,7 @@ class GameInterface: UIView {
         gameView.addSubview(buttonsView)
         gameView.addSubview(statisticsView)
         gameView.addSubview(woodenBack)
+        gameView.addSubview(plusCoinsAnimationsLabel)
         
         //Inside Settings:
         settingsView.addSubview(settingsMusic)
@@ -417,7 +439,8 @@ class GameInterface: UIView {
         
         //UI:
         gameView.addSubview(timeLabel)
-        gameView.addSubview(flipsLabel)
+        gameView.addSubview(coinLabel)
+//        gameView.addSubview(flipsLabel)
         gameView.addSubview(pairsLabel)
         gameView.addSubview(settingsButton)
         
@@ -435,7 +458,6 @@ class GameInterface: UIView {
         //Settings:
         gameView.addSubview(settingsView)
         gameView.bringSubviewToFront(settingsView)
-//        settingsView.addSubview(settingsBackgroundView)
     }
     
     //MARK: - Constraints:
@@ -452,11 +474,6 @@ class GameInterface: UIView {
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
             settingsView.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             settingsView.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
-            
-//            settingsBackgroundView.topAnchor.constraint(equalTo: gameView.topAnchor),
-//            settingsBackgroundView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
-//            settingsBackgroundView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
-//            settingsBackgroundView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
             
             settingsMusic.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 20),
             settingsMusic.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
@@ -506,17 +523,23 @@ class GameInterface: UIView {
             
             //UI:
             pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            pairsLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 10),
+            pairsLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
             
-            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.layoutMarginsGuide.trailingAnchor, constant: 10),
+//            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+//            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
+            
+            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
 
             timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -10),
+            timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor),
             
-            settingsButton.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            settingsButton.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor, constant: -10),
             settingsButton.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
-
+            settingsButton.widthAnchor.constraint(equalToConstant: 50),
+            settingsButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            //Pop-up:
             gameOverLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             gameOverLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
 
@@ -530,6 +553,10 @@ class GameInterface: UIView {
             backToMenuButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
             backToMenuButton.widthAnchor.constraint(equalToConstant: 120),
+            
+            //Animations:
+            plusCoinsAnimationsLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
+            plusCoinsAnimationsLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
         ])
     }
     

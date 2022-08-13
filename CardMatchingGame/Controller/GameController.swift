@@ -11,8 +11,11 @@ import AVFoundation
 class GameController: UIViewController {
     
     var audioFX = AudioFX()
-    let gameInterface = GameInterface()
     var prop = Properties()
+    
+    let gameInterface = GameInterface()
+    let animations = Animations()
+    
     let defaults = UserDefaults.standard
     
     override func loadView() {
@@ -442,6 +445,17 @@ class GameController: UIViewController {
                 //match cards!
                 print("BINGO")
                 
+                //TESTING COINS:
+                //Animation:
+                plusCoinAnimation()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.animations.spring(self.gameInterface.coinLabel)
+                }
+                
+                gameInterface.coins += 1
+                defaults.set(gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+                //FINISHED TESTING COINS
+                
                 //remove from prop.pairList: (to sort pairs for next level)
                 gameInterface.pairsCounter += 1
                 if let cardName = sender.titleLabel?.text {
@@ -449,6 +463,17 @@ class GameController: UIViewController {
                     prop.pairList.removeAll { $0 == cardName }
                     print(prop.pairList)
                     print(prop.pairList.count)
+                }
+                
+                //add Coin:
+                if gameInterface.pairsCounter.isMultiple(of: 10) {
+                    print("+ COIN!")
+                    
+                    //Animation:
+                    plusCoinAnimation()
+                    
+                    gameInterface.coins += 1
+                    defaults.set(gameInterface.coins, forKey: CoinsKey.coins.rawValue)
                 }
                 
                 //timer to show both cards:
@@ -472,20 +497,9 @@ class GameController: UIViewController {
                         self.prop.activatedButtons.first?.pulsateRemove()
                     })
                     
-                    //default animation: (old)
-//                    self.prop.activatedButtons.first?.alpha = 0
-//                } ) { finished in
-//                    self.prop.activatedButtons.first?.isHidden = true
-//                    self.prop.activatedButtons.first?.alpha = 1
-                    
                     //reset cards:
                     self.prop.activatedCards.removeAll()
                     self.prop.activatedButtons.removeAll()
-                    
-                    //add bonus time to totalTime:
-//                    self.gameInterface.timeCounter += 5
-//                    self.prop.totalTime += 5
-//                    print("total time changed to: \(self.prop.totalTime)")
                     
                     //reset counter:
                     self.prop.cardCounter = 0
@@ -614,5 +628,38 @@ class GameController: UIViewController {
                 prop.cardButtons.append(cardButton)
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if let touch = touches.first {
+        let location = touch.location(in: self.gameInterface.gameView)
+        print(location.x)
+        print(location.y)
+      }
+    }
+    
+    func plusCoinAnimation() {
+        gameInterface.plusCoinsAnimationsLabel.alpha = 1
+        
+        let thePath = CGMutablePath()
+        thePath.move(to: CGPoint(x: 200, y: 150))
+        thePath.addCurve(to: CGPoint(x: 200, y: 100),
+                         control1: CGPoint(x: 0, y: 0),
+                         control2: CGPoint(x:200, y: 0))
+//        thePath.addCurve(to: CGPoint(x: 400, y: 300),
+//                         control1: CGPoint(x: 200, y: 50),
+//                         control2: CGPoint(x: 400, y: 50))
+
+        let theAnimaton = CAKeyframeAnimation(keyPath: "position")
+        theAnimaton.path = thePath
+        theAnimaton.duration = 5
+        self.gameInterface.plusCoinsAnimationsLabel.layer.add(theAnimaton, forKey: "position")
+        
+        let fadeAnim = CABasicAnimation(keyPath: "opacity")
+        fadeAnim.fromValue = 1.0
+        fadeAnim.toValue = 0.0
+        fadeAnim.duration = 2.0
+        gameInterface.plusCoinsAnimationsLabel.layer.add(fadeAnim, forKey: "fadeAnim")
+        gameInterface.plusCoinsAnimationsLabel.layer.opacity = 0.0
     }
 }

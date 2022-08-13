@@ -68,6 +68,20 @@ extension UILabel {
         pulse.damping = 1.0
         layer.add(pulse, forKey: nil)
     }
+    
+    func spring(label: UILabel) {
+        label.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 1.5,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.3),
+                       initialSpringVelocity: CGFloat(0.3),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+            label.transform = CGAffineTransform.identity
+        },
+                       completion: { Void in()  }
+        )
+    }
 }
 
 //MARK: - UIImageView:
