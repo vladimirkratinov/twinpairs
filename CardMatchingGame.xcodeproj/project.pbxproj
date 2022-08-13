@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71193892890C5EF00BC1DAA /* AppDelegate.swift */; };
 		F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711938B2890C5EF00BC1DAA /* SceneDelegate.swift */; };
-		F711938E2890C5EF00BC1DAA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711938D2890C5EF00BC1DAA /* ViewController.swift */; };
+		F711938E2890C5EF00BC1DAA /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711938D2890C5EF00BC1DAA /* GameController.swift */; };
 		F71193912890C5EF00BC1DAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F711938F2890C5EF00BC1DAA /* Main.storyboard */; };
 		F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71193922890C5F000BC1DAA /* Assets.xcassets */; };
 		F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */; };
 		F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711939D28910ECE00BC1DAA /* Extensions.swift */; };
 		F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711BF28289238C300C3E0E8 /* MenuController.swift */; };
-		F760AF6B289C6EA2007ABE11 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* UserInterface.swift */; };
+		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */; };
 		F774F5BB289D0C14006D5AF5 /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = F774F5BA289D0C14006D5AF5 /* spark.sks */; };
@@ -29,6 +29,7 @@
 		F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8928934FBA002993E7 /* matchIgnite.wav */; };
 		F781AD8C28935088002993E7 /* buttonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8B28935088002993E7 /* buttonPress.wav */; };
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
+		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
 		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
@@ -40,14 +41,14 @@
 		F71193862890C5EF00BC1DAA /* CardMatchingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardMatchingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71193892890C5EF00BC1DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F711938B2890C5EF00BC1DAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F711938D2890C5EF00BC1DAA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F711938D2890C5EF00BC1DAA /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		F71193902890C5EF00BC1DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F71193922890C5F000BC1DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F71193952890C5F000BC1DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F71193972890C5F000BC1DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F711939D28910ECE00BC1DAA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F711BF28289238C300C3E0E8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		F760AF6A289C6EA2007ABE11 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
+		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleScene.swift; sourceTree = "<group>"; };
 		F774F5BA289D0C14006D5AF5 /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		F781AD8928934FBA002993E7 /* matchIgnite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = matchIgnite.wav; sourceTree = "<group>"; };
 		F781AD8B28935088002993E7 /* buttonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonPress.wav; sourceTree = "<group>"; };
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
+		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
 		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
@@ -117,7 +119,7 @@
 		F7815853289CBA7C0016A41D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F711938D2890C5EF00BC1DAA /* ViewController.swift */,
+				F711938D2890C5EF00BC1DAA /* GameController.swift */,
 				F711BF28289238C300C3E0E8 /* MenuController.swift */,
 			);
 			path = Controller;
@@ -126,7 +128,7 @@
 		F7815854289CBA850016A41D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F760AF6A289C6EA2007ABE11 /* UserInterface.swift */,
+				F760AF6A289C6EA2007ABE11 /* GameInterface.swift */,
 				F7E53529289F6AE10019B770 /* MenuInterface.swift */,
 			);
 			path = View;
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				F760AF6C289C7CE8007ABE11 /* Properties.swift */,
+				F7835BF528A71D3D00081C6B /* Palette.swift */,
 				F774F5B8289D09C7006D5AF5 /* ParticleScene.swift */,
 				F781AD7728931921002993E7 /* AudioFX.swift */,
 				F711939D28910ECE00BC1DAA /* Extensions.swift */,
@@ -248,11 +251,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */,
-				F760AF6B289C6EA2007ABE11 /* UserInterface.swift in Sources */,
+				F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */,
 				F781AD7828931921002993E7 /* AudioFX.swift in Sources */,
-				F711938E2890C5EF00BC1DAA /* ViewController.swift in Sources */,
+				F711938E2890C5EF00BC1DAA /* GameController.swift in Sources */,
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
+				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,
 				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
 				F774F5B9289D09C7006D5AF5 /* ParticleScene.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,

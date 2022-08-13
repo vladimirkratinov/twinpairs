@@ -7,13 +7,16 @@
 
 import UIKit
 
-let UI = UserInterface()
+let gameInterface = GameInterface()
 
 struct Properties {
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 25
     var debugFontColor: UIColor = UIColor.white
+    
+    var rows = 4
+    var columns = 3
     
     var cardList = [
         "argentina","argentina",
@@ -38,14 +41,12 @@ struct Properties {
     var mutedGeneral = Bool()
     
     var timer: Timer!
+    var isPaused = false
     
     var cardCounter = 0
     var totalTime = 0
-    var standardTimeCounter = 120
+    var standardTimeCounter = 179
     var gameIsOver = false
-    
-    var rows = 3
-    var columns = 2
     
     var flipAnimationTime = 0.4
     var flipBackAnimationTime = 0.4

@@ -11,18 +11,18 @@ import AVFoundation
 class MenuController: UIViewController {
     
     var audioFX = AudioFX()
-    let MI = MenuInterface()
+    let menuInterface = MenuInterface()
     
     override func loadView() {
-        view = MI.menuView
+        view = menuInterface.menuView
         view.backgroundColor = UIColor.systemPink
-        view.insertSubview(MI.backgroundImageView, at: 0)
+        view.insertSubview(menuInterface.backgroundImageView, at: 0)
         
-        MI.setupSubviews()
-        MI.setupConstraints()
+        menuInterface.setupSubviews()
+        menuInterface.setupConstraints()
         
-        MI.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        MI.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
+        menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -31,15 +31,15 @@ class MenuController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         //animation:
-        MI.backgroundImageView.pulsateSlow()
+        menuInterface.backgroundImageView.pulsateSlow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MI.setGradientBackground()
+        menuInterface.setGradientBackground()
         
         //animation:
-        MI.backgroundImageView.pulsateSlow()
+        menuInterface.backgroundImageView.pulsateSlow()
     }
     
     @objc func playButtonTapped(_ sender: UIButton) {
@@ -55,7 +55,7 @@ class MenuController: UIViewController {
         transition.type = CATransitionType.fade
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "Halloween") as? ViewController else { return }
+            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "GameController") as? GameController else { return }
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)
         }
@@ -75,9 +75,9 @@ class MenuController: UIViewController {
     
     fileprivate func resetStatisticsUserDefaults() {
         let defaults = UserDefaults.standard
-        defaults.set(UI.timeCounter, forKey: StatisticsKey.time.rawValue)
-        defaults.set(UI.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
-        defaults.set(UI.flipsCounter, forKey: StatisticsKey.flips.rawValue)
+        defaults.set(gameInterface.timeCounter, forKey: StatisticsKey.time.rawValue)
+        defaults.set(gameInterface.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
+        defaults.set(gameInterface.flipsCounter, forKey: StatisticsKey.flips.rawValue)
         
         print("defaults RESET!")
         print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
