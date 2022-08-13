@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SpriteKit
 
 class GameInterface: UIView {
     let prop = Properties()
@@ -19,7 +18,7 @@ class GameInterface: UIView {
         }
     }
     
-    var pairsCounter: Int = 9 {
+    var pairsCounter: Int = 0 {
         didSet {
             pairsLabel.text = "🃏 \(pairsCounter)"
         }
@@ -269,7 +268,7 @@ class GameInterface: UIView {
         let pairsLabel = UILabel()
         pairsLabel.translatesAutoresizingMaskIntoConstraints = false
         pairsLabel.textAlignment = .right
-        pairsLabel.text = "🃏"
+        pairsLabel.text = "🃏 0"
         pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return pairsLabel
     }()
@@ -278,7 +277,7 @@ class GameInterface: UIView {
         let flipsLabel = UILabel()
         flipsLabel.translatesAutoresizingMaskIntoConstraints = false
         flipsLabel.textAlignment = .right
-        flipsLabel.text = "♠️"
+        flipsLabel.text = "♠️ 0"
         flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return flipsLabel
     }()
@@ -351,7 +350,7 @@ class GameInterface: UIView {
         plusCoinsAnimationsLabel.translatesAutoresizingMaskIntoConstraints = false
         plusCoinsAnimationsLabel.textAlignment = .center
         plusCoinsAnimationsLabel.text = "+1 Coin!"
-        plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 30)
+        plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         plusCoinsAnimationsLabel.textColor = UIColor.yellow
         plusCoinsAnimationsLabel.layer.shadowColor = UIColor.black.cgColor
         plusCoinsAnimationsLabel.layer.shadowOffset = CGSize(width: 5, height: 5)

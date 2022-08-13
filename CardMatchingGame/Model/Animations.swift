@@ -7,10 +7,11 @@
 
 import UIKit
 
-struct Animations {
-    
+
+
+class Animations {
     func spring(_ sender: UILabel) {
-        sender.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        sender.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
         UIView.animate(withDuration: 1.5,
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.3),

@@ -12,7 +12,7 @@ let gameInterface = GameInterface()
 struct Properties {
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 25
+    var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
     var rows = 5

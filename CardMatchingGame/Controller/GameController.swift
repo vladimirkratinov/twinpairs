@@ -447,13 +447,17 @@ class GameController: UIViewController {
                 
                 //TESTING COINS:
                 //Animation:
-                plusCoinAnimation()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.animations.spring(self.gameInterface.coinLabel)
+                DispatchQueue.main.async {
+                    self.plusCoinAnimation()
                 }
                 
-                gameInterface.coins += 1
-                defaults.set(gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.animations.spring(self.gameInterface.coinLabel)
+                    self.gameInterface.coins += 1
+                    self.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+                }
+                
+                
                 //FINISHED TESTING COINS
                 
                 //remove from prop.pairList: (to sort pairs for next level)
@@ -469,8 +473,9 @@ class GameController: UIViewController {
                 if gameInterface.pairsCounter.isMultiple(of: 10) {
                     print("+ COIN!")
                     
-                    //Animation:
-                    plusCoinAnimation()
+                    DispatchQueue.main.async {
+                        self.plusCoinAnimation()
+                    }
                     
                     gameInterface.coins += 1
                     defaults.set(gameInterface.coins, forKey: CoinsKey.coins.rawValue)
@@ -630,33 +635,40 @@ class GameController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let touch = touches.first {
-        let location = touch.location(in: self.gameInterface.gameView)
-        print(location.x)
-        print(location.y)
-      }
-    }
-    
     func plusCoinAnimation() {
+        
         gameInterface.plusCoinsAnimationsLabel.alpha = 1
         
         let thePath = CGMutablePath()
-        thePath.move(to: CGPoint(x: 200, y: 150))
-        thePath.addCurve(to: CGPoint(x: 200, y: 100),
-                         control1: CGPoint(x: 0, y: 0),
-                         control2: CGPoint(x:200, y: 0))
-//        thePath.addCurve(to: CGPoint(x: 400, y: 300),
-//                         control1: CGPoint(x: 200, y: 50),
-//                         control2: CGPoint(x: 400, y: 50))
+        let randomNumber = Int.random(in: 1...3)
+        
+        switch randomNumber {
+        case 1:
+            thePath.move(to: CGPoint(x: 200, y: 150))
+            thePath.addCurve(to: CGPoint(x: 200, y: 100),
+                             control1: CGPoint(x: 0, y: 0),
+                             control2: CGPoint(x:200, y: 0))
+        case 2:
+            thePath.move(to: CGPoint(x: 60, y: 200))
+            thePath.addCurve(to: CGPoint(x: 100, y: 100),
+                             control1: CGPoint(x: 100, y: 20),
+                             control2: CGPoint(x:200, y: 20))
+        case 3:
+            thePath.move(to: CGPoint(x: 300, y: 100))
+            thePath.addCurve(to: CGPoint(x: 300, y: 100),
+                             control1: CGPoint(x: 0, y: 25),
+                             control2: CGPoint(x: 0, y: 25))
+        default:
+            break
+        }
 
         let theAnimaton = CAKeyframeAnimation(keyPath: "position")
         theAnimaton.path = thePath
         theAnimaton.duration = 5
-        self.gameInterface.plusCoinsAnimationsLabel.layer.add(theAnimaton, forKey: "position")
+        gameInterface.plusCoinsAnimationsLabel.layer.add(theAnimaton, forKey: "position")
         
         let fadeAnim = CABasicAnimation(keyPath: "opacity")
-        fadeAnim.fromValue = 1.0
+        fadeAnim.fromValue = 1
         fadeAnim.toValue = 0.0
         fadeAnim.duration = 2.0
         gameInterface.plusCoinsAnimationsLabel.layer.add(fadeAnim, forKey: "fadeAnim")
