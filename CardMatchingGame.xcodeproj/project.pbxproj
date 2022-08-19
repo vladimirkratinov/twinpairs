@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DBBAC6FB3E33CC7E6777439B /* Pods_CardMatchingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */; };
 		F700123328AEED89007DEA94 /* CardListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123228AEED89007DEA94 /* CardListViewCell.swift */; };
 		F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123428AEEDA1007DEA94 /* CardListController.swift */; };
 		F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71193892890C5EF00BC1DAA /* AppDelegate.swift */; };
@@ -43,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardMatchingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8439CCBB8C3DFF5EE3EFDEE3 /* Pods-CardMatchingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.debug.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.debug.xcconfig"; sourceTree = "<group>"; };
+		F05A91FD5F7828A56AF9DC38 /* Pods-CardMatchingGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.release.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.release.xcconfig"; sourceTree = "<group>"; };
 		F700123228AEED89007DEA94 /* CardListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewCell.swift; sourceTree = "<group>"; };
 		F700123428AEEDA1007DEA94 /* CardListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListController.swift; sourceTree = "<group>"; };
 		F71193862890C5EF00BC1DAA /* CardMatchingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardMatchingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,17 +90,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBAC6FB3E33CC7E6777439B /* Pods_CardMatchingGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12E8F55D501AEE3815F787CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E6248C029B4E5C5C1E51C00 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8439CCBB8C3DFF5EE3EFDEE3 /* Pods-CardMatchingGame.debug.xcconfig */,
+				F05A91FD5F7828A56AF9DC38 /* Pods-CardMatchingGame.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F711937D2890C5EF00BC1DAA = {
 			isa = PBXGroup;
 			children = (
 				F71193882890C5EF00BC1DAA /* CardMatchingGame */,
 				F71193872890C5EF00BC1DAA /* Products */,
+				6E6248C029B4E5C5C1E51C00 /* Pods */,
+				12E8F55D501AEE3815F787CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,9 +213,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F711939A2890C5F000BC1DAA /* Build configuration list for PBXNativeTarget "CardMatchingGame" */;
 			buildPhases = (
+				2874F6A80053180729DFBECC /* [CP] Check Pods Manifest.lock */,
 				F71193822890C5EF00BC1DAA /* Sources */,
 				F71193832890C5EF00BC1DAA /* Frameworks */,
 				F71193842890C5EF00BC1DAA /* Resources */,
+				3564DBFB9DD001ADF4B58A66 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -258,6 +284,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2874F6A80053180729DFBECC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CardMatchingGame-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3564DBFB9DD001ADF4B58A66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F71193822890C5EF00BC1DAA /* Sources */ = {
@@ -424,11 +492,12 @@
 		};
 		F711939B2890C5F000BC1DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8439CCBB8C3DFF5EE3EFDEE3 /* Pods-CardMatchingGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 400;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
@@ -444,7 +513,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.CardMatchingGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -455,11 +524,12 @@
 		};
 		F711939C2890C5F000BC1DAA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F05A91FD5F7828A56AF9DC38 /* Pods-CardMatchingGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 400;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
@@ -475,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.CardMatchingGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

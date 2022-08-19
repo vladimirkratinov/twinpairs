@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Gemini
 
-class CollectionViewCell: UICollectionViewCell {
+class CollectionViewCell: GeminiCell {
     
     static let identifier = "CollectionViewCell"
     

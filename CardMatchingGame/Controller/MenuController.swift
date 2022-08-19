@@ -15,7 +15,6 @@ class MenuController: UIViewController {
     
     override func loadView() {
         view = menuInterface.menuView
-        view.backgroundColor = UIColor.systemPink
         view.insertSubview(menuInterface.backgroundImageView, at: 0)
         
         menuInterface.setupSubviews()
@@ -28,17 +27,13 @@ class MenuController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.isHidden = true
-        
-        //animation:
-        menuInterface.backgroundImageView.pulsateSlow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //background:
         menuInterface.setGradientBackground()
-        
         //animation:
         menuInterface.backgroundImageView.pulsateSlow()
     }
@@ -64,7 +59,13 @@ class MenuController: UIViewController {
     
     @objc func collectionButtonTapped(_ sender: UIButton) {
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
-//        self.navigationController?.view.layer.add(transition, forKey: nil)
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        
+        self.navigationController?.view.layer.add(transition, forKey: nil)
         self.navigationController?.pushViewController(vc, animated: false)
     }
     

@@ -21,9 +21,9 @@ struct Properties {
     var cardCollection = [[String]]()
     
     var cardList = [
+        "HK","HK",
         "nz2","nz2",
         "argentina","argentina",
-        "HK","HK",
         "japan","japan",
         "knie","knie",
         "papua","papua",

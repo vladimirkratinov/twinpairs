@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import ViewAnimator
 
 class GameController: UIViewController {
     
@@ -74,6 +75,13 @@ class GameController: UIViewController {
                 self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let fromAnimation = AnimationType.from(direction: .bottom, offset: 300)
+        gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.7)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

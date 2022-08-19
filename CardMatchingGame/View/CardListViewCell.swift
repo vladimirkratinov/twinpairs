@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Gemini
 
-class CardListViewCell: UICollectionViewCell {
+class CardListViewCell: GeminiCell {
     
     static let identifier = "CardListViewCell"
     

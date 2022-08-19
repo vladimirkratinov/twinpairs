@@ -23,7 +23,7 @@ class DetailInterface: UIView {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 0.2
         backgroundImageView.image = UIImage(named: "LaunchScreen1")
-        backgroundImageView.contentMode = .topLeft
+        backgroundImageView.contentMode = .top
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()
@@ -32,7 +32,7 @@ class DetailInterface: UIView {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 0.2
         backgroundImageView.image = UIImage(named: "LaunchScreen1")
-        backgroundImageView.contentMode = .bottomRight
+        backgroundImageView.contentMode = .bottom
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()

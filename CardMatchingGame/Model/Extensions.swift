@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - UIButton
+//MARK: - UIButton:
 
 extension UIButton {
     
@@ -101,6 +101,15 @@ extension UIImageView {
     }
     
     func pulsateSlow() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 4
+        pulse.fromValue = 1.01
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = .infinity
+        pulse.initialVelocity = 1
+        pulse.damping = 1.0
+        layer.add(pulse, forKey: nil)
     }
 }
 
