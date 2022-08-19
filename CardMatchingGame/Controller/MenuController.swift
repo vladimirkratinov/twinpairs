@@ -28,6 +28,18 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        
+        let fm = FileManager.default
+//        let path = Bundle.main.resourcePath!
+        let path = Bundle.main.
+//        let items = try! fm.contentsOfDirectory(atPath: path)
+        
+        print(path)
+//        for item in items {
+//            if item.hasPrefix("Set1") {
+//                print(item)
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

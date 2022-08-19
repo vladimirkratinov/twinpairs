@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DBBAC6FB3E33CC7E6777439B /* Pods_CardMatchingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */; };
 		F700123328AEED89007DEA94 /* CardListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123228AEED89007DEA94 /* CardListViewCell.swift */; };
 		F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123428AEEDA1007DEA94 /* CardListController.swift */; };
 		F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71193892890C5EF00BC1DAA /* AppDelegate.swift */; };
@@ -22,6 +21,9 @@
 		F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */; };
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
+		F74951BE28AF84FD00DB6479 /* Set3 in Resources */ = {isa = PBXBuildFile; fileRef = F74951BB28AF84FD00DB6479 /* Set3 */; };
+		F74951C028AF84FD00DB6479 /* Set2 in Resources */ = {isa = PBXBuildFile; fileRef = F74951BD28AF84FD00DB6479 /* Set2 */; };
+		F74951DA28AF85A600DB6479 /* Set1 in Resources */ = {isa = PBXBuildFile; fileRef = F74951D928AF85A600DB6479 /* Set1 */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
@@ -44,7 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardMatchingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8439CCBB8C3DFF5EE3EFDEE3 /* Pods-CardMatchingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.debug.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.debug.xcconfig"; sourceTree = "<group>"; };
 		F05A91FD5F7828A56AF9DC38 /* Pods-CardMatchingGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.release.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.release.xcconfig"; sourceTree = "<group>"; };
 		F700123228AEED89007DEA94 /* CardListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewCell.swift; sourceTree = "<group>"; };
@@ -63,6 +64,9 @@
 		F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
+		F74951BB28AF84FD00DB6479 /* Set3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Set3; sourceTree = "<group>"; };
+		F74951BD28AF84FD00DB6479 /* Set2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Set2; sourceTree = "<group>"; };
+		F74951D928AF85A600DB6479 /* Set1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Set1; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
@@ -90,7 +94,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBBAC6FB3E33CC7E6777439B /* Pods_CardMatchingGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +103,6 @@
 		12E8F55D501AEE3815F787CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				232F1485D256FD9F98D17865 /* Pods_CardMatchingGame.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,6 +119,9 @@
 		F711937D2890C5EF00BC1DAA = {
 			isa = PBXGroup;
 			children = (
+				F74951D928AF85A600DB6479 /* Set1 */,
+				F74951BD28AF84FD00DB6479 /* Set2 */,
+				F74951BB28AF84FD00DB6479 /* Set3 */,
 				F71193882890C5EF00BC1DAA /* CardMatchingGame */,
 				F71193872890C5EF00BC1DAA /* Products */,
 				6E6248C029B4E5C5C1E51C00 /* Pods */,
@@ -266,8 +271,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F74951DA28AF85A600DB6479 /* Set1 in Resources */,
+				F74951C028AF84FD00DB6479 /* Set2 in Resources */,
 				F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */,
 				F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */,
+				F74951BE28AF84FD00DB6479 /* Set3 in Resources */,
 				F781AD8028931C40002993E7 /* match.wav in Resources */,
 				F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */,
 				F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */,
