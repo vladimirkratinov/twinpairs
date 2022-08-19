@@ -23,6 +23,7 @@ class MenuController: UIViewController {
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
+        menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -59,6 +60,12 @@ class MenuController: UIViewController {
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)
         }
+    }
+    
+    @objc func collectionButtonTapped(_ sender: UIButton) {
+        guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
+//        self.navigationController?.view.layer.add(transition, forKey: nil)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc func otherButtonTapped(_ sender: UIButton) {

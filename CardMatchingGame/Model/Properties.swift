@@ -15,12 +15,14 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
-    var rows = 5
-    var columns = 4
+    var rows = 3
+    var columns = 2
+    
+    var cardCollection = [[String]]()
     
     var cardList = [
-        "argentina","argentina",
         "nz2","nz2",
+        "argentina","argentina",
         "HK","HK",
         "japan","japan",
         "knie","knie",
@@ -29,6 +31,32 @@ struct Properties {
         "UK","UK",
         "canada","canada",
         "USSR","USSR",
+    ]
+    
+    var cardList1 = [
+        "Pumpkin","Pumpkin",
+        "CardBack","CardBack",
+        "Bat","Bat",
+        "Bones","Bones",
+        "Cobweb","Cobweb",
+        "Dracula","Dracula",
+        "Eye","Eye",
+        "Ghost","Ghost",
+        "Skull","Skull",
+        "Spider","Spider",
+    ]
+    
+    var cardList2 = [
+        "psyduck","psyduck",
+        "CardBackSide1","CardBackSide1",
+        "CardBackSide2","CardBackSide2",
+        "egg","egg",
+        "location","location",
+        "pig","pig",
+        "pikachu","pikachu",
+        "pokeballs1","pokeballs1",
+        "pokeballs2","pokeballs2",
+        "pokeballs3","pokeballs3",
     ]
 
     var cardButtons = [UIButton]()
@@ -45,7 +73,7 @@ struct Properties {
     
     var cardCounter = 0
     var totalTime = 0
-    var standardTimeCounter = 179
+    var standardTimeCounter = 180
     var gameIsOver = false
     
     var flipAnimationTime = 0.4

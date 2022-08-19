@@ -18,7 +18,7 @@ class MenuInterface: UIView {
 
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.4
+        backgroundImageView.alpha = 0.3
         backgroundImageView.image = UIImage(named: "LaunchScreen2")
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,7 @@ class MenuInterface: UIView {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        titleLabel.text = "MATCH PAIR GAME (v.0.3) build 300"
+        titleLabel.text = "MATCH PAIR GAME (v.0.3)"
         titleLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return titleLabel
     }()
@@ -56,6 +56,7 @@ class MenuInterface: UIView {
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
         timeModeButton.translatesAutoresizingMaskIntoConstraints = false
+        timeModeButton.alpha = 0.5
         timeModeButton.setTitle("Time", for: .normal)
         timeModeButton.setTitleColor(UIColor.black, for: .normal)
         timeModeButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -97,6 +98,7 @@ class MenuInterface: UIView {
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()
         collectionButton.translatesAutoresizingMaskIntoConstraints = false
+        collectionButton.alpha = 1
         collectionButton.setTitle("Collection", for: .normal)
         collectionButton.setTitleColor(UIColor.black, for: .normal)
         collectionButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -107,7 +109,7 @@ class MenuInterface: UIView {
         collectionButton.layer.shadowRadius = 1
         collectionButton.layer.shadowOpacity = 1.0
         collectionButton.isUserInteractionEnabled = true
-        collectionButton.isEnabled = false
+        collectionButton.isEnabled = true
         collectionButton.backgroundColor = UIColor.systemTeal
         collectionButton.layer.shouldRasterize = true
         collectionButton.layer.rasterizationScale = UIScreen.main.scale
@@ -117,6 +119,7 @@ class MenuInterface: UIView {
     lazy var challengesButton: UIButton = {
         let challengesButton = UIButton()
         challengesButton.translatesAutoresizingMaskIntoConstraints = false
+        challengesButton.alpha = 0.5
         challengesButton.setTitle("Challenges", for: .normal)
         challengesButton.setTitleColor(UIColor.black, for: .normal)
         challengesButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)

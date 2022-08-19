@@ -95,13 +95,10 @@ class GameController: UIViewController {
         //reset card counter:
         prop.cardCounter = 0
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.setupTimer()
-            
-            if self.prop.gameIsOver {
-                self.gameOver()              //debug gameOver
-            }
+        if prop.gameIsOver {
+            gameOver()              //debug gameOver
         }
+        
         
         //MARK: - if Cards = 20
         
@@ -394,6 +391,11 @@ class GameController: UIViewController {
             prop.activatedCards.append(imageName)
             prop.activatedButtons.append(sender)
             
+            //setup Timer:
+            if gameInterface.flipsCounter < 1 {
+                setupTimer()
+            }
+            
             prop.cardCounter += 1    //0 - 2
             gameInterface.flipsCounter += 1
             
@@ -444,21 +446,7 @@ class GameController: UIViewController {
             if prop.activatedCards.last == prop.activatedCards.first && prop.activatedCards.count > 1 {
                 //match cards!
                 print("BINGO")
-                
-                //TESTING COINS:
-                //Animation:
-                DispatchQueue.main.async {
-                    self.plusCoinAnimation()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.animations.spring(self.gameInterface.coinLabel)
-                    self.gameInterface.coins += 1
-                    self.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
-                }
-                
-                
-                //FINISHED TESTING COINS
+//                addCoin()         //FOR TESTING
                 
                 //remove from prop.pairList: (to sort pairs for next level)
                 gameInterface.pairsCounter += 1
@@ -469,16 +457,10 @@ class GameController: UIViewController {
                     print(prop.pairList.count)
                 }
                 
-                //add Coin:
+                //add Coin each 10 pairs:
                 if gameInterface.pairsCounter.isMultiple(of: 10) {
                     print("+ COIN!")
-                    
-                    DispatchQueue.main.async {
-                        self.plusCoinAnimation()
-                    }
-                    
-                    gameInterface.coins += 1
-                    defaults.set(gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+                    addCoin()
                 }
                 
                 //timer to show both cards:
@@ -574,13 +556,20 @@ class GameController: UIViewController {
                 self.gameInterface.buttonsView.isUserInteractionEnabled = true
             }
         }
-        //Pause/Resume Timer:
-        if prop.isPaused {
-            setupTimer()
-            prop.isPaused = false
+        
+        //Pause & Resume Timer:
+        //Check if timer is nil:
+        if prop.timer != nil {
+            print("timer is NOT nil")
+            if prop.isPaused {
+                setupTimer()
+                prop.isPaused = false
+            } else {
+                prop.timer.invalidate()
+                prop.isPaused = true
+            }
         } else {
-            prop.timer.invalidate()
-            prop.isPaused = true
+            print("timer is NIL")
         }
     }
     
@@ -673,5 +662,20 @@ class GameController: UIViewController {
         fadeAnim.duration = 2.0
         gameInterface.plusCoinsAnimationsLabel.layer.add(fadeAnim, forKey: "fadeAnim")
         gameInterface.plusCoinsAnimationsLabel.layer.opacity = 0.0
+    }
+    
+    //MARK: - Add Coin:
+    
+    func addCoin() {
+        //Animations +1Coin & CoinCounter bounce:
+        DispatchQueue.main.async {
+            self.plusCoinAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.animations.spring(self.gameInterface.coinLabel)
+            self.gameInterface.coins += 1
+            self.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+        }
     }
 }

@@ -44,6 +44,52 @@
             </objects>
             <point key="canvasLocation" x="1900.0000000000002" y="95.758928571428569"/>
         </scene>
+        <!--CollectionController-->
+        <scene sceneID="meQ-Ch-QOJ">
+            <objects>
+                <viewController storyboardIdentifier="CollectionController" title="CollectionController" id="wB4-sv-gtV" customClass="CollectionController" customModule="CardMatchingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Op6-3g-Owj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="qf8-xR-raI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="z7x-hI-cRf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rVY-bd-9XP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1900" y="822"/>
+        </scene>
+        <!--CardListController-->
+        <scene sceneID="i25-SG-xEi">
+            <objects>
+                <viewController storyboardIdentifier="CardListController" title="CardListController" id="dwL-dx-DC9" customClass="CardListController" customModule="CardMatchingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KUQ-jM-RG4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0dx-H8-Sk1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amM-FY-SaF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2784" y="822"/>
+        </scene>
+        <!--DetailController-->
+        <scene sceneID="qlc-dr-mhJ">
+            <objects>
+                <viewController storyboardIdentifier="DetailController" title="DetailController" id="Qj8-gp-MZs" customClass="DetailController" customModule="CardMatchingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eq5-ok-PZ8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="JFn-LQ-2g4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLq-im-PqG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3678" y="822"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="A1v-Rc-Ufx">
             <objects>
@@ -60,7 +106,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yj-4O-gC6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="13" y="96"/>
+            <point key="canvasLocation" x="126" y="96"/>
         </scene>
     </scenes>
     <resources>
