@@ -52,11 +52,11 @@ class MenuController: UIViewController {
         try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
 
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.2
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "GameController") as? GameController else { return }
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)
@@ -72,11 +72,11 @@ class MenuController: UIViewController {
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
         
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.2
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)
         }
@@ -85,13 +85,10 @@ class MenuController: UIViewController {
     @objc func otherButtonTapped(_ sender: UIButton) {
         //animation:
         sender.flash()
-        
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
-        
         //reset Defaults:
         resetStatisticsUserDefaults()
-        
     }
     
     fileprivate func resetStatisticsUserDefaults() {

@@ -49,10 +49,8 @@ class GameController: UIViewController {
         
         //timer to load and get the width & height properties! (cheating)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            
             let widthButtonsView = self.gameInterface.buttonsView.frame.width
             print("ButtonsView width: \(widthButtonsView)")
-            
             //setup time:
             self.gameInterface.timeCounter = self.prop.standardTimeCounter
             //total time for statistics:
@@ -78,9 +76,8 @@ class GameController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         //ViewAnimator:
-        let fromAnimation = AnimationType.from(direction: .bottom, offset: 300)
+        let fromAnimation = AnimationType.from(direction: .bottom, offset: 200)
         gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
     }
     
@@ -104,7 +101,7 @@ class GameController: UIViewController {
         prop.cardCounter = 0
         
         if prop.gameIsOver {
-            gameOver()              //debug gameOver
+            gameOver()                                          //test Game Over
         }
         
         

@@ -114,6 +114,11 @@ extension UILabel {
     }
 }
 
+//MARK: - UIImage:
+
+extension UIImage {
+}
+
 //MARK: - UIImageView:
 
 extension UIImageView {

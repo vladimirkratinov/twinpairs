@@ -30,7 +30,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         title = "CollectionController"
         
-        print("CardCollection Items: \(Properties.cardCollection)")
+//        print("CardCollection Items: \(Properties.cardCollection)")
         
         navigationController?.navigationBar.isHidden = false
 
@@ -65,7 +65,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         //blur background image:
         backgroundImageView.addBlurEffect()
-        
+                
         configureAnimation()
         view.addSubview(collectionView)
     }

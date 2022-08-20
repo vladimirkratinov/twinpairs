@@ -11,6 +11,7 @@ import Gemini
 class CollectionViewCell: GeminiCell {
     
     static let identifier = "CollectionViewCell"
+    let palette = Palette()
     
     private let myImageView: UIImageView = {
         let imageView = UIImageView()
@@ -31,8 +32,7 @@ class CollectionViewCell: GeminiCell {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
         contentView.clipsToBounds = true
-        contentView.backgroundColor = UIColor.systemBrown
-//        contentView.backgroundColor = UIColor(patternImage: UIImage(named: "woodenLog2")!)
+        contentView.backgroundColor = palette.pastelRed
         
         contentView.layer.cornerRadius = 20
         contentView.layer.borderWidth = 5.0
