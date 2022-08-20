@@ -51,6 +51,22 @@ extension UIButton {
                        completion: { Void in()  }
         )
     }
+    
+    func bounce(_ sender: UIButton) {
+
+        sender.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+
+        UIView.animate(withDuration: 0.3,
+                                   delay: 0,
+                                   usingSpringWithDamping: CGFloat(0.20),
+                                   initialSpringVelocity: CGFloat(6.0),
+                                   options: UIView.AnimationOptions.allowUserInteraction,
+                                   animations: {
+                                    sender.transform = CGAffineTransform.identity
+            },
+                                   completion: { Void in()  }
+        )
+    }
 }
 
 //MARK: - UILabel:
@@ -87,6 +103,15 @@ extension UILabel {
 //MARK: - UIImageView:
 
 extension UIImageView {
+    
+    func addBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        self.addSubview(blurEffectView)
+    }
     
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
@@ -171,4 +196,22 @@ extension String {
         guard self.hasSuffix(suffix) else { return self }
         return String(self.dropLast(suffix.count))
     }
+    
+    func toImage() -> UIImage? {
+            if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
+                return UIImage(data: data)
+            }
+            return nil
+        }
+    
+    func stringToImage(_ handler: @escaping ((UIImage?)->())) {
+                if let url = URL(string: self) {
+                    URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        if let data = data {
+                            let image = UIImage(data: data)
+                            handler(image)
+                        }
+                    }.resume()
+                }
+            }
 }

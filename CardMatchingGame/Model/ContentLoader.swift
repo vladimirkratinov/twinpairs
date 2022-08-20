@@ -22,21 +22,22 @@ class ContentLoader {
             
             for item in contents {
                 let fileString = item.lastPathComponent
-                let imageString = fileString.deletingSuffix(".png")
-                if imageString.hasPrefix("set\(setNumber)_") {
-                    let completedString = imageString.deletingPrefix("set\(setNumber)_")
+//                let imageString = fileString.deletingSuffix(".png")
+//                if imageString.hasPrefix("set\(setNumber)_") {
+                if fileString.hasPrefix("set\(setNumber)_") {
+//                    let completedString = fileString.deletingPrefix("set\(setNumber)_")
                     switch setNumber {
                     case 1:
-                        if prop.cardList1.count < 10 {
-                            prop.cardList1.append(completedString)
+                        if Properties.cardList1.count < 10 {
+                            Properties.cardList1.append(fileString)
                         }
                     case 2:
-                        if prop.cardList2.count < 10 {
-                            prop.cardList2.append(completedString)
+                        if Properties.cardList2.count < 10 {
+                            Properties.cardList2.append(fileString)
                         }
                     case 3:
-                        if prop.cardList3.count < 10 {
-                            prop.cardList3.append(completedString)
+                        if Properties.cardList3.count < 10 {
+                            Properties.cardList3.append(fileString)
                         }
                     default: break
                     }
@@ -45,23 +46,29 @@ class ContentLoader {
             
             switch setNumber {
             case 1:
-                prop.cardList1.append(contentsOf: prop.cardList1)
-                prop.cardCollection.append(prop.cardList1)
+                Properties.cardList1.append(contentsOf: Properties.cardList1)
+                Properties.cardList1.sort()
+                Properties.cardCollection.append(Properties.cardList1)
             case 2:
-                prop.cardList2.append(contentsOf: prop.cardList2)
-                prop.cardCollection.append(prop.cardList2)
+                Properties.cardList2.append(contentsOf: Properties.cardList2)
+                Properties.cardList2.sort()
+                Properties.cardCollection.append(Properties.cardList2)
             case 3:
-                prop.cardList3.append(contentsOf: prop.cardList3)
-                prop.cardCollection.append(prop.cardList3)
+                Properties.cardList3.append(contentsOf: Properties.cardList3)
+                Properties.cardList3.sort()
+                Properties.cardCollection.append(Properties.cardList3)
             default: break
             }
         }
         catch let error as NSError {
             print(error)
         }
-        print("set1 is \(prop.cardList1.count)")
-        print("set2 is \(prop.cardList2.count)")
-        print("set3 is \(prop.cardList3.count)")
-        print(prop.cardCollection.count)
-    }  
+    }
+    
+    func getImage(name: String) -> UIImage? {
+        if let imgPath = Bundle.main.path(forResource: name, ofType: ".png") {
+            return UIImage(contentsOfFile: imgPath)
+        }
+        return nil
+    }
 }

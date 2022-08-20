@@ -12,7 +12,7 @@ enum CoinsKey: String {
 }
 
 enum ImageKey: String {
-    case backImage = "Back1Medium"
+    case backImage = "Back1Large"
 }
 
 enum FontKey: String {

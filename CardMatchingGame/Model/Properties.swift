@@ -15,18 +15,15 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
-    var rows = 5
-    var columns = 4
+    static var rows = 3
+    static var columns = 2
     
-    var cardCollection = [[String]]()
-    var cardList1 = [String]()
-    var cardList2 = [String]()
-    var cardList3 = [String]()
+    static var cardCollection = [[String]]()
+    static var cardList1 = [String]()
+    static var cardList2 = [String]()
+    static var cardList3 = [String]()
     
-//    static var cardCollection = [[String]]()
-//    static var cardList1 = [String]()
-//    static var cardList2 = [String]()
-//    static var cardList3 = [String]()
+    static var cardListImage1 = [UIImage]()
 
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()

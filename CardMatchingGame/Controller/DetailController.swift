@@ -19,31 +19,26 @@ class DetailController: UIViewController {
         detailInterface.setupSubviews()
         detailInterface.setupConstraints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let notEmptyString = selectedImage {
             detailInterface.detailImageView.image = UIImage(named: notEmptyString)
             detailInterface.backgroundImageView1.image = UIImage(named: notEmptyString)
-            detailInterface.backgroundImageView2.image = UIImage(named: notEmptyString)
         }
-            
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◀ Back", style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backTapped))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         let zoomAnimation = AnimationType.zoom(scale: 0.2)
         detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.5)
         detailInterface.detailImageView.pulsateSlow()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
     }
     
     @objc func backTapped(sender: UIBarButtonItem) {
@@ -52,10 +47,6 @@ class DetailController: UIViewController {
             self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
             self.detailInterface.detailImageView.alpha = 0
         })
-        
-//        let zoomAnimation = AnimationType.vector()
-//        detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.7)
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.navigationController?.popViewController(animated: false)
         }

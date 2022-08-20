@@ -15,11 +15,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var prop = Properties()
     let palette = Palette()
     var contentLoader = ContentLoader()
+    var image = UIImage()
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.2
-        backgroundImageView.image = UIImage(named: "LaunchScreen2")
+        backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: "LaunchScreen3")
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -29,20 +30,28 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         title = "CollectionController"
         
-        
-        
-        print("CardCollection Items: \(prop.cardCollection.count)")
-        print(prop.cardList1)
+        print("CardCollection Items: \(Properties.cardCollection)")
         
         navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◀ Back", style: .plain, target: self, action: #selector(backTapped))
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(backTapped))
+        navigationController?.navigationBar.tintColor = palette.wildCarribeanGrean
+        navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
+        
+        //transparent NavigationBar:
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: (view.frame.size.width/1.2), height: (view.frame.size.width))
-//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -51,51 +60,41 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.frame = view.bounds
-        
-        collectionView.backgroundColor = palette.wildCarribeanGrean
+        collectionView.backgroundColor = UIColor.white
         collectionView.backgroundView = backgroundImageView
         
-        configureAnimation()
+        //blur background image:
+        backgroundImageView.addBlurEffect()
         
+        configureAnimation()
         view.addSubview(collectionView)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     @objc func backTapped(sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: false)
+        UIView.animate(withDuration: 0.5, animations:  {
+            self.collectionView?.transform = CGAffineTransform.identity
+            self.configureAnimation()
+            self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
+                                              at: .left,
+                                              animated: true)
+        })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let transition = CATransition()
+            transition.duration = 0.2
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.fade
+            
+            self.navigationController?.view.layer.add(transition, forKey: nil)
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
-    // Configure animation and properties
+    // Gemini Animation:
     func configureAnimation() {
         collectionView?.gemini
-//            .circleRotationAnimation()
-//            .radius(400)
-//            .rotateDirection(.clockwise)
-//            .itemRotationEnabled(true)
-        
-//            .rollRotationAnimation()
-//                .degree(90)
-//                .rollEffect(.sineWave)
-        
             .cubeAnimation()
                 .cubeDegree(90)
-        
-//            .yawRotationAnimation()
-//            .yawEffect(.yawUp)
-        
-//            .circleRotationAnimation()
-//                .radius(30) // The radius of the circle
-//                .rotateDirection(.anticlockwise) // Direction of rotation.
-//                .itemRotationEnabled(true) // Whether the item rotates or not.
     }
     
     // Call animation function
@@ -106,23 +105,23 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? GeminiCell {
             self.collectionView?.animateCell(cell)
-//
-//            let fromAnimation = AnimationType.from(direction: .bottom, offset: 100)
-//            cell.animate(animations: [fromAnimation], delay: 0, duration: 0.3)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return prop.cardCollection.count
+        return Properties.cardCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         
-        let label = prop.cardCollection[indexPath.item][0]
-        let image = UIImage(named: label)
-        
-        cell.configure(label: label, image: image!)
+        //Load Label & Image:
+        let label = Properties.cardCollection[indexPath.item][0]
+        if let imageString = UIImage(named: label) {
+            let image = imageString
+            cell.configure(label: label, image: image)
+            
+        }
         self.collectionView?.animateCell(cell)
         return cell
     }
@@ -131,7 +130,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         print(indexPath.item)
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
         
-        vc.selectedList = prop.cardCollection[indexPath.item]
+        vc.selectedList = Properties.cardCollection[indexPath.item]
         
         let transition = CATransition()
         transition.duration = 0.3
@@ -145,16 +144,4 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
    }
-    
-    func setGradientBackground() {
-        let palette = Palette()
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = collectionView!.bounds
-        gradientLayer.colors = [
-            palette.wildCarribeanGrean.cgColor,
-            palette.darkMountainMeadow.cgColor,
-            palette.fuelTown.cgColor,
-        ]
-        collectionView?.layer.insertSublayer(gradientLayer, at: 0)
-    }
 }

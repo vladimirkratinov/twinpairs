@@ -26,23 +26,25 @@ class CollectionViewCell: GeminiCell {
         label.textAlignment = .center
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
         contentView.clipsToBounds = true
+        contentView.backgroundColor = UIColor.systemBrown
+//        contentView.backgroundColor = UIColor(patternImage: UIImage(named: "woodenLog2")!)
         
-//        contentView.layer.cornerRadius = 20
-//        contentView.layer.borderWidth = 5.0
-//        contentView.layer.borderColor = UIColor.white.cgColor
-//        contentView.layer.masksToBounds = true
-//
-//        contentView.layer.shadowColor = UIColor.black.cgColor
-//        contentView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-//        contentView.layer.shadowRadius = 2.0
-//        contentView.layer.shadowOpacity = 0.5
-//        contentView.layer.masksToBounds = false
-//        contentView.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 5.0
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.masksToBounds = true
+
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        contentView.layer.shadowRadius = 2.0
+        contentView.layer.shadowOpacity = 0.5
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
         
         contentView.addSubview(myLabel)
         contentView.addSubview(myImageView)

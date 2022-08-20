@@ -28,7 +28,7 @@ class GameController: UIViewController {
         
         //timer to load and get the width & height properties!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.setupButtons(rows: self.prop.rows, columns: self.prop.columns)
+            self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
         
         gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
@@ -81,8 +81,9 @@ class GameController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //ViewAnimator:
         let fromAnimation = AnimationType.from(direction: .bottom, offset: 300)
-        gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.7)
+        gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -112,14 +113,14 @@ class GameController: UIViewController {
         //MARK: - if Cards = 20
         
         //if same amount card buttons and cardlist:
-        if prop.cardButtons.count == prop.cardList1.count {
-            print("Cards: \(prop.cardList1.count)")
+        if prop.cardButtons.count == Properties.cardList1.count {
+            print("Cards: \(Properties.cardList1.count)")
             
             //create pair list:
-            prop.pairList = prop.cardList1
+            prop.pairList = Properties.cardList1
             
             //shuffle card list:
-            let shuffledList = prop.cardList1.shuffled()
+            let shuffledList = Properties.cardList1.shuffled()
             
             //set title:
             for i in 0..<prop.cardButtons.count {
@@ -128,18 +129,18 @@ class GameController: UIViewController {
                 
             //button names list:
             print("prop.cardButtons Count: \(prop.cardButtons.count)")
-            print("prop.cardList Count: \(prop.cardList1.count)")
+            print("prop.cardList Count: \(Properties.cardList1.count)")
             
         } else {
             
             //MARK: - If Cards < 20
             
             //create lower amounts of card list:
-            prop.lowerAmmountOfCardsList = prop.cardList1
+            prop.lowerAmmountOfCardsList = Properties.cardList1
             print(prop.lowerAmmountOfCardsList)
             
             //remove other cards, if less then 20
-            let sum = prop.cardList1.count - prop.cardButtons.count
+            let sum = Properties.cardList1.count - prop.cardButtons.count
             
             //BUG ??? Range requires lowerBound <= upperBound
             for _ in 0..<sum {
@@ -198,11 +199,11 @@ class GameController: UIViewController {
 //            }
             
             //update level:
-            if self.prop.rows < 5 && self.prop.columns < 4 {
-                self.prop.rows += 1
-                self.prop.columns += 1
+            if Properties.rows < 5 && Properties.columns < 4 {
+                Properties.rows += 1
+                Properties.columns += 1
             }
-            self.setupButtons(rows: self.prop.rows, columns: self.prop.columns)
+            self.setupButtons(rows: Properties.rows, columns: Properties.columns)
             self.loadLevel()
             
             //reset cards color:
@@ -273,6 +274,8 @@ class GameController: UIViewController {
     //MARK: - restartTapped:
     
     @objc func restartTapped(_ sender: UIButton) {
+        sender.bounce(sender)
+        
         //reset timer:
         prop.timer.invalidate()
         
@@ -318,7 +321,7 @@ class GameController: UIViewController {
     
     @objc func muteButtonTapped(_ sender: UIButton) {
         //animation:
-        sender.flash()
+        sender.bounce(sender)
         //set UserDefaults:
         var muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
         
@@ -355,7 +358,7 @@ class GameController: UIViewController {
     
     @objc func menuButtonTapped(_ sender: UIButton) {
         //animation:
-        sender.flash()
+        sender.bounce(sender)
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
@@ -551,7 +554,9 @@ class GameController: UIViewController {
     
     //MARK: - Settings Button Tapped:
     
-    @objc func settingsButtonTapped(_sender: UIButton) {
+    @objc func settingsButtonTapped(_ sender: UIButton) {
+        sender.bounce(sender)
+        
         //UI Hide/Enable
         if gameInterface.settingsView.alpha == 0 {
             gameInterface.settingsView.alpha = 1

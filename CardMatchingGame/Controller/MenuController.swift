@@ -47,7 +47,8 @@ class MenuController: UIViewController {
     
     @objc func playButtonTapped(_ sender: UIButton) {
         //animation:
-        sender.flash()
+//        sender.flash()
+        sender.bounce(sender)
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
@@ -65,6 +66,8 @@ class MenuController: UIViewController {
     }
     
     @objc func collectionButtonTapped(_ sender: UIButton) {
+        sender.bounce(sender)
+        
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
         
         let transition = CATransition()
@@ -72,8 +75,10 @@ class MenuController: UIViewController {
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
-        self.navigationController?.view.layer.add(transition, forKey: nil)
-        self.navigationController?.pushViewController(vc, animated: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.navigationController?.view.layer.add(transition, forKey: nil)
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
     
     @objc func otherButtonTapped(_ sender: UIButton) {

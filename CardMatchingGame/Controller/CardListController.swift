@@ -17,13 +17,31 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     var selectedList = [String]()
     var orderedNoDuplicates = [String]()
     
+    var backgroundImageView: UIImageView = {
+        let backgroundImageView = UIImageView(frame: .zero)
+        backgroundImageView.alpha = 0.1
+        backgroundImageView.image = UIImage(named: "LaunchScreen2")
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        return backgroundImageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◀ Back", style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(backTapped))
+        
+        //transparent NavigationBar:
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
         
         orderedNoDuplicates = NSOrderedSet(array: selectedList).map ({ $0 as! String})
+        print(orderedNoDuplicates)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -38,10 +56,11 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         guard let collectionView = collectionView else { return }
         
         collectionView.register(CardListViewCell.self, forCellWithReuseIdentifier: CardListViewCell.identifier)
-        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.frame = view.bounds
+        collectionView.backgroundColor = UIColor.white
+//        collectionView.backgroundView = backgroundImageView
         
         configureAnimation()
         
@@ -51,28 +70,17 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     //ViewAnimator:
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let fromAnimation = AnimationType.from(direction: .top, offset: 100)
+        let fromAnimation = AnimationType.from(direction: .bottom, offset: 20)
         collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.3)
-        
-//        let fromAnimation = AnimationType.from(direction: .top, offset: 300)
-//        let zoomAnimation = AnimationType.zoom(scale: 0.5)
-//        let rotateAnimation = AnimationType.rotate(angle: CGFloat.pi/6)
-//        collectionView?.animate(animations: [fromAnimation, zoomAnimation])
-        
     }
     
     @objc func backTapped(sender: UIBarButtonItem) {
         UIView.animate(withDuration: 1, animations:  {
             self.collectionView?.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             self.collectionView?.transform = CGAffineTransform.identity
-//            self.collectionView!.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
             self.collectionView?.alpha = 0
         })
-        
-//        let zoomAnimation = AnimationType.vector()
-//        detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.7)
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let transition = CATransition()
             transition.duration = 0.3
@@ -114,11 +122,11 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         let label = orderedNoDuplicates[indexPath.item]
-        let image = UIImage(named: label)!
-        
+        if let imageString = UIImage(named: label) {
+            let image = imageString
+            cell.configure(label: label, image: image)
+        }
         self.collectionView?.animateCell(cell)
-        cell.configure(label: label, image: image)
-        
         return cell
     }
     
@@ -135,5 +143,25 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.navigationController?.view.layer.add(transition, forKey: nil)
         self.navigationController?.pushViewController(vc, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+    if(velocity.y>0) {
+        //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+            print("Hide")
+        }, completion: nil)
+
+    } else {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+//            self.navigationController?.setToolbarHidden(false, animated: true)
+            print("Unhide")
+        }, completion: nil)
+      }
+   }
 }
