@@ -32,7 +32,9 @@ struct Properties {
     static var pairList = [String]()
     static var lowerAmmountOfCardsList = [String]()
     
-    var mutedGeneral = Bool()
+    static let defaults = UserDefaults.standard
+    
+    static var mutedGeneral = Bool()
     
     var timer: Timer!
     var isPaused = false

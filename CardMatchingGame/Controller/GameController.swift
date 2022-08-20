@@ -17,8 +17,6 @@ class GameController: UIViewController {
     let gameInterface = GameInterface()
     var gameLogic = GameLogic()
     
-    let defaults = UserDefaults.standard
-    
     override func loadView() {
         view = gameInterface.gameView
         
@@ -40,9 +38,9 @@ class GameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
-        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
-        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
+//        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
+//        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
+//        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         navigationController?.navigationBar.isHidden = true
         //disable gestures:
@@ -64,15 +62,6 @@ class GameController: UIViewController {
         //debugging Constraints error message:
 //        UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
-        //Background AudioFX:
-        DispatchQueue.main.async {
-            try? self.audioFX.playBackgroundMusic(file: AudioFileKey.SnowfallButterfiles.rawValue, type: AudioTypeKey.mp3.rawValue)
-            if self.prop.mutedGeneral {
-                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
-            } else {
-                self.audioFX.backgroundMusic?.volume = self.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,18 +69,8 @@ class GameController: UIViewController {
         //ViewAnimator:
         let fromAnimation = AnimationType.from(direction: .bottom, offset: 200)
         gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //audioFX:
-        DispatchQueue.main.async {
-            self.audioFX.stopMusic()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        //setup gradient Background:
         gameInterface.setGradientBackground()
     }
     
@@ -126,7 +105,7 @@ class GameController: UIViewController {
             self.gameInterface.buttonsView.subviews.forEach { $0.removeFromSuperview() }
             
             //invalidateTimer:
-            self.prop.timer.invalidate()
+//            self.prop.timer.invalidate()
             
             self.gameInterface.nextLevelLabel.alpha = 0
             
@@ -174,22 +153,22 @@ class GameController: UIViewController {
         DispatchQueue.main.async {
             self.gameInterface.statisticsLabel.text = "Your Result: \n Total Time: \(self.prop.totalTime) sec. \n Found Pairs: \(self.gameInterface.pairsCounter) \n Total Flips: \(self.gameInterface.flipsCounter) \n ------------------------------"
             
-            self.gameInterface.bestResultLabel.text = "Best result: \n Total Time: \(self.defaults.integer(forKey: StatisticsKey.time.rawValue)) sec. \n Found Pairs: \(self.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(self.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
+            self.gameInterface.bestResultLabel.text = "Best result: \n Total Time: \(Properties.defaults.integer(forKey: StatisticsKey.time.rawValue)) sec. \n Found Pairs: \(Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
         }
         
-        //update defaults if result is better:
-        if gameInterface.pairsCounter > defaults.integer(forKey: StatisticsKey.pairs.rawValue) {
-            defaults.set(prop.totalTime, forKey: StatisticsKey.time.rawValue)
-            defaults.set(gameInterface.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
-            defaults.set(gameInterface.flipsCounter, forKey: StatisticsKey.flips.rawValue)
-            print("defaults updated!")
+        //update Properties.defaults if result is better:
+        if gameInterface.pairsCounter > Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue) {
+            Properties.defaults.set(prop.totalTime, forKey: StatisticsKey.time.rawValue)
+            Properties.defaults.set(gameInterface.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
+            Properties.defaults.set(gameInterface.flipsCounter, forKey: StatisticsKey.flips.rawValue)
+            print("Properties.defaults updated!")
         } else {
-            print("defaults are NOT updated!")
+            print("Properties.defaults are NOT updated!")
         }
         
-        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
-        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
-        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
+        print("default time: \(Properties.defaults.integer(forKey: StatisticsKey.time.rawValue))")
+        print("default pairs: \(Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
+        print("default flips: \(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         //restart and menu button animations:
         UIView.transition(with: self.gameInterface.backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -258,36 +237,37 @@ class GameController: UIViewController {
     @objc func muteButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
-        //set UserDefaults:
-        var muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
+        //set UserProperties.defaults:
+        var muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
         
         //set to have an access in viewDidLoad() to control volume level
-        prop.mutedGeneral = muted
+        Properties.mutedGeneral = muted
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         if muted {
-            //set UserDefaults:
-            defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.myColor.rawValue)
-            defaults.set(false, forKey: AudioKey.isMuted.rawValue)
-            defaults.set(0.1, forKey: AudioKey.volumeLevel.rawValue)
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.myColor.rawValue)
+            Properties.defaults.set(false, forKey: AudioKey.isMuted.rawValue)
+            Properties.defaults.set(0.1, forKey: AudioKey.volumeLevel.rawValue)
             
-            //get UserDefaults:
-            muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
-            sender.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
-            audioFX.backgroundMusic?.volume = defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.myColor.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
         } else {
-            //set UserDefaults:
-            defaults.setColor(color: UIColor.gray, forKey: ColorKey.myColor.rawValue)
-            defaults.set(true, forKey: AudioKey.isMuted.rawValue)
-            defaults.set(0, forKey: AudioKey.volumeLevel.rawValue)
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.myColor.rawValue)
+            Properties.defaults.set(true, forKey: AudioKey.isMuted.rawValue)
+            Properties.defaults.set(0, forKey: AudioKey.volumeLevel.rawValue)
             
-            //get UserDefaults:
-            muted = defaults.bool(forKey: AudioKey.isMuted.rawValue)
-            sender.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
-            audioFX.backgroundMusic?.volume = defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.myColor.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
         }
+        print(muted)
     }
     
     //MARK: - menuButtonTapped:
@@ -299,23 +279,25 @@ class GameController: UIViewController {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.fade
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             //reset timer:
             if self.prop.timer != nil {
                 self.prop.timer.invalidate()
                 print("timer invalidated!")
             }
             
+            print("quit button pressed: Audio is \(String(describing: AudioFX.backgroundMusic?.isPlaying))")
+            
             //remove old subview:
             self.gameInterface.buttonsView.subviews.forEach { $0.removeFromSuperview() }
             
+            let transition = CATransition()
+            transition.duration = 0.2
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.fade
+            
             self.navigationController?.view.layer.add(transition, forKey: nil)
-            self.navigationController?.popToRootViewController(animated: false)
+            self.navigationController?.popViewController(animated: false)
         }
     }
     
@@ -491,7 +473,11 @@ class GameController: UIViewController {
     //MARK: - Settings Button Tapped:
     
     @objc func settingsButtonTapped(_ sender: UIButton) {
+        //animation:
         sender.bounce(sender)
+        
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //UI Hide/Enable
         if gameInterface.settingsView.alpha == 0 {
@@ -575,6 +561,8 @@ class GameController: UIViewController {
         }
     }
     
+    //MARK: - CoinAnimation:
+    
     func plusCoinAnimation() {
         
         gameInterface.plusCoinsAnimationsLabel.alpha = 1
@@ -626,7 +614,7 @@ class GameController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.gameInterface.coinLabel.spring(self.gameInterface.coinLabel)
             self.gameInterface.coins += 1
-            self.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+            Properties.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
         }
     }
 }

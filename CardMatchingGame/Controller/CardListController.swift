@@ -12,7 +12,8 @@ import ViewAnimator
 class CardListController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var collectionView: GeminiCollectionView?
-    var prop = Properties()
+//    var prop = Properties()
+    let audioFX = AudioFX()
        
     var selectedList = [String]()
     var orderedNoDuplicates = [String]()
@@ -74,7 +75,12 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.3)
     }
     
+    //MARK: - BackTapped:
+    
     @objc func backTapped(sender: UIBarButtonItem) {
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
         UIView.animate(withDuration: 1, animations:  {
             self.collectionView?.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             self.collectionView?.transform = CGAffineTransform.identity
@@ -129,9 +135,12 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         self.collectionView?.animateCell(cell)
         return cell
     }
+    //MARK: - DidSelect:
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
+        
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "DetailController") as? DetailController else { return }
         
         vc.selectedImage = orderedNoDuplicates[indexPath.item]

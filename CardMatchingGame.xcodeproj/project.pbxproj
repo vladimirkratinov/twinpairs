@@ -25,8 +25,8 @@
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
-		F781AD7F28931C40002993E7 /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory.wav */; };
-		F781AD8028931C40002993E7 /* match.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7B28931C40002993E7 /* match.wav */; };
+		F781AD7F28931C40002993E7 /* victory_old.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory_old.wav */; };
+		F781AD8028931C40002993E7 /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7B28931C40002993E7 /* victory.wav */; };
 		F781AD8128931C40002993E7 /* creepy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7C28931C40002993E7 /* creepy.mp3 */; };
 		F781AD8528931CC5002993E7 /* flip1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8428931CC5002993E7 /* flip1.wav */; };
 		F781AD8728934D67002993E7 /* flip2.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8628934D67002993E7 /* flip2.wav */; };
@@ -67,12 +67,11 @@
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
-		F781AD7A28931C40002993E7 /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
-		F781AD7B28931C40002993E7 /* match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = match.wav; sourceTree = "<group>"; };
+		F781AD7A28931C40002993E7 /* victory_old.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory_old.wav; sourceTree = "<group>"; };
+		F781AD7B28931C40002993E7 /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
 		F781AD7C28931C40002993E7 /* creepy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = creepy.mp3; sourceTree = "<group>"; };
 		F781AD8428931CC5002993E7 /* flip1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flip1.wav; sourceTree = "<group>"; };
 		F781AD8628934D67002993E7 /* flip2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flip2.wav; sourceTree = "<group>"; };
-		F781AD8828934D72002993E7 /* flop.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = flop.ogg; sourceTree = "<group>"; };
 		F781AD8928934FBA002993E7 /* matchIgnite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = matchIgnite.wav; sourceTree = "<group>"; };
 		F781AD8B28935088002993E7 /* buttonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonPress.wav; sourceTree = "<group>"; };
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
@@ -197,10 +196,9 @@
 				F781AD7C28931C40002993E7 /* creepy.mp3 */,
 				F781AD8428931CC5002993E7 /* flip1.wav */,
 				F781AD8628934D67002993E7 /* flip2.wav */,
-				F781AD8828934D72002993E7 /* flop.ogg */,
 				F781AD7928931C40002993E7 /* gameOver.wav */,
-				F781AD7B28931C40002993E7 /* match.wav */,
-				F781AD7A28931C40002993E7 /* victory.wav */,
+				F781AD7B28931C40002993E7 /* victory.wav */,
+				F781AD7A28931C40002993E7 /* victory_old.wav */,
 				F781AD8928934FBA002993E7 /* matchIgnite.wav */,
 				F781AD8B28935088002993E7 /* buttonPress.wav */,
 				F781AD8D2893508E002993E7 /* tinyButtonPress.wav */,
@@ -271,7 +269,7 @@
 				F7E6A47928AF90170023E317 /* Images.bundle in Resources */,
 				F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */,
 				F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */,
-				F781AD8028931C40002993E7 /* match.wav in Resources */,
+				F781AD8028931C40002993E7 /* victory.wav in Resources */,
 				F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */,
 				F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */,
 				F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */,
@@ -279,7 +277,7 @@
 				F781AD8528931CC5002993E7 /* flip1.wav in Resources */,
 				F781AD7E28931C40002993E7 /* gameOver.wav in Resources */,
 				F781AD8128931C40002993E7 /* creepy.mp3 in Resources */,
-				F781AD7F28931C40002993E7 /* victory.wav in Resources */,
+				F781AD7F28931C40002993E7 /* victory_old.wav in Resources */,
 				F71193912890C5EF00BC1DAA /* Main.storyboard in Resources */,
 				F7EDF98828A636D2009CA17B /* Snowfall.mp3 in Resources */,
 				F781AD8C28935088002993E7 /* buttonPress.wav in Resources */,

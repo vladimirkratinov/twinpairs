@@ -11,6 +11,7 @@ import ViewAnimator
 class DetailController: UIViewController {
     
     let detailInterface = DetailInterface()
+    let audioFX = AudioFX()
     var selectedImage: String?
     
     override func loadView() {
@@ -41,7 +42,12 @@ class DetailController: UIViewController {
         detailInterface.detailImageView.pulsateSlow()
     }
     
+    //MARK: - BackTapped:
+    
     @objc func backTapped(sender: UIBarButtonItem) {
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
         UIView.animate(withDuration: 0.5, animations:  {
             self.detailInterface.detailImageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)

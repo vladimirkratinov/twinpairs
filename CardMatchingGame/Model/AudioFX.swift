@@ -8,18 +8,16 @@
 import UIKit
 import AVFoundation
 
-struct AudioFX {
-    
-    let defaults = UserDefaults.standard
+class AudioFX {
     var audioFX: AVAudioPlayer?
-    var backgroundMusic: AVAudioPlayer?
+    static var backgroundMusic: AVAudioPlayer?
     var gameStateFX: AVAudioPlayer?
     
-    mutating func stopMusic() {
-        backgroundMusic?.stop()
+    func stopMusic() {
+        AudioFX.backgroundMusic?.stop()
     }
     
-    mutating func playFX(file: String, type: String) throws {
+    func playFX(file: String, type: String) throws {
         
         enum AudioError: Error {
             case FileNotExist
@@ -37,7 +35,7 @@ struct AudioFX {
         }
     }
     
-    mutating func playGameStateFX(file: String, type: String) throws {
+    func playGameStateFX(file: String, type: String) throws {
         
         enum AudioError: Error {
             case FileNotExist
@@ -55,7 +53,7 @@ struct AudioFX {
         }
     }
     
-    mutating func playBackgroundMusic(file: String, type: String) throws {
+    @objc func playBackgroundMusic(file: String, type: String) throws {
         
         enum AudioError: Error {
             case FileNotExist
@@ -64,12 +62,35 @@ struct AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            backgroundMusic = try AVAudioPlayer(contentsOf: url)
-            backgroundMusic?.volume = 0.1
-            backgroundMusic?.play()
+            AudioFX.backgroundMusic = try AVAudioPlayer(contentsOf: url)
+            AudioFX.backgroundMusic?.volume = 0.1
+            AudioFX.backgroundMusic?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
         }
+        
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            print("AVAudioSession Category Playback - OK!")
+            
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("AVAudioSession is Active!")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        
+        if Properties.mutedGeneral {
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+        } else {
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+        }
     }
+    
 }

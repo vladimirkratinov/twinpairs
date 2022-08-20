@@ -26,8 +26,8 @@ enum StatisticsKey: String {
 }
 
 enum AudioFileKey: String {
-    case CeremonialBackground = "Ceremonial"
-    case SnowfallButterfiles = "Snowfall"
+    case Ceremonial = "Ceremonial"
+    case Snowfall = "Snowfall"
     case creepy = "creepy"
     case flip1 = "flip1"
     case flip2 = "flip2"

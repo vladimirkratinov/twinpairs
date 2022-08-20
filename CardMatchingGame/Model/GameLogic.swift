@@ -36,9 +36,11 @@ public class GameLogic {
             
             //remove other cards, if less then 20
             let sum = set.count - Properties.cardButtons.count
+//            let sum = Properties.cardButtons.count - set.count
+            
             
             //BUG ??? Range requires lowerBound <= upperBound
-            for _ in 0..<sum {
+            for _ in 0..<abs(sum) {
                 if sum > 0 {
                     Properties.lowerAmmountOfCardsList.removeLast()
                 }

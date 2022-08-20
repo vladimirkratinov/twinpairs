@@ -26,14 +26,6 @@ class MenuController: UIViewController {
         menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //background:
-        menuInterface.setGradientBackground()
-        //animation:
-        menuInterface.backgroundImageView.pulsateSlow()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +35,33 @@ class MenuController: UIViewController {
         contentLoader.loadSet(setNumber: 1)
         contentLoader.loadSet(setNumber: 2)
         contentLoader.loadSet(setNumber: 3)
+        
+//        //Background AudioFX:
+        let randomNumber = Int.random(in: 1...2)
+        switch randomNumber {
+        case 1: try? self.audioFX.playBackgroundMusic(file: AudioFileKey.Snowfall.rawValue, type: AudioTypeKey.mp3.rawValue)
+        case 2: try? self.audioFX.playBackgroundMusic(file: AudioFileKey.Ceremonial.rawValue, type: AudioTypeKey.mp3.rawValue)
+        default: return
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //background:
+        menuInterface.setGradientBackground()
+        //animation:
+        menuInterface.backgroundImageView.pulsateSlow()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //Background AudioFX:
+        
+        //Keep Playing AudioFX:
+        if AudioFX.backgroundMusic != nil {
+            AudioFX.backgroundMusic?.play()
+            print("audio is playing")
+        }    
     }
     
     @objc func playButtonTapped(_ sender: UIButton) {
@@ -56,7 +75,7 @@ class MenuController: UIViewController {
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.fade
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "GameController") as? GameController else { return }
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)

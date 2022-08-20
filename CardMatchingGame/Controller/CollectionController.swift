@@ -15,7 +15,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var prop = Properties()
     let palette = Palette()
     var contentLoader = ContentLoader()
-    var image = UIImage()
+    let audioFX = AudioFX()
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
@@ -70,7 +70,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         view.addSubview(collectionView)
     }
     
+    //MARK: - BackTapped:
+    
     @objc func backTapped(sender: UIBarButtonItem) {
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
         UIView.animate(withDuration: 0.5, animations:  {
             self.collectionView?.transform = CGAffineTransform.identity
             self.configureAnimation()
@@ -89,6 +94,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             self.navigationController?.popViewController(animated: false)
         }
     }
+    
+    //MARK: - Configure Animations:
     
     // Gemini Animation:
     func configureAnimation() {
@@ -126,8 +133,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
     }
     
+    //MARK: - DidSelect:
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
+        
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
         
         vc.selectedList = Properties.cardCollection[indexPath.item]
