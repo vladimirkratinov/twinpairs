@@ -13,6 +13,7 @@ class GameController: UIViewController {
     
     var audioFX = AudioFX()
     var prop = Properties()
+    var contentLoader = ContentLoader()
     
     let gameInterface = GameInterface()
     let animations = Animations()
@@ -111,14 +112,14 @@ class GameController: UIViewController {
         //MARK: - if Cards = 20
         
         //if same amount card buttons and cardlist:
-        if prop.cardButtons.count == prop.cardList.count {
-            print("Cards: \(prop.cardList.count)")
+        if prop.cardButtons.count == prop.cardList1.count {
+            print("Cards: \(prop.cardList1.count)")
             
             //create pair list:
-            prop.pairList = prop.cardList
+            prop.pairList = prop.cardList1
             
             //shuffle card list:
-            let shuffledList = prop.cardList.shuffled()
+            let shuffledList = prop.cardList1.shuffled()
             
             //set title:
             for i in 0..<prop.cardButtons.count {
@@ -127,17 +128,18 @@ class GameController: UIViewController {
                 
             //button names list:
             print("prop.cardButtons Count: \(prop.cardButtons.count)")
-            print("prop.cardList Count: \(prop.cardList.count)")
+            print("prop.cardList Count: \(prop.cardList1.count)")
             
         } else {
             
             //MARK: - If Cards < 20
             
             //create lower amounts of card list:
-            prop.lowerAmmountOfCardsList = prop.cardList
+            prop.lowerAmmountOfCardsList = prop.cardList1
+            print(prop.lowerAmmountOfCardsList)
             
             //remove other cards, if less then 20
-            let sum = prop.cardList.count - prop.cardButtons.count
+            let sum = prop.cardList1.count - prop.cardButtons.count
             
             //BUG ??? Range requires lowerBound <= upperBound
             for _ in 0..<sum {

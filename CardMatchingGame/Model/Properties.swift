@@ -15,49 +15,18 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
-    var rows = 3
-    var columns = 2
+    var rows = 5
+    var columns = 4
     
     var cardCollection = [[String]]()
+    var cardList1 = [String]()
+    var cardList2 = [String]()
+    var cardList3 = [String]()
     
-    var cardList = [
-        "HK","HK",
-        "nz2","nz2",
-        "argentina","argentina",
-        "japan","japan",
-        "knie","knie",
-        "papua","papua",
-        "US","US",
-        "UK","UK",
-        "canada","canada",
-        "USSR","USSR",
-    ]
-    
-    var cardList1 = [
-        "Pumpkin","Pumpkin",
-        "CardBack","CardBack",
-        "Bat","Bat",
-        "Bones","Bones",
-        "Cobweb","Cobweb",
-        "Dracula","Dracula",
-        "Eye","Eye",
-        "Ghost","Ghost",
-        "Skull","Skull",
-        "Spider","Spider",
-    ]
-    
-    var cardList2 = [
-        "psyduck","psyduck",
-        "CardBackSide1","CardBackSide1",
-        "CardBackSide2","CardBackSide2",
-        "egg","egg",
-        "location","location",
-        "pig","pig",
-        "pikachu","pikachu",
-        "pokeballs1","pokeballs1",
-        "pokeballs2","pokeballs2",
-        "pokeballs3","pokeballs3",
-    ]
+//    static var cardCollection = [[String]]()
+//    static var cardList1 = [String]()
+//    static var cardList2 = [String]()
+//    static var cardList3 = [String]()
 
     var cardButtons = [UIButton]()
     var activatedButtons = [UIButton]()

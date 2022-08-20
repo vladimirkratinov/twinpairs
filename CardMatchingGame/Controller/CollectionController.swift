@@ -14,6 +14,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     private var collectionView: GeminiCollectionView?
     var prop = Properties()
     let palette = Palette()
+    var contentLoader = ContentLoader()
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
@@ -27,11 +28,11 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "CollectionController"
-        prop.cardCollection.append(prop.cardList)
-        prop.cardCollection.append(prop.cardList1)
-        prop.cardCollection.append(prop.cardList2)
+        
+        
         
         print("CardCollection Items: \(prop.cardCollection.count)")
+        print(prop.cardList1)
         
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◀ Back", style: .plain, target: self, action: #selector(backTapped))

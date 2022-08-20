@@ -10,8 +10,10 @@ import AVFoundation
 
 class MenuController: UIViewController {
     
+    var prop = Properties()
     var audioFX = AudioFX()
     let menuInterface = MenuInterface()
+    var contentLoader = ContentLoader()
     
     override func loadView() {
         view = menuInterface.menuView
@@ -24,23 +26,6 @@ class MenuController: UIViewController {
         menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        
-        let fm = FileManager.default
-//        let path = Bundle.main.resourcePath!
-        let path = Bundle.main.
-//        let items = try! fm.contentsOfDirectory(atPath: path)
-        
-        print(path)
-//        for item in items {
-//            if item.hasPrefix("Set1") {
-//                print(item)
-//            }
-//        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,6 +33,16 @@ class MenuController: UIViewController {
         menuInterface.setGradientBackground()
         //animation:
         menuInterface.backgroundImageView.pulsateSlow()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        
+        //loadFiles:
+        contentLoader.loadSet(setNumber: 1)
+        contentLoader.loadSet(setNumber: 2)
+        contentLoader.loadSet(setNumber: 3)
     }
     
     @objc func playButtonTapped(_ sender: UIButton) {
