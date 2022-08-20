@@ -35,6 +35,7 @@
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
+		F7E50B1728B0C02D00DCA3BF /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
 		F7E6A47928AF90170023E317 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E6A47828AF90170023E317 /* Images.bundle */; };
 		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
@@ -77,6 +78,7 @@
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
 		F7E6A47828AF90170023E317 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				F781AD7728931921002993E7 /* AudioFX.swift */,
 				F7EDF98228A634D2009CA17B /* HapticsManager.swift */,
 				F7F49CC128B0272D0064A069 /* ContentLoader.swift */,
+				F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				F72837C028ADA788000B9567 /* CollectionController.swift in Sources */,
 				F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */,
 				F700123328AEED89007DEA94 /* CardListViewCell.swift in Sources */,
+				F7E50B1728B0C02D00DCA3BF /* GameLogic.swift in Sources */,
 				F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

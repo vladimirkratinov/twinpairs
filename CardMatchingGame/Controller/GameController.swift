@@ -15,6 +15,7 @@ class GameController: UIViewController {
     var prop = Properties()
     var contentLoader = ContentLoader()
     let gameInterface = GameInterface()
+    var gameLogic = GameLogic()
     
     let defaults = UserDefaults.standard
     
@@ -104,62 +105,7 @@ class GameController: UIViewController {
             gameOver()                                          //test Game Over
         }
         
-        
-        //MARK: - if Cards = 20
-        
-        //if same amount card buttons and cardlist:
-        if prop.cardButtons.count == Properties.cardList1.count {
-            print("Cards: \(Properties.cardList1.count)")
-            
-            //create pair list:
-            prop.pairList = Properties.cardList1
-            
-            //shuffle card list:
-            let shuffledList = Properties.cardList1.shuffled()
-            
-            //set title:
-            for i in 0..<prop.cardButtons.count {
-                prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
-            }
-                
-            //button names list:
-            print("prop.cardButtons Count: \(prop.cardButtons.count)")
-            print("prop.cardList Count: \(Properties.cardList1.count)")
-            
-        } else {
-            
-            //MARK: - If Cards < 20
-            
-            //create lower amounts of card list:
-            prop.lowerAmmountOfCardsList = Properties.cardList1
-            print(prop.lowerAmmountOfCardsList)
-            
-            //remove other cards, if less then 20
-            let sum = Properties.cardList1.count - prop.cardButtons.count
-            
-            //BUG ??? Range requires lowerBound <= upperBound
-            for _ in 0..<sum {
-                if sum > 0 {
-                    prop.lowerAmmountOfCardsList.removeLast()
-                }
-            }
-            print(prop.lowerAmmountOfCardsList)
-            
-            //create pair list:
-            prop.pairList = prop.lowerAmmountOfCardsList
-            
-            //shuffle card list:
-            let shuffledList = prop.lowerAmmountOfCardsList.shuffled()
-            
-            //set title:
-            for i in 0..<prop.cardButtons.count {
-                prop.cardButtons[i].setTitle(shuffledList[i], for: .normal)
-            }
-            
-            //button names list:
-            print("prop.cardButtons Count: \(prop.cardButtons.count)")
-            print("lowerAmmountOfCardsList Count: \(prop.lowerAmmountOfCardsList.count)")
-        }
+        gameLogic.setupCards(Properties.cardList2)
     }
     
     //MARK: - nextLevel:
@@ -184,9 +130,9 @@ class GameController: UIViewController {
             
             self.gameInterface.nextLevelLabel.alpha = 0
             
-            self.prop.activatedCards.removeAll()
-            self.prop.activatedButtons.removeAll()
-            self.prop.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
+            Properties.activatedCards.removeAll()
+            Properties.activatedButtons.removeAll()
+            Properties.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
                         
             //update level:
             if Properties.rows < 5 && Properties.columns < 4 {
@@ -197,7 +143,7 @@ class GameController: UIViewController {
             self.loadLevel()
             
             //reset cards color:
-            for card in self.prop.cardButtons {
+            for card in Properties.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
                     card.pulsateRemove()
                     card.alpha = 1
@@ -250,7 +196,7 @@ class GameController: UIViewController {
         UIView.transition(with: self.gameInterface.restartButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
         
         //cards animations:
-        for card in prop.cardButtons {
+        for card in Properties.cardButtons {
             card.pulsateRemove()
             
             UIButton.animate(withDuration: 1, animations: {
@@ -275,8 +221,8 @@ class GameController: UIViewController {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
-        prop.activatedCards.removeAll()
-        prop.activatedButtons.removeAll()
+        Properties.activatedCards.removeAll()
+        Properties.activatedButtons.removeAll()
         
         //setup time:
         self.gameInterface.timeCounter = self.prop.standardTimeCounter
@@ -296,7 +242,7 @@ class GameController: UIViewController {
             self.gameInterface.pairsCounter = 0
             
             //reset cards:
-            for card in self.prop.cardButtons {
+            for card in Properties.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
                     let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
                     card.setBackgroundImage(backgroundImage, for: .normal)
@@ -380,7 +326,7 @@ class GameController: UIViewController {
         try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //flip card:
-        if !prop.activatedButtons.contains(sender) {
+        if !Properties.activatedButtons.contains(sender) {
             guard let imageName = sender.titleLabel?.text else { return }
             let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
             sender.setBackgroundImage(image, for: .normal)
@@ -391,8 +337,8 @@ class GameController: UIViewController {
             //flip animation:
             UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
             
-            prop.activatedCards.append(imageName)
-            prop.activatedButtons.append(sender)
+            Properties.activatedCards.append(imageName)
+            Properties.activatedButtons.append(sender)
             
             //setup Timer:
             if gameInterface.flipsCounter < 1 {
@@ -422,20 +368,20 @@ class GameController: UIViewController {
             }
             
             //reset cards:
-            prop.activatedButtons.removeLast()
-            prop.activatedCards.removeLast()
+            Properties.activatedButtons.removeLast()
+            Properties.activatedCards.removeLast()
             
             //reset counter:
             prop.cardCounter = 0
             
         }
-        print(prop.activatedCards)
+        print(Properties.activatedCards)
         
         //auto-disable cards after 2 clicked:
         if prop.cardCounter == 2 {
             
             //SYNC UserInteractionEnabled with Kill animation:
-            for card in prop.cardButtons {
+            for card in Properties.cardButtons {
                 card.isUserInteractionEnabled = false
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + prop.syncDisableAnimation) {
@@ -446,7 +392,7 @@ class GameController: UIViewController {
             //MARK: - Match:
             
             //check for duplicates (to avoid self-match with 1 item in array):
-            if prop.activatedCards.last == prop.activatedCards.first && prop.activatedCards.count > 1 {
+            if Properties.activatedCards.last == Properties.activatedCards.first && Properties.activatedCards.count > 1 {
                 //match cards!
                 print("BINGO")
 //                addCoin()         //FOR TESTING
@@ -455,9 +401,9 @@ class GameController: UIViewController {
                 gameInterface.pairsCounter += 1
                 if let cardName = sender.titleLabel?.text {
                     print("\(cardName) removed from list")
-                    prop.pairList.removeAll { $0 == cardName }
-                    print(prop.pairList)
-                    print(prop.pairList.count)
+                    Properties.pairList.removeAll { $0 == cardName }
+                    print(Properties.pairList)
+                    print(Properties.pairList.count)
                 }
                 
                 //add Coin each 10 pairs:
@@ -475,21 +421,21 @@ class GameController: UIViewController {
                     HapticsManager.shared.vibrate(for: .success)
                     
                     //animation:
-                    UIView.transition(with: self.prop.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
-                        self.prop.activatedButtons.last?.alpha = 0.3
-                        self.prop.activatedButtons.last?.isEnabled = false
-                        self.prop.activatedButtons.last?.pulsateRemove()
+                    UIView.transition(with: Properties.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        Properties.activatedButtons.last?.alpha = 0.3
+                        Properties.activatedButtons.last?.isEnabled = false
+                        Properties.activatedButtons.last?.pulsateRemove()
                     })
                     
-                    UIView.transition(with: self.prop.activatedButtons.first!, duration: 0.7, options: .transitionCurlUp, animations: {
-                        self.prop.activatedButtons.first?.alpha = 0.3
-                        self.prop.activatedButtons.first?.isEnabled = false
-                        self.prop.activatedButtons.first?.pulsateRemove()
+                    UIView.transition(with: Properties.activatedButtons.first!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        Properties.activatedButtons.first?.alpha = 0.3
+                        Properties.activatedButtons.first?.isEnabled = false
+                        Properties.activatedButtons.first?.pulsateRemove()
                     })
                     
                     //reset cards:
-                    self.prop.activatedCards.removeAll()
-                    self.prop.activatedButtons.removeAll()
+                    Properties.activatedCards.removeAll()
+                    Properties.activatedButtons.removeAll()
                     
                     //reset counter:
                     self.prop.cardCounter = 0
@@ -510,25 +456,25 @@ class GameController: UIViewController {
                     HapticsManager.shared.vibrate(for: .error)
                     
                     //animations:
-                    UIView.transition(with: self.prop.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)
+                    UIView.transition(with: Properties.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)
                     
-                    UIView.transition(with: self.prop.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
+                    UIView.transition(with: Properties.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //show card cover:
                     let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
-                    self.prop.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
-                    self.prop.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
+                    Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
+                    Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
                 
                 //kill pulsate animation:
                 DispatchQueue.main.asyncAfter(deadline: .now() + prop.syncDisableAnimation) {
                     //SYNC with kill animation!!!
-                    self.prop.activatedButtons.last?.pulsateRemove()
-                    self.prop.activatedButtons.first?.pulsateRemove()
+                    Properties.activatedButtons.last?.pulsateRemove()
+                    Properties.activatedButtons.first?.pulsateRemove()
                     
                     //reset cards:
-                    self.prop.activatedCards.removeAll()
-                    self.prop.activatedButtons.removeAll()
+                    Properties.activatedCards.removeAll()
+                    Properties.activatedButtons.removeAll()
                     
                     //reset counter:
                     self.prop.cardCounter = 0
@@ -536,7 +482,7 @@ class GameController: UIViewController {
             }
         }
         
-        if prop.pairList.isEmpty {
+        if Properties.pairList.isEmpty {
             print("PAIR LIST IS EMPTY")
             nextLevel()
         }
@@ -624,7 +570,7 @@ class GameController: UIViewController {
                 //shadows }
                 
                 gameInterface.buttonsView.addSubview(cardButton)
-                prop.cardButtons.append(cardButton)
+                Properties.cardButtons.append(cardButton)
             }
         }
     }

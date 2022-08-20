@@ -25,12 +25,12 @@ struct Properties {
     
     static var cardListImage1 = [UIImage]()
 
-    var cardButtons = [UIButton]()
-    var activatedButtons = [UIButton]()
+    static var cardButtons = [UIButton]()
+    static var activatedButtons = [UIButton]()
     
-    var activatedCards = [String]()
-    var pairList = [String]()
-    var lowerAmmountOfCardsList = [String]()
+    static var activatedCards = [String]()
+    static var pairList = [String]()
+    static var lowerAmmountOfCardsList = [String]()
     
     var mutedGeneral = Bool()
     
