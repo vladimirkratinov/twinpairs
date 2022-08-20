@@ -47,9 +47,7 @@ class MenuController: UIViewController {
     
     @objc func playButtonTapped(_ sender: UIButton) {
         //animation:
-//        sender.flash()
         sender.bounce(sender)
-        
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
 
@@ -66,7 +64,10 @@ class MenuController: UIViewController {
     }
     
     @objc func collectionButtonTapped(_ sender: UIButton) {
+        //animation:
         sender.bounce(sender)
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
         

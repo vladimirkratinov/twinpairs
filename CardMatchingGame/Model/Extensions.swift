@@ -73,6 +73,20 @@ extension UIButton {
 
 extension UILabel {
     
+    func spring(_ sender: UILabel) {
+        sender.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+        UIView.animate(withDuration: 1.5,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.3),
+                       initialSpringVelocity: CGFloat(0.3),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+            sender.transform = CGAffineTransform.identity
+        },
+                       completion: { Void in()  }
+        )
+    }
+    
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         pulse.duration = 0.4

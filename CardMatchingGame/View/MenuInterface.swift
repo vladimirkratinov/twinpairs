@@ -29,7 +29,7 @@ class MenuInterface: UIView {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        titleLabel.text = "MATCH PAIR GAME (v.0.3)"
+        titleLabel.text = "MATCH PAIR GAME (v.0.4)"
         titleLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return titleLabel
     }()

@@ -14,9 +14,7 @@ class GameController: UIViewController {
     var audioFX = AudioFX()
     var prop = Properties()
     var contentLoader = ContentLoader()
-    
     let gameInterface = GameInterface()
-    let animations = Animations()
     
     let defaults = UserDefaults.standard
     
@@ -192,12 +190,7 @@ class GameController: UIViewController {
             self.prop.activatedCards.removeAll()
             self.prop.activatedButtons.removeAll()
             self.prop.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
-            
-            //update timeCounter:
-//            if self.gameInterface.timeCounter > 10 {
-//                self.gameInterface.timeCounter -= 10
-//            }
-            
+                        
             //update level:
             if Properties.rows < 5 && Properties.columns < 4 {
                 Properties.rows += 1
@@ -688,7 +681,7 @@ class GameController: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.animations.spring(self.gameInterface.coinLabel)
+            self.gameInterface.coinLabel.spring(self.gameInterface.coinLabel)
             self.gameInterface.coins += 1
             self.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
         }

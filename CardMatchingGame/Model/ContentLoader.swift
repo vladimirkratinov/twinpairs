@@ -22,10 +22,7 @@ class ContentLoader {
             
             for item in contents {
                 let fileString = item.lastPathComponent
-//                let imageString = fileString.deletingSuffix(".png")
-//                if imageString.hasPrefix("set\(setNumber)_") {
                 if fileString.hasPrefix("set\(setNumber)_") {
-//                    let completedString = fileString.deletingPrefix("set\(setNumber)_")
                     switch setNumber {
                     case 1:
                         if Properties.cardList1.count < 10 {
