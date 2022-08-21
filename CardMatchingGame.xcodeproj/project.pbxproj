@@ -35,9 +35,9 @@
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
+		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
 		F7E50B1728B0C02D00DCA3BF /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
-		F7E6A47928AF90170023E317 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E6A47828AF90170023E317 /* Images.bundle */; };
 		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
 		F7EDF98828A636D2009CA17B /* Snowfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98628A636D2009CA17B /* Snowfall.mp3 */; };
 		F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */; };
@@ -77,9 +77,9 @@
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
-		F7E6A47828AF90170023E317 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		F7EDF98628A636D2009CA17B /* Snowfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Snowfall.mp3; sourceTree = "<group>"; };
 		F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ceremonial.mp3; sourceTree = "<group>"; };
@@ -116,6 +116,7 @@
 		F711937D2890C5EF00BC1DAA = {
 			isa = PBXGroup;
 			children = (
+				F7C2626128B1C62700A24724 /* Images.bundle */,
 				F71193882890C5EF00BC1DAA /* CardMatchingGame */,
 				F71193872890C5EF00BC1DAA /* Products */,
 				6E6248C029B4E5C5C1E51C00 /* Pods */,
@@ -140,7 +141,6 @@
 				F7815854289CBA850016A41D /* View */,
 				F7815853289CBA7C0016A41D /* Controller */,
 				F781AD8328931C4F002993E7 /* AudioFX */,
-				F7E6A47828AF90170023E317 /* Images.bundle */,
 				F711938F2890C5EF00BC1DAA /* Main.storyboard */,
 				F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */,
 				F71193922890C5F000BC1DAA /* Assets.xcassets */,
@@ -266,7 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7E6A47928AF90170023E317 /* Images.bundle in Resources */,
+				F7C2626228B1C62700A24724 /* Images.bundle in Resources */,
 				F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */,
 				F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */,
 				F781AD8028931C40002993E7 /* victory.wav in Resources */,

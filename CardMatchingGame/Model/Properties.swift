@@ -18,7 +18,13 @@ struct Properties {
     static var rows = 5
     static var columns = 4
     
-    static let listOfSets = ["Standart", "New Zealand", "Australia"]
+    static let listOfSets = ["Standart",
+                             "New Zealand",
+                             "Australia",
+                             "Japan 1961 Flowers",
+                             "Ukraine 1",
+                             "Ukraine 2",
+    ]
     static public var selectedSetName = String()
     
     static var selectedCollection = [String]()
@@ -28,6 +34,9 @@ struct Properties {
     static var cardList1 = [String]()
     static var cardList2 = [String]()
     static var cardList3 = [String]()
+    static var cardList4 = [String]()
+    static var cardList5 = [String]()
+    static var cardList6 = [String]()
     
     static var cardListImage1 = [UIImage]()
 

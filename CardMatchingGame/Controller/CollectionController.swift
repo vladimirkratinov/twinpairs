@@ -144,7 +144,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
-        let label = Properties.cardCollection[indexPath.item][1]
+        let label = Properties.cardCollection[indexPath.item][0]
+        print(label)
         if let imageString = UIImage(named: label) {
             let image = imageString
             cell.configure(label: name, image: image)

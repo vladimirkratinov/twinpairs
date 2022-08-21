@@ -15,6 +15,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
 //    var prop = Properties()
     let audioFX = AudioFX()
     var prop = Properties()
+    let palette = Palette()
     
 //    var selectedList = [String]()
     var orderedNoDuplicates = [String]()
@@ -32,6 +33,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         let name = Properties.selectedSetName
+        
         
         print(name)
         
@@ -53,6 +55,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         self.toolbarItems = tabPanel
         
         navigationController?.toolbar.tintColor = .brown
+        navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
         
 //        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"),
 //                                         style: .plain,
@@ -74,6 +77,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         self.navigationController?.view.backgroundColor = .clear
         
         orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
+        print(orderedNoDuplicates.count)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

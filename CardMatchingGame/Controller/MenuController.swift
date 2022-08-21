@@ -40,6 +40,9 @@ class MenuController: UIViewController {
         contentLoader.loadSet(setNumber: 1)
         contentLoader.loadSet(setNumber: 2)
         contentLoader.loadSet(setNumber: 3)
+        contentLoader.loadSet(setNumber: 4)
+        contentLoader.loadSet(setNumber: 5)
+        contentLoader.loadSet(setNumber: 6)
         
 //        //Background AudioFX:
         let randomNumber = Int.random(in: 1...2)

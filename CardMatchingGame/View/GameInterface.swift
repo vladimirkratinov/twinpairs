@@ -17,31 +17,18 @@ class GameInterface: UIView {
             flipsLabel.text = "♠️ \(flipsCounter)"
         }
     }
-    
     var pairsCounter: Int = 0 {
         didSet {
             pairsLabel.text = "🃏 \(pairsCounter)"
         }
     }
-    
     var coins: Int = UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue) {
         didSet {
             coinLabel.text = "🪙\(coins)"
         }
     }
-    
     var timeCounter: Int = 0 {
         didSet {
-//            let (m,s) = secToMinSec(timeCounter)
-//
-//            if s < 10 {
-//                timeLabel.text = "⏳ \(m):0\(s)"
-//            } else if s == 0 {
-//                timeLabel.text = "⏳ \(m):\(s)0"
-//            } else {
-//                timeLabel.text = "⏳ \(m):\(s)"
-//            }
-            
             let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.hour, .minute, .second]
             formatter.unitsStyle = .abbreviated

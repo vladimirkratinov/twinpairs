@@ -92,7 +92,18 @@ class GameController: UIViewController {
         } else if
             Properties.selectedCardList.hasPrefix("set3") {
             gameLogic.setupCards(Properties.cardList3)
-        } else {
+        } else if
+            Properties.selectedCardList.hasPrefix("set4") {
+            gameLogic.setupCards(Properties.cardList4)
+        } else if
+            Properties.selectedCardList.hasPrefix("set5") {
+            gameLogic.setupCards(Properties.cardList5)
+        } else if
+            Properties.selectedCardList.hasPrefix("set6") {
+            gameLogic.setupCards(Properties.cardList6)
+        }
+        
+        else {
             gameLogic.setupCards(Properties.cardList1)
         }
         

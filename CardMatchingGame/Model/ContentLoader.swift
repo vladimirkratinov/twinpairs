@@ -36,6 +36,19 @@ class ContentLoader {
                         if Properties.cardList3.count < 10 {
                             Properties.cardList3.append(fileString)
                         }
+                    case 4:
+                        if Properties.cardList4.count < 10 {
+                            Properties.cardList4.append(fileString)
+                        }
+                    case 5:
+                        if Properties.cardList5.count < 10 {
+                            Properties.cardList5.append(fileString)
+                        }
+                    case 6:
+                        if Properties.cardList6.count < 10 {
+                            Properties.cardList6.append(fileString)
+                        }
+                        
                     default: break
                     }
                 }
@@ -54,6 +67,18 @@ class ContentLoader {
                 Properties.cardList3.append(contentsOf: Properties.cardList3)
                 Properties.cardList3.sort()
                 Properties.cardCollection.append(Properties.cardList3)
+            case 4:
+                Properties.cardList4.append(contentsOf: Properties.cardList4)
+                Properties.cardList4.sort()
+                Properties.cardCollection.append(Properties.cardList4)
+            case 5:
+                Properties.cardList5.append(contentsOf: Properties.cardList5)
+                Properties.cardList5.sort()
+                Properties.cardCollection.append(Properties.cardList5)
+            case 6:
+                Properties.cardList6.append(contentsOf: Properties.cardList6)
+                Properties.cardList6.sort()
+                Properties.cardCollection.append(Properties.cardList6)
             default: break
             }
         }
