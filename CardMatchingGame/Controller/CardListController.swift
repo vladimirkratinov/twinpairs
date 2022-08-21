@@ -16,6 +16,17 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     let audioFX = AudioFX()
     var prop = Properties()
     let palette = Palette()
+    var selectButton = UIBarButtonItem()
+
+    static var selectedString: String = "Select" {
+        didSet {
+            if Properties.cardSetIsSelected {
+                selectedString = "Selected"
+            } else {
+                selectedString = "Select"
+            }
+        }
+    }
     
 //    var selectedList = [String]()
     var orderedNoDuplicates = [String]()
@@ -37,16 +48,16 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         var tabPanel = [UIBarButtonItem]()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
-
+        selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
         tabPanel.append(space)
         tabPanel.append(selectButton)
         tabPanel.append(space)
-        
         self.toolbarItems = tabPanel
         
-        navigationController?.toolbar.tintColor = .brown
+        
+        navigationController?.toolbar.tintColor = .black
         navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
+        navigationController?.toolbar.barTintColor = palette.darkMountainMeadow
         
 //        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"),
 //                                         style: .plain,
@@ -62,26 +73,29 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         
-        //transparent NavigationBar:
-        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
-        self.navigationController?.toolbar.shadowImage(forToolbarPosition: .bottom)
-        self.navigationController?.toolbar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
+        //transparent Toolbar:
+//        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
+//        self.navigationController?.toolbar.shadowImage(forToolbarPosition: .bottom)
+//        self.navigationController?.toolbar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
         
         orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
         print(orderedNoDuplicates.count)
         
         let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
+//        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
-        //vertical View:
+        //vertical View x6:
 //        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
         
-        //horisontal View:
-        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/3)-4)
+        //vertical View x4:
+        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
+        
+        //horisontal View x4:
+//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/3)-4)
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -92,7 +106,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.frame = view.bounds
         collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false //stop scrollable
         
 //        let image = UIImage(named: ImageKey.CardListBackground.rawValue)!
 //        collectionView.backgroundColor = UIColor(patternImage: image).withAlphaComponent(0.5)
@@ -128,6 +142,10 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         if let safeString = Properties.selectedCollection.first {
             Properties.selectedCardList = safeString
             print("Selected as main: \(safeString)")
+            navigationController?.toolbar.barTintColor = palette.fuelTown
+            selectButton.title = "Selected!"
+            Properties.cardSetIsSelected = true
+            print(Properties.cardSetIsSelected)
         }
     }
     

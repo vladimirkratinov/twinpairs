@@ -38,6 +38,8 @@ struct Properties {
     static var cardList5 = [String]()
     static var cardList6 = [String]()
     
+    static var cardSetIsSelected = false
+    
     static var cardListImage1 = [UIImage]()
 
     static var cardButtons = [UIButton]()
