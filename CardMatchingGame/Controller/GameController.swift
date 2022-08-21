@@ -31,7 +31,8 @@ class GameController: UIViewController {
         gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         gameInterface.backToMenuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         gameInterface.quitButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
-        gameInterface.muteMusicButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
+        gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
+        gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
     }
     
@@ -102,7 +103,6 @@ class GameController: UIViewController {
             Properties.selectedCardList.hasPrefix("set6") {
             gameLogic.setupCards(Properties.cardList6)
         }
-        
         else {
             gameLogic.setupCards(Properties.cardList1)
         }
@@ -132,9 +132,9 @@ class GameController: UIViewController {
             
             self.gameInterface.nextLevelLabel.alpha = 0
             
-            Properties.activatedCards.removeAll()
-            Properties.activatedButtons.removeAll()
-            Properties.cardButtons.removeAll()           //  fixed bug - reset cardButtons array
+            //RESET CARDS:
+            self.resetCards()
+            //  fixed bug - reset cardButtons array
                         
             //update level:
             if Properties.rows < 5 && Properties.columns < 4 {
@@ -223,8 +223,10 @@ class GameController: UIViewController {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
-        Properties.activatedCards.removeAll()
-        Properties.activatedButtons.removeAll()
+//        Properties.activatedCards.removeAll()
+//        Properties.activatedButtons.removeAll()
+        resetCards()
+    
         
         //setup time:
         self.gameInterface.timeCounter = self.prop.standardTimeCounter
@@ -246,7 +248,7 @@ class GameController: UIViewController {
             //reset cards:
             for card in Properties.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
-                    let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                    let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
                     card.setBackgroundImage(backgroundImage, for: .normal)
                     card.alpha = 1
                     card.isEnabled = true
@@ -255,45 +257,92 @@ class GameController: UIViewController {
         }
     }
     
-    //MARK: - muteButtonTapped:
+    //MARK: - MuteButtonTapped:
     
-    @objc func muteButtonTapped(_ sender: UIButton) {
+    @objc func muteMusicTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //set UserProperties.defaults:
-        var muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
+        var muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
         
         //set to have an access in viewDidLoad() to control volume level
-        Properties.mutedGeneral = muted
+        Properties.musicMutedSwitcher = muted
         
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         if muted {
             //set UserProperties.defaults:
-            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.myColor.rawValue)
-            Properties.defaults.set(false, forKey: AudioKey.isMuted.rawValue)
-            Properties.defaults.set(0.1, forKey: AudioKey.volumeLevel.rawValue)
+            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.musicButton.rawValue)
+            Properties.defaults.set(false, forKey: AudioKey.musicIsMuted.rawValue)
+            Properties.defaults.set(0.1, forKey: AudioKey.musicVolumeLevel.rawValue)
             
             //get UserProperties.defaults:
-            muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
-            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.myColor.rawValue)
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+            muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
-            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.myColor.rawValue)
-            Properties.defaults.set(true, forKey: AudioKey.isMuted.rawValue)
-            Properties.defaults.set(0, forKey: AudioKey.volumeLevel.rawValue)
+            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.musicButton.rawValue)
+//            sender.backgroundColor = UIColor.gray
+            Properties.defaults.set(true, forKey: AudioKey.musicIsMuted.rawValue)
+            Properties.defaults.set(0, forKey: AudioKey.musicVolumeLevel.rawValue)
             
             //get UserProperties.defaults:
-            muted = Properties.defaults.bool(forKey: AudioKey.isMuted.rawValue)
-            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.myColor.rawValue)
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+            muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         }
         print(muted)
     }
     
-    //MARK: - menuButtonTapped:
+    //MARK: - MuteSoundTapped:
+    
+    @objc func muteSoundTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //set UserProperties.defaults:
+        var muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+        
+        //set to have an access in viewDidLoad() to control volume level
+        Properties.soundMutedSwitcher = muted
+        
+        //audioFX:
+        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
+        if muted {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.soundButton.rawValue)
+            Properties.defaults.set(false, forKey: AudioKey.soundIsMuted.rawValue)
+            Properties.defaults.set(0.1, forKey: AudioKey.soundVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+        } else {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.soundButton.rawValue)
+//            sender.backgroundColor = UIColor.gray
+            Properties.defaults.set(true, forKey: AudioKey.soundIsMuted.rawValue)
+            Properties.defaults.set(0, forKey: AudioKey.soundVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+        }
+        print(muted)
+        
+    }
+    
+    
+    
+    //MARK: - MuteVibrationTapped:
+    
+    //MARK: - MenuButtonTapped:
     
     @objc func menuButtonTapped(_ sender: UIButton) {
         //animation:
@@ -303,10 +352,12 @@ class GameController: UIViewController {
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.resetCards()
             //reset timer:
             if self.prop.timer != nil {
                 self.prop.timer.invalidate()
                 print("timer invalidated!")
+//                Properties.cardButtons.removeAll()
             }
             
             print("quit button pressed: Audio is \(String(describing: AudioFX.backgroundMusic?.isPlaying))")
@@ -358,7 +409,7 @@ class GameController: UIViewController {
             //MARK: - Flip Back
             
             //flip back:
-            let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+            let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
             sender.setBackgroundImage(backgroundImage, for: .normal)
             
             //flip back animation:
@@ -466,7 +517,7 @@ class GameController: UIViewController {
                     UIView.transition(with: Properties.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //show card cover:
-                    let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                    let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
                     Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
                     Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
@@ -560,7 +611,7 @@ class GameController: UIViewController {
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
-                let backgroundImage = UIImage(named: ImageKey.backImage.rawValue)
+                let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
                 cardButton.setTitleColor(prop.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)
@@ -639,5 +690,14 @@ class GameController: UIViewController {
             self.gameInterface.coins += 1
             Properties.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
         }
+    }
+    
+    //MARK: - ResetCards:
+    
+    func resetCards() {
+        Properties.activatedCards.removeAll()
+        Properties.activatedButtons.removeAll()
+        Properties.cardButtons.removeAll()
+        Properties.pairList.removeAll()
     }
 }

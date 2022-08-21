@@ -23,8 +23,8 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.1
-        backgroundImageView.image = UIImage(named: "LaunchScreen2")
+        backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: ImageKey.CardListBackground.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -33,21 +33,12 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         let name = Properties.selectedSetName
-        
-        
-        print(name)
-        
         title = "\(name)"
-//        navigationController?.navigationBar.isHidden = false
-//        navigationController?.isToolbarHidden = false
         
         var tabPanel = [UIBarButtonItem]()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
-//        let selectButton = UIBarButtonItem(image: UIImage(named: "selectButton"),
-//                                     style: .plain,
-//                                     target: self,
-//                                     action: #selector(selectTapped))
+
         tabPanel.append(space)
         tabPanel.append(selectButton)
         tabPanel.append(space)
@@ -61,7 +52,8 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
 //                                         style: .plain,
 //                                         target: self,
 //                                         action: #selector(backTapped))
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
         
         //transparent NavigationBar:
@@ -80,12 +72,16 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         print(orderedNoDuplicates.count)
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-//        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 1
-//        layout.itemSize = CGSize(width: (view.frame.size.width/2)-4, height: (view.frame.size.height/4))
-        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
+//        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        //vertical View:
+//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
+        
+        //horisontal View:
+        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/3)-4)
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -96,7 +92,10 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.frame = view.bounds
         collectionView.backgroundColor = UIColor.white
-//        collectionView.backgroundView = backgroundImageView
+        collectionView.isPagingEnabled = true
+        
+//        let image = UIImage(named: ImageKey.CardListBackground.rawValue)!
+//        collectionView.backgroundColor = UIColor(patternImage: image).withAlphaComponent(0.5)
         
         configureAnimation()
         
@@ -142,6 +141,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             self.collectionView?.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             self.collectionView?.transform = CGAffineTransform.identity
             self.collectionView?.alpha = 0
+            self.collectionView?.layoutIfNeeded()   //remove white flashing when animated
         })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

@@ -12,7 +12,12 @@ enum CoinsKey: String {
 }
 
 enum ImageKey: String {
-    case backImage = "Back1Large"
+    case MenuBackground = "Back1Large"
+    case SettingsBackground = "wood3"
+    case CollectionBackground = "envelope1"
+    case CollectionViewCellBackground = "wood2"
+    case CardListBackground = "wood5"
+    case DetailBackground = "envelope3"
 }
 
 enum FontKey: String {
@@ -46,10 +51,15 @@ enum AudioTypeKey: String {
 }
 
 enum AudioKey: String {
-    case isMuted = "isMuted"
-    case volumeLevel = "volumeLevel"
+    case musicIsMuted = "musicIsMuted"
+    case soundIsMuted = "soundIsMuted"
+    case vibrationIsMuted = "vibrationIsMuted"
+    case musicVolumeLevel = "musicVolumeLevel"
+    case soundVolumeLevel = "soundVolumeLevel"
 }
 
 enum ColorKey: String {
-    case myColor = "myColor"
+    case musicButton = "musicButton"
+    case soundButton = "soundButton"
+    case vibrationButton = "vibrationButton"
 }

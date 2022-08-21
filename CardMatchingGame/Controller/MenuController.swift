@@ -37,12 +37,9 @@ class MenuController: UIViewController {
         }, completion: nil)
         
         //loadFiles:
-        contentLoader.loadSet(setNumber: 1)
-        contentLoader.loadSet(setNumber: 2)
-        contentLoader.loadSet(setNumber: 3)
-        contentLoader.loadSet(setNumber: 4)
-        contentLoader.loadSet(setNumber: 5)
-        contentLoader.loadSet(setNumber: 6)
+        for i in 1...6 {
+            contentLoader.loadSet(setNumber: i)
+        }
         
 //        //Background AudioFX:
         let randomNumber = Int.random(in: 1...2)
@@ -119,14 +116,7 @@ class MenuController: UIViewController {
     }
     
     fileprivate func resetStatisticsUserDefaults() {
-        let defaults = UserDefaults.standard
-        defaults.set(gameInterface.timeCounter, forKey: StatisticsKey.time.rawValue)
-        defaults.set(gameInterface.pairsCounter, forKey: StatisticsKey.pairs.rawValue)
-        defaults.set(gameInterface.flipsCounter, forKey: StatisticsKey.flips.rawValue)
-        
+        UserDefaults.standard.reset()
         print("defaults RESET!")
-        print("default time: \(defaults.integer(forKey: StatisticsKey.time.rawValue))")
-        print("default pairs: \(defaults.integer(forKey: StatisticsKey.pairs.rawValue))")
-        print("default flips: \(defaults.integer(forKey: StatisticsKey.flips.rawValue))")
     }
 }

@@ -15,8 +15,8 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
-    static var rows = 5
-    static var columns = 4
+    static var rows = 3
+    static var columns = 2
     
     static let listOfSets = ["Standart",
                              "New Zealand",
@@ -49,7 +49,9 @@ struct Properties {
     
     static let defaults = UserDefaults.standard
     
-    static var mutedGeneral = Bool()
+    static var musicMutedSwitcher = Bool()
+    static var soundMutedSwitcher = Bool()
+    static var vibrationMutedSwitcher = Bool()
     
     var timer: Timer!
     var isPaused = false

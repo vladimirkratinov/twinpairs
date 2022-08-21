@@ -91,7 +91,7 @@ class GameInterface: UIView {
         settingsView.alpha = 0
         settingsView.layer.borderWidth = 5
         settingsView.layer.cornerRadius = 20
-        settingsView.backgroundColor = UIColor.brown
+        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.SettingsBackground.rawValue)!)
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
     }()
@@ -135,7 +135,7 @@ class GameInterface: UIView {
         muteMusicButton.layer.borderWidth = 3
         muteMusicButton.layer.cornerRadius = 10
         muteMusicButton.isUserInteractionEnabled = true
-        muteMusicButton.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
+        muteMusicButton.backgroundColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
         muteMusicButton.layer.shadowColor = UIColor.black.cgColor
         muteMusicButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         muteMusicButton.layer.shadowRadius = 1
@@ -148,7 +148,7 @@ class GameInterface: UIView {
     lazy var muteSoundButton: UIButton = {
         let muteSoundButton = UIButton()
         let defaults = UserDefaults.standard
-        muteSoundButton.alpha = 0.3
+        muteSoundButton.alpha = 1
         muteSoundButton.translatesAutoresizingMaskIntoConstraints = false
         muteSoundButton.setTitle(" Mute ", for: .normal)
         muteSoundButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -157,7 +157,7 @@ class GameInterface: UIView {
         muteSoundButton.layer.borderWidth = 3
         muteSoundButton.layer.cornerRadius = 10
         muteSoundButton.isUserInteractionEnabled = true
-        muteSoundButton.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
+        muteSoundButton.backgroundColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
         muteSoundButton.layer.shadowColor = UIColor.black.cgColor
         muteSoundButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         muteSoundButton.layer.shadowRadius = 1
@@ -179,7 +179,7 @@ class GameInterface: UIView {
         muteVibrationButton.layer.borderWidth = 3
         muteVibrationButton.layer.cornerRadius = 10
         muteVibrationButton.isUserInteractionEnabled = true
-        muteVibrationButton.backgroundColor = defaults.colorForKey(key: ColorKey.myColor.rawValue)
+        muteVibrationButton.backgroundColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.systemPink
         muteVibrationButton.layer.shadowColor = UIColor.black.cgColor
         muteVibrationButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         muteVibrationButton.layer.shadowRadius = 1
@@ -355,6 +355,7 @@ class GameInterface: UIView {
         settingsButton.alpha = 1
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.setImage(UIImage(named: "settings"), for: .normal)
+//        settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
         settingsButton.isUserInteractionEnabled = true
         settingsButton.layer.shadowColor = UIColor.black.cgColor
         settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)

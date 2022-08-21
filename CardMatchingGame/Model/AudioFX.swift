@@ -9,9 +9,9 @@ import UIKit
 import AVFoundation
 
 class AudioFX {
-    var audioFX: AVAudioPlayer?
+    static var audioFX: AVAudioPlayer?
+    static var gameStateFX: AVAudioPlayer?
     static var backgroundMusic: AVAudioPlayer?
-    var gameStateFX: AVAudioPlayer?
     
     func stopMusic() {
         AudioFX.backgroundMusic?.stop()
@@ -26,9 +26,9 @@ class AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            audioFX = try AVAudioPlayer(contentsOf: url)
-            audioFX?.volume = 0.2
-            audioFX?.play()
+            AudioFX.audioFX = try AVAudioPlayer(contentsOf: url)
+            AudioFX.audioFX?.volume = 0.2
+            AudioFX.audioFX?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
@@ -44,9 +44,9 @@ class AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            gameStateFX = try AVAudioPlayer(contentsOf: url)
-            gameStateFX?.volume = 0.2
-            gameStateFX?.play()
+            AudioFX.gameStateFX = try AVAudioPlayer(contentsOf: url)
+            AudioFX.gameStateFX?.volume = 0.2
+            AudioFX.gameStateFX?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
@@ -70,7 +70,6 @@ class AudioFX {
             throw AudioError.FileNotExist
         }
         
-        
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             print("AVAudioSession Category Playback - OK!")
@@ -86,10 +85,18 @@ class AudioFX {
         }
         
         
-        if Properties.mutedGeneral {
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+        if Properties.musicMutedSwitcher {
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         } else {
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.volumeLevel.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+        }
+        
+        if Properties.soundMutedSwitcher {
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+        } else {
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         }
     }
     

@@ -25,11 +25,11 @@ class DetailController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .white
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let notEmptyString = selectedImage {
             detailInterface.detailImageView.image = UIImage(named: notEmptyString)
             detailInterface.backgroundImageView1.image = UIImage(named: notEmptyString)
@@ -37,7 +37,8 @@ class DetailController: UIViewController {
 //            detailInterface.backgroundImageView1.addBlurEffect()
         }
         
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
 //        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
     }
@@ -47,6 +48,11 @@ class DetailController: UIViewController {
         let zoomAnimation = AnimationType.zoom(scale: 0.2)
         detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.5)
         detailInterface.detailImageView.pulsateSlow()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.tintColor = .black
     }
     
     //MARK: - BackTapped:
@@ -59,6 +65,7 @@ class DetailController: UIViewController {
             self.detailInterface.detailImageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
             self.detailInterface.detailImageView.alpha = 0
+            self.detailInterface.detailImageView.layoutIfNeeded()  //remove white flashing when animated
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.navigationController?.popViewController(animated: false)

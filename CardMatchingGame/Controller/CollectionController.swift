@@ -20,7 +20,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: "LaunchScreen3")
+        backgroundImageView.image = UIImage(named: ImageKey.CollectionBackground.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -28,21 +28,23 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
         title = "Collections"
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
+        
+        //blur background image:
+//        backgroundImageView.addBlurEffect()
         
 //        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow")?.imageFlippedForRightToLeftLayoutDirection(),
 //                                         style: .plain,
 //                                         target: self,
 //                                         action: #selector(backTapped))
         
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-        
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
-
-
-        navigationController?.navigationBar.tintColor = palette.wildCarribeanGrean
+        
+        navigationController?.navigationBar.tintColor = UIColor.black
         navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
         
         //transparent NavigationBar:
@@ -55,7 +57,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: (view.frame.size.width/1.2), height: (view.frame.size.width))
+        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.width))
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -66,9 +68,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.frame = view.bounds
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
-        
-        //blur background image:
-        backgroundImageView.addBlurEffect()
+        collectionView.isPagingEnabled = true   //stop scrolling
                 
         configureAnimation()
         view.addSubview(collectionView)
@@ -92,15 +92,19 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     //MARK: - BackTapped:
     
     @objc func backTapped(_ sender: UIBarButtonItem) {
+        
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
-        UIView.animate(withDuration: 0.5, animations:  {
+        UIView.animate(withDuration: 5, animations:  {
+            self.collectionView?.isPagingEnabled = false
             self.collectionView?.transform = CGAffineTransform.identity
             self.configureAnimation()
             self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
                                               at: .left,
                                               animated: true)
+            self.collectionView?.layoutIfNeeded()               //remove white flashing when animated
+            
         })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
