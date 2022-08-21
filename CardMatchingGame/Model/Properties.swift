@@ -15,8 +15,14 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
-    static var rows = 3
-    static var columns = 2
+    static var rows = 5
+    static var columns = 4
+    
+    static let listOfSets = ["Standart", "New Zealand", "Australia"]
+    static public var selectedSetName = String()
+    
+    static var selectedCollection = [String]()
+    static var selectedCardList = String()
     
     static var cardCollection = [[String]]()
     static var cardList1 = [String]()

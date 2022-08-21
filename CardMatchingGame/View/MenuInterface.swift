@@ -178,7 +178,7 @@ class MenuInterface: UIView {
             titleLabel.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor, constant: 100),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             
-            playButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 120),
+            playButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 50),
             playButton.widthAnchor.constraint(equalToConstant: 120),

@@ -114,9 +114,16 @@ extension UILabel {
     }
 }
 
-//MARK: - UIImage:
+//MARK: - UITabBar:
 
-extension UIImage {
+extension UITabBar {
+    
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        super.sizeThatFits(size)
+        var sizeThatFits = super.sizeThatFits(size)
+        sizeThatFits.height = 150
+        return sizeThatFits
+    }
 }
 
 //MARK: - UIImageView:

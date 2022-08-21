@@ -30,6 +30,11 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        navigationController?.isToolbarHidden = true
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }, completion: nil)
         
         //loadFiles:
         contentLoader.loadSet(setNumber: 1)

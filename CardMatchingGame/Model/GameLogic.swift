@@ -40,7 +40,7 @@ public class GameLogic {
             
             
             //BUG ??? Range requires lowerBound <= upperBound
-            for _ in 0..<abs(sum) {
+            for _ in 0..<sum {
                 if sum > 0 {
                     Properties.lowerAmmountOfCardsList.removeLast()
                 }

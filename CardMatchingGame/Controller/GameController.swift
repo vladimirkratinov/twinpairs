@@ -84,9 +84,21 @@ class GameController: UIViewController {
             gameOver()                                          //test Game Over
         }
         
-        gameLogic.setupCards(Properties.cardList2)
+        if Properties.selectedCardList.hasPrefix("set1") {
+            gameLogic.setupCards(Properties.cardList1)
+        } else if
+            Properties.selectedCardList.hasPrefix("set2") {
+            gameLogic.setupCards(Properties.cardList2)
+        } else if
+            Properties.selectedCardList.hasPrefix("set3") {
+            gameLogic.setupCards(Properties.cardList3)
+        } else {
+            gameLogic.setupCards(Properties.cardList1)
+        }
+        
+        print("Selected CardList: \(Properties.selectedCollection)")
     }
-    
+
     //MARK: - nextLevel:
     
     func nextLevel() {

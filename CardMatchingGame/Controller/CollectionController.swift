@@ -28,16 +28,20 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "CollectionController"
-        
-//        print("CardCollection Items: \(Properties.cardCollection)")
-        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Collections"
         navigationController?.navigationBar.isHidden = false
+        
+//        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow")?.imageFlippedForRightToLeftLayoutDirection(),
+//                                         style: .plain,
+//                                         target: self,
+//                                         action: #selector(backTapped))
+        
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+        
+        navigationItem.leftBarButtonItem = backButton
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"),
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(backTapped))
+
         navigationController?.navigationBar.tintColor = palette.wildCarribeanGrean
         navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
         
@@ -60,7 +64,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.frame = view.bounds
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
         
         //blur background image:
@@ -70,9 +74,24 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         view.addSubview(collectionView)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.isToolbarHidden = true
+    }
+    
     //MARK: - BackTapped:
     
-    @objc func backTapped(sender: UIBarButtonItem) {
+    @objc func backTapped(_ sender: UIBarButtonItem) {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
@@ -94,6 +113,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             self.navigationController?.popViewController(animated: false)
         }
     }
+    
     
     //MARK: - Configure Animations:
     
@@ -123,11 +143,11 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         
         //Load Label & Image:
-        let label = Properties.cardCollection[indexPath.item][0]
+        let name = Properties.listOfSets[indexPath.item]
+        let label = Properties.cardCollection[indexPath.item][1]
         if let imageString = UIImage(named: label) {
             let image = imageString
-            cell.configure(label: label, image: image)
-            
+            cell.configure(label: name, image: image)
         }
         self.collectionView?.animateCell(cell)
         return cell
@@ -138,10 +158,15 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
+        print(indexPath.item)
+        Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
         
-        vc.selectedList = Properties.cardCollection[indexPath.item]
+//        vc.selectedList = Properties.cardCollection[indexPath.item]
+        Properties.selectedCollection = Properties.cardCollection[indexPath.item]
+        
+        print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
         
         let transition = CATransition()
         transition.duration = 0.3

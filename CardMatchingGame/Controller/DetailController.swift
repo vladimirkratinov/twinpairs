@@ -12,11 +12,12 @@ class DetailController: UIViewController {
     
     let detailInterface = DetailInterface()
     let audioFX = AudioFX()
+    let palette = Palette()
     var selectedImage: String?
     
     override func loadView() {
         view = detailInterface.detailView
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = palette.imperialPrimer
         detailInterface.setupSubviews()
         detailInterface.setupConstraints()
     }
@@ -28,11 +29,17 @@ class DetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let notEmptyString = selectedImage {
             detailInterface.detailImageView.image = UIImage(named: notEmptyString)
             detailInterface.backgroundImageView1.image = UIImage(named: notEmptyString)
+            title = ""
+//            detailInterface.backgroundImageView1.addBlurEffect()
         }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backTapped))
+        
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+//        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = backButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
