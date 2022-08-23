@@ -70,6 +70,7 @@ class CardListViewCell: GeminiCell {
     
     public func configure(label: String, image: UIImage) {
         myLabel.text = label
+        myLabel.adjustsFontSizeToFitWidth = true
         myImageView.image = image
     }
     

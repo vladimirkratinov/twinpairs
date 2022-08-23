@@ -11,7 +11,7 @@ import ViewAnimator
 
 class CollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    private var collectionView: GeminiCollectionView?
+    var collectionView: GeminiCollectionView?
     var prop = Properties()
     let palette = Palette()
     var contentLoader = ContentLoader()
@@ -32,22 +32,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         //Large Title:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
-        
-        //gesture recognizer delegate
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
-        //blur background image:
-//        backgroundImageView.addBlurEffect()
-        
-//        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow")?.imageFlippedForRightToLeftLayoutDirection(),
-//                                         style: .plain,
-//                                         target: self,
-//                                         action: #selector(backTapped))
-        
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
+                
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
-        
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
         
@@ -74,7 +64,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.backgroundView = backgroundImageView
         collectionView.isPagingEnabled = true               //stop scrolling
                 
-        configureAnimation()
+        
+        
         view.addSubview(collectionView)
     }
     
@@ -84,15 +75,15 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
-        UIView.animate(withDuration: 1, animations:  {
-            self.collectionView?.isPagingEnabled = false
-            self.collectionView?.transform = CGAffineTransform.identity
-            self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
-                                              at: .left,
-                                              animated: true)
-            self.collectionView?.layoutIfNeeded()               //remove white flashing when animated
-            
-        })
+//        UIView.animate(withDuration: 1, animations:  {
+//            self.collectionView?.isPagingEnabled = false
+//            self.collectionView?.transform = CGAffineTransform.identity
+//            self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
+//                                              at: .left,
+//                                              animated: true)
+//            self.collectionView?.layoutIfNeeded()               //remove white flashing when animated
+//
+//        })
 
         let transition = CATransition()
         transition.duration = 0.2
@@ -110,47 +101,38 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     // Gemini Animation:
     func configureAnimation() {
-        //Broken!!! Cube:
-        
-//        collectionView?.gemini
-//            .cubeAnimation()
-//                .cubeDegree(90)
-        
-        //Custom:
-        collectionView?.gemini
-            .customAnimation()
-            .translation(x: 0, y: 50, z: 0)
-            .rotationAngle(x: 0, y: 15, z: 0)
-            .ease(.easeOutExpo)
-            .shadowEffect(.fadeIn)
-            .maxShadowAlpha(0.3)
+        collectionView!.gemini
+            .cubeAnimation()
+                .cubeDegree(90)
     }
     
     // Call animation function
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        collectionView?.animateVisibleCells()
+        self.collectionView?.animateVisibleCells()
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? GeminiCell {
+        if let cell = cell as? CollectionViewCell {
             self.collectionView?.animateCell(cell)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Properties.cardCollection.count
+        return Properties.listOfSets.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-
+                
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
         let label = Properties.cardCollection[indexPath.item][0]
-        print(label)
+        print(name)
         if let imageString = UIImage(named: label) {
             let image = imageString
             cell.configure(label: name, image: image)
+            cell.layoutSubviews()
             
         }
         

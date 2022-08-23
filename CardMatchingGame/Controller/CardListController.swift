@@ -221,17 +221,14 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             
     //adapt animation Immediately
         func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            if let cell = cell as? GeminiCell {
+            if let cell = cell as? CardListViewCell {
                 self.collectionView?.animateCell(cell)
             }
         }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardListViewCell.identifier, for: indexPath) as? CardListViewCell else {
-            fatalError("Unable to dequeue CardListViewCell")
-        }
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardListViewCell.identifier, for: indexPath) as? CardListViewCell else { fatalError("Unable to dequeue CardListViewCell") }
         let label = orderedNoDuplicates[indexPath.item]
         if let imageString = UIImage(named: label) {
             let image = imageString
@@ -267,7 +264,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.navigationController?.view.layer.add(transition, forKey: nil)
         self.navigationController?.pushViewController(vc, animated: false)
-//        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

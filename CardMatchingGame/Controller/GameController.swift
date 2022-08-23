@@ -613,6 +613,20 @@ class GameController: UIViewController {
         gameInterface.settingsView.isHidden = true
         gameInterface.buttonsView.alpha = 1
         gameInterface.buttonsView.isUserInteractionEnabled = true
+        
+        //Check if timer is nil:
+        if prop.timer != nil {
+            print("Settings: timer is NOT NIL")
+            if prop.isPaused {
+                setupTimer()
+                prop.isPaused = false
+            } else {
+                prop.timer.invalidate()
+                prop.isPaused = true
+            }
+        } else {
+            print("Settings: timer is NIL")
+        }
     }
     
     //MARK: - Setup Timer:

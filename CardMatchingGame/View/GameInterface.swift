@@ -496,7 +496,7 @@ class GameInterface: UIView {
             rateButton.widthAnchor.constraint(equalToConstant: 100),
             
             //Views:
-            buttonsView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 40),
+            buttonsView.topAnchor.constraint(equalTo: woodenBack.bottomAnchor, constant: 0),
             buttonsView.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
             buttonsView.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: -40),
@@ -520,10 +520,10 @@ class GameInterface: UIView {
 //            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
             
             coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
+            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 10),
 
             timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor),
+            timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -10),
             
             settingsButton.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor, constant: -10),
             settingsButton.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),

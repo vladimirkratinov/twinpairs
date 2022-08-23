@@ -17,7 +17,7 @@ class CollectionViewCell: GeminiCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
+        imageView.clipsToBounds = false
         return imageView
     }()
     
@@ -30,13 +30,12 @@ class CollectionViewCell: GeminiCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        contentView.backgroundColor = .clear
         contentView.clipsToBounds = true
         contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.CollectionViewCellBackground.rawValue)!)
         contentView.contentMode = .center
 
         contentView.layer.cornerRadius = 20
-        contentView.layer.borderWidth = 5.0
+//        contentView.layer.borderWidth = 5.0
         contentView.layer.borderColor = UIColor.black.cgColor
 
         contentView.layer.shadowColor = UIColor.black.cgColor
@@ -81,5 +80,6 @@ class CollectionViewCell: GeminiCell {
         super.prepareForReuse()
         myLabel.text = nil
         myImageView.image = nil
+//        contentView.backgroundColor = nil
     }
 }
