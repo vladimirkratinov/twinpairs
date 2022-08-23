@@ -11,12 +11,12 @@ import ViewAnimator
 
 class CardListController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var collectionView: GeminiCollectionView?
-//    var prop = Properties()
+    private var collectionView: GeminiCollectionView!
     let audioFX = AudioFX()
     var prop = Properties()
     let palette = Palette()
     var selectButton = UIBarButtonItem()
+    var observer: NSKeyValueObservation?
 
     static var selectedString: String = "Select" {
         didSet {
@@ -46,6 +46,20 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         let name = Properties.selectedSetName
         title = "\(name)"
         
+        //Hide Small Title when scroll down:
+//        self.observer = self.navigationController?.navigationBar.observe(\.frame, options: [.new], changeHandler: { (navigationBar, changes) in
+//                    if let height = changes.newValue?.height {
+//                        if height > 44 {
+//                            //Large Title
+//                            let name = Properties.selectedSetName
+//                            self.title = "\(name)"
+//                        } else {
+//                            //Small Title
+//                            self.title = ""
+//                        }
+//                    }
+//                })
+        
         var tabPanel = [UIBarButtonItem]()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
@@ -54,6 +68,10 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         tabPanel.append(space)
         self.toolbarItems = tabPanel
         
+        //gesture recognizer delegate
+//        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+//        navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         navigationController?.toolbar.tintColor = .black
         navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
@@ -106,7 +124,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.frame = view.bounds
         collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = false //stop scrollable
+        collectionView.isPagingEnabled = false              //stop scrollable
         
 //        let image = UIImage(named: ImageKey.CardListBackground.rawValue)!
 //        collectionView.backgroundColor = UIColor(patternImage: image).withAlphaComponent(0.5)
@@ -121,6 +139,9 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     //ViewAnimator:
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.toolbar.isHidden = false
         
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -161,14 +182,14 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             self.collectionView?.alpha = 0
             self.collectionView?.layoutIfNeeded()   //remove white flashing when animated
         })
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-            transition.type = CATransitionType.fade
-                        
-            self.navigationController?.view.layer.add(transition, forKey: nil)
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.navigationController?.popViewController(animated: false)
         }
     }
@@ -176,6 +197,8 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return orderedNoDuplicates.count
     }
+    
+    //MARK: - Configure Animations Gemini:
     
     // Configure animation and properties
         func configureAnimation() {
@@ -188,8 +211,15 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         // Call animation function
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             collectionView?.animateVisibleCells()
+            
+            //Hide small title when scroll down:
+            let heightForCollapsedNav = UINavigationController().navigationBar.frame.size.height
+            let navHeight = navigationController?.navigationBar.frame.size.height
+            let name = Properties.selectedSetName
+            navigationController?.navigationBar.topItem?.title = navHeight ?? 44 <= heightForCollapsedNav  ? "" : "\(name)"
         }
-
+            
+    //adapt animation Immediately
         func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
             if let cell = cell as? GeminiCell {
                 self.collectionView?.animateCell(cell)
@@ -205,8 +235,18 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         let label = orderedNoDuplicates[indexPath.item]
         if let imageString = UIImage(named: label) {
             let image = imageString
-            cell.configure(label: label, image: image)
+            let cleanName = label
+                .deletingSuffix(".png")
+                .deletingPrefix("set")
+            let dropNumber = cleanName.dropFirst()
+            let dropLine = dropNumber.dropFirst()
+            let replaceLinesWithSpaces = dropLine.replacingOccurrences(of: "_", with: " ")
+            let cleanString = replaceLinesWithSpaces
+                
+            cell.configure(label: cleanString, image: image)
         }
+        
+        //adapt animation immediately
         self.collectionView?.animateCell(cell)
         return cell
     }
@@ -227,21 +267,21 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.navigationController?.view.layer.add(transition, forKey: nil)
         self.navigationController?.pushViewController(vc, animated: false)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+//        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 
-    if(velocity.y>0) {
+    if(velocity.y > 0) {
         //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.navigationController?.setToolbarHidden(true, animated: true)
             print("Hide")
         }, completion: nil)
 
     } else {
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.navigationController?.setToolbarHidden(false, animated: true)
             print("Unhide")

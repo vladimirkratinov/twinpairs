@@ -18,6 +18,10 @@ enum ImageKey: String {
     case CollectionViewCellBackground = "wood2"
     case CardListBackground = "wood5"
     case DetailBackground = "envelope3"
+    case SettingsButton = "settings2"
+    case LaunchScreen1 = "LaunchScreen1"
+    case LaunchScreen2 = "LaunchScreen2"
+    case LaunchScreen3 = "LaunchScreen3"
 }
 
 enum FontKey: String {

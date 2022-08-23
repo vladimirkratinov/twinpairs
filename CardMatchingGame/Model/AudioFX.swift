@@ -100,4 +100,41 @@ class AudioFX {
         }
     }
     
+    //MARK: - PlaySoundFX:
+    
+    func playSoundFX(name: String, isMuted: Bool) {
+        switch name {
+        case AudioFileKey.tinyButtonPress.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.buttonPress.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.buttonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.flip1.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.flip2.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.matchIgnite.rawValue:
+            if !isMuted {
+                try? playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.victory.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.victory.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        case AudioFileKey.gameOver.rawValue:
+            if !isMuted {
+                try? playFX(file: AudioFileKey.gameOver.rawValue, type: AudioTypeKey.wav.rawValue)
+            }
+        default: return
+        }
+    
+    }
+    
 }

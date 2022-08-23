@@ -40,6 +40,7 @@ class DetailInterface: UIView {
     var detailImageView: UIImageView = {
         let detailImageView = UIImageView()
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
+        detailImageView.isUserInteractionEnabled = true
         detailImageView.image = UIImage(named: "LaunchScreen1")
         detailImageView.contentMode = .scaleAspectFit
         detailImageView.clipsToBounds = true

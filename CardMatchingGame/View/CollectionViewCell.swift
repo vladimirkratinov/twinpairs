@@ -30,15 +30,14 @@ class CollectionViewCell: GeminiCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .clear
+//        contentView.backgroundColor = .clear
         contentView.clipsToBounds = true
         contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.CollectionViewCellBackground.rawValue)!)
         contentView.contentMode = .center
-//
-//        contentView.layer.cornerRadius = 20
-//        contentView.layer.borderWidth = 5.0
-//        contentView.layer.borderColor = UIColor.black.cgColor
-//        contentView.layer.masksToBounds = true
+
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 5.0
+        contentView.layer.borderColor = UIColor.black.cgColor
 
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
@@ -61,20 +60,20 @@ class CollectionViewCell: GeminiCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        myLabel.frame = CGRect(x: 10,
+        myLabel.frame = CGRect(x: 0,
                                y: contentView.frame.size.height-50,
                                width: contentView.frame.size.width-10,
                                height: 50)
         
-        myImageView.frame = CGRect(x: 10,
+        myImageView.frame = CGRect(x: 0,
                                    y: 10,
                                    width: contentView.frame.size.width-10,
                                    height: contentView.frame.size.height-50)
     }
     
     public func configure(label: String, image: UIImage) {
-        myLabel.text = label
         myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 30)
+        myLabel.text = label
         myImageView.image = image
     }
     

@@ -45,6 +45,7 @@ class DetailController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.isToolbarHidden = true
         let zoomAnimation = AnimationType.zoom(scale: 0.2)
         detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.5)
         detailInterface.detailImageView.pulsateSlow()

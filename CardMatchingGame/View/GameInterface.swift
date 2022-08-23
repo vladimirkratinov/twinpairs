@@ -88,7 +88,8 @@ class GameInterface: UIView {
     lazy var settingsView: UIView = {
         let settingsView = UIView()
         settingsView.translatesAutoresizingMaskIntoConstraints = false
-        settingsView.alpha = 0
+        settingsView.isHidden = true
+        settingsView.alpha = 1
         settingsView.layer.borderWidth = 5
         settingsView.layer.cornerRadius = 20
         settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.SettingsBackground.rawValue)!)
@@ -236,6 +237,7 @@ class GameInterface: UIView {
     var timeLabel: UILabel = {
         let timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.textColor = Properties.uiLabelsColor
         timeLabel.textAlignment = .left
         timeLabel.text = ""
         timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -245,6 +247,7 @@ class GameInterface: UIView {
     var coinLabel: UILabel = {
         let coinLabel = UILabel()
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.textColor = Properties.uiLabelsColor
         coinLabel.textAlignment = .left
         coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
         coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -254,6 +257,7 @@ class GameInterface: UIView {
     var pairsLabel: UILabel = {
         let pairsLabel = UILabel()
         pairsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pairsLabel.textColor = Properties.uiLabelsColor
         pairsLabel.textAlignment = .right
         pairsLabel.text = "🃏 0"
         pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -263,6 +267,7 @@ class GameInterface: UIView {
     var flipsLabel: UILabel = {
         let flipsLabel = UILabel()
         flipsLabel.translatesAutoresizingMaskIntoConstraints = false
+        flipsLabel.textColor = Properties.uiLabelsColor
         flipsLabel.textAlignment = .right
         flipsLabel.text = "♠️ 0"
         flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -354,8 +359,7 @@ class GameInterface: UIView {
         let settingsButton = UIButton()
         settingsButton.alpha = 1
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.setImage(UIImage(named: "settings"), for: .normal)
-//        settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
+        settingsButton.setImage(UIImage(named: ImageKey.SettingsButton.rawValue), for: .normal)
         settingsButton.isUserInteractionEnabled = true
         settingsButton.layer.shadowColor = UIColor.black.cgColor
         settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)

@@ -184,14 +184,20 @@ extension UserDefaults {
     
     enum Keys: String, CaseIterable {
         
+        //muted buttons
         case musicIsMuted = "musicIsMuted"
         case soundIsMuted = "soundIsMuted"
         case vibrationIsMuted = "vibrationIsMuted"
+        
+        //volume level
         case musicVolumeLevel = "musicVolumeLevel"
         case soundVolumeLevel = "soundVolumeLevel"
+        
+        //colors
         case musicButton = "musicButton"
         case soundButton = "soundButton"
         case vibrationButton = "vibrationButton"
+        
         case time = "time"
         case pairs = "pairs"
         case flips = "flips"
@@ -282,5 +288,17 @@ extension Int {
                 f()
             }
         }
+    }
+}
+
+extension CardListController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+}
+
+extension CollectionController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }

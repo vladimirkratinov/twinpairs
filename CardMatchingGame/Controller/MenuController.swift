@@ -13,7 +13,11 @@ class MenuController: UIViewController {
     var prop = Properties()
     var audioFX = AudioFX()
     let menuInterface = MenuInterface()
+    let gameInterface = GameInterface()
+    static let gameController = GameController()
     var contentLoader = ContentLoader()
+    var gestureRecognizer: UITapGestureRecognizer?
+//    var settingsButtons = SettingButtons()
     
     override func loadView() {
         view = menuInterface.menuView
@@ -23,14 +27,29 @@ class MenuController: UIViewController {
         menuInterface.setupConstraints()
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
+        
+        menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
+        
+        menuInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        menuInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
+        menuInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        navigationController?.isToolbarHidden = true
+        navigationController?.toolbar.isHidden = true
+        
+//        //Tap Gesture Settings:
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(closeView),
+//                                               name: NSNotification.Name("CloseView"),
+//                                               object: nil)
+//        //gesture Recognizer:
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(closeView(_:)))
+//        view.addGestureRecognizer(gesture)
+//        self.gestureRecognizer = gesture
         
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setToolbarHidden(true, animated: true)
@@ -56,6 +75,9 @@ class MenuController: UIViewController {
         menuInterface.setGradientBackground()
         //animation:
         menuInterface.backgroundImageView.pulsateSlow()
+        
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.toolbar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,11 +91,14 @@ class MenuController: UIViewController {
         }    
     }
     
+    //MARK: - PlayButtonTapped:
+    
     @objc func playButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
 
         let transition = CATransition()
         transition.duration = 0.2
@@ -87,11 +112,14 @@ class MenuController: UIViewController {
         }
     }
     
+    //MARK: - CollectionButtonTapped:
+    
     @objc func collectionButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CollectionController") as? CollectionController else { return }
         
@@ -106,11 +134,14 @@ class MenuController: UIViewController {
         }
     }
     
+    //MARK: - RESET!!!:
+    
     @objc func otherButtonTapped(_ sender: UIButton) {
         //animation:
         sender.flash()
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.buttonPress.rawValue, type: "wav")
         //reset Defaults:
         resetStatisticsUserDefaults()
     }
@@ -119,4 +150,127 @@ class MenuController: UIViewController {
         UserDefaults.standard.reset()
         print("defaults RESET!")
     }
+    
+    //MARK: - Settings Button Tapped:
+    
+    @objc func settingsButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
+        //UI Hide/Enable
+        if menuInterface.settingsView.isHidden {
+            menuInterface.settingsView.isHidden = false
+            menuInterface.coverImageView.isHidden = false
+            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = false
+            
+        } else {
+            menuInterface.settingsView.isHidden = true
+            menuInterface.coverImageView.isHidden = true
+            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = true
+        }
+    }
+    
+    //MARK: - Dismiss Settings Veiw:
+    
+//    @objc private func closeView(_ tapGestureRecognizer: UITapGestureRecognizer) {
+//        let location = tapGestureRecognizer.location(in: menuInterface.settingsView)
+//        guard menuInterface.settingsView.isHidden == false,
+//              !menuInterface.settingsView.bounds.contains(location) else {  //We need to have tapped outside of view 2
+//            return
+//        }
+//        menuInterface.settingsView.isHidden = true
+//    }
+    
+    //MARK: - MuteButtonTapped:
+    
+    @objc func muteMusicTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //set UserProperties.defaults:
+        var muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
+        
+        //set to have an access in viewDidLoad() to control volume level
+        Properties.musicMutedSwitcher = muted
+        
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
+        if muted {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.musicButton.rawValue)
+            Properties.defaults.set(false, forKey: AudioKey.musicIsMuted.rawValue)
+            Properties.defaults.set(0.1, forKey: AudioKey.musicVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+        } else {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.musicButton.rawValue)
+//            sender.backgroundColor = UIColor.gray
+            Properties.defaults.set(true, forKey: AudioKey.musicIsMuted.rawValue)
+            Properties.defaults.set(0, forKey: AudioKey.musicVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+        }
+        print(muted)
+    }
+    
+    //MARK: - MuteSoundTapped:
+    
+    @objc func muteSoundTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //set UserProperties.defaults:
+        var muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+        
+        //set to have an access in viewDidLoad() to control volume level
+        Properties.soundMutedSwitcher = muted
+        
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
+        if muted {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.soundButton.rawValue)
+            Properties.defaults.set(false, forKey: AudioKey.soundIsMuted.rawValue)
+            Properties.defaults.set(0.1, forKey: AudioKey.soundVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+        } else {
+            //set UserProperties.defaults:
+            Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.soundButton.rawValue)
+//            sender.backgroundColor = UIColor.gray
+            Properties.defaults.set(true, forKey: AudioKey.soundIsMuted.rawValue)
+            Properties.defaults.set(0, forKey: AudioKey.soundVolumeLevel.rawValue)
+            
+            //get UserProperties.defaults:
+            muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
+            sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+        }
+        print(muted)
+        
+    }
+    
+    
+    
+    
 }
+
+

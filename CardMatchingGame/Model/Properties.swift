@@ -15,6 +15,8 @@ struct Properties {
     var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     
+    static var uiLabelsColor = UIColor.white
+    
     static var rows = 3
     static var columns = 2
     
@@ -51,9 +53,9 @@ struct Properties {
     
     static let defaults = UserDefaults.standard
     
-    static var musicMutedSwitcher = Bool()
-    static var soundMutedSwitcher = Bool()
-    static var vibrationMutedSwitcher = Bool()
+    static var musicMutedSwitcher = false
+    static var soundMutedSwitcher = false
+    static var vibrationMutedSwitcher = false
     
     var timer: Timer!
     var isPaused = false
