@@ -1,9 +1,9 @@
-# Match Pair Game 🎮
-Match Pair is a memory game where you need to match pairs of cards. 
-Playing is very simple - you turn over one card and then try to find a matching card.
+# 🎮 Match Pair Game 
+Match Pair is a memory game where you need to match pairs of cards <br />
+Playing is very simple - you turn over one card and then try to find a matching card
 
-# How to play
-Try to match the cards with its respective pair with as few moves as possible.
+# ❓ How to play:
+Try to match the cards with its respective pair with as few moves as possible
 
 * Reveal cards by clicking on them
 * Only two cards can be revealed at a time
@@ -11,16 +11,16 @@ Try to match the cards with its respective pair with as few moves as possible.
 * If the symbols match the revealed cards will remain open
 * Game is successfully completed when all pairs of cards have been matched to each other
 
-# Features: 🚀
+# 🚀 Features: 
 
-- Match Pair is a challenging memory game where one must find and match pairs of cards, increasing the difficulty level and the total number of cards on the screen
+- Match Pair is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
 - This application is written in Swift and uses UIKit as the main framework
-- The game’s main feature is a unique graphic design with smooth and entertaining UI animations that improve and complements the user experience
-- Added additional CocoaPods libraries to diversify the gameplay and present customized animations within collections of cards available to the player
+- The game’s main feature is a unique graphic design with smooth and entertaining UI animations <br /> that improve and complements the user experience
+- Added additional CocoaPods libraries to diversify the gameplay and present customized animations <br /> within collections of cards available to the player
 - The impactful sound design emphasizes gameplay, including immersive background music and various effects
 - Used UICollectionView to organize and sort the pack of cards
 
-# Screenshots: 📷
+# 📷 Screenshots: 
 
 ## ver. 0.4 (NEW)
 
