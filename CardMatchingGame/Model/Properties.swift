@@ -17,6 +17,8 @@ struct Properties {
     
     static var uiLabelsColor = UIColor.white
     
+    static var sharedCoins = 0
+    
     static var rows = 3
     static var columns = 2
     

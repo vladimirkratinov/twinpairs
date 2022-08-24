@@ -10,4 +10,5 @@ import UIKit
 struct LockerModel {
     var cellNumber: Int
     var isLocked: Bool
+    var unlockPrice: Int
 }

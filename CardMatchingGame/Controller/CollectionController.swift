@@ -132,13 +132,19 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         //updating UI Locking mechanism:
         if Properties.collectionOfLockedSets[indexPath.item].isLocked {
+            //price:
+            let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
+
             cell.lockerImageView.isHidden = false
-        } else {
+            cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
+            cell.myLabel.isHidden = true
+            cell.myImageView.alpha = 0.5
+        }
+        else {
             cell.lockerImageView.isHidden = true
             cell.unlockButton.isHidden = true
         }
-        
-                
+    
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
         let label = Properties.cardCollection[indexPath.item][0]
@@ -153,28 +159,39 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
     }
     
-    //DELEGATE BUTTON!!!:
+    //MARK: - Unlock Button:
+                                                                                    //DELEGATE PATTERN
     func touchUpInside(delegatedFrom cell: CollectionViewCell) {
         if let indexPath = collectionView!.indexPath(for: cell) {
             print("Button pressed in cell: \(indexPath.item)")
-
+            
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
-                    Properties.collectionOfLockedSets[indexPath.item].isLocked = false
-                    cell.lockerImageView.isHidden = true
-                    cell.unlockButton.isHidden = true
-                } else {
-                    Properties.collectionOfLockedSets[indexPath.item].isLocked = true
-                    cell.lockerImageView.isHidden = false
+                    let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
+                    let ac = UIAlertController(title: "Unlock New Card Set", message: "Are you sure you want to open it for \(price)  coins?", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "Yes", style: .default) { _ in
+                        cell.lockerImageView.isHidden = true
+                        cell.unlockButton.isHidden = true
+                        cell.myLabel.isHidden = false
+                        cell.myImageView.alpha = 1
+                        //change property in Locker Class:
+                        Properties.collectionOfLockedSets[indexPath.item].isLocked = false
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                        Properties.collectionOfLockedSets[indexPath.item].isLocked = true
+                    }
+                    ac.addAction(defaultAction)
+                    ac.addAction(cancelAction)
+                    
+                    present(ac, animated: true, completion: nil)
                 }
+                
                 print("Locker Number: \(Properties.collectionOfLockedSets[indexPath.item].cellNumber), isLocked: \(Properties.collectionOfLockedSets[indexPath.item].isLocked)")
             }
         }
     }
-    
-    
-    
-    //MARK: - DidSelect:
+
+    //MARK: - DidSelectItemAt:
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell: \(indexPath)")
@@ -195,18 +212,23 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
+    //disable UICollectionViewCell User Interaction:
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if Properties.collectionOfLockedSets[indexPath.item].isLocked {
             return false
         } else {
             return true
         }
-        
    }
     
+    //MARK: - loadLockerModel:
+    
     func loadLockerModel() {
+        var price = 0
+        
         for i in 0..<Properties.listOfSets.count {
-            let lockerModel = LockerModel(cellNumber: i, isLocked: true)
+            price += 5
+            let lockerModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: price)
             if Properties.collectionOfLockedSets.count < Properties.listOfSets.count {
                 Properties.collectionOfLockedSets.append(lockerModel)
                 print(i)

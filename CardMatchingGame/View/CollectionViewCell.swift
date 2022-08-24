@@ -17,7 +17,7 @@ class CollectionViewCell: GeminiCell {
     static let identifier = "CollectionViewCell"
     let palette = Palette()
     
-    private let myImageView: UIImageView = {
+    var myImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFit
@@ -57,7 +57,7 @@ class CollectionViewCell: GeminiCell {
         return unlockButton
     }()
     
-    private let myLabel: UILabel = {
+    var myLabel: UILabel = {
         let label = UILabel()
         label.text = "Custom"
         label.textAlignment = .center
@@ -152,36 +152,8 @@ class CollectionViewCell: GeminiCell {
     
     @objc func unlockButtonTapped(_ sender: UIButton) {
         sender.bounce(sender)
-        
         delegate?.touchUpInside(delegatedFrom: self)
-        
-        
-//        print("unlock button tapped!")
-//        if Properties.collectionIsLocked {
-//            print("unlocked!")
-//            lockerImageView.isHidden = true
-//            Properties.collectionIsLocked = false
-//        } else {
-//            print("locked!")
-//            lockerImageView.isHidden = false
-//            Properties.collectionIsLocked = true
-//        }
-        
-        //sending here function from Index.Path Cell:
-//        print("collectionOfLockedSets: \(Properties.collectionOfLockedSets[Properties.sharedIndexPath])")
-//        print(Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked)
-//
-//
-//        if Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked {
-//            Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked = false
-//            lockerImageView.isHidden = true
-//        } else {
-//            Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked = true
-//            lockerImageView.isHidden = false
-//        }
-    
     }
-    
 }
 
 
