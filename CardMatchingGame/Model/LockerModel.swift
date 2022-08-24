@@ -8,6 +8,6 @@
 import UIKit
 
 struct LockerModel {
-    var name: String
+    var cellNumber: Int
     var isLocked: Bool
 }

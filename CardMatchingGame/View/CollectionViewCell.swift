@@ -8,6 +8,10 @@
 import UIKit
 import Gemini
 
+protocol CollectionViewCellDelegate: AnyObject {
+    func touchUpInside(delegatedFrom cell: CollectionViewCell)
+}
+
 class CollectionViewCell: GeminiCell {
     
     static let identifier = "CollectionViewCell"
@@ -39,6 +43,7 @@ class CollectionViewCell: GeminiCell {
         unlockButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         unlockButton.setTitleColor(UIColor.black, for: .normal)
         unlockButton.layer.borderColor = UIColor.black.cgColor
+        unlockButton.tag += 1
         unlockButton.layer.borderWidth = 3
         unlockButton.layer.cornerRadius = 10
         unlockButton.isUserInteractionEnabled = true
@@ -48,6 +53,7 @@ class CollectionViewCell: GeminiCell {
         unlockButton.layer.shadowOpacity = 1.0
         unlockButton.layer.shouldRasterize = true
         unlockButton.layer.rasterizationScale = UIScreen.main.scale
+        
         return unlockButton
     }()
     
@@ -57,6 +63,8 @@ class CollectionViewCell: GeminiCell {
         label.textAlignment = .center
         return label
     }()
+    
+    weak var delegate: CollectionViewCellDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -116,17 +124,18 @@ class CollectionViewCell: GeminiCell {
                                    width: contentView.frame.size.width/2,
                                    height: contentView.frame.size.height/2)
         
-        unlockButton.frame = CGRect(x: contentView.frame.size.width/3,
-                                   y: contentView.frame.size.height/2 + 130,
-                                   width: 120,
+        unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
+                                    y: contentView.frame.size.height/1.3,
+                                   width: 100,
                                    height: 44)
         
         unlockButton.addTarget(self, action: #selector(unlockButtonTapped), for: .touchUpInside)
     }
     
     public func configure(label: String, image: UIImage) {
-        myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 30)
+        myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 25)
         myLabel.text = label
+        myLabel.adjustsFontSizeToFitWidth = true
         myImageView.image = image
     }
     
@@ -134,22 +143,45 @@ class CollectionViewCell: GeminiCell {
         super.prepareForReuse()
         myLabel.text = nil
         myImageView.image = nil
-        lockerImageView.isHidden = false
+        lockerImageView.image = UIImage(systemName: "lock.fill")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
     }
     
     @objc func unlockButtonTapped(_ sender: UIButton) {
         sender.bounce(sender)
-        print("unlock button tapped!")
-        if Properties.collectionIsLocked {
-            print("unlocked!")
-            lockerImageView.isHidden = true
-            Properties.collectionIsLocked = false
-        } else {
-            print("locked!")
-            lockerImageView.isHidden = false
-            Properties.collectionIsLocked = true
-        }
+        
+        delegate?.touchUpInside(delegatedFrom: self)
+        
+        
+//        print("unlock button tapped!")
+//        if Properties.collectionIsLocked {
+//            print("unlocked!")
+//            lockerImageView.isHidden = true
+//            Properties.collectionIsLocked = false
+//        } else {
+//            print("locked!")
+//            lockerImageView.isHidden = false
+//            Properties.collectionIsLocked = true
+//        }
+        
+        //sending here function from Index.Path Cell:
+//        print("collectionOfLockedSets: \(Properties.collectionOfLockedSets[Properties.sharedIndexPath])")
+//        print(Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked)
+//
+//
+//        if Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked {
+//            Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked = false
+//            lockerImageView.isHidden = true
+//        } else {
+//            Properties.collectionOfLockedSets[Properties.sharedIndexPath].isLocked = true
+//            lockerImageView.isHidden = false
+//        }
     
     }
     
 }
+
+

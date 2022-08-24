@@ -42,8 +42,8 @@ struct Properties {
     
     static var cardSetIsSelected = false
     
-    static var collectionIsLocked = true
-    
+    static var collectionOfLockedSets = [LockerModel]()
+
     static var cardListImage1 = [UIImage]()
 
     static var cardButtons = [UIButton]()

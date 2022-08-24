@@ -97,6 +97,7 @@ class GameController: UIViewController {
             gameOver()                                          //test Game Over
         }
         
+        //SETUP SELECTED CARDS:
         if Properties.selectedCardList.hasPrefix("set1") {
             gameLogic.setupCards(Properties.cardList1)
         } else if
@@ -119,7 +120,7 @@ class GameController: UIViewController {
             gameLogic.setupCards(Properties.cardList1)
         }
         
-        print("Selected CardList: \(Properties.selectedCollection)")
+//        print("Selected CardList: \(Properties.selectedCollection)")
     }
 
     //MARK: - nextLevel:

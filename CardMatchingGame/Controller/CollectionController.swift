@@ -9,7 +9,7 @@ import UIKit
 import Gemini
 import ViewAnimator
 
-class CollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CollectionViewCellDelegate {
 
     var collectionView: GeminiCollectionView?
     var prop = Properties()
@@ -29,6 +29,9 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Collections"
+        
+        loadLockerModel()
+        
         //Large Title:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
@@ -49,9 +52,11 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.width))
+//        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.width/2))
+        //changing size of collection:
+        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -114,7 +119,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             self.collectionView?.animateCell(cell)
         }
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Properties.listOfSets.count
         
@@ -122,11 +127,22 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
+        
+        cell.delegate = self                                                //DELEGATE!!!
+        
+        //updating UI Locking mechanism:
+        if Properties.collectionOfLockedSets[indexPath.item].isLocked {
+            cell.lockerImageView.isHidden = false
+        } else {
+            cell.lockerImageView.isHidden = true
+            cell.unlockButton.isHidden = true
+        }
+        
                 
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
         let label = Properties.cardCollection[indexPath.item][0]
-        print(name)
+
         if let imageString = UIImage(named: label) {
             let image = imageString
             cell.configure(label: name, image: image)
@@ -137,9 +153,31 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
     }
     
+    //DELEGATE BUTTON!!!:
+    func touchUpInside(delegatedFrom cell: CollectionViewCell) {
+        if let indexPath = collectionView!.indexPath(for: cell) {
+            print("Button pressed in cell: \(indexPath.item)")
+
+            if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
+                if Properties.collectionOfLockedSets[indexPath.item].isLocked {
+                    Properties.collectionOfLockedSets[indexPath.item].isLocked = false
+                    cell.lockerImageView.isHidden = true
+                    cell.unlockButton.isHidden = true
+                } else {
+                    Properties.collectionOfLockedSets[indexPath.item].isLocked = true
+                    cell.lockerImageView.isHidden = false
+                }
+                print("Locker Number: \(Properties.collectionOfLockedSets[indexPath.item].cellNumber), isLocked: \(Properties.collectionOfLockedSets[indexPath.item].isLocked)")
+            }
+        }
+    }
+    
+    
+    
     //MARK: - DidSelect:
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected cell: \(indexPath)")
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
@@ -158,7 +196,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if Properties.collectionIsLocked {
+        if Properties.collectionOfLockedSets[indexPath.item].isLocked {
             return false
         } else {
             return true
@@ -166,7 +204,15 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
    }
     
-    func unlockButtonTapped(sender: UIButton) {
+    func loadLockerModel() {
+        for i in 0..<Properties.listOfSets.count {
+            let lockerModel = LockerModel(cellNumber: i, isLocked: true)
+            if Properties.collectionOfLockedSets.count < Properties.listOfSets.count {
+                Properties.collectionOfLockedSets.append(lockerModel)
+                print(i)
+            }
+        }
+        print("Loading Locker Model: \(Properties.collectionOfLockedSets)")
     }
-    
 }
+
