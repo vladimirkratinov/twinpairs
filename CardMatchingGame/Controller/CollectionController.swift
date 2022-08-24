@@ -20,7 +20,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: ImageKey.CollectionBackground.rawValue)
+        backgroundImageView.image = UIImage(named: ImageKey.LaunchScreen3.rawValue)
+        backgroundImageView.addBlurEffect()
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -31,8 +32,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Collections"
-        
-        loadLockerModel()
 
         //Large Title:
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -63,12 +62,15 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 1
-//        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.width/2))
         
-        //changing size of collection:
+        //horizontal x1
+//        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.height/2))
+        
+        //Horizontal x6
         layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
+        print(layout.itemSize)
         
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -80,15 +82,42 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
         collectionView.isPagingEnabled = true               //stop scrolling
+//
 
+//        configureAnimation()
+        
         view.addSubview(collectionView)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        print("\(view.bounds.width) x \(view.bounds.height)")
+ 
+    }
+    
+    //MARK: - viewDidAppear:
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.toolbar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //load Locker Mechanism in CollectionView:
+        LockerModel.loadLockerModel()
+        
+        print(Properties.unlockedList)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
-    
-    //MARK: - CoinsTapped:
+
+    //MARK: - InfoTapped:
     
     @objc func infoTapped(_ sender: UIBarButtonItem) {
         
@@ -173,22 +202,22 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
     }
     
+    //MARK: - cellForItemAt
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        
+                
         cell.delegate = self                                                //DELEGATE!!!
         
         //updating UI Locking mechanism:
         if Properties.collectionOfLockedSets[indexPath.item].isLocked {
             //price:
             let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
-
             cell.lockerImageView.isHidden = false
             cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
             cell.myLabel.isHidden = true
             cell.myImageView.alpha = 0.5
-        }
-        else {
+        } else {
             cell.lockerImageView.isHidden = true
             cell.unlockButton.isHidden = true
         }
@@ -214,6 +243,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             print("Button pressed in cell: \(indexPath.item)")
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
+//                print("inside function")
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
                     let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
                     let ac = UIAlertController(title: "Unlock New Card Set", message: "Are you sure you want to open it for \(price)  coins?", preferredStyle: .alert)
@@ -224,6 +254,27 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                         cell.myImageView.alpha = 1
                         //change property in Locker Class:
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = false
+                        
+                        
+//                        Properties.unlockedList[indexPath.item] = false
+                        
+                        
+                        //UserDefaults 2 version:
+                        let defaults = UserDefaults.standard
+                        Properties.unlockedList[indexPath.item] = Properties.collectionOfLockedSets[indexPath.item].isLocked
+                        print("Unlocked List Index: \(indexPath.item) \(Properties.unlockedList[indexPath.item]) = \(Properties.collectionOfLockedSets[indexPath.item].cellNumber) is \(Properties.collectionOfLockedSets[indexPath.item].isLocked) ")
+                        
+                        defaults.set(Properties.unlockedList, forKey: "unlockedList")
+                        print(defaults.array(forKey: "unlockedList") as Any)
+                        print(Properties.unlockedList)
+                        
+                        
+                        
+                        
+                        //UserDefaults 1 version:
+//                        LockerModel.saveData(index: indexPath.item)
+//                        print(Properties.collectionOfLockedSets[indexPath.item])
+                        
                     }
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = true
@@ -269,20 +320,5 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         }
    }
     
-    //MARK: - loadLockerModel:
-    
-    func loadLockerModel() {
-        var price = 0
-        
-        for i in 0..<Properties.listOfSets.count {
-            price += 5
-            let lockerModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: price)
-            if Properties.collectionOfLockedSets.count < Properties.listOfSets.count {
-                Properties.collectionOfLockedSets.append(lockerModel)
-                print(i)
-            }
-        }
-        print("Loading Locker Model: \(Properties.collectionOfLockedSets)")
-    }
 }
 

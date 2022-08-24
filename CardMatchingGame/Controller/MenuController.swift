@@ -21,7 +21,7 @@ class MenuController: UIViewController {
     override func loadView() {
         view = menuInterface.menuView
         view.insertSubview(menuInterface.backgroundImageView, at: 0)
-        
+                
         menuInterface.setupSubviews()
         menuInterface.setupConstraints()
         
@@ -36,6 +36,9 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaults.standard.synchronize()
+        
         navigationController?.navigationBar.isHidden = true
         navigationController?.toolbar.isHidden = true
         
@@ -111,11 +114,7 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //reset Defaults:
-        resetStatisticsUserDefaults()
-    }
-    
-    fileprivate func resetStatisticsUserDefaults() {
-        UserDefaults.standard.reset()
+        UserDefaults.resetDefaults()
         print("defaults RESET!")
     }
     

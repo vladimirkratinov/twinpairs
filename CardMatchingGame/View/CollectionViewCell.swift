@@ -37,7 +37,7 @@ class CollectionViewCell: GeminiCell {
     var unlockButton: UIButton = {
         let unlockButton = UIButton()
         unlockButton.alpha = 1
-//        unlockButton.translatesAutoresizingMaskIntoConstraints = false
+        unlockButton.translatesAutoresizingMaskIntoConstraints = false
         unlockButton.setTitle(" Unlock ", for: .normal)
         unlockButton.backgroundColor = UIColor.systemGreen
         unlockButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
@@ -124,10 +124,23 @@ class CollectionViewCell: GeminiCell {
                                    width: contentView.frame.size.width/2,
                                    height: contentView.frame.size.height/2)
         
+//        unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
+//                                    y: contentView.frame.size.height/1.3,
+//                                   width: 100,
+//                                   height: 44)
+        
         unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
                                     y: contentView.frame.size.height/1.3,
                                    width: 100,
                                    height: 44)
+        
+        NSLayoutConstraint.activate([
+            unlockButton.bottomAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: -5),
+            unlockButton.centerXAnchor.constraint(equalTo: myLabel.centerXAnchor),
+            unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
+            unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+        ])
+        
         
         unlockButton.addTarget(self, action: #selector(unlockButtonTapped), for: .touchUpInside)
     }

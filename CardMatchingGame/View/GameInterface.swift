@@ -25,7 +25,6 @@ class GameInterface: UIView {
     var coins: Int = UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue) {
         didSet {
             coinLabel.text = "🪙\(coins)"
-            Properties.sharedCoins = coins
         }
     }
     var timeCounter: Int = 0 {

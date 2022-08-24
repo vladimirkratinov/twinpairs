@@ -183,26 +183,25 @@ func animationButton(_ sender: UIButton) {
 extension UserDefaults {
     
     enum Keys: String, CaseIterable {
-        
         //muted buttons
         case musicIsMuted = "musicIsMuted"
         case soundIsMuted = "soundIsMuted"
         case vibrationIsMuted = "vibrationIsMuted"
-        
         //volume level
         case musicVolumeLevel = "musicVolumeLevel"
         case soundVolumeLevel = "soundVolumeLevel"
-        
         //colors
         case musicButton = "musicButton"
         case soundButton = "soundButton"
         case vibrationButton = "vibrationButton"
-        
-        case time = "time"
-        case pairs = "pairs"
-        case flips = "flips"
-        case coins = "Coins"
     }
+    
+    //preferred reset:
+    static func resetDefaults() {
+            if let bundleID = Bundle.main.bundleIdentifier {
+                UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            }
+        }
     
     func reset() {
         Keys.allCases.forEach { removeObject(forKey: $0.rawValue) }
@@ -299,6 +298,7 @@ extension CardListController: UIGestureRecognizerDelegate {
 
 extension CollectionController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        navigationController?.navigationBar.isHidden = false
         return true
     }
 }
