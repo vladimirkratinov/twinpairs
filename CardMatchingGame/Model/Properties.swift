@@ -42,6 +42,8 @@ struct Properties {
     
     static var cardSetIsSelected = false
     
+    static var collectionIsLocked = true
+    
     static var cardListImage1 = [UIImage]()
 
     static var cardButtons = [UIButton]()
@@ -53,9 +55,9 @@ struct Properties {
     
     static let defaults = UserDefaults.standard
     
-    static var musicMutedSwitcher = false
-    static var soundMutedSwitcher = false
-    static var vibrationMutedSwitcher = false
+    static var musicMutedSwitcher = true
+    static var soundMutedSwitcher = true
+    static var vibrationMutedSwitcher = true
     
     var timer: Timer!
     var isPaused = false

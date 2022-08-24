@@ -365,7 +365,7 @@ class MenuInterface: UIView {
         settingsView.addSubview(muteSoundButton)
         settingsView.addSubview(muteVibrationButton)
         
-        settingsView.addSubview(quitButton)
+//        settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
         
         menuView.bringSubviewToFront(coverImageView)
@@ -452,11 +452,12 @@ class MenuInterface: UIView {
             muteVibrationButton.topAnchor.constraint(equalTo: settingsVibration.topAnchor, constant: 0),
             muteVibrationButton.widthAnchor.constraint(equalToConstant: 80),
             
-            quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
-            quitButton.widthAnchor.constraint(equalToConstant: 100),
+//            quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
+//            quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
+//            quitButton.widthAnchor.constraint(equalToConstant: 100),
             
-            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+//            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            rateButton.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor),
             rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
             rateButton.widthAnchor.constraint(equalToConstant: 100),
         ])

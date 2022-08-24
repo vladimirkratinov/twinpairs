@@ -23,7 +23,7 @@
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
-		F764E17428B478BE00F4575F /* SettingButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingButtons.swift */; };
+		F764E17428B478BE00F4575F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingController.swift */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
 		F781AD7F28931C40002993E7 /* victory_old.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory_old.wav */; };
@@ -42,6 +42,7 @@
 		F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EDF98228A634D2009CA17B /* HapticsManager.swift */; };
 		F7EDF98828A636D2009CA17B /* Snowfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98628A636D2009CA17B /* Snowfall.mp3 */; };
 		F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */; };
+		F7F2343828B5B609005C75A4 /* LockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F2343728B5B609005C75A4 /* LockerModel.swift */; };
 		F7F49CC228B0272D0064A069 /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F49CC128B0272D0064A069 /* ContentLoader.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +67,7 @@
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		F764E17328B478BE00F4575F /* SettingButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButtons.swift; sourceTree = "<group>"; };
+		F764E17328B478BE00F4575F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		F781AD7A28931C40002993E7 /* victory_old.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory_old.wav; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		F7EDF98228A634D2009CA17B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		F7EDF98628A636D2009CA17B /* Snowfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Snowfall.mp3; sourceTree = "<group>"; };
 		F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ceremonial.mp3; sourceTree = "<group>"; };
+		F7F2343728B5B609005C75A4 /* LockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerModel.swift; sourceTree = "<group>"; };
 		F7F49CC128B0272D0064A069 /* ContentLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,7 +188,8 @@
 				F7EDF98228A634D2009CA17B /* HapticsManager.swift */,
 				F7F49CC128B0272D0064A069 /* ContentLoader.swift */,
 				F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */,
-				F764E17328B478BE00F4575F /* SettingButtons.swift */,
+				F764E17328B478BE00F4575F /* SettingController.swift */,
+				F7F2343728B5B609005C75A4 /* LockerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */,
+				F7F2343828B5B609005C75A4 /* LockerModel.swift in Sources */,
 				F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */,
 				F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */,
 				F7F49CC228B0272D0064A069 /* ContentLoader.swift in Sources */,
@@ -344,7 +348,7 @@
 				F711938E2890C5EF00BC1DAA /* GameController.swift in Sources */,
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
 				F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */,
-				F764E17428B478BE00F4575F /* SettingButtons.swift in Sources */,
+				F764E17428B478BE00F4575F /* SettingController.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */,
 				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,

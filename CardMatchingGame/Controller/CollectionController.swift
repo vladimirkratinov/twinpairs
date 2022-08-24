@@ -63,9 +63,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
         collectionView.isPagingEnabled = true               //stop scrolling
-                
-        
-        
+
         view.addSubview(collectionView)
     }
     
@@ -133,7 +131,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             let image = imageString
             cell.configure(label: name, image: image)
             cell.layoutSubviews()
-            
         }
         
         self.collectionView?.animateCell(cell)
@@ -145,14 +142,10 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //audioFX:
         try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
-        print(indexPath.item)
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
-        
-//        vc.selectedList = Properties.cardCollection[indexPath.item]
         Properties.selectedCollection = Properties.cardCollection[indexPath.item]
-        
         print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
         
         let transition = CATransition()
@@ -164,7 +157,16 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        return true
-//   }
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if Properties.collectionIsLocked {
+            return false
+        } else {
+            return true
+        }
+        
+   }
+    
+    func unlockButtonTapped(sender: UIButton) {
+    }
+    
 }
