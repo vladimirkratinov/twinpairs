@@ -17,10 +17,12 @@ struct Properties {
     
     static var uiLabelsColor = UIColor.white
     
-    static var sharedCoins = 0
+    static var sharedCoins = 20
     
     static var rows = 3
     static var columns = 2
+    
+    static let infoMessage = "Game Version: ver 0.5 (stable build) \n Unlock items in Collections Shop! \n Collect 🪙 coins in Game Mode \n 10 match pairs = 1 coin \n New Game Modes coming soon!"
     
     static let listOfSets = ["Standart",
                              "New Zealand",

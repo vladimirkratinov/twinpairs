@@ -70,19 +70,21 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         //gesture recognizer delegate
 //        navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
 //        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        
+        navigationController?.navigationBar.tintColor = .black
+        
         
         navigationController?.toolbar.tintColor = .black
         navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
         navigationController?.toolbar.barTintColor = palette.darkMountainMeadow
-        
-//        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"),
+                
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
 //                                         style: .plain,
 //                                         target: self,
 //                                         action: #selector(backTapped))
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
+        
         navigationItem.leftBarButtonItem = backButton
         
         //transparent NavigationBar:
@@ -109,7 +111,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         //vertical View x6:
 //        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
         
-        //vertical View x4:
+        //horisontal View x6:
         layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
         
         //horisontal View x4:
@@ -126,11 +128,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.backgroundColor = UIColor.white
         collectionView.isPagingEnabled = false              //stop scrollable
         
-//        let image = UIImage(named: ImageKey.CardListBackground.rawValue)!
-//        collectionView.backgroundColor = UIColor(patternImage: image).withAlphaComponent(0.5)
-        
         configureAnimation()
-        
         view.addSubview(collectionView)
     }
     

@@ -40,9 +40,19 @@ class MenuInterface: UIView {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        titleLabel.text = "MATCH PAIR GAME (v.0.4)"
+        titleLabel.text = "MATCH PAIR GAME (v.0.5)"
         titleLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         return titleLabel
+    }()
+    
+    lazy var coinLabel: UILabel = {
+        let coinLabel = UILabel()
+        coinLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.textColor = UIColor.black
+        coinLabel.textAlignment = .left
+        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
+        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
+        return coinLabel
     }()
     
     lazy var playButton: UIButton = {
@@ -339,11 +349,13 @@ class MenuInterface: UIView {
         return rateButton
     }()
     
+    //MARK: - setupSubviews:
+    
     func setupSubviews() {
         menuView.addSubview(coverImageView)
         
-        
         menuView.addSubview(titleLabel)
+        menuView.addSubview(coinLabel)
         
         menuView.addSubview(playButton)
         menuView.addSubview(timeModeButton)
@@ -374,6 +386,8 @@ class MenuInterface: UIView {
         
     }
     
+    //MARK: - setupConstraints:
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: menuView.topAnchor),
@@ -385,6 +399,9 @@ class MenuInterface: UIView {
             coverImageView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor),
             coverImageView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
             coverImageView.bottomAnchor.constraint(equalTo: menuView.bottomAnchor),
+            
+            coinLabel.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor),
+            coinLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor, constant: 10),
             
             titleLabel.topAnchor.constraint(lessThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 120),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
@@ -462,6 +479,8 @@ class MenuInterface: UIView {
             rateButton.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
+    
+    //MARK: - setGradientBackground
     
     func setGradientBackground() {
         let palette = Palette()

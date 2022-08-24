@@ -84,6 +84,127 @@ class GameInterface: UIView {
         return woodenBack
     }()
     
+    //MARK: - UI Labels:
+
+    var timeLabel: UILabel = {
+        let timeLabel = UILabel()
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.textColor = Properties.uiLabelsColor
+        timeLabel.textAlignment = .left
+        timeLabel.text = ""
+        timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return timeLabel
+    }()
+    
+    var coinLabel: UILabel = {
+        let coinLabel = UILabel()
+        coinLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.textColor = Properties.uiLabelsColor
+        coinLabel.textAlignment = .left
+        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
+        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return coinLabel
+    }()
+    
+    var pairsLabel: UILabel = {
+        let pairsLabel = UILabel()
+        pairsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pairsLabel.textColor = Properties.uiLabelsColor
+        pairsLabel.textAlignment = .right
+        pairsLabel.text = "🃏 0"
+        pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return pairsLabel
+    }()
+
+    var flipsLabel: UILabel = {
+        let flipsLabel = UILabel()
+        flipsLabel.translatesAutoresizingMaskIntoConstraints = false
+        flipsLabel.textColor = Properties.uiLabelsColor
+        flipsLabel.textAlignment = .right
+        flipsLabel.text = "♠️ 0"
+        flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        return flipsLabel
+    }()
+    
+    //MARK: - Statistics Label:
+    
+    lazy var statisticsLabel: UILabel = {
+        let statisticsLabel = UILabel()
+        statisticsLabel.alpha = 1
+        statisticsLabel.translatesAutoresizingMaskIntoConstraints = false
+        statisticsLabel.textAlignment = .center
+        statisticsLabel.numberOfLines = 5
+        statisticsLabel.text = "statistics"
+        statisticsLabel.textColor = UIColor.gray
+        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
+        return statisticsLabel
+    }()
+    
+    lazy var bestResultLabel: UILabel = {
+        let bestResultLabel = UILabel()
+        bestResultLabel.alpha = 1
+        bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
+        bestResultLabel.textColor = UIColor.darkGray
+        bestResultLabel.textAlignment = .center
+        bestResultLabel.numberOfLines = 5
+        bestResultLabel.text = "best results"
+        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
+        return bestResultLabel
+    }()
+
+    //MARK: - Pop-up Label:
+    
+    lazy var gameOverLabel: UILabel = {
+        let gameOverLabel = UILabel()
+        gameOverLabel.alpha = 0
+        gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameOverLabel.textAlignment = .center
+        gameOverLabel.text = "GAME OVER!"
+        gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
+        gameOverLabel.textColor = UIColor.yellow
+        gameOverLabel.layer.shadowColor = UIColor.black.cgColor
+        gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
+        gameOverLabel.layer.shadowRadius = 1
+        gameOverLabel.layer.shadowOpacity = 1.0
+        gameOverLabel.layer.shouldRasterize = true
+        gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
+        return gameOverLabel
+    }()
+
+    lazy var nextLevelLabel: UILabel = {
+        let nextLevelLabel = UILabel()
+        nextLevelLabel.alpha = 0
+        nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
+        nextLevelLabel.textAlignment = .center
+        nextLevelLabel.text = "NEXT LEVEL!"
+        nextLevelLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 45)
+        nextLevelLabel.textColor = UIColor.green
+        nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
+        nextLevelLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
+        nextLevelLabel.layer.shadowRadius = 1
+        nextLevelLabel.layer.shadowOpacity = 1.0
+        nextLevelLabel.layer.shouldRasterize = true
+        nextLevelLabel.layer.rasterizationScale = UIScreen.main.scale
+        return nextLevelLabel
+    }()
+    
+    lazy var plusCoinsAnimationsLabel: UILabel = {
+        let plusCoinsAnimationsLabel = UILabel()
+        plusCoinsAnimationsLabel.alpha = 0
+        plusCoinsAnimationsLabel.translatesAutoresizingMaskIntoConstraints = false
+        plusCoinsAnimationsLabel.textAlignment = .center
+        plusCoinsAnimationsLabel.text = "+1 Coin!"
+        plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        plusCoinsAnimationsLabel.textColor = UIColor.yellow
+        plusCoinsAnimationsLabel.layer.shadowColor = UIColor.black.cgColor
+        plusCoinsAnimationsLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
+        plusCoinsAnimationsLabel.layer.shadowRadius = 1
+        plusCoinsAnimationsLabel.layer.shadowOpacity = 1.0
+        plusCoinsAnimationsLabel.layer.shouldRasterize = true
+        plusCoinsAnimationsLabel.layer.rasterizationScale = UIScreen.main.scale
+        return plusCoinsAnimationsLabel
+    }()
+    
     //MARK: - Settings:
     
     lazy var settingsView: UIView = {
@@ -231,127 +352,6 @@ class GameInterface: UIView {
         rateButton.layer.shouldRasterize = true
         rateButton.layer.rasterizationScale = UIScreen.main.scale
         return rateButton
-    }()
-    
-    //MARK: - UI Labels:
-
-    var timeLabel: UILabel = {
-        let timeLabel = UILabel()
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.textColor = Properties.uiLabelsColor
-        timeLabel.textAlignment = .left
-        timeLabel.text = ""
-        timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        return timeLabel
-    }()
-    
-    var coinLabel: UILabel = {
-        let coinLabel = UILabel()
-        coinLabel.translatesAutoresizingMaskIntoConstraints = false
-        coinLabel.textColor = Properties.uiLabelsColor
-        coinLabel.textAlignment = .left
-        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
-        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        return coinLabel
-    }()
-    
-    var pairsLabel: UILabel = {
-        let pairsLabel = UILabel()
-        pairsLabel.translatesAutoresizingMaskIntoConstraints = false
-        pairsLabel.textColor = Properties.uiLabelsColor
-        pairsLabel.textAlignment = .right
-        pairsLabel.text = "🃏 0"
-        pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        return pairsLabel
-    }()
-
-    var flipsLabel: UILabel = {
-        let flipsLabel = UILabel()
-        flipsLabel.translatesAutoresizingMaskIntoConstraints = false
-        flipsLabel.textColor = Properties.uiLabelsColor
-        flipsLabel.textAlignment = .right
-        flipsLabel.text = "♠️ 0"
-        flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        return flipsLabel
-    }()
-    
-    //MARK: - Statistics Label:
-    
-    lazy var statisticsLabel: UILabel = {
-        let statisticsLabel = UILabel()
-        statisticsLabel.alpha = 1
-        statisticsLabel.translatesAutoresizingMaskIntoConstraints = false
-        statisticsLabel.textAlignment = .center
-        statisticsLabel.numberOfLines = 5
-        statisticsLabel.text = "statistics"
-        statisticsLabel.textColor = UIColor.gray
-        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
-        return statisticsLabel
-    }()
-    
-    lazy var bestResultLabel: UILabel = {
-        let bestResultLabel = UILabel()
-        bestResultLabel.alpha = 1
-        bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
-        bestResultLabel.textColor = UIColor.darkGray
-        bestResultLabel.textAlignment = .center
-        bestResultLabel.numberOfLines = 5
-        bestResultLabel.text = "best results"
-        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
-        return bestResultLabel
-    }()
-
-    //MARK: - Pop-up Label:
-    
-    lazy var gameOverLabel: UILabel = {
-        let gameOverLabel = UILabel()
-        gameOverLabel.alpha = 0
-        gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameOverLabel.textAlignment = .center
-        gameOverLabel.text = "GAME OVER!"
-        gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
-        gameOverLabel.textColor = UIColor.yellow
-        gameOverLabel.layer.shadowColor = UIColor.black.cgColor
-        gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        gameOverLabel.layer.shadowRadius = 1
-        gameOverLabel.layer.shadowOpacity = 1.0
-        gameOverLabel.layer.shouldRasterize = true
-        gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
-        return gameOverLabel
-    }()
-
-    lazy var nextLevelLabel: UILabel = {
-        let nextLevelLabel = UILabel()
-        nextLevelLabel.alpha = 0
-        nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
-        nextLevelLabel.textAlignment = .center
-        nextLevelLabel.text = "NEXT LEVEL!"
-        nextLevelLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 45)
-        nextLevelLabel.textColor = UIColor.green
-        nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
-        nextLevelLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        nextLevelLabel.layer.shadowRadius = 1
-        nextLevelLabel.layer.shadowOpacity = 1.0
-        nextLevelLabel.layer.shouldRasterize = true
-        nextLevelLabel.layer.rasterizationScale = UIScreen.main.scale
-        return nextLevelLabel
-    }()
-    
-    lazy var plusCoinsAnimationsLabel: UILabel = {
-        let plusCoinsAnimationsLabel = UILabel()
-        plusCoinsAnimationsLabel.alpha = 0
-        plusCoinsAnimationsLabel.translatesAutoresizingMaskIntoConstraints = false
-        plusCoinsAnimationsLabel.textAlignment = .center
-        plusCoinsAnimationsLabel.text = "+1 Coin!"
-        plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        plusCoinsAnimationsLabel.textColor = UIColor.yellow
-        plusCoinsAnimationsLabel.layer.shadowColor = UIColor.black.cgColor
-        plusCoinsAnimationsLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        plusCoinsAnimationsLabel.layer.shadowRadius = 1
-        plusCoinsAnimationsLabel.layer.shadowOpacity = 1.0
-        plusCoinsAnimationsLabel.layer.shouldRasterize = true
-        plusCoinsAnimationsLabel.layer.rasterizationScale = UIScreen.main.scale
-        return plusCoinsAnimationsLabel
     }()
     
     //MARK: - Buttons:

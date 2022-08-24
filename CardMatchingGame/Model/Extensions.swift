@@ -299,6 +299,6 @@ extension CardListController: UIGestureRecognizerDelegate {
 
 extension CollectionController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
+        return true
     }
 }

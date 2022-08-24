@@ -26,22 +26,33 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         return backgroundImageView
     }()
     
+    var coinLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Collections"
         
         loadLockerModel()
-        
+
         //Large Title:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
+        //Gesture recognizer:
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
                 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,
                                          target: self,
                                          action: #selector(backTapped))
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle.fill"),
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(infoTapped))
+        
         navigationItem.leftBarButtonItem = backButton
-        navigationController?.navigationBar.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = rightItem
+        
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
         
         //transparent NavigationBar:
@@ -55,6 +66,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
 //        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.width/2))
+        
         //changing size of collection:
         layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
         
@@ -70,6 +82,43 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.isPagingEnabled = true               //stop scrolling
 
         view.addSubview(collectionView)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    //MARK: - CoinsTapped:
+    
+    @objc func infoTapped(_ sender: UIBarButtonItem) {
+        
+        let titleAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 25)!,
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+        ]
+        
+          let titleString = NSAttributedString(string: "Information", attributes: titleAttributes)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        
+        let messageText = NSAttributedString(
+            string: Properties.infoMessage,
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor : UIColor.black,
+                NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 13)!,
+            ]
+        )
+        
+        let ac = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        ac.setValue(titleString, forKey: "attributedTitle")
+        ac.setValue(messageText, forKey: "attributedMessage")
+        
+        let cancel = UIAlertAction(title: "Ok", style: .cancel)
+        ac.addAction(cancel)
+        
+        present(ac, animated: true)
     }
     
     //MARK: - BackTapped:
@@ -98,7 +147,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             self.navigationController?.popViewController(animated: false)
         }
     }
-    
     
     //MARK: - Configure Animations:
     
@@ -169,7 +217,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
                     let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
                     let ac = UIAlertController(title: "Unlock New Card Set", message: "Are you sure you want to open it for \(price)  coins?", preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "Yes", style: .default) { _ in
+                    let defaultAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
                         cell.lockerImageView.isHidden = true
                         cell.unlockButton.isHidden = true
                         cell.myLabel.isHidden = false
