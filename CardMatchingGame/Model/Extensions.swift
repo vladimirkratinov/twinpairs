@@ -73,6 +73,10 @@ extension UIButton {
 
 extension UILabel {
     
+    func update(completion: (UILabel) -> Void) {
+            completion(self)
+        }
+    
     func spring(_ sender: UILabel) {
         sender.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
         UIView.animate(withDuration: 1.5,

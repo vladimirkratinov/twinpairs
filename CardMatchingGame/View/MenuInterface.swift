@@ -45,15 +45,23 @@ class MenuInterface: UIView {
         return titleLabel
     }()
     
+    var coins: Int = Properties.coins {
+        didSet {
+            coinLabel.text = "🪙 \(coins)"
+        }
+    }
+    
     lazy var coinLabel: UILabel = {
         let coinLabel = UILabel()
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
         coinLabel.textColor = UIColor.black
         coinLabel.textAlignment = .left
-        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
+        coinLabel.text = "🪙 \(coins)"
         coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
         return coinLabel
     }()
+    
+    
     
     lazy var playButton: UIButton = {
         let playButton = UIButton()
@@ -163,26 +171,49 @@ class MenuInterface: UIView {
         return challengesButton
     }()
     
-    lazy var otherButton: UIButton = {
-       let otherButton = UIButton()
-        otherButton.translatesAutoresizingMaskIntoConstraints = false
-        otherButton.alpha = 1
-        otherButton.tag = 1
-        otherButton.isUserInteractionEnabled = true
-        otherButton.isEnabled = true
-        otherButton.setTitle("Reset", for: .normal)
-        otherButton.setTitleColor(UIColor.black, for: .normal)
-        otherButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        otherButton.layer.borderWidth = 3
-        otherButton.layer.cornerRadius = 10
-        otherButton.layer.shadowColor = UIColor.black.cgColor
-        otherButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        otherButton.layer.shadowRadius = 1
-        otherButton.layer.shadowOpacity = 1.0
-        otherButton.backgroundColor = UIColor.gray
-        otherButton.layer.shouldRasterize = true
-        otherButton.layer.rasterizationScale = UIScreen.main.scale
-        return otherButton
+    lazy var resetButton: UIButton = {
+       let resetButton = UIButton()
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.alpha = 1
+        resetButton.tag = 1
+        resetButton.isUserInteractionEnabled = true
+        resetButton.isEnabled = true
+        resetButton.setTitle(" RESET (ADMIN) ", for: .normal)
+        resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        resetButton.setTitleColor(UIColor.black, for: .normal)
+        resetButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        resetButton.layer.borderWidth = 3
+        resetButton.layer.cornerRadius = 10
+        resetButton.layer.shadowColor = UIColor.black.cgColor
+        resetButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        resetButton.layer.shadowRadius = 1
+        resetButton.layer.shadowOpacity = 1.0
+        resetButton.backgroundColor = UIColor.red
+        resetButton.layer.shouldRasterize = true
+        resetButton.layer.rasterizationScale = UIScreen.main.scale
+        return resetButton
+    }()
+    
+    lazy var addCoinButton: UIButton = {
+       let addCoinButton = UIButton()
+        addCoinButton.translatesAutoresizingMaskIntoConstraints = false
+        addCoinButton.alpha = 1
+        addCoinButton.tag = 1
+        addCoinButton.isUserInteractionEnabled = true
+        addCoinButton.isEnabled = true
+        addCoinButton.setTitle("🪙 Add Coin", for: .normal)
+        addCoinButton.setTitleColor(UIColor.black, for: .normal)
+        addCoinButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        addCoinButton.layer.borderWidth = 3
+        addCoinButton.layer.cornerRadius = 10
+        addCoinButton.layer.shadowColor = UIColor.black.cgColor
+        addCoinButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        addCoinButton.layer.shadowRadius = 1
+        addCoinButton.layer.shadowOpacity = 1.0
+        addCoinButton.backgroundColor = UIColor.green
+        addCoinButton.layer.shouldRasterize = true
+        addCoinButton.layer.rasterizationScale = UIScreen.main.scale
+        return addCoinButton
     }()
     
     //MARK: - Settings:
@@ -362,11 +393,11 @@ class MenuInterface: UIView {
         menuView.addSubview(hardcoreModeButton)
         menuView.addSubview(collectionButton)
         menuView.addSubview(challengesButton)
-        menuView.addSubview(otherButton)
-        
-        menuView.addSubview(settingsButton)
+        menuView.addSubview(resetButton)
+        menuView.addSubview(addCoinButton)
         
         //Settings:
+        menuView.addSubview(settingsButton)
         menuView.addSubview(settingsView)
         
         settingsView.addSubview(settingsMusic)
@@ -383,6 +414,7 @@ class MenuInterface: UIView {
         menuView.bringSubviewToFront(coverImageView)
         menuView.bringSubviewToFront(settingsButton)
         menuView.bringSubviewToFront(settingsView)
+        menuView.bringSubviewToFront(coinLabel)
         
     }
     
@@ -401,7 +433,7 @@ class MenuInterface: UIView {
             coverImageView.bottomAnchor.constraint(equalTo: menuView.bottomAnchor),
             
             coinLabel.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor, constant: 10),
+            coinLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor, constant: 5),
             
             titleLabel.topAnchor.constraint(lessThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 120),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
@@ -431,10 +463,15 @@ class MenuInterface: UIView {
             challengesButton.heightAnchor.constraint(equalToConstant: 50),
             challengesButton.widthAnchor.constraint(equalToConstant: 120),
             
-            otherButton.topAnchor.constraint(equalTo: challengesButton.bottomAnchor, constant: 50),
-            otherButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            otherButton.heightAnchor.constraint(equalToConstant: 50),
-            otherButton.widthAnchor.constraint(equalToConstant: 120),
+            resetButton.topAnchor.constraint(equalTo: challengesButton.bottomAnchor, constant: 50),
+            resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            resetButton.heightAnchor.constraint(equalToConstant: 50),
+            resetButton.widthAnchor.constraint(equalToConstant: 120),
+            
+            addCoinButton.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 10),
+            addCoinButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            addCoinButton.heightAnchor.constraint(equalToConstant: 50),
+            addCoinButton.widthAnchor.constraint(equalToConstant: 120),
             
             settingsButton.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor, constant: -10),
             settingsButton.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),

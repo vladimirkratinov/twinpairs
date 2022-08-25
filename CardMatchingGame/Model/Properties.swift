@@ -14,11 +14,16 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 12
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
-    static var uiLabelsColor = UIColor.white
+    static var uiLabelsColor = UIColor.black
+    static var uiLabelsSize: CGFloat = 25
+    //Admin Functions:
+    static var hideAdminButtons = false
     
+    //Coins:
+    static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)
     //Card View Configuration:
     static var rows = 3
     static var columns = 2

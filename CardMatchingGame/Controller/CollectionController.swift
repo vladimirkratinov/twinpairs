@@ -81,7 +81,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
         //Gesture recognizer:
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+//        navigationController?.interactivePopGestureRecognizer?.delegate = self
                 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,
@@ -255,6 +255,18 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         if Properties.collectionOfLockedSets[indexPath.item].isLocked {
             //price:
             let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
+            
+            //price button color & mechanics:
+            if price > Properties.coins {
+                cell.unlockButton.backgroundColor = .systemRed
+                cell.unlockButton.alpha = 0.5
+                cell.unlockButton.isEnabled = false
+            } else {
+                cell.unlockButton.backgroundColor = .green
+                cell.unlockButton.alpha = 1
+                cell.unlockButton.isEnabled = true
+            }
+            
             cell.lockerImageView.isHidden = false
             cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
             cell.myLabel.isHidden = true
@@ -295,23 +307,34 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                                                message: "Are you sure you want to open it for \(price)  coins?",
                                                preferredStyle: .alert)
                     
+                    //YES button:
                     let defaultAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
+                        
+                        //reduce price from user coins:
+                        Properties.coins -= price
+                        print("cutted \(price) from \(Properties.coins) coins!")
+                        Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
+                        print("now you have \(Properties.coins) coins!")
                         
                         //prepare label and shadow layer before animation
                         cell.myLabel.isHidden = false
                         cell.myLabel.alpha = 0
                         cell.myShadowView.isHidden = false
                         cell.myShadowView.alpha = 1
-                        
-                        
                         //animation block:
                         UIView.animate(withDuration: 1.0, animations: { () -> Void in
                             cell.myImageView.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.1)
                             cell.unlockButton.layer.transform = CATransform3DMakeTranslation(0, 80, 0)
                             cell.myShadowView.alpha = 0
-                            cell.myLabel.alpha = 1
+//                            let degrees = 90.0
+//                            let radians = CGFloat(degrees * Double.pi / 180)
+//                            cell.myShadowView.layer.anchorPoint = CGPoint(x: 0.0, y: 1.0)
+//                            cell.myShadowView.layer.position = CGPoint(x: 0, y: -90)
+//                            cell.myShadowView.layer.transform = CATransform3DMakeRotation(radians, 0, 0, 90)
+//                            cell.myShadowView.layer.transform = CATransform3DMakeTranslation(0, 0, 90)
+//                            cell.myShadowView.layer.transform = CATransform3DMakeScale(10, 0, 10)
                             cell.myImageView.alpha = 1
-                            
+                            cell.myLabel.alpha = 1
                             cell.lockerImageView.alpha = 0
                             cell.lockerImageView.shake()
                             cell.lockerImageView.rotate(angle: 45)

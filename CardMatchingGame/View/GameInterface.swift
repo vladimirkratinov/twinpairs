@@ -22,9 +22,9 @@ class GameInterface: UIView {
             pairsLabel.text = "🃏 \(pairsCounter)"
         }
     }
-    var coins: Int = UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue) {
+    var coins: Int = Properties.coins {
         didSet {
-            coinLabel.text = "🪙\(coins)"
+            coinLabel.text = "🪙 \(coins)"
         }
     }
     var timeCounter: Int = 0 {
@@ -91,7 +91,7 @@ class GameInterface: UIView {
         timeLabel.textColor = Properties.uiLabelsColor
         timeLabel.textAlignment = .left
         timeLabel.text = ""
-        timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        timeLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: Properties.uiLabelsSize)
         return timeLabel
     }()
     
@@ -100,8 +100,8 @@ class GameInterface: UIView {
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
         coinLabel.textColor = Properties.uiLabelsColor
         coinLabel.textAlignment = .left
-        coinLabel.text = "🪙 \(UserDefaults.standard.integer(forKey: CoinsKey.coins.rawValue))"
-        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        coinLabel.text = "🪙 \(Properties.coins)"
+        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: Properties.uiLabelsSize)
         return coinLabel
     }()
     
@@ -111,7 +111,7 @@ class GameInterface: UIView {
         pairsLabel.textColor = Properties.uiLabelsColor
         pairsLabel.textAlignment = .right
         pairsLabel.text = "🃏 0"
-        pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        pairsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: Properties.uiLabelsSize)
         return pairsLabel
     }()
 
@@ -121,7 +121,7 @@ class GameInterface: UIView {
         flipsLabel.textColor = Properties.uiLabelsColor
         flipsLabel.textAlignment = .right
         flipsLabel.text = "♠️ 0"
-        flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        flipsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: Properties.uiLabelsSize)
         return flipsLabel
     }()
     
@@ -158,7 +158,7 @@ class GameInterface: UIView {
         gameOverLabel.alpha = 0
         gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
         gameOverLabel.textAlignment = .center
-        gameOverLabel.text = "GAME OVER!"
+        gameOverLabel.text = "GAME OVER"
         gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
         gameOverLabel.textColor = UIColor.yellow
         gameOverLabel.layer.shadowColor = UIColor.black.cgColor
@@ -175,7 +175,7 @@ class GameInterface: UIView {
         nextLevelLabel.alpha = 0
         nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         nextLevelLabel.textAlignment = .center
-        nextLevelLabel.text = "NEXT LEVEL!"
+        nextLevelLabel.text = "GREAT!"
         nextLevelLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 45)
         nextLevelLabel.textColor = UIColor.green
         nextLevelLabel.layer.shadowColor = UIColor.black.cgColor
@@ -192,7 +192,7 @@ class GameInterface: UIView {
         plusCoinsAnimationsLabel.alpha = 0
         plusCoinsAnimationsLabel.translatesAutoresizingMaskIntoConstraints = false
         plusCoinsAnimationsLabel.textAlignment = .center
-        plusCoinsAnimationsLabel.text = "+1 Coin!"
+        plusCoinsAnimationsLabel.text = "+2 Coins"
         plusCoinsAnimationsLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         plusCoinsAnimationsLabel.textColor = UIColor.yellow
         plusCoinsAnimationsLabel.layer.shadowColor = UIColor.black.cgColor
@@ -315,7 +315,7 @@ class GameInterface: UIView {
         let quitButton = UIButton()
         quitButton.alpha = 1
         quitButton.translatesAutoresizingMaskIntoConstraints = false
-        quitButton.setTitle(" Quit ", for: .normal)
+        quitButton.setTitle(" Menu ", for: .normal)
         quitButton.backgroundColor = UIColor.systemPink
         quitButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         quitButton.setTitleColor(UIColor.black, for: .normal)
@@ -513,18 +513,28 @@ class GameInterface: UIView {
             bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
             
             //UI:
+            
+            //OLD COINS & PAIRS:
+//            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+//            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 10),
+//
+//            pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+//            pairsLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            
+            //NEW COINS & PAIRS:
+            
+            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            coinLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            
             pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            pairsLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            pairsLabel.leadingAnchor.constraint(equalTo: coinLabel.trailingAnchor, constant: 10),
             
 //            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
 //            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
             
-            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 10),
-
             timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
             timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -10),
-            
+
             settingsButton.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor, constant: -10),
             settingsButton.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             settingsButton.widthAnchor.constraint(equalToConstant: 50),

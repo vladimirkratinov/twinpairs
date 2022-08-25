@@ -27,9 +27,9 @@ class CollectionViewCell: GeminiCell {
     
     var myShadowView: UIImageView = {
         let myShadowView = UIImageView()
-//        myShadowView.image = UIImage(systemName: "house")
-        myShadowView.contentMode = .scaleAspectFit
-        myShadowView.clipsToBounds = false
+        myShadowView.image = UIImage(named: "cardFrame")
+        myShadowView.contentMode = .scaleToFill
+        myShadowView.clipsToBounds = true
         return myShadowView
     }()
     
@@ -134,8 +134,8 @@ class CollectionViewCell: GeminiCell {
         
         myShadowView.frame = CGRect(x: 0,
                                    y: 0,
-                                   width: contentView.frame.size.width-10,
-                                   height: contentView.frame.size.height-50)
+                                   width: contentView.frame.size.width,
+                                   height: contentView.frame.size.height)
         
         lockerImageView.frame = CGRect(x: 0,
                                        y: 0,

@@ -27,7 +27,8 @@ class MenuController: UIViewController {
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
-        menuInterface.otherButton.addTarget(self, action: #selector(otherButtonTapped), for: .touchUpInside)
+        menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
         
         menuInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         menuInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
@@ -36,6 +37,12 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //admin functions:
+        if Properties.hideAdminButtons {
+            menuInterface.resetButton.isHidden = true
+            menuInterface.addCoinButton.isHidden = true
+        }
         
         UserDefaults.standard.synchronize()
         
@@ -74,6 +81,9 @@ class MenuController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //update Coins label:
+        menuInterface.coins = Properties.coins
+        
         //updateSettingsUIButtonsColor:
         updateSettingsUIButtonsColor()
         
@@ -106,16 +116,40 @@ class MenuController: UIViewController {
         transitionToVC(duration: 0.2, identifier: "CollectionController")
     }
     
-    //MARK: - Reset Defaults:
+    //MARK: - Reset Button:
     
-    @objc func otherButtonTapped(_ sender: UIButton) {
+    @objc func resetButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //reset Defaults:
-        UserDefaults.resetDefaults()
-        print("defaults RESET!")
+        DispatchQueue.main.async {
+            UserDefaults.resetDefaults()
+            Properties.coins = 0
+            
+            self.menuInterface.coinLabel.update { $0.text = "Reset" }
+        }
+        print("Defaults RESETED!")
+    }
+    
+    //MARK: - Add Coin Button:
+    
+    @objc func addCoinButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //add Coin:
+        menuInterface.coins += 2
+        Properties.coins += 2
+        gameInterface.coins += 2
+        
+        Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
+        
+        print("properties.coins = \(Properties.coins)")
+        print("menuInterface.coins = \(menuInterface.coins)")
+        print("gameInterface.coins = \(gameInterface.coins)")
     }
     
     //MARK: - Settings Buttons:

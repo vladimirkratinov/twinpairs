@@ -76,6 +76,10 @@ class GameController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //update Coins label:
+        gameInterface.coins = Properties.coins
+
         //ViewAnimator:
         let fromAnimation = AnimationType.from(direction: .bottom, offset: 200)
         gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
@@ -379,7 +383,7 @@ class GameController: UIViewController {
             if Properties.activatedCards.last == Properties.activatedCards.first && Properties.activatedCards.count > 1 {
                 //match cards!
                 print("BINGO")
-//                addCoin()         //FOR TESTING
+                addCoin()         //FOR TESTING!
                 
                 //remove from prop.pairList: (to sort pairs for next level)
                 gameInterface.pairsCounter += 1
@@ -651,9 +655,17 @@ class GameController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.gameInterface.coinLabel.spring(self.gameInterface.coinLabel)
-            self.gameInterface.coins += 1
-            Properties.defaults.set(self.gameInterface.coins, forKey: CoinsKey.coins.rawValue)
+
+            Properties.coins += 2
+            self.gameInterface.coins += 2
+//            self.menuInterface.coins += 2
+
+            Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
         }
+        
+        print("properties.coins = \(Properties.coins)")
+        print("menuInterface.coins = \(menuInterface.coins)")
+        print("gameInterface.coins = \(gameInterface.coins)")
     }
     
     //MARK: - ResetCards:
