@@ -139,6 +139,20 @@ extension UIImageView {
         self.addSubview(blurEffectView)
     }
     
+    func shake() {
+            let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+            animation.duration = 0.4
+            animation.values = [-10.0, 10.0, -10.0, 10.0, -5.0, 5.0, -1.0, 1.0, 0.0 ]
+            layer.add(animation, forKey: "shake")
+        }
+    
+    func rotate(angle: CGFloat) {
+            let radians = angle / 180.0 * CGFloat.pi
+            let rotation = self.transform.rotated(by: radians);
+            self.transform = rotation
+        }
+    
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         pulse.duration = 0.4

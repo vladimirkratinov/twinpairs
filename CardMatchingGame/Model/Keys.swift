@@ -22,6 +22,9 @@ enum ImageKey: String {
     case LaunchScreen1 = "LaunchScreen1"
     case LaunchScreen2 = "LaunchScreen2"
     case LaunchScreen3 = "LaunchScreen3"
+    case lock1 = "lock1"
+    case lock2 = "lock2"
+    case lock3 = "lock3"
 }
 
 enum FontKey: String {

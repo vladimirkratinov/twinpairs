@@ -262,6 +262,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         } else {
             cell.lockerImageView.isHidden = true
             cell.unlockButton.isHidden = true
+            cell.myShadowView.isHidden = true
         }
     
         //Load Label & Image:
@@ -296,17 +297,25 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                     
                     let defaultAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
                         
-                        //prepare label before animation
+                        //prepare label and shadow layer before animation
                         cell.myLabel.isHidden = false
                         cell.myLabel.alpha = 0
+                        cell.myShadowView.isHidden = false
+                        cell.myShadowView.alpha = 1
+                        
                         
                         //animation block:
                         UIView.animate(withDuration: 1.0, animations: { () -> Void in
                             cell.myImageView.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.1)
                             cell.unlockButton.layer.transform = CATransform3DMakeTranslation(0, 80, 0)
-                            cell.lockerImageView.alpha = 0
+                            cell.myShadowView.alpha = 0
                             cell.myLabel.alpha = 1
                             cell.myImageView.alpha = 1
+                            
+                            cell.lockerImageView.alpha = 0
+                            cell.lockerImageView.shake()
+                            cell.lockerImageView.rotate(angle: 45)
+                            
                         })
                         
                         
@@ -314,8 +323,10 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                             //bounce back:
                             UIView.animate(withDuration: 0.5) {
                                 cell.myImageView.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                                
                             }
                             //hide all views that already were animated:
+                            
                             cell.myLabel.isHidden = false
                             cell.lockerImageView.isHidden = true
                             cell.unlockButton.isHidden = true

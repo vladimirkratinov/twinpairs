@@ -25,11 +25,21 @@ class CollectionViewCell: GeminiCell {
         return imageView
     }()
     
+    var myShadowView: UIImageView = {
+        let myShadowView = UIImageView()
+//        myShadowView.image = UIImage(systemName: "house")
+        myShadowView.contentMode = .scaleAspectFit
+        myShadowView.clipsToBounds = false
+        return myShadowView
+    }()
+    
     var lockerImageView: UIImageView = {
         let lockerImageView = UIImageView()
-        lockerImageView.image = UIImage(systemName: "lock.fill")
+        lockerImageView.translatesAutoresizingMaskIntoConstraints = false
+        lockerImageView.image = UIImage(named: ImageKey.lock2.rawValue)
+//        lockerImageView.backgroundColor = .blue
         lockerImageView.tintColor = UIColor.systemPink
-        lockerImageView.contentMode = .scaleAspectFill
+        lockerImageView.contentMode = .scaleToFill
         lockerImageView.clipsToBounds = false
         return lockerImageView
     }()
@@ -72,8 +82,8 @@ class CollectionViewCell: GeminiCell {
         contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.CollectionViewCellBackground.rawValue)!)
         contentView.contentMode = .center
 
-        contentView.layer.cornerRadius = 20
 //        contentView.layer.borderWidth = 5.0
+        contentView.layer.cornerRadius = 20
         contentView.layer.borderColor = UIColor.black.cgColor
 
         contentView.layer.shadowColor = UIColor.black.cgColor
@@ -85,21 +95,24 @@ class CollectionViewCell: GeminiCell {
                                                         self.bounds,
                                                     cornerRadius:
                                                         self.contentView.layer.cornerRadius).cgPath
-        
-        lockerImageView.layer.shadowColor = UIColor.black.cgColor
-        lockerImageView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        lockerImageView.layer.shadowRadius = 0.5
-        lockerImageView.layer.shadowOpacity = 0.5
-        lockerImageView.layer.masksToBounds = false
-        lockerImageView.layer.shadowPath = UIBezierPath(roundedRect:
+                
+        myShadowView.layer.shadowColor = UIColor.black.cgColor
+        myShadowView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        myShadowView.layer.shadowRadius = 0.5
+        myShadowView.layer.shadowOpacity = 0.5
+        myShadowView.layer.masksToBounds = false
+        myShadowView.layer.shadowPath = UIBezierPath(roundedRect:
                                                         self.bounds,
                                                     cornerRadius:
                                                         self.contentView.layer.cornerRadius).cgPath
         
         contentView.addSubview(myLabel)
         contentView.addSubview(myImageView)
+        contentView.addSubview(myShadowView)
         contentView.addSubview(lockerImageView)
         contentView.addSubview(unlockButton)
+
+
     }
     
     required init?(coder: NSCoder) {
@@ -119,8 +132,13 @@ class CollectionViewCell: GeminiCell {
                                    width: contentView.frame.size.width-10,
                                    height: contentView.frame.size.height-50)
         
-        lockerImageView.frame = CGRect(x: 0,
+        myShadowView.frame = CGRect(x: 0,
                                    y: 0,
+                                   width: contentView.frame.size.width-10,
+                                   height: contentView.frame.size.height-50)
+        
+        lockerImageView.frame = CGRect(x: 0,
+                                       y: 0,
                                    width: contentView.frame.size.width/2,
                                    height: contentView.frame.size.height/2)
         
@@ -129,11 +147,18 @@ class CollectionViewCell: GeminiCell {
                                    width: 100,
                                    height: 44)
         
+        
+        
         NSLayoutConstraint.activate([
             unlockButton.bottomAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: -5),
             unlockButton.centerXAnchor.constraint(equalTo: myLabel.centerXAnchor),
             unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
             unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+            
+            lockerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            lockerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
+            lockerImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+            lockerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
         ])
         
         unlockButton.addTarget(self, action: #selector(unlockButtonTapped), for: .touchUpInside)
