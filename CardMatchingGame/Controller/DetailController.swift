@@ -18,13 +18,14 @@ class DetailController: UIViewController {
     override func loadView() {
         view = detailInterface.detailView
         view.backgroundColor = palette.imperialPrimer
+        detailInterface.backgroundImageView1.contentMode = .scaleAspectFit
         detailInterface.setupSubviews()
         detailInterface.setupConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
+//        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .white
     }
 
@@ -45,15 +46,30 @@ class DetailController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.isToolbarHidden = true
-        let zoomAnimation = AnimationType.zoom(scale: 0.2)
-        detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.5)
+//        navigationController?.isToolbarHidden = true
+//        let zoomAnimation = AnimationType.zoom(scale: 0.2)
+//        detailInterface.detailImageView.animate(animations: [zoomAnimation], duration: 0.5)
         detailInterface.detailImageView.pulsateSlow()
+        
+//        self.detailInterface.detailImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+//        self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: .infinity)
+//        self.detailInterface.detailImageView.alpha = 1
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.tintColor = .black
+        
+        UIView.animate(withDuration: 0.2, animations:  {
+//            self.detailInterface.detailImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+//            self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: .pi/2)
+//            self.detailInterface.detailImageView.alpha = 0
+            
+//            self.detailInterface.detailImageView.layoutIfNeeded()  //remove white flashing when animated
+        })
+        
+        UIView.animate(withDuration: 2, animations: {
+            
+        })
     }
     
     //MARK: - BackTapped:

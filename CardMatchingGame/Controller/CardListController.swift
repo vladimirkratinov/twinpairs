@@ -17,6 +17,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     let palette = Palette()
     var selectButton = UIBarButtonItem()
     var observer: NSKeyValueObservation?
+    var animationHasBeenShown = false
 
     static var selectedString: String = "Select" {
         didSet {
@@ -46,35 +47,16 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         let name = Properties.selectedSetName
         title = "\(name)"
         
-        //Hide Small Title when scroll down:
-//        self.observer = self.navigationController?.navigationBar.observe(\.frame, options: [.new], changeHandler: { (navigationBar, changes) in
-//                    if let height = changes.newValue?.height {
-//                        if height > 44 {
-//                            //Large Title
-//                            let name = Properties.selectedSetName
-//                            self.title = "\(name)"
-//                        } else {
-//                            //Small Title
-//                            self.title = ""
-//                        }
-//                    }
-//                })
-        
         var tabPanel = [UIBarButtonItem]()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
+        
         tabPanel.append(space)
         tabPanel.append(selectButton)
         tabPanel.append(space)
+        
         self.toolbarItems = tabPanel
-        
-        //gesture recognizer delegate
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
-//        navigationController?.navigationItem.largeTitleDisplayMode = .always
-        
-        navigationController?.navigationBar.tintColor = .black
-        
-        
+    
         navigationController?.toolbar.tintColor = .black
         navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
         navigationController?.toolbar.barTintColor = palette.darkMountainMeadow
@@ -138,22 +120,48 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.toolbar.isHidden = false
+        navigationController?.setToolbarHidden(false, animated: true)
+        
+//        navigationController?.navigationBar.isHidden = true                                                 //NAV BAR HERE:
+//        navigationController?.toolbar.isHidden = false
+        
+        
+        
+        if !animationHasBeenShown {
+            let fromAnimation = AnimationType.from(direction: .bottom, offset: 40)
+            collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
+            animationHasBeenShown = true
+        }
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        
         
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.setToolbarHidden(false, animated: true)
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
+//            self.navigationController?.setToolbarHidden(false, animated: true)
         }, completion: nil)
         
 //        navigationController?.isToolbarHidden = false
-        let fromAnimation = AnimationType.from(direction: .bottom, offset: 20)
-        collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.3)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        navigationController?.toolbar.isHidden = false
+//        navigationController?.toolbar.isHidden = false
     }
     
     //MARK: - SelectTapped:
@@ -270,15 +278,15 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
 
     if(velocity.y > 0) {
         //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
-        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(), animations: {
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)                       //NAV BAR HERE:
             self.navigationController?.setToolbarHidden(true, animated: true)
             print("Hide")
         }, completion: nil)
 
     } else {
-        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(), animations: {
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
             self.navigationController?.setToolbarHidden(false, animated: true)
             print("Unhide")
         }, completion: nil)

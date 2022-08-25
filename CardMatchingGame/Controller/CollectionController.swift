@@ -16,6 +16,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     let palette = Palette()
     var contentLoader = ContentLoader()
     let audioFX = AudioFX()
+    let collectionInterface = CollectionInterface()
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
@@ -27,7 +28,22 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         return backgroundImageView
     }()
     
-    var coinLabel: UILabel!
+    
+//    var coins: Int = Properties.coins {
+//        didSet {
+//            coinLabel.text = "🪙 \(coins)"
+//        }
+//    }
+//    
+//    var coinLabel: UILabel = {
+//        let coinLabel = UILabel()
+//        coinLabel.translatesAutoresizingMaskIntoConstraints = false
+//        coinLabel.textColor = UIColor.black
+//        coinLabel.textAlignment = .left
+//        coinLabel.text = "🪙 \(coins)"
+//        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
+//        return coinLabel
+//    }()
     
     override func loadView() {
         super.loadView()
@@ -37,9 +53,9 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
 //        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/5)-4)           //x8 horisontal
-        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+15)            //x6 horisontal
-        layout.minimumLineSpacing = -10           //default 5
-        layout.minimumInteritemSpacing = -5        //default 0
+        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+30)  //+15     //x6 horisontal
+        layout.minimumLineSpacing = 0           //default 5
+        layout.minimumInteritemSpacing = 0       //default 0
         
 //        horizontal x1
 //        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.height/2))
@@ -50,7 +66,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 //        layout.itemSize = CGSize(width: 150, height: 150)
         print(layout.itemSize)
 
-        
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
 
         guard let collectionView = collectionView else { return }
@@ -66,11 +81,18 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
  
-//        collectionView.frame = view.bounds
-        collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: (view.bounds.height))
+        collectionView.frame = view.bounds
+//        collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: (view.bounds.height))
         
         configureAnimation()
         view.addSubview(collectionView)
+        view.addSubview(coinLabel)
+        view.bringSubviewToFront(coinLabel)
+        
+        NSLayoutConstraint.activate([
+            coinLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            coinLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 5),
+        ])
     }
 
     override func viewDidLoad() {
@@ -79,9 +101,11 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 
         //Large Title:
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.isHidden = false
+        
+//        navigationController?.navigationBar.isHidden = true
+        
         //Gesture recognizer:
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
                 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,
@@ -115,14 +139,20 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.toolbar.isHidden = true
-        navigationController?.setToolbarHidden(true, animated: false)
+//        navigationController?.toolbar.isHidden = true
+//        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //enable gestures:
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
         navigationController?.toolbar.isHidden = true
         navigationController?.setToolbarHidden(true, animated: false)
+        
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()
@@ -132,7 +162,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+//        navigationController?.navigationBar.isHidden = false
+        
+//        navigationController?.toolbar.isHidden = true
+        navigationController?.setToolbarHidden(true, animated: true)
+//        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     //MARK: - InfoTapped:
@@ -222,7 +257,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         //PERFECT FIT CARDS:
         collectionView!.gemini
             .circleRotationAnimation()
-            .radius(800) // The radius of the circle
+            .radius(860) // The radius of the circle
             .rotateDirection(.anticlockwise) // Direction of rotation.
             .itemRotationEnabled(true) // Whether the item rotates or not.
                 

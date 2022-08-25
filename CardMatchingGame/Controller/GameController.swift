@@ -44,8 +44,6 @@ class GameController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         navigationController?.toolbar.isHidden = true
-        //disable gestures:
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         //Tap Gesture Settings:
         NotificationCenter.default.addObserver(self,
@@ -77,6 +75,9 @@ class GameController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //disable gestures:
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         //update Coins label:
         gameInterface.coins = Properties.coins
