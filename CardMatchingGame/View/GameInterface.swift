@@ -292,7 +292,7 @@ class GameInterface: UIView {
     lazy var muteVibrationButton: UIButton = {
         let muteVibrationButton = UIButton()
         let defaults = UserDefaults.standard
-        muteVibrationButton.alpha = 0.3
+        muteVibrationButton.alpha = 1
         muteVibrationButton.translatesAutoresizingMaskIntoConstraints = false
         muteVibrationButton.setTitle(" Mute ", for: .normal)
         muteVibrationButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)

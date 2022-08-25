@@ -37,6 +37,7 @@ class GameController: UIViewController {
         gameInterface.quitButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
+        gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -407,8 +408,10 @@ class GameController: UIViewController {
 //                    try? self.audioFX.playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
-                    HapticsManager.shared.vibrate(for: .success)
-                    
+                    if Properties.vibrationMutedSwitcher == false {
+                        HapticsManager.shared.vibrate(for: .success)
+                    }
+
                     //animation:
                     UIView.transition(with: Properties.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
                         Properties.activatedButtons.last?.alpha = 0.3
@@ -443,7 +446,10 @@ class GameController: UIViewController {
 //                    try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
-                    HapticsManager.shared.vibrate(for: .error)
+                    if Properties.vibrationMutedSwitcher == false {
+                        HapticsManager.shared.vibrate(for: .error)
+                    }
+                    
                     
                     //animations:
                     UIView.transition(with: Properties.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -523,6 +529,10 @@ class GameController: UIViewController {
     
     @objc func muteSoundTapped(_ sender: UIButton) {
         SettingController.muteSoundTapped(sender: sender)
+    }
+    
+    @objc func muteVibrationTapped(_ sender: UIButton) {
+        SettingController.muteVibrationTapped(sender: sender)
     }
     
     //MARK: - Dismiss Settings Veiw:
@@ -681,10 +691,19 @@ class GameController: UIViewController {
     
     func updateSettingsUIButtonsColor() {
         DispatchQueue.main.async {
-            self.menuInterface.muteMusicButton.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
-            self.menuInterface.muteSoundButton.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
-            self.gameInterface.muteMusicButton.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
-            self.gameInterface.muteSoundButton.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
+            let muteMusicColor =        Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            let muteSoundColor =        Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            let muteVibrationColor =    Properties.defaults.colorForKey(key: ColorKey.vibrationButton.rawValue)
+            
+            //Menu UI:
+            self.menuInterface.muteMusicButton.backgroundColor =        muteMusicColor ?? UIColor.systemPink
+            self.menuInterface.muteSoundButton.backgroundColor =        muteSoundColor ?? UIColor.systemPink
+            self.menuInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ?? UIColor.systemPink
+            
+            //Game UI:
+            self.gameInterface.muteMusicButton.backgroundColor =        muteMusicColor ?? UIColor.systemPink
+            self.gameInterface.muteSoundButton.backgroundColor =        muteSoundColor ?? UIColor.systemPink
+            self.gameInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ?? UIColor.systemPink
         }
     }
 }
