@@ -153,6 +153,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        navigationController?.toolbar.isHidden = false
     }
     
     //MARK: - SelectTapped:

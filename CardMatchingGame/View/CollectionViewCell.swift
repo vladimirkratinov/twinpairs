@@ -124,11 +124,6 @@ class CollectionViewCell: GeminiCell {
                                    width: contentView.frame.size.width/2,
                                    height: contentView.frame.size.height/2)
         
-//        unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
-//                                    y: contentView.frame.size.height/1.3,
-//                                   width: 100,
-//                                   height: 44)
-        
         unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
                                     y: contentView.frame.size.height/1.3,
                                    width: 100,
@@ -141,12 +136,11 @@ class CollectionViewCell: GeminiCell {
             unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
         ])
         
-        
         unlockButton.addTarget(self, action: #selector(unlockButtonTapped), for: .touchUpInside)
     }
     
     public func configure(label: String, image: UIImage) {
-        myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 25)
+        myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 20)
         myLabel.text = label
         myLabel.adjustsFontSizeToFitWidth = true
         myImageView.image = image

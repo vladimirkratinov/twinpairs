@@ -20,14 +20,58 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: ImageKey.LaunchScreen3.rawValue)
-        backgroundImageView.addBlurEffect()
+        backgroundImageView.image = UIImage(named: ImageKey.CollectionBackground.rawValue)
+//        backgroundImageView.addBlurEffect()
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()
     
     var coinLabel: UILabel!
+    
+    override func loadView() {
+        super.loadView()
+        //TESTING UI:
+
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/5)-4)           //x8 horisontal
+        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+15)            //x6 horisontal
+        layout.minimumLineSpacing = -10           //default 5
+        layout.minimumInteritemSpacing = -5        //default 0
+        
+//        horizontal x1
+//        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.height/2))
+        
+//        Horizontal x6
+//        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
+        
+//        layout.itemSize = CGSize(width: 150, height: 150)
+        print(layout.itemSize)
+
+        
+        collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
+
+        guard let collectionView = collectionView else { return }
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.isPagingEnabled = true
+        
+        collectionView.isScrollEnabled = true
+        collectionView.isUserInteractionEnabled = true
+        collectionView.alwaysBounceHorizontal = true
+        
+        collectionView.backgroundColor = palette.imperialPrimer
+        collectionView.backgroundView = backgroundImageView
+ 
+//        collectionView.frame = view.bounds
+        collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: (view.bounds.height))
+        
+        configureAnimation()
+        view.addSubview(collectionView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,42 +103,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 1
-        
-        //horizontal x1
-//        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.height/2))
-        
-        //Horizontal x6
-        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
-        print(layout.itemSize)
-        
-        collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        guard let collectionView = collectionView else { return }
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.frame = view.bounds
-        collectionView.backgroundColor = palette.imperialPrimer
-        collectionView.backgroundView = backgroundImageView
-        collectionView.isPagingEnabled = true               //stop scrolling
-//
-
-//        configureAnimation()
-        
-        view.addSubview(collectionView)
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         print("\(view.bounds.width) x \(view.bounds.height)")
- 
+
     }
     
     //MARK: - viewDidAppear:
@@ -102,10 +116,14 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.toolbar.isHidden = true
+        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.toolbar.isHidden = true
+        navigationController?.setToolbarHidden(true, animated: false)
+        
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()
         
@@ -181,9 +199,33 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     // Gemini Animation:
     func configureAnimation() {
+//        collectionView!.gemini
+//            .cubeAnimation()
+//                .cubeDegree(90)
+        
+//        collectionView!.gemini
+//            .cubeAnimation()
+//                .cubeDegree(30)
+        
+        //Looks fun (made a video)
+//        collectionView!.gemini
+//            .circleRotationAnimation()
+//            .radius(360)
+//            .rotateDirection(.clockwise)
+        
+//        collectionView!.gemini
+//            .circleRotationAnimation()
+//            .radius(-30)
+//            .rotateDirection(.clockwise)
+        
+        
+        //PERFECT FIT CARDS:
         collectionView!.gemini
-            .cubeAnimation()
-                .cubeDegree(90)
+            .circleRotationAnimation()
+            .radius(800) // The radius of the circle
+            .rotateDirection(.anticlockwise) // Direction of rotation.
+            .itemRotationEnabled(true) // Whether the item rotates or not.
+                
     }
     
     // Call animation function
@@ -245,19 +287,49 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
 //                print("inside function")
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
+                    
                     let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
-                    let ac = UIAlertController(title: "Unlock New Card Set", message: "Are you sure you want to open it for \(price)  coins?", preferredStyle: .alert)
+                    
+                    let ac = UIAlertController(title: "Unlock New Card Set",
+                                               message: "Are you sure you want to open it for \(price)  coins?",
+                                               preferredStyle: .alert)
+                    
                     let defaultAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
-                        cell.lockerImageView.isHidden = true
-                        cell.unlockButton.isHidden = true
+                        
+                        //prepare label before animation
                         cell.myLabel.isHidden = false
-                        cell.myImageView.alpha = 1
+                        cell.myLabel.alpha = 0
+                        
+                        //animation block:
+                        UIView.animate(withDuration: 1.0, animations: { () -> Void in
+                            cell.myImageView.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.1)
+                            cell.unlockButton.layer.transform = CATransform3DMakeTranslation(0, 80, 0)
+                            cell.lockerImageView.alpha = 0
+                            cell.myLabel.alpha = 1
+                            cell.myImageView.alpha = 1
+                        })
+                        
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            //bounce back:
+                            UIView.animate(withDuration: 0.5) {
+                                cell.myImageView.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                            }
+                            //hide all views that already were animated:
+                            cell.myLabel.isHidden = false
+                            cell.lockerImageView.isHidden = true
+                            cell.unlockButton.isHidden = true
+                            
+                        }
+                        
+                        //default values:
+//                        cell.lockerImageView.isHidden = true
+//                        cell.unlockButton.isHidden = true
+//                        cell.myLabel.isHidden = false
+//                        cell.myImageView.alpha = 1
+                        
                         //change property in Locker Class:
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = false
-                        
-                        
-//                        Properties.unlockedList[indexPath.item] = false
-                        
                         
                         //UserDefaults 2 version:
                         let defaults = UserDefaults.standard
@@ -267,14 +339,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                         defaults.set(Properties.unlockedList, forKey: "unlockedList")
                         print(defaults.array(forKey: "unlockedList") as Any)
                         print(Properties.unlockedList)
-                        
-                        
-                        
-                        
-                        //UserDefaults 1 version:
-//                        LockerModel.saveData(index: indexPath.item)
-//                        print(Properties.collectionOfLockedSets[indexPath.item])
-                        
+
                     }
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = true
