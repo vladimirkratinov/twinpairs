@@ -35,66 +35,38 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: ImageKey.CardListBackground.rawValue)
-        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.alpha = 0.8
+//        backgroundImageView.layer.zPosition = -1
+        backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
+        backgroundImageView.contentMode = .scaleToFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let name = Properties.selectedSetName
-        title = "\(name)"
         
-        var tabPanel = [UIBarButtonItem]()
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
+        view.backgroundColor = palette.imperialPrimer
+//        let name = Properties.selectedSetName
+//        title = "\(name)"
+//
         
-        tabPanel.append(space)
-        tabPanel.append(selectButton)
-        tabPanel.append(space)
-        
-        self.toolbarItems = tabPanel
-    
         navigationController?.toolbar.tintColor = .black
-        navigationController?.toolbar.sizeThatFits(CGSize(width: 150, height: 220))
-        navigationController?.toolbar.barTintColor = palette.darkMountainMeadow
-                
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
-//                                         style: .plain,
-//                                         target: self,
-//                                         action: #selector(backTapped))
+        navigationController?.toolbar.barTintColor = palette.wildCarribeanGrean
+        navigationController?.toolbar.layer.zPosition = 1
         
-        navigationItem.leftBarButtonItem = backButton
-        
-        //transparent NavigationBar:
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
-        
-        //transparent Toolbar:
-//        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
-//        self.navigationController?.toolbar.shadowImage(forToolbarPosition: .bottom)
-//        self.navigationController?.toolbar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-        
-        orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
-        print(orderedNoDuplicates.count)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
 //        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = -20
+        layout.minimumInteritemSpacing = -20
         
         //vertical View x6:
-//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
+        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
         
         //horisontal View x6:
-        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
+//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
         
         //horisontal View x4:
 //        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/3)-4)
@@ -108,10 +80,96 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.frame = view.bounds
         collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = false              //stop scrollable
+        collectionView.isPagingEnabled = false                      //stop scrollable
+        collectionView.backgroundColor = .clear
+        collectionView.layer.zPosition = 0
+//        collectionView.backgroundView = backgroundImageView
         
         configureAnimation()
+//        backgroundImageView.addBlurEffect()
+        
+        var tabPanel = [UIBarButtonItem]()
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        //image:
+//        selectButton = UIBarButtonItem(image: UIImage(named: ImageKey.selectButton.rawValue), style: .plain, target: self, action: #selector(selectTapped))
+        
+        //title:
+        selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
+        
+        tabPanel.append(space)
+        tabPanel.append(selectButton)
+        tabPanel.append(space)
+        
+        toolbarItems = tabPanel
+    
+        
+                
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+////        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+////                                         style: .plain,
+////                                         target: self,
+////                                         action: #selector(backTapped))
+//
+//        navigationItem.leftBarButtonItem = backButton
+        
+        //transparent NavigationBar:
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
+        
+        //transparent Toolbar:
+//        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
+//        self.navigationController?.toolbar.shadowImage(forToolbarPosition: .bottom)
+//        self.navigationController?.toolbar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
+        
+        orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
+        print(orderedNoDuplicates.count)
+        
+        view.addSubview(backgroundImageView)
         view.addSubview(collectionView)
+//        view.bringSubviewToFront(collectionView)
+//        view.sendSubviewToBack(backgroundImageView)
+        
+//        navigationController?.toolbar.layer.zPosition = 1
+//        navigationController?.toolbar.alpha = 1
+//        navigationController?.toolbar.isTranslucent = false
+        
+//        view.bringSubviewToFront(collectionView)
+//        view.sendSubviewToBack(backgroundImageView)
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        NSLayoutConstraint.activate([
+//            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            
+//            backgroundImageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+//            backgroundImageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+//            backgroundImageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+//            backgroundImageView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            
+            
+            
+//            backgroundImageView.widthAnchor.constraint(equalToConstant: 150),
+//            backgroundImageView.heightAnchor.constraint(equalToConstant: 150)
+        ])
     }
     
     //MARK: - ViewDidAppear:
@@ -122,46 +180,38 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         navigationController?.setToolbarHidden(false, animated: true)
         
-//        navigationController?.navigationBar.isHidden = true                                                 //NAV BAR HERE:
-//        navigationController?.toolbar.isHidden = false
-        
-        
-        
+        //slide animation only after CollectionView:
         if !animationHasBeenShown {
             let fromAnimation = AnimationType.from(direction: .bottom, offset: 40)
+//            collectionView?.backgroundView!.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             animationHasBeenShown = true
         }
         
-        navigationController?.setToolbarHidden(false, animated: true)
-
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        
-        
+
+        collectionView?.animateVisibleCells()
         
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
 //            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
 //            self.navigationController?.setToolbarHidden(false, animated: true)
         }, completion: nil)
-        
-//        navigationController?.isToolbarHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
+        navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        navigationController?.toolbar.isHidden = false
     }
     
     //MARK: - SelectTapped:
@@ -181,7 +231,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @objc func backTapped(sender: UIBarButtonItem) {
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         UIView.animate(withDuration: 1, animations:  {
             self.collectionView?.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -209,10 +259,22 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // Configure animation and properties
         func configureAnimation() {
+//            collectionView?.gemini
+//                .rollRotationAnimation()
+//                    .degree(45)
+//                    .rollEffect(.rollUp)
+            
+            //that's nice:
             collectionView?.gemini
-                .rollRotationAnimation()
-                    .degree(45)
-                    .rollEffect(.rollUp)
+                .yawRotationAnimation()
+//                .degree(180)
+                .yawEffect(.yawDown)
+            
+//            collectionView.gemini
+//                .circleRotationAnimation()
+//                .radius(800)
+//                .rotateDirection(.anticlockwise)
+//                .itemRotationEnabled(true)
         }
 
         // Call animation function
@@ -220,10 +282,10 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             collectionView?.animateVisibleCells()
             
             //Hide small title when scroll down:
-            let heightForCollapsedNav = UINavigationController().navigationBar.frame.size.height
-            let navHeight = navigationController?.navigationBar.frame.size.height
-            let name = Properties.selectedSetName
-            navigationController?.navigationBar.topItem?.title = navHeight ?? 44 <= heightForCollapsedNav  ? "" : "\(name)"
+//            let heightForCollapsedNav = UINavigationController().navigationBar.frame.size.height
+//            let navHeight = navigationController?.navigationBar.frame.size.height
+//            let name = Properties.selectedSetName
+//            navigationController?.navigationBar.topItem?.title = navHeight ?? 44 <= heightForCollapsedNav  ? "" : "\(name)"
         }
             
     //adapt animation Immediately
@@ -258,7 +320,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
+        audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "DetailController") as? DetailController else { return }
         

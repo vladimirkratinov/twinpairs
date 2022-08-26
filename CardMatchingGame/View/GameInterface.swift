@@ -213,7 +213,7 @@ class GameInterface: UIView {
         settingsView.alpha = 1
         settingsView.layer.borderWidth = 5
         settingsView.layer.cornerRadius = 20
-        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.SettingsBackground.rawValue)!)
+        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
     }()
@@ -563,27 +563,35 @@ class GameInterface: UIView {
     
     //MARK: - Set Gradient Bachround:
     
-    func setGradientBackground() {
+    func setGradientBackground1() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gameView.bounds
         gradientLayer.colors = [
-            
-//            UIColor.systemPink.cgColor,
-//            UIColor.systemOrange.cgColor,
-//            UIColor.systemRed.cgColor
-            
-//            UIColor.systemGreen.cgColor,
-//            UIColor.systemTeal.cgColor,
-//            UIColor.systemBrown.cgColor
-            
-//            UIColor.systemBlue.cgColor,
-//            UIColor.systemGray.cgColor,
-//            UIColor.systemBrown.cgColor,
-            
             palette.wildCarribeanGrean.cgColor,
             palette.darkMountainMeadow.cgColor,
             palette.fuelTown.cgColor,
-            
+        ]
+        gameView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setGradientBackground2() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gameView.bounds
+        gradientLayer.colors = [
+            UIColor.systemPink.cgColor,
+            UIColor.systemOrange.cgColor,
+            UIColor.systemRed.cgColor,
+        ]
+        gameView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setGradientBackground3() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gameView.bounds
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemGray.cgColor,
+            UIColor.systemBrown.cgColor,
         ]
         gameView.layer.insertSublayer(gradientLayer, at: 0)
     }

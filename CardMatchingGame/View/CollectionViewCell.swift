@@ -79,7 +79,7 @@ class CollectionViewCell: GeminiCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.clipsToBounds = true
-        contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.CollectionViewCellBackground.rawValue)!)
+        contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood2.rawValue)!)
         contentView.contentMode = .center
 
 //        contentView.layer.borderWidth = 5.0

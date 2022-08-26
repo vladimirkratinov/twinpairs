@@ -20,8 +20,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: ImageKey.CollectionBackground.rawValue)
+        backgroundImageView.alpha = 0.8
+        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
 //        backgroundImageView.addBlurEffect()
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,15 +35,15 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 //        }
 //    }
 //    
-//    var coinLabel: UILabel = {
-//        let coinLabel = UILabel()
-//        coinLabel.translatesAutoresizingMaskIntoConstraints = false
-//        coinLabel.textColor = UIColor.black
-//        coinLabel.textAlignment = .left
-//        coinLabel.text = "🪙 \(coins)"
-//        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
-//        return coinLabel
-//    }()
+    var coinLabel: UILabel = {
+        let coinLabel = UILabel()
+        coinLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.textColor = UIColor.black
+        coinLabel.textAlignment = .left
+        coinLabel.text = "🪙 \(Properties.coins)"
+        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
+        return coinLabel
+    }()
     
     override func loadView() {
         super.loadView()
@@ -88,6 +88,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         view.addSubview(collectionView)
         view.addSubview(coinLabel)
         view.bringSubviewToFront(coinLabel)
+        view.backgroundColor = palette.imperialPrimer
         
         NSLayoutConstraint.activate([
             coinLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -97,30 +98,24 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collections"
-
-        //Large Title:
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-//        navigationController?.navigationBar.isHidden = true
         
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
                 
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(backTapped))
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle.fill"),
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(infoTapped))
+//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+//                                         style: .plain,
+//                                         target: self,
+//                                         action: #selector(backTapped))
+//        let rightItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle.fill"),
+//                                        style: .plain,
+//                                        target: self,
+//                                        action: #selector(infoTapped))
         
-        navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = rightItem
+//        navigationItem.leftBarButtonItem = backButton
+//        navigationItem.rightBarButtonItem = rightItem
         
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
+//        navigationController?.navigationBar.tintColor = .black
+//        navigationController?.navigationBar.layer.borderColor = UIColor.black.cgColor
         
         //transparent NavigationBar:
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -156,17 +151,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()
-        
         print(Properties.unlockedList)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.navigationBar.isHidden = false
-        
-//        navigationController?.toolbar.isHidden = true
         navigationController?.setToolbarHidden(true, animated: true)
-//        navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -205,9 +195,9 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     //MARK: - BackTapped:
     
-    @objc func backTapped(_ sender: UIBarButtonItem) {
+//    @objc func backTapped(_ sender: UIBarButtonItem) {
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
 //        UIView.animate(withDuration: 1, animations:  {
 //            self.collectionView?.isPagingEnabled = false
@@ -219,16 +209,16 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 //
 //        })
 
-        let transition = CATransition()
-        transition.duration = 0.2
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.fade
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.navigationController?.view.layer.add(transition, forKey: nil)
-            self.navigationController?.popViewController(animated: false)
-        }
-    }
+//        let transition = CATransition()
+//        transition.duration = 0.2
+//        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+//        transition.type = CATransitionType.fade
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            self.navigationController?.view.layer.add(transition, forKey: nil)
+//            self.navigationController?.popViewController(animated: false)
+//        }
+//    }
     
     //MARK: - Configure Animations:
     
@@ -260,7 +250,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             .radius(860) // The radius of the circle
             .rotateDirection(.anticlockwise) // Direction of rotation.
             .itemRotationEnabled(true) // Whether the item rotates or not.
-                
     }
     
     // Call animation function
@@ -276,7 +265,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Properties.listOfSets.count
-        
     }
     
     //MARK: - cellForItemAt
@@ -294,7 +282,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             //price button color & mechanics:
             if price > Properties.coins {
                 cell.unlockButton.backgroundColor = .systemRed
-                cell.unlockButton.alpha = 0.5
+                cell.unlockButton.alpha = 1
                 cell.unlockButton.isEnabled = false
             } else {
                 cell.unlockButton.backgroundColor = .green
@@ -333,23 +321,49 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             print("Button pressed in cell: \(indexPath.item)")
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
-//                print("inside function")
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
                     
                     let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
                     
-                    let ac = UIAlertController(title: "Unlock New Card Set",
-                                               message: "Are you sure you want to open it for \(price)  coins?",
-                                               preferredStyle: .alert)
+//                    let ac = UIAlertController(title: "Unlock",
+//                                               message: "Open it for \(price)  coins?",
+//                                               preferredStyle: .alert)
+                    
+                    //attributed AlertController:
+                    let titleAttributes = [
+                        NSAttributedString.Key.font: UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)!,
+                        NSAttributedString.Key.foregroundColor: UIColor.black,
+                    ]
+                    
+                      let titleString = NSAttributedString(string: "Unlock", attributes: titleAttributes)
+                    
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.alignment = .center
+                    
+                    let messageText = NSAttributedString(
+                        string: "Open it for \(price) coins?",
+                        attributes: [
+                            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                            NSAttributedString.Key.foregroundColor : UIColor.red,
+                            NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 16)!,
+                        ]
+                    )
+                    
+                    let ac = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                    ac.setValue(titleString, forKey: "attributedTitle")
+                    ac.setValue(messageText, forKey: "attributedMessage")
                     
                     //YES button:
-                    let defaultAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
+                    let defaultAction = UIAlertAction(title: "Open", style: .destructive) { _ in
                         
                         //reduce price from user coins:
                         Properties.coins -= price
                         print("cutted \(price) from \(Properties.coins) coins!")
                         Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
                         print("now you have \(Properties.coins) coins!")
+                        
+                        //update Coins label:
+                        self.coinLabel.text = "🪙 \(Properties.coins)"
                         
                         //prepare label and shadow layer before animation
                         cell.myLabel.isHidden = false
@@ -373,29 +387,18 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
                             cell.lockerImageView.alpha = 0
                             cell.lockerImageView.shake()
                             cell.lockerImageView.rotate(angle: 45)
-                            
                         })
-                        
-                        
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             //bounce back:
                             UIView.animate(withDuration: 0.5) {
                                 cell.myImageView.layer.transform = CATransform3DMakeScale(1, 1, 1)
-                                
                             }
                             //hide all views that already were animated:
-                            
                             cell.myLabel.isHidden = false
                             cell.lockerImageView.isHidden = true
                             cell.unlockButton.isHidden = true
-                            
                         }
-                        
-                        //default values:
-//                        cell.lockerImageView.isHidden = true
-//                        cell.unlockButton.isHidden = true
-//                        cell.myLabel.isHidden = false
-//                        cell.myImageView.alpha = 1
                         
                         //change property in Locker Class:
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = false
@@ -429,7 +432,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell: \(indexPath)")
         //audioFX:
-        try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
+        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }

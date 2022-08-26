@@ -29,7 +29,6 @@ class GameController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
-        
         gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         gameInterface.backToMenuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         
@@ -38,6 +37,10 @@ class GameController: UIViewController {
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidLoad() {
@@ -51,7 +54,7 @@ class GameController: UIViewController {
                                                name: NSNotification.Name("CloseView"),
                                                object: nil)
         //gesture Recognizer:
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(closeView(_:)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(closeView))
         view.addGestureRecognizer(gesture)
         self.gestureRecognizer = gesture
         
@@ -87,7 +90,7 @@ class GameController: UIViewController {
         gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
         
         //setup gradient Background:
-        gameInterface.setGradientBackground()
+        gameInterface.setGradientBackground1()
         
         //updateSettingsUIButtonsColor:
         updateSettingsUIButtonsColor()
@@ -182,7 +185,6 @@ class GameController: UIViewController {
         prop.timer.invalidate()
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.gameOver.rawValue, isMuted: Properties.soundMutedSwitcher)
-//        try? audioFX.playGameStateFX(file: AudioFileKey.gameOver.rawValue, type: AudioTypeKey.wav.rawValue)
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.gameOverLabel.alpha = 1
@@ -243,7 +245,6 @@ class GameController: UIViewController {
         
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
         
 //        Properties.activatedCards.removeAll()
 //        Properties.activatedButtons.removeAll()
@@ -270,7 +271,7 @@ class GameController: UIViewController {
             //reset cards:
             for card in Properties.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
-                    let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
+                    let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
                     card.setBackgroundImage(backgroundImage, for: .normal)
                     card.alpha = 1
                     card.isEnabled = true
@@ -342,7 +343,7 @@ class GameController: UIViewController {
             //MARK: - Flip Back
             
             //flip back:
-            let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
+            let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
             sender.setBackgroundImage(backgroundImage, for: .normal)
             
             //flip back animation:
@@ -458,7 +459,7 @@ class GameController: UIViewController {
                     UIView.transition(with: Properties.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //show card cover:
-                    let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
+                    let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
                     Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
                     Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
@@ -538,12 +539,11 @@ class GameController: UIViewController {
     
     //MARK: - Dismiss Settings Veiw:
     
+    //We need to have tapped outside of view 2
     @objc private func closeView(_ tapGestureRecognizer: UITapGestureRecognizer) {
         let location = tapGestureRecognizer.location(in: gameInterface.settingsView)
         guard gameInterface.settingsView.isHidden == false,
-              !gameInterface.settingsView.bounds.contains(location) else {  //We need to have tapped outside of view 2
-            return
-        }
+              !gameInterface.settingsView.bounds.contains(location) else { return }
         gameInterface.settingsView.isHidden = true
         gameInterface.buttonsView.alpha = 1
         gameInterface.buttonsView.isUserInteractionEnabled = true
@@ -590,7 +590,7 @@ class GameController: UIViewController {
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
-                let backgroundImage = UIImage(named: ImageKey.MenuBackground.rawValue)
+                let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
                 cardButton.setTitleColor(prop.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)

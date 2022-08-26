@@ -12,16 +12,26 @@ enum CoinsKey: String {
 }
 
 enum ImageKey: String {
-    case MenuBackground = "Back1Large"
-    case SettingsBackground = "wood3"
-    case CollectionBackground = "envelope1"
-    case CollectionViewCellBackground = "wood2"
-    case CardListBackground = "wood5"
-    case DetailBackground = "envelope3"
+    case wood1 = "wood1"
+    case wood2 = "wood2"
+    case wood3 = "wood3"
+    case wood4 = "wood4"
+    case wood5 = "wood5"
+    
+    case stampBackground = "background"
     case SettingsButton = "settings2"
+    case selectButton = "selectButton"
+    
+    case envelope1 = "envelope1"
+    case envelope2 = "envelope2"
+    case envelope3 = "envelope3"
+    case envelope4Large = "envelope4Large"
+    case envelope4Medium = "envelope4Medium"
+    
     case LaunchScreen1 = "LaunchScreen1"
     case LaunchScreen2 = "LaunchScreen2"
     case LaunchScreen3 = "LaunchScreen3"
+    
     case lock1 = "lock1"
     case lock2 = "lock2"
     case lock3 = "lock3"

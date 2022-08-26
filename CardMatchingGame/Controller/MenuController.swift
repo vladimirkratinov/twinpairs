@@ -74,6 +74,8 @@ class MenuController: UIViewController {
         menuInterface.setGradientBackground()
         //animation:
         menuInterface.backgroundImageView.pulsateSlow()
+        //update Coins label:
+        menuInterface.coins = Properties.coins
         
         navigationController?.navigationBar.isHidden = true
         navigationController?.toolbar.isHidden = true
@@ -82,8 +84,7 @@ class MenuController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //update Coins label:
-        menuInterface.coins = Properties.coins
+        
         
         //updateSettingsUIButtonsColor:
         updateSettingsUIButtonsColor()
@@ -144,7 +145,7 @@ class MenuController: UIViewController {
         //add Coin:
         menuInterface.coins += 2
         Properties.coins += 2
-        gameInterface.coins += 2
+//        gameInterface.coins += 2
         
         Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
         

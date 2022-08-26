@@ -30,7 +30,7 @@ class MenuInterface: UIView {
         let coverImageView = UIImageView(frame: .zero)
         coverImageView.isHidden = true
         coverImageView.alpha = 1
-        coverImageView.image = UIImage(named: ImageKey.MenuBackground.rawValue)
+        coverImageView.image = UIImage(named: ImageKey.envelope4Large.rawValue)
         coverImageView.contentMode = .scaleAspectFill
         coverImageView.translatesAutoresizingMaskIntoConstraints = false
         return coverImageView
@@ -240,7 +240,7 @@ class MenuInterface: UIView {
         settingsView.alpha = 1
         settingsView.layer.borderWidth = 5
         settingsView.layer.cornerRadius = 20
-        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.SettingsBackground.rawValue)!)
+        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
     }()
