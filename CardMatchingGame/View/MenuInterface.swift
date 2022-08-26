@@ -435,7 +435,7 @@ class MenuInterface: UIView {
             coinLabel.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor),
             coinLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor, constant: 5),
             
-            titleLabel.topAnchor.constraint(lessThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 120),
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 50),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             
             playButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
@@ -472,6 +472,7 @@ class MenuInterface: UIView {
             addCoinButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             addCoinButton.heightAnchor.constraint(equalToConstant: 50),
             addCoinButton.widthAnchor.constraint(equalToConstant: 120),
+            addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: menuView.bottomAnchor, constant: -170),
             
             settingsButton.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor, constant: -10),
             settingsButton.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),

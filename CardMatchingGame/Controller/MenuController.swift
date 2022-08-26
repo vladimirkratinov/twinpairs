@@ -126,11 +126,12 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //reset Defaults:
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             UserDefaults.resetDefaults()
             Properties.coins = 0
-            
-            self.menuInterface.coinLabel.update { $0.text = "Reset" }
+            menuInterface.coins = 0
+            gameInterface.coins = 0
+            menuInterface.coinLabel.update { $0.text = "Reset" }
         }
         print("Defaults RESETED!")
     }
@@ -143,9 +144,9 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //add Coin:
-        menuInterface.coins += 2
-        Properties.coins += 2
-//        gameInterface.coins += 2
+        menuInterface.coins += 60
+        Properties.coins += 60
+        gameInterface.coins += 60
         
         Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
         

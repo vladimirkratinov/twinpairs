@@ -14,6 +14,7 @@ protocol CollectionViewCellDelegate: AnyObject {
 
 class CollectionViewCell: GeminiCell {
     
+    weak var delegate: CollectionViewCellDelegate?
     static let identifier = "CollectionViewCell"
     let palette = Palette()
     
@@ -73,8 +74,6 @@ class CollectionViewCell: GeminiCell {
         label.textAlignment = .center
         return label
     }()
-    
-    weak var delegate: CollectionViewCellDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -111,8 +110,6 @@ class CollectionViewCell: GeminiCell {
         contentView.addSubview(myShadowView)
         contentView.addSubview(lockerImageView)
         contentView.addSubview(unlockButton)
-
-
     }
     
     required init?(coder: NSCoder) {
@@ -146,8 +143,6 @@ class CollectionViewCell: GeminiCell {
                                     y: contentView.frame.size.height/1.3,
                                    width: 100,
                                    height: 44)
-        
-        
         
         NSLayoutConstraint.activate([
             unlockButton.bottomAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: -5),

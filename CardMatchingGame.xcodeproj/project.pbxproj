@@ -22,6 +22,7 @@
 		F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */; };
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
+		F72ED08628B9345F007FE584 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ED08528B9345F007FE584 /* AlertController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F764E17428B478BE00F4575F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingController.swift */; };
@@ -67,6 +68,7 @@
 		F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
+		F72ED08528B9345F007FE584 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F764E17328B478BE00F4575F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */,
 				F764E17328B478BE00F4575F /* SettingController.swift */,
 				F7F2343728B5B609005C75A4 /* LockerModel.swift */,
+				F72ED08528B9345F007FE584 /* AlertController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				F7F2343828B5B609005C75A4 /* LockerModel.swift in Sources */,
 				F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */,
 				F7273DF328B8316A00B37F11 /* CollectionInterface.swift in Sources */,
+				F72ED08628B9345F007FE584 /* AlertController.swift in Sources */,
 				F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */,
 				F7F49CC228B0272D0064A069 /* ContentLoader.swift in Sources */,
 				F781AD7828931921002993E7 /* AudioFX.swift in Sources */,
