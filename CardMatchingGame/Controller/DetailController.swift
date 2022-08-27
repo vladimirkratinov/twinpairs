@@ -55,11 +55,6 @@ class DetailController: UIViewController {
             detailInterface.detailImageButton.setImage(image, for: .normal)
             detailInterface.backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
         }
-        
-//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backTapped))
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-//        let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backTapped))
-//        navigationItem.leftBarButtonItem = backButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,8 +94,8 @@ class DetailController: UIViewController {
             detailInterface.detailLabel.alpha = 0
             isTapped = true
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + prop.flipAnimationTime) {
-                UIView.animate(withDuration: 0.3, animations: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                UIView.animate(withDuration: 0.5, animations: {
                     self.detailInterface.titleLabel.alpha = 1
                     self.detailInterface.detailLabel.alpha = 1
                 })
@@ -128,23 +123,6 @@ class DetailController: UIViewController {
             isTapped = false
         }
     }
-    
-    //MARK: - BackTapped:
-    
-//    @objc func backTapped(sender: UIBarButtonItem) {
-//        //audioFX:
-//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
-//
-//        UIView.animate(withDuration: 0.5, animations:  {
-//            self.detailInterface.detailImageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-//            self.detailInterface.detailImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-//            self.detailInterface.detailImageView.alpha = 0
-//            self.detailInterface.detailImageView.layoutIfNeeded()  //remove white flashing when animated
-//        })
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-//            self.navigationController?.popViewController(animated: false)
-//        }
-//    }
     
     //MARK: - Dismiss Details View:
     

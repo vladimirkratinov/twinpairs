@@ -60,159 +60,61 @@ class MenuInterface: UIView {
         coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
         return coinLabel
     }()
-    
-    
+
+    //MARK: - Buttons:
     
     lazy var playButton: UIButton = {
         let playButton = UIButton()
-        playButton.translatesAutoresizingMaskIntoConstraints = false
         playButton.setTitle("Classic", for: .normal)
-        playButton.tag = 1
-        playButton.setTitleColor(UIColor.black, for: .normal)
-        playButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        playButton.layer.borderWidth = 3
-        playButton.layer.cornerRadius = 10
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        playButton.layer.shadowRadius = 1
-        playButton.layer.shadowOpacity = 1.0
-        playButton.isUserInteractionEnabled = true
-        playButton.backgroundColor = palette.wildCarribeanGrean
-        playButton.layer.shouldRasterize = true
-        playButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(playButton)
         return playButton
     }()
     
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
-        timeModeButton.translatesAutoresizingMaskIntoConstraints = false
-        timeModeButton.alpha = 0.5
-        timeModeButton.tag = 1
         timeModeButton.setTitle("Time", for: .normal)
-        timeModeButton.setTitleColor(UIColor.black, for: .normal)
-        timeModeButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        timeModeButton.layer.borderWidth = 3
-        timeModeButton.layer.cornerRadius = 10
-        timeModeButton.layer.shadowColor = UIColor.black.cgColor
-        timeModeButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        timeModeButton.layer.shadowRadius = 1
-        timeModeButton.layer.shadowOpacity = 1.0
-        timeModeButton.isUserInteractionEnabled = true
-        timeModeButton.isEnabled = false
-        timeModeButton.backgroundColor = UIColor.systemOrange
-        timeModeButton.layer.shouldRasterize = true
-        timeModeButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(timeModeButton)
+        timeModeButton.alpha = 0.3
         return timeModeButton
     }()
     
     lazy var hardcoreModeButton: UIButton = {
         let hardcoreModeButton = UIButton()
-        hardcoreModeButton.translatesAutoresizingMaskIntoConstraints = false
-        hardcoreModeButton.alpha = 0.5
-        hardcoreModeButton.tag = 1
         hardcoreModeButton.setTitle("Hardcore", for: .normal)
-        hardcoreModeButton.setTitleColor(UIColor.black, for: .normal)
-        hardcoreModeButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        hardcoreModeButton.layer.borderWidth = 3
-        hardcoreModeButton.layer.cornerRadius = 10
-        hardcoreModeButton.layer.shadowColor = UIColor.black.cgColor
-        hardcoreModeButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        hardcoreModeButton.layer.shadowRadius = 1
-        hardcoreModeButton.layer.shadowOpacity = 1.0
-        hardcoreModeButton.isUserInteractionEnabled = true
-        hardcoreModeButton.isEnabled = false
-        hardcoreModeButton.backgroundColor = UIColor.systemRed
-        hardcoreModeButton.layer.shouldRasterize = true
-        hardcoreModeButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(hardcoreModeButton)
+        hardcoreModeButton.alpha = 0.3
         return hardcoreModeButton
     }()
     
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()
-        collectionButton.translatesAutoresizingMaskIntoConstraints = false
-        collectionButton.alpha = 1
-        collectionButton.tag = 1
         collectionButton.setTitle("Collection", for: .normal)
-        collectionButton.setTitleColor(UIColor.black, for: .normal)
-        collectionButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        collectionButton.layer.borderWidth = 3
-        collectionButton.layer.cornerRadius = 10
-        collectionButton.layer.shadowColor = UIColor.black.cgColor
-        collectionButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        collectionButton.layer.shadowRadius = 1
-        collectionButton.layer.shadowOpacity = 1.0
-        collectionButton.isUserInteractionEnabled = true
-        collectionButton.isEnabled = true
-        collectionButton.backgroundColor = UIColor.systemTeal
-        collectionButton.layer.shouldRasterize = true
-        collectionButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(collectionButton)
+        collectionButton.backgroundColor = palette.cyanite
         return collectionButton
     }()
     
     lazy var challengesButton: UIButton = {
         let challengesButton = UIButton()
-        challengesButton.translatesAutoresizingMaskIntoConstraints = false
-        challengesButton.alpha = 0.5
-        challengesButton.tag = 1
         challengesButton.setTitle("Challenges", for: .normal)
-        challengesButton.setTitleColor(UIColor.black, for: .normal)
-        challengesButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        challengesButton.layer.borderWidth = 3
-        challengesButton.layer.cornerRadius = 10
-        challengesButton.layer.shadowColor = UIColor.black.cgColor
-        challengesButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        challengesButton.layer.shadowRadius = 1
-        challengesButton.layer.shadowOpacity = 1.0
-        challengesButton.isUserInteractionEnabled = true
-        challengesButton.isEnabled = false
-        challengesButton.backgroundColor = UIColor.systemTeal
-        challengesButton.layer.shouldRasterize = true
-        challengesButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(challengesButton)
+        challengesButton.alpha = 0.3
         return challengesButton
     }()
     
     lazy var resetButton: UIButton = {
        let resetButton = UIButton()
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        resetButton.alpha = 1
-        resetButton.tag = 1
-        resetButton.isUserInteractionEnabled = true
-        resetButton.isEnabled = true
-        resetButton.setTitle(" RESET (ADMIN) ", for: .normal)
-        resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        resetButton.setTitleColor(UIColor.black, for: .normal)
-        resetButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        resetButton.layer.borderWidth = 3
-        resetButton.layer.cornerRadius = 10
-        resetButton.layer.shadowColor = UIColor.black.cgColor
-        resetButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        resetButton.layer.shadowRadius = 1
-        resetButton.layer.shadowOpacity = 1.0
-        resetButton.backgroundColor = UIColor.red
-        resetButton.layer.shouldRasterize = true
-        resetButton.layer.rasterizationScale = UIScreen.main.scale
+        resetButton.setTitle(" ⚠️ RESET ", for: .normal)
+        setupAppearence(resetButton)
+        resetButton.backgroundColor = .red
         return resetButton
     }()
     
     lazy var addCoinButton: UIButton = {
        let addCoinButton = UIButton()
-        addCoinButton.translatesAutoresizingMaskIntoConstraints = false
-        addCoinButton.alpha = 1
-        addCoinButton.tag = 1
-        addCoinButton.isUserInteractionEnabled = true
-        addCoinButton.isEnabled = true
         addCoinButton.setTitle("🪙 Add Coin", for: .normal)
-        addCoinButton.setTitleColor(UIColor.black, for: .normal)
-        addCoinButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        addCoinButton.layer.borderWidth = 3
-        addCoinButton.layer.cornerRadius = 10
-        addCoinButton.layer.shadowColor = UIColor.black.cgColor
-        addCoinButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        addCoinButton.layer.shadowRadius = 1
-        addCoinButton.layer.shadowOpacity = 1.0
-        addCoinButton.backgroundColor = UIColor.green
-        addCoinButton.layer.shouldRasterize = true
-        addCoinButton.layer.rasterizationScale = UIScreen.main.scale
+        setupAppearence(addCoinButton)
+        addCoinButton.backgroundColor = .green
         return addCoinButton
     }()
     
@@ -274,109 +176,43 @@ class MenuInterface: UIView {
 
     lazy var muteMusicButton: UIButton = {
         let muteMusicButton = UIButton()
-        let defaults = UserDefaults.standard
-        muteMusicButton.alpha = 1
-        muteMusicButton.translatesAutoresizingMaskIntoConstraints = false
         muteMusicButton.setTitle(" Mute ", for: .normal)
-        muteMusicButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        muteMusicButton.setTitleColor(UIColor.black, for: .normal)
-        muteMusicButton.layer.borderColor = UIColor.black.cgColor
-        muteMusicButton.layer.borderWidth = 3
-        muteMusicButton.layer.cornerRadius = 10
-        muteMusicButton.isUserInteractionEnabled = true
-        muteMusicButton.backgroundColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
-        muteMusicButton.layer.shadowColor = UIColor.black.cgColor
-        muteMusicButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        muteMusicButton.layer.shadowRadius = 1
-        muteMusicButton.layer.shadowOpacity = 1.0
-        muteMusicButton.layer.shouldRasterize = true
-        muteMusicButton.layer.rasterizationScale = UIScreen.main.scale
+        muteMusicButton.backgroundColor = Properties.defaultMusicButtonColor
+        setupSettingsAppearence(muteMusicButton)
         return muteMusicButton
     }()
     
     lazy var muteSoundButton: UIButton = {
         let muteSoundButton = UIButton()
-        let defaults = UserDefaults.standard
-        muteSoundButton.alpha = 1
-        muteSoundButton.translatesAutoresizingMaskIntoConstraints = false
         muteSoundButton.setTitle(" Mute ", for: .normal)
-        muteSoundButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        muteSoundButton.setTitleColor(UIColor.black, for: .normal)
-        muteSoundButton.layer.borderColor = UIColor.black.cgColor
-        muteSoundButton.layer.borderWidth = 3
-        muteSoundButton.layer.cornerRadius = 10
-        muteSoundButton.isUserInteractionEnabled = true
-        muteSoundButton.backgroundColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
-        muteSoundButton.layer.shadowColor = UIColor.black.cgColor
-        muteSoundButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        muteSoundButton.layer.shadowRadius = 1
-        muteSoundButton.layer.shadowOpacity = 1.0
-        muteSoundButton.layer.shouldRasterize = true
-        muteSoundButton.layer.rasterizationScale = UIScreen.main.scale
+        muteSoundButton.backgroundColor = Properties.defaultSoundButtonColor
+        setupSettingsAppearence(muteSoundButton)
         return muteSoundButton
     }()
     
     lazy var muteVibrationButton: UIButton = {
         let muteVibrationButton = UIButton()
-        let defaults = UserDefaults.standard
-        muteVibrationButton.alpha = 1
-        muteVibrationButton.translatesAutoresizingMaskIntoConstraints = false
         muteVibrationButton.setTitle(" Mute ", for: .normal)
-        muteVibrationButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        muteVibrationButton.setTitleColor(UIColor.black, for: .normal)
-        muteVibrationButton.layer.borderColor = UIColor.black.cgColor
-        muteVibrationButton.layer.borderWidth = 3
-        muteVibrationButton.layer.cornerRadius = 10
-        muteVibrationButton.isUserInteractionEnabled = true
-        muteVibrationButton.backgroundColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.systemPink
-        muteVibrationButton.layer.shadowColor = UIColor.black.cgColor
-        muteVibrationButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        muteVibrationButton.layer.shadowRadius = 1
-        muteVibrationButton.layer.shadowOpacity = 1.0
-        muteVibrationButton.layer.shouldRasterize = true
-        muteVibrationButton.layer.rasterizationScale = UIScreen.main.scale
+        muteVibrationButton.backgroundColor = Properties.defaultVibroButtonColor
+        setupSettingsAppearence(muteVibrationButton)
         return muteVibrationButton
     }()
     
     lazy var quitButton: UIButton = {
         let quitButton = UIButton()
-        quitButton.alpha = 1
-        quitButton.translatesAutoresizingMaskIntoConstraints = false
+        
         quitButton.setTitle(" Quit ", for: .normal)
-        quitButton.backgroundColor = UIColor.systemPink
-        quitButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        quitButton.setTitleColor(UIColor.black, for: .normal)
-        quitButton.layer.borderColor = UIColor.black.cgColor
-        quitButton.layer.borderWidth = 3
-        quitButton.layer.cornerRadius = 10
-        quitButton.isUserInteractionEnabled = true
-        quitButton.layer.shadowColor = UIColor.black.cgColor
-        quitButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        quitButton.layer.shadowRadius = 1
-        quitButton.layer.shadowOpacity = 1.0
-        quitButton.layer.shouldRasterize = true
-        quitButton.layer.rasterizationScale = UIScreen.main.scale
+        setupSettingsAppearence(quitButton)
         return quitButton
     }()
     
     lazy var rateButton: UIButton = {
         let rateButton = UIButton()
-        rateButton.alpha = 0.3
-        rateButton.translatesAutoresizingMaskIntoConstraints = false
         rateButton.setTitle(" Rate Us ", for: .normal)
-        rateButton.backgroundColor = UIColor.systemGreen
-        rateButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
-        rateButton.setTitleColor(UIColor.black, for: .normal)
-        rateButton.layer.borderColor = UIColor.black.cgColor
-        rateButton.layer.borderWidth = 3
-        rateButton.layer.cornerRadius = 10
-        rateButton.isUserInteractionEnabled = true
-        rateButton.layer.shadowColor = UIColor.black.cgColor
-        rateButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        rateButton.layer.shadowRadius = 1
-        rateButton.layer.shadowOpacity = 1.0
-        rateButton.layer.shouldRasterize = true
-        rateButton.layer.rasterizationScale = UIScreen.main.scale
+        setupSettingsAppearence(rateButton)
+        rateButton.alpha = 0.3
+        rateButton.backgroundColor = .systemGreen
+
         return rateButton
     }()
     
@@ -530,5 +366,44 @@ class MenuInterface: UIView {
             palette.fuelTown.cgColor,
         ]
         menuView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    //MARK: - setup Appearence:
+    
+    func setupAppearence(_ thisButton: UIButton) {
+        thisButton.translatesAutoresizingMaskIntoConstraints = false
+        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        thisButton.tag = 1
+        thisButton.setTitleColor(UIColor.black, for: .normal)
+        thisButton.layer.borderWidth = 0
+        thisButton.layer.cornerRadius = 10
+        thisButton.layer.shadowColor = UIColor.black.cgColor
+        thisButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        thisButton.layer.shadowRadius = 6
+        thisButton.layer.shadowOpacity = 1.0
+        thisButton.isUserInteractionEnabled = true
+        thisButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        thisButton.backgroundColor = palette.wildCarribeanGrean
+        thisButton.layer.shouldRasterize = true
+        thisButton.layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    //MARK: - setup Settings Appearence:
+    
+    func setupSettingsAppearence(_ thisButton: UIButton) {
+        thisButton.translatesAutoresizingMaskIntoConstraints = false
+        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        thisButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        thisButton.setTitleColor(UIColor.black, for: .normal)
+        thisButton.layer.borderColor = UIColor.black.cgColor
+        thisButton.layer.borderWidth = 3
+        thisButton.layer.cornerRadius = 10
+        thisButton.isUserInteractionEnabled = true
+        thisButton.layer.shadowColor = UIColor.black.cgColor
+        thisButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        thisButton.layer.shadowRadius = 1
+        thisButton.layer.shadowOpacity = 1.0
+        thisButton.layer.shouldRasterize = true
+        thisButton.layer.rasterizationScale = UIScreen.main.scale
     }
 }

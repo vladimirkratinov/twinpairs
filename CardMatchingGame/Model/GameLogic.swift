@@ -27,22 +27,7 @@ public class GameLogic {
     
     private func shuffleAndSetTitle() {
         let shuffledList = Properties.pairList.shuffled()
-        for i in 0..<Properties.cardButtons.count {
-            //delete suffix and prefix:
-//            var cleanString = ""
-//            var clearedShuffledList = [String]()
-//            
-//            for item in shuffledList {
-//                let cleanName = item
-//                    .deletingSuffix(".png")
-//                    .deletingPrefix("set")
-//                let dropNumber = cleanName.dropFirst()
-//                let dropLine = dropNumber.dropFirst()
-//                let replaceLinesWithSpaces = dropLine.replacingOccurrences(of: "_", with: " ")
-//                cleanString = replaceLinesWithSpaces
-//                clearedShuffledList.append(cleanString)
-//            }
-            
+        for i in 0..<Properties.cardButtons.count {            
             Properties.cardButtons[i].setTitle(shuffledList[i], for: .normal)
         }
     }

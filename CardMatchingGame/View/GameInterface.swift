@@ -29,13 +29,22 @@ class GameInterface: UIView {
     }
     var timeCounter: Int = 0 {
         didSet {
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.hour, .minute, .second]
-            formatter.unitsStyle = .abbreviated
-
-            let formattedString = formatter.string(from: TimeInterval(timeCounter))!
-            timeLabel.text = "⏳ \(formattedString)"
+//            let formatter = DateComponentsFormatter()
+//            formatter.allowedUnits = [.hour, .minute, .second]
+//            formatter.unitsStyle = .abbreviated
+//            let formattedString = formatter.string(from: TimeInterval(timeCounter))!
             
+            let convertedTime = secToMinSec(timeCounter)
+            let minutes = convertedTime.0
+            let seconds = convertedTime.1
+            var secondZero = ""
+            
+            if seconds == 0 {
+                secondZero = "0"
+            } else {
+                secondZero.removeAll()
+            }
+            timeLabel.text = "⏳ \(minutes):\(seconds)\(secondZero)"
         }
     }
     
