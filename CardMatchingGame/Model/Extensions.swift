@@ -254,7 +254,7 @@ extension UserDefaults {
             }
         }
     
-    func reset() {
+    func resetMusicSettings() {
         Keys.allCases.forEach { removeObject(forKey: $0.rawValue) }
     }
     

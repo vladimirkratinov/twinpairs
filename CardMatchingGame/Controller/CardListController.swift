@@ -178,7 +178,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.setToolbarHidden(false, animated: false)
         
         //slide animation only after CollectionView:
         if !animationHasBeenShown {
@@ -187,13 +187,11 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             animationHasBeenShown = true
         }
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: false)
 
         collectionView?.animateVisibleCells()
         
@@ -205,8 +203,9 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        //DON'T TOUCH THIS!:
         navigationController?.setToolbarHidden(true, animated: false)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     

@@ -29,7 +29,7 @@ class GameController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
-        gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
+//        gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         gameInterface.backToMenuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         
         gameInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
@@ -102,7 +102,7 @@ class GameController: UIViewController {
         //reset card counter:
         prop.cardCounter = 0
         
-        if prop.gameIsOver {
+        if Properties.gameIsOver {
             gameOver()                                          //test Game Over
         }
         
@@ -182,7 +182,10 @@ class GameController: UIViewController {
     
     func gameOver() {
         //reset timer:
-        prop.timer.invalidate()
+        if prop.timer != nil {
+            prop.timer.invalidate()
+        }
+        
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.gameOver.rawValue, isMuted: Properties.soundMutedSwitcher)
         //labels animations:
@@ -192,7 +195,7 @@ class GameController: UIViewController {
             self.gameInterface.backToMenuButton.alpha = 1
             self.gameInterface.restartButton.alpha = 1
             self.gameInterface.gameOverLabel.pulsate()
-            self.gameInterface.restartButton.pulsate()
+//            self.gameInterface.restartButton.pulsate()
         })
         
         //update statistics UI:
@@ -229,54 +232,6 @@ class GameController: UIViewController {
                 card.isHidden = false
                 card.isEnabled = false
             })
-        }
-    }
-    
-    //MARK: - restartTapped:
-    
-    @objc func restartTapped(_ sender: UIButton) {
-        sender.bounce(sender)
-        
-        //reset timer:
-        prop.timer.invalidate()
-        
-        //animation:
-        gameInterface.restartButton.flash()
-        
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        
-//        Properties.activatedCards.removeAll()
-//        Properties.activatedButtons.removeAll()
-        resetCards()
-    
-        
-        //setup time:
-        self.gameInterface.timeCounter = self.prop.standardTimeCounter
-        //total time for statistics:
-        self.prop.totalTime = self.gameInterface.timeCounter
-        print("total time: \(self.prop.totalTime)")
-        
-        loadLevel()
-        
-        //reset level:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.gameInterface.gameOverLabel.alpha = 0
-            self.gameInterface.statisticsView.alpha = 0
-            self.gameInterface.backToMenuButton.alpha = 0
-            self.gameInterface.restartButton.alpha = 0
-            self.gameInterface.flipsCounter = 0
-            self.gameInterface.pairsCounter = 0
-            
-            //reset cards:
-            for card in Properties.cardButtons {
-                UIButton.animate(withDuration: 1, animations: {
-                    let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
-                    card.setBackgroundImage(backgroundImage, for: .normal)
-                    card.alpha = 1
-                    card.isEnabled = true
-                })
-            }
         }
     }
     
@@ -410,7 +365,7 @@ class GameController: UIViewController {
 //                    try? self.audioFX.playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
-                    if Properties.vibrationMutedSwitcher == false {
+                    if Properties.vibrationMutedSwitcher {
                         HapticsManager.shared.vibrate(for: .success)
                     }
 
@@ -448,7 +403,7 @@ class GameController: UIViewController {
 //                    try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
-                    if Properties.vibrationMutedSwitcher == false {
+                    if Properties.vibrationMutedSwitcher {
                         HapticsManager.shared.vibrate(for: .error)
                     }
                     

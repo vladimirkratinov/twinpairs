@@ -45,6 +45,9 @@ class MenuController: UIViewController {
             menuInterface.addCoinButton.isHidden = true
         }
         
+        //debug sound:
+        print("background music volume: \(String(describing: AudioFX.backgroundMusic?.volume))")
+        
         UserDefaults.standard.synchronize()
         
         navigationController?.navigationBar.isHidden = true
@@ -61,9 +64,14 @@ class MenuController: UIViewController {
         
         //        //Background AudioFX:
         let randomNumber = Int.random(in: 1...2)
+        
+        let snowfall =      AudioFileKey.Snowfall.rawValue
+        let ceremonial =    AudioFileKey.Ceremonial.rawValue
+        let mp3File =       AudioTypeKey.mp3.rawValue
+        
         switch randomNumber {
-        case 1: try? self.audioFX.playBackgroundMusic(file: AudioFileKey.Snowfall.rawValue, type: AudioTypeKey.mp3.rawValue)
-        case 2: try? self.audioFX.playBackgroundMusic(file: AudioFileKey.Ceremonial.rawValue, type: AudioTypeKey.mp3.rawValue)
+        case 1: try? self.audioFX.playBackgroundMusic(file: snowfall, type: mp3File)
+        case 2: try? self.audioFX.playBackgroundMusic(file: ceremonial, type: mp3File)
         default: return
         }
     }

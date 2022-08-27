@@ -373,9 +373,10 @@ class GameInterface: UIView {
     lazy var restartButton: UIButton = {
         let restartButton = UIButton()
         restartButton.alpha = 0
+        restartButton.isHidden = true
         restartButton.translatesAutoresizingMaskIntoConstraints = false
         restartButton.setTitle(" Restart ", for: .normal)
-        restartButton.backgroundColor = UIColor.red
+        restartButton.backgroundColor = UIColor.systemPink
         restartButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
         restartButton.setTitleColor(UIColor.black, for: .normal)
         restartButton.layer.borderColor = UIColor.black.cgColor
@@ -398,12 +399,12 @@ class GameInterface: UIView {
         backToMenuButton.layer.borderWidth = 3
         backToMenuButton.layer.cornerRadius = 10
         backToMenuButton.isUserInteractionEnabled = true
-        backToMenuButton.layer.shadowColor = UIColor.black.cgColor
-        backToMenuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        backToMenuButton.layer.shadowRadius = 1
-        backToMenuButton.layer.shadowOpacity = 1.0
-        backToMenuButton.layer.shouldRasterize = true
-        backToMenuButton.layer.rasterizationScale = UIScreen.main.scale
+//        backToMenuButton.layer.shadowColor = UIColor.black.cgColor
+//        backToMenuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        backToMenuButton.layer.shadowRadius = 1
+//        backToMenuButton.layer.shadowOpacity = 1.0
+//        backToMenuButton.layer.shouldRasterize = true
+//        backToMenuButton.layer.rasterizationScale = UIScreen.main.scale
         return backToMenuButton
     }()
     
@@ -552,7 +553,8 @@ class GameInterface: UIView {
             restartButton.widthAnchor.constraint(equalToConstant: 120),
 
             backToMenuButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
-            backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
+            backToMenuButton.centerYAnchor.constraint(equalTo: gameView.centerYAnchor, constant: 100),
+//            backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
             backToMenuButton.widthAnchor.constraint(equalToConstant: 120),
             
             //Animations:

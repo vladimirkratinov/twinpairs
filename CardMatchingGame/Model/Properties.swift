@@ -21,6 +21,8 @@ struct Properties {
     static var uiLabelsSize: CGFloat = 25
     //Admin Functions:
     static var hideAdminButtons = false
+    //debug gameOver:
+    static var gameIsOver = false
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)
@@ -83,7 +85,8 @@ struct Properties {
     var cardCounter = 0
     var totalTime = 0
     var standardTimeCounter = 180
-    var gameIsOver = false
+    
+    
     
     var flipAnimationTime = 0.4
     var flipBackAnimationTime = 0.4
