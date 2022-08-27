@@ -34,7 +34,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         coinLabel.textColor = UIColor.black
         coinLabel.textAlignment = .left
         coinLabel.text = "🪙 \(Properties.coins)"
-        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
+        coinLabel.font = UIFont(name: Properties.uiLabelsFont, size: Properties.uiLabelsSize)
         return coinLabel
     }()
     
@@ -238,6 +238,10 @@ extension CollectionController: CollectionViewCellDelegate {
         if let indexPath = collectionView!.indexPath(for: cell) {
             print("Button pressed in cell: \(indexPath.item)")
             
+            //audioFX:
+            let shiny = AudioFileKey.shiny.rawValue
+            audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 
                 //if locked:
@@ -247,6 +251,10 @@ extension CollectionController: CollectionViewCellDelegate {
                     
                     //YES button:
                     let confirm = UIAlertAction(title: "Open", style: .destructive) {_ in
+                                                
+                        //audioFX2:
+                        let magic = AudioFileKey.magic.rawValue
+                        self.audioFX.playAnotherSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
                         
                         //Locker Model:
                         LockerModel.unlock(cell: cell, price: price, index: indexPath.item)

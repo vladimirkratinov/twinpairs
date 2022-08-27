@@ -19,6 +19,7 @@ struct Properties {
     //UI Color:
     static var uiLabelsColor = UIColor.black
     static var uiLabelsSize: CGFloat = 25
+    static var uiLabelsFont = FontKey.AmericanTypewriterCondensedBold.rawValue
     //Admin Functions:
     static var hideAdminButtons = false
     //debug gameOver:
@@ -99,7 +100,6 @@ struct Properties {
     var userInterfaceFontSize: CGFloat = 10
     
     //COLORS:
-    
     static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
     static let defaultSoundButtonColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
     static let defaultVibroButtonColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.systemPink

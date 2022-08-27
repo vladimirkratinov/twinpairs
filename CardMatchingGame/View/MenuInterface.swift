@@ -12,6 +12,8 @@ class MenuInterface: UIView {
     let palette = Palette()
     let gameInterface = GameInterface()
     
+    //MARK: - Views:
+    
     var menuView: UIView = {
         let menuView = UIView()
         return menuView
@@ -36,12 +38,14 @@ class MenuInterface: UIView {
         return coverImageView
     }()
     
+    //MARK: - Labels:
+    
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.text = "MATCH PAIR GAME (v.0.5)"
-        titleLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        titleLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedLight.rawValue, size: 25)
         return titleLabel
     }()
     
@@ -57,7 +61,7 @@ class MenuInterface: UIView {
         coinLabel.textColor = UIColor.black
         coinLabel.textAlignment = .left
         coinLabel.text = "🪙 \(coins)"
-        coinLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 25)
+        coinLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
         return coinLabel
     }()
 
@@ -112,7 +116,7 @@ class MenuInterface: UIView {
     
     lazy var addCoinButton: UIButton = {
        let addCoinButton = UIButton()
-        addCoinButton.setTitle("🪙 Add Coin", for: .normal)
+        addCoinButton.setTitle(" 🪙 Add Coin ", for: .normal)
         setupAppearence(addCoinButton)
         addCoinButton.backgroundColor = .green
         return addCoinButton
@@ -147,38 +151,36 @@ class MenuInterface: UIView {
         return settingsView
     }()
     
+    //MARK: - Settings - Labels:
+    
     lazy var settingsMusic: UILabel = {
        let settingsMusic = UILabel()
-        settingsMusic.translatesAutoresizingMaskIntoConstraints = false
-        settingsMusic.textAlignment = .left
         settingsMusic.text = "Music"
-        settingsMusic.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 30)
+        setupSettingsLabels(settingsMusic)
         return settingsMusic
     }()
     
     lazy var settingsSound: UILabel = {
        let settingsSound = UILabel()
-        settingsSound.translatesAutoresizingMaskIntoConstraints = false
-        settingsSound.textAlignment = .left
         settingsSound.text = "Sound"
-        settingsSound.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 30)
+        setupSettingsLabels(settingsSound)
         return settingsSound
     }()
     
     lazy var settingsVibration: UILabel = {
        let settingsVibration = UILabel()
-        settingsVibration.translatesAutoresizingMaskIntoConstraints = false
-        settingsVibration.textAlignment = .left
         settingsVibration.text = "Vibration"
-        settingsVibration.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 30)
+        setupSettingsLabels(settingsVibration)
         return settingsVibration
     }()
+    
+    //MARK: - Settings - Buttons:
 
     lazy var muteMusicButton: UIButton = {
         let muteMusicButton = UIButton()
         muteMusicButton.setTitle(" Mute ", for: .normal)
         muteMusicButton.backgroundColor = Properties.defaultMusicButtonColor
-        setupSettingsAppearence(muteMusicButton)
+        setupSettingsButtons(muteMusicButton)
         return muteMusicButton
     }()
     
@@ -186,7 +188,7 @@ class MenuInterface: UIView {
         let muteSoundButton = UIButton()
         muteSoundButton.setTitle(" Mute ", for: .normal)
         muteSoundButton.backgroundColor = Properties.defaultSoundButtonColor
-        setupSettingsAppearence(muteSoundButton)
+        setupSettingsButtons(muteSoundButton)
         return muteSoundButton
     }()
     
@@ -194,25 +196,23 @@ class MenuInterface: UIView {
         let muteVibrationButton = UIButton()
         muteVibrationButton.setTitle(" Mute ", for: .normal)
         muteVibrationButton.backgroundColor = Properties.defaultVibroButtonColor
-        setupSettingsAppearence(muteVibrationButton)
+        setupSettingsButtons(muteVibrationButton)
         return muteVibrationButton
     }()
     
     lazy var quitButton: UIButton = {
         let quitButton = UIButton()
-        
         quitButton.setTitle(" Quit ", for: .normal)
-        setupSettingsAppearence(quitButton)
+        setupSettingsButtons(quitButton)
         return quitButton
     }()
     
     lazy var rateButton: UIButton = {
         let rateButton = UIButton()
         rateButton.setTitle(" Rate Us ", for: .normal)
-        setupSettingsAppearence(rateButton)
+        setupSettingsButtons(rateButton)
         rateButton.alpha = 0.3
         rateButton.backgroundColor = .systemGreen
-
         return rateButton
     }()
     
@@ -382,7 +382,7 @@ class MenuInterface: UIView {
         thisButton.layer.shadowRadius = 6
         thisButton.layer.shadowOpacity = 1.0
         thisButton.isUserInteractionEnabled = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
         thisButton.backgroundColor = palette.wildCarribeanGrean
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
@@ -390,10 +390,10 @@ class MenuInterface: UIView {
     
     //MARK: - setup Settings Appearence:
     
-    func setupSettingsAppearence(_ thisButton: UIButton) {
+    func setupSettingsButtons(_ thisButton: UIButton) {
         thisButton.translatesAutoresizingMaskIntoConstraints = false
         thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
         thisButton.setTitleColor(UIColor.black, for: .normal)
         thisButton.layer.borderColor = UIColor.black.cgColor
         thisButton.layer.borderWidth = 3
@@ -405,5 +405,11 @@ class MenuInterface: UIView {
         thisButton.layer.shadowOpacity = 1.0
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func setupSettingsLabels(_ thisLabel: UILabel) {
+        thisLabel.translatesAutoresizingMaskIntoConstraints = false
+        thisLabel.textAlignment = .left
+        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 30)
     }
 }

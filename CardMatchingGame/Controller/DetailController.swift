@@ -127,6 +127,9 @@ class DetailController: UIViewController {
     //MARK: - Dismiss Details View:
     
     @objc private func closeDetailView(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.flip3.rawValue, isMuted: Properties.soundMutedSwitcher)
+    
         // Remove the image view
         let location = tapGestureRecognizer.location(in: detailInterface.detailImageButton)
         guard detailInterface.detailImageButton.isHidden == false,

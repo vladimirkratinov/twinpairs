@@ -70,7 +70,7 @@ class SettingController {
             muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
             AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
             Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.soundButton.rawValue)
@@ -81,7 +81,7 @@ class SettingController {
             muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
             AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.gameStateFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         }
         print("Sound is Muted: \(muted)")
     }

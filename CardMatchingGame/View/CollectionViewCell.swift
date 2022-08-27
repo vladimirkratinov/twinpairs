@@ -51,7 +51,7 @@ class CollectionViewCell: GeminiCell {
         unlockButton.translatesAutoresizingMaskIntoConstraints = false
         unlockButton.setTitle(" Unlock ", for: .normal)
         unlockButton.backgroundColor = UIColor.systemGreen
-        unlockButton.titleLabel?.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 20)
+        unlockButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
         unlockButton.setTitleColor(UIColor.black, for: .normal)
         unlockButton.layer.borderColor = UIColor.black.cgColor
         unlockButton.tag += 1
