@@ -20,9 +20,33 @@ Try to match the cards with its respective pair with as few moves as possible
 - The impactful sound design emphasizes gameplay, including immersive background music and various effects
 - Used UICollectionView to organize and sort the pack of cards
 
-# 📷 Screenshots: 
+# 📷 Screenshots:
 
-## ver. 0.4 (NEW)
+## ver. 0.5 (NEW!)
+
+- Added new feature - unlock mechanism in CollectionView
+- Added prices and purchase function
+- Coins are presented in every view
+- Settings, Coins and Unlocked Sets of Cards are preserved
+- Fixed UI bugs in CollectionView and CardView
+- Removed Navigation Controller
+- Brand New Animations!
+- Re-design of Collections and Details views
+- UI optimized for swipe gestures
+- Presented new DetailView: clickable picture with details on the other side
+- Tap to dismiss DetailView'
+
+![1](https://user-images.githubusercontent.com/78992253/186836937-28e20dec-a11b-4e18-99c1-b646eea4d58a.PNG)
+![2](https://user-images.githubusercontent.com/78992253/186836940-1f32943d-12e2-4053-9a5f-0dd0c88c6b99.PNG)
+![3](https://user-images.githubusercontent.com/78992253/186836944-ddf6e4d3-8efa-4402-95b3-0a51bce053fb.PNG)
+![4](https://user-images.githubusercontent.com/78992253/186836948-e1666ad4-1a95-4f72-a61c-66a69dbd147b.PNG)
+![5](https://user-images.githubusercontent.com/78992253/186836951-8de7becb-7baf-4589-90e9-89f0daaf60fb.PNG)
+![6](https://user-images.githubusercontent.com/78992253/186836953-6a9b8c00-a99e-47c7-b035-a13906b4fa50.PNG)
+
+
+
+
+## ver. 0.4
 
 - Presented new feature - Collections!
 - Add custom animations in the Collection view
