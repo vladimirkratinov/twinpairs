@@ -13,6 +13,4 @@ class CollectionInterface: UIView {
         let collectionView = UIView()
         return collectionView
     }()
-    
-    
 }
