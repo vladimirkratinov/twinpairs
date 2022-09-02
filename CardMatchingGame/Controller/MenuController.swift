@@ -27,6 +27,8 @@ class MenuController: UIViewController {
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
+        menuInterface.difficultyButton.addTarget(self, action: #selector(difficultyButtonTapped), for: .touchUpInside)
+        
         menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
         
@@ -124,6 +126,35 @@ class MenuController: UIViewController {
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //transition:
         transitionToVC(duration: 0.2, identifier: "CollectionController")
+    }
+    
+    //MARK: - DifficultyButtonTapped:
+    
+    @objc func difficultyButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        if sender.titleLabel?.text == DifficultyKey.easy.rawValue {
+            sender.setTitle("Medium", for: .normal)
+            Properties.selectedDifficulty = DifficultyKey.medium.rawValue
+            sender.backgroundColor = .orange
+            Properties.rows = 4
+            Properties.columns = 3
+        } else if sender.titleLabel?.text == DifficultyKey.medium.rawValue {
+            sender.setTitle("Hard", for: .normal)
+            Properties.selectedDifficulty = DifficultyKey.hard.rawValue
+            sender.backgroundColor = .red
+            Properties.rows = 5
+            Properties.columns = 4
+        } else if sender.titleLabel?.text == DifficultyKey.hard.rawValue {
+            sender.setTitle("Easy", for: .normal)
+            Properties.selectedDifficulty = DifficultyKey.easy.rawValue
+            sender.backgroundColor = .green
+            Properties.rows = 3
+            Properties.columns = 2
+        }
     }
     
     //MARK: - Reset Button:

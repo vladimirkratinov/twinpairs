@@ -103,33 +103,13 @@ class GameController: UIViewController {
         prop.cardCounter = 0
         
         if Properties.gameIsOver {
-            gameOver()                                          //test Game Over
+            gameOver()              //test Game Over
         }
+        print("selectedCardList: \(Properties.selectedCardList)")
         
         //SETUP SELECTED CARDS:
-        if Properties.selectedCardList.hasPrefix("set1") {
-            gameLogic.setupCards(Properties.cardList1)
-        } else if
-            Properties.selectedCardList.hasPrefix("set2") {
-            gameLogic.setupCards(Properties.cardList2)
-        } else if
-            Properties.selectedCardList.hasPrefix("set3") {
-            gameLogic.setupCards(Properties.cardList3)
-        } else if
-            Properties.selectedCardList.hasPrefix("set4") {
-            gameLogic.setupCards(Properties.cardList4)
-        } else if
-            Properties.selectedCardList.hasPrefix("set5") {
-            gameLogic.setupCards(Properties.cardList5)
-        } else if
-            Properties.selectedCardList.hasPrefix("set6") {
-            gameLogic.setupCards(Properties.cardList6)
-        }
-        else {
-            gameLogic.setupCards(Properties.cardList1)
-        }
-        
-//        print("Selected CardList: \(Properties.selectedCollection)")
+        gameLogic.setupSelectedSet()
+
     }
 
     //MARK: - nextLevel:
@@ -137,7 +117,6 @@ class GameController: UIViewController {
     func nextLevel() {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
-//        try? audioFX.playFX(file: AudioFileKey.victory.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
@@ -160,10 +139,10 @@ class GameController: UIViewController {
             //  fixed bug - reset cardButtons array
                         
             //update level:
-            if Properties.rows < 5 && Properties.columns < 4 {
-                Properties.rows += 1
-                Properties.columns += 1
-            }
+//            if Properties.rows < 5 && Properties.columns < 4 {
+//                Properties.rows += 1
+//                Properties.columns += 1
+//            }
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
             self.loadLevel()
             

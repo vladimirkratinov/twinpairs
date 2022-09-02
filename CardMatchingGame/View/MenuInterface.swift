@@ -22,7 +22,7 @@ class MenuInterface: UIView {
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 0.3
-        backgroundImageView.image = UIImage(named: ImageKey.LaunchScreen2.rawValue)
+        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -98,12 +98,13 @@ class MenuInterface: UIView {
         return collectionButton
     }()
     
-    lazy var challengesButton: UIButton = {
-        let challengesButton = UIButton()
-        challengesButton.setTitle("Challenges", for: .normal)
-        setupAppearence(challengesButton)
-        challengesButton.alpha = 0.3
-        return challengesButton
+    lazy var difficultyButton: UIButton = {
+        let difficultyButton = UIButton()
+        difficultyButton.setTitle("Easy", for: .normal)
+        setupAppearence(difficultyButton)
+        difficultyButton.alpha = 1
+        difficultyButton.backgroundColor = .green
+        return difficultyButton
     }()
     
     lazy var resetButton: UIButton = {
@@ -228,7 +229,7 @@ class MenuInterface: UIView {
         menuView.addSubview(timeModeButton)
         menuView.addSubview(hardcoreModeButton)
         menuView.addSubview(collectionButton)
-        menuView.addSubview(challengesButton)
+        menuView.addSubview(difficultyButton)
         menuView.addSubview(resetButton)
         menuView.addSubview(addCoinButton)
         
@@ -294,12 +295,12 @@ class MenuInterface: UIView {
             collectionButton.heightAnchor.constraint(equalToConstant: 50),
             collectionButton.widthAnchor.constraint(equalToConstant: 120),
             
-            challengesButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 10),
-            challengesButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            challengesButton.heightAnchor.constraint(equalToConstant: 50),
-            challengesButton.widthAnchor.constraint(equalToConstant: 120),
+            difficultyButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 10),
+            difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            difficultyButton.heightAnchor.constraint(equalToConstant: 50),
+            difficultyButton.widthAnchor.constraint(equalToConstant: 120),
             
-            resetButton.topAnchor.constraint(equalTo: challengesButton.bottomAnchor, constant: 50),
+            resetButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 50),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             resetButton.heightAnchor.constraint(equalToConstant: 50),
             resetButton.widthAnchor.constraint(equalToConstant: 120),

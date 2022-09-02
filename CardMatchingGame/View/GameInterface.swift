@@ -104,6 +104,16 @@ class GameInterface: UIView {
         return timeLabel
     }()
     
+    var difficultylabel: UILabel = {
+        let difficultylabel = UILabel()
+        difficultylabel.translatesAutoresizingMaskIntoConstraints = false
+        difficultylabel.textColor = Properties.uiLabelsColor
+        difficultylabel.textAlignment = .center
+        difficultylabel.text = Properties.selectedDifficulty
+        difficultylabel.font = UIFont(name: Properties.uiLabelsFont, size: Properties.uiLabelsSize)
+        return difficultylabel
+    }()
+    
     var coinLabel: UILabel = {
         let coinLabel = UILabel()
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -358,6 +368,7 @@ class GameInterface: UIView {
         //UI:
         gameView.addSubview(timeLabel)
         gameView.addSubview(coinLabel)
+        gameView.addSubview(difficultylabel)
 //        gameView.addSubview(flipsLabel)
         gameView.addSubview(pairsLabel)
         gameView.addSubview(settingsButton)
@@ -458,6 +469,9 @@ class GameInterface: UIView {
             
 //            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
 //            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
+            
+            difficultylabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            difficultylabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
             timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
             timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -10),

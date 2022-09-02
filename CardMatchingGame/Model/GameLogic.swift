@@ -31,4 +31,28 @@ public class GameLogic {
             Properties.cardButtons[i].setTitle(shuffledList[i], for: .normal)
         }
     }
+    
+    public func setupSelectedSet() {
+        if Properties.selectedCardList.hasPrefix("set1") {
+            setupCards(Properties.cardList1)
+        } else if
+            Properties.selectedCardList.hasPrefix("set2") {
+            setupCards(Properties.cardList2)
+        } else if
+            Properties.selectedCardList.hasPrefix("set3") {
+            setupCards(Properties.cardList3)
+        } else if
+            Properties.selectedCardList.hasPrefix("set4") {
+            setupCards(Properties.cardList4)
+        } else if
+            Properties.selectedCardList.hasPrefix("set5") {
+            setupCards(Properties.cardList5)
+        } else if
+            Properties.selectedCardList.hasPrefix("set6") {
+            setupCards(Properties.cardList6)
+        }
+        else {
+            setupCards(Properties.cardList1)
+        }
+    }
 }

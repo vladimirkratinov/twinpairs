@@ -93,3 +93,9 @@ enum ColorKey: String {
     case soundButton =          "soundButton"
     case vibrationButton =      "vibrationButton"
 }
+
+enum DifficultyKey: String {
+    case easy = "Easy"
+    case medium = "Medium"
+    case hard = "Hard"
+}

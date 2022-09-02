@@ -53,6 +53,8 @@ struct Properties {
     static var selectedCollection = [String]()
     //Setup Selected Cards (Check if have Set1...6 in GameController        (??? CAN CHANGE)
     static var selectedCardList = String()
+    //select difficulty leve:
+    static var selectedDifficulty = "Easy"
     
     //collection settings unlock:
     static var unlockedList = [Bool]()
