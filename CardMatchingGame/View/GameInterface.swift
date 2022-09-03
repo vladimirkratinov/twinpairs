@@ -260,6 +260,13 @@ class GameInterface: UIView {
         return settingsVibration
     }()
     
+    lazy var settingsBackground: UILabel = {
+       let settingsBackground = UILabel()
+        settingsBackground.text = "Background"
+        setupSettingsLabels(settingsBackground)
+        return settingsBackground
+    }()
+    
     //MARK: - Settings - Buttons:
     
     lazy var settingsButton: UIButton = {
@@ -299,6 +306,14 @@ class GameInterface: UIView {
         muteVibrationButton.backgroundColor = Properties.defaultVibroButtonColor
         setupSettingsButtons(muteVibrationButton)
         return muteVibrationButton
+    }()
+    
+    lazy var backgroundButton: UIButton = {
+        let backgroundButton = UIButton()
+        backgroundButton.setTitle(" Change ", for: .normal)
+        backgroundButton.backgroundColor = .green
+        setupSettingsButtons(backgroundButton)
+        return backgroundButton
     }()
     
     lazy var quitButton: UIButton = {
@@ -357,10 +372,12 @@ class GameInterface: UIView {
         settingsView.addSubview(settingsMusic)
         settingsView.addSubview(settingsSound)
         settingsView.addSubview(settingsVibration)
+        settingsSound.addSubview(settingsBackground)
         
         settingsView.addSubview(muteMusicButton)
         settingsView.addSubview(muteSoundButton)
         settingsView.addSubview(muteVibrationButton)
+        settingsView.addSubview(backgroundButton)
         
         settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
@@ -412,6 +429,9 @@ class GameInterface: UIView {
             
             settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 20),
             settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            
+            settingsBackground.topAnchor.constraint(equalTo: settingsVibration.bottomAnchor, constant: 20),
+            settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
 
             muteMusicButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
             muteMusicButton.topAnchor.constraint(equalTo: settingsMusic.topAnchor, constant: 0),
@@ -424,6 +444,10 @@ class GameInterface: UIView {
             muteVibrationButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
             muteVibrationButton.topAnchor.constraint(equalTo: settingsVibration.topAnchor, constant: 0),
             muteVibrationButton.widthAnchor.constraint(equalToConstant: 80),
+            
+            backgroundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
+            backgroundButton.topAnchor.constraint(equalTo: settingsBackground.topAnchor, constant: 0),
+            backgroundButton.widthAnchor.constraint(equalToConstant: 80),
             
             quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
             quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),

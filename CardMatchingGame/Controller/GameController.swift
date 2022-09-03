@@ -37,6 +37,7 @@ class GameController: UIViewController {
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
+        gameInterface.backgroundButton.addTarget(self, action: #selector(backgroundButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -472,6 +473,10 @@ class GameController: UIViewController {
     
     @objc func muteVibrationTapped(_ sender: UIButton) {
         SettingController.muteVibrationTapped(sender: sender)
+    }
+    
+    @objc func backgroundButtonTapped(_ sender: UIButton) {
+        SettingController.backgroundButtonTapped(sender: sender)
     }
     
     //MARK: - Dismiss Settings Veiw:

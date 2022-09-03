@@ -119,4 +119,17 @@ class SettingController {
         }
         print("Vibration is Muted: \(muted)")
     }
+    
+    //MARK: - Background Button Tapped:
+    
+    static func backgroundButtonTapped(sender: UIButton) {
+        let audioFX = AudioFX()
+//        let gameInterface = GameInterface()
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+    }
+    
+    
 }
