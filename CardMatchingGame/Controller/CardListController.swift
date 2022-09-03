@@ -18,6 +18,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     var selectButton = UIBarButtonItem()
     var observer: NSKeyValueObservation?
     var animationHasBeenShown = false
+    var temporaryIndexPath = Int()
 
     static var selectedString: String = "Select" {
         didSet {
@@ -219,6 +220,10 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         if let safeString = Properties.selectedCollection.first {
             Properties.selectedCardList = safeString
             print("Selected as main: \(safeString)")
+            
+            Properties.selectedCardListNumber = temporaryIndexPath
+            
+            print("SELECTED INDEXPATH.ITEM: \(Properties.selectedCardListNumber)")
             navigationController?.toolbar.barTintColor = palette.fuelTown
             selectButton.title = "Selected!"
             Properties.cardSetIsSelected = true

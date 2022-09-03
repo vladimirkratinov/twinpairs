@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 15
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -51,8 +51,12 @@ struct Properties {
     
     //Selected Collection from "Selected" Button in CardListController
     static var selectedCollection = [String]()
-    //Setup Selected Cards (Check if have Set1...6 in GameController        (??? CAN CHANGE)
+    
+
+    //Setup Selected Cards (Check if have Set1...6 in GameController
     static var selectedCardList = String()
+    static var selectedCardListNumber = 0
+    
     //select difficulty leve:
     static var selectedDifficulty = "Easy"
     
@@ -63,12 +67,6 @@ struct Properties {
     
     //Card Collections:
     static var cardCollection = [[String]]()
-    static var cardList1 = [String]()
-    static var cardList2 = [String]()
-    static var cardList3 = [String]()
-    static var cardList4 = [String]()
-    static var cardList5 = [String]()
-    static var cardList6 = [String]()
 
     //Game Mechanics
     static var cardButtons = [UIButton]()

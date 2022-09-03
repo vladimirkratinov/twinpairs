@@ -41,6 +41,17 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //loadFiles:
+        for i in 1...6 {
+            contentLoader.loadSet(setNumber: i)
+        }
+        
+        print("PROPERTIES: CARD COLLECTION:::: \(Properties.cardCollection) \n")
+        print()
+        print("SELECTED SET: \(Properties.selectedCollection)")
+        
+        print("SELECTED CARD LIST: \(Properties.selectedCardList)")
+        
         //admin functions:
         if Properties.hideAdminButtons {
             menuInterface.resetButton.isHidden = true
@@ -59,12 +70,8 @@ class MenuController: UIViewController {
             self.navigationController?.setToolbarHidden(true, animated: true)
         }, completion: nil)
         
-        //loadFiles:
-        for i in 1...6 {
-            contentLoader.loadSet(setNumber: i)
-        }
         
-        //        //Background AudioFX:
+        //Background AudioFX:
         let randomNumber = Int.random(in: 1...2)
         
         let snowfall =      AudioFileKey.Snowfall.rawValue

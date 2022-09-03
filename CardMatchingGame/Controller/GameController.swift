@@ -71,6 +71,10 @@ class GameController: UIViewController {
             self.loadLevel()
         }
         
+        
+        print("selectedCardList: \(Properties.selectedCardList)")
+        print("selectedCardSet: \(Properties.selectedCollection)")
+        
         //debugging Constraints error message:
 //        UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
@@ -105,10 +109,9 @@ class GameController: UIViewController {
         if Properties.gameIsOver {
             gameOver()              //test Game Over
         }
-        print("selectedCardList: \(Properties.selectedCardList)")
         
         //SETUP SELECTED CARDS:
-        gameLogic.setupSelectedSet()
+        gameLogic.setupSelectedSet(prefix: Properties.selectedCardListNumber)
 
     }
 

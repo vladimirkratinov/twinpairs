@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CollectionInterface: UIView {
-    
-    var collectionView: UIView = {
-        let collectionView = UIView()
-        return collectionView
-    }()
-}
+//class CollectionInterface: UIView {
+//    
+//    var collectionView: UIView = {
+//        let collectionView = UIView()
+//        return collectionView
+//    }()
+//}

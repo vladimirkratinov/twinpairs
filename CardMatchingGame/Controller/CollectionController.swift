@@ -17,7 +17,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     let palette = Palette()
     var contentLoader = ContentLoader()
     let audioFX = AudioFX()
-    let collectionInterface = CollectionInterface()
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
@@ -205,9 +204,11 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
+        
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
         Properties.selectedCollection = Properties.cardCollection[indexPath.item]
         print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
+        vc.temporaryIndexPath = indexPath.item
         
         let transition = CATransition()
         transition.duration = 0.3
