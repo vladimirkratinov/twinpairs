@@ -163,6 +163,46 @@ extension UIImage {
     }
 }
 
+//MARK: - UIView:
+
+extension UIView {
+    
+    func setGradientBackground1() {
+        let palette = Palette()
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [
+            palette.wildCarribeanGrean.cgColor,
+            palette.darkMountainMeadow.cgColor,
+            palette.fuelTown.cgColor,
+        ]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setGradientBackground2() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [
+            UIColor.systemTeal.cgColor,
+            UIColor.systemBlue.cgColor,
+            UIColor.systemPink.cgColor,
+        ]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setGradientBackground3() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemGray.cgColor,
+            UIColor.systemBrown.cgColor,
+        ]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+}
+
 //MARK: - UIImageView:
 
 extension UIImageView {

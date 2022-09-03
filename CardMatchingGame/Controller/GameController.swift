@@ -42,6 +42,8 @@ class GameController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        //Changing background color:
+        SettingController.changingBackgroundGradient()
     }
     
     override func viewDidLoad() {
@@ -93,9 +95,6 @@ class GameController: UIViewController {
         //ViewAnimator:
         let fromAnimation = AnimationType.from(direction: .bottom, offset: 200)
         gameInterface.buttonsView.animate(animations: [fromAnimation], duration: 0.5)
-        
-        //setup gradient Background:
-        gameInterface.setGradientBackground1()
         
         //updateSettingsUIButtonsColor:
         updateSettingsUIButtonsColor()

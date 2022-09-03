@@ -31,6 +31,8 @@ struct Properties {
     static var rows = 3
     static var columns = 2
     
+    static var backgroundGradientSwitcher = 1
+    
     //CollectionView InfoButton message:
     static let infoMessage = "Game Version: ver 0.5 (stable build) \n Unlock items in Collections Shop! \n Collect 🪙 coins in Game Mode \n 10 match pairs = 1 coin \n New Game Modes coming soon!"
     

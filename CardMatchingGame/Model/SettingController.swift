@@ -124,12 +124,32 @@ class SettingController {
     
     static func backgroundButtonTapped(sender: UIButton) {
         let audioFX = AudioFX()
-//        let gameInterface = GameInterface()
         //animation:
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        //Changing color: first delete sublayer - than replace it with proper gradient
+        Properties.backgroundGradientSwitcher += 1
+        changingBackgroundGradient()
+        
+        print(Properties.backgroundGradientSwitcher)
     }
     
-    
+    static func changingBackgroundGradient() {
+        if Properties.backgroundGradientSwitcher == 1 {
+            GameInterface.backgroundImageView.layer.sublayers = nil
+            GameInterface.backgroundImageView.setGradientBackground1()
+ 
+        } else if Properties.backgroundGradientSwitcher == 2 {
+            GameInterface.backgroundImageView.layer.sublayers = nil
+            GameInterface.backgroundImageView.setGradientBackground2()
+
+        } else if Properties.backgroundGradientSwitcher == 3 {
+            GameInterface.backgroundImageView.layer.sublayers = nil
+            GameInterface.backgroundImageView.setGradientBackground3()
+        } else {
+            Properties.backgroundGradientSwitcher = 0
+        }
+    }
 }

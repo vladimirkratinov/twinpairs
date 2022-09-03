@@ -56,8 +56,17 @@ class GameInterface: UIView {
     
     var gameView: UIView = {
         let gameView = UIView()
-        gameView.backgroundColor = UIColor.red
+        gameView.backgroundColor = .white
         return gameView
+    }()
+    
+    static var backgroundImageView: UIImageView = {
+        let backgroundImageView = UIImageView(frame: .zero)
+        backgroundImageView.alpha = 1
+        backgroundImageView.backgroundColor = .white
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        return backgroundImageView
     }()
     
     var buttonsView: UIView = {
@@ -363,6 +372,7 @@ class GameInterface: UIView {
     
     func setupSubviews() {
         //Views:
+        gameView.addSubview(GameInterface.backgroundImageView)
         gameView.addSubview(buttonsView)
         gameView.addSubview(statisticsView)
         gameView.addSubview(woodenBack)
@@ -410,6 +420,10 @@ class GameInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            GameInterface.backgroundImageView.topAnchor.constraint(equalTo: gameView.topAnchor),
+            GameInterface.backgroundImageView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
+            GameInterface.backgroundImageView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
+            GameInterface.backgroundImageView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
             //top level:
             woodenBack.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 60),
             woodenBack.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
@@ -525,42 +539,7 @@ class GameInterface: UIView {
             plusCoinsAnimationsLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             plusCoinsAnimationsLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
         ])
-    }
-    
-    //MARK: - Set Gradient Bachround:
-    
-    func setGradientBackground1() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = gameView.bounds
-        gradientLayer.colors = [
-            palette.wildCarribeanGrean.cgColor,
-            palette.darkMountainMeadow.cgColor,
-            palette.fuelTown.cgColor,
-        ]
-        gameView.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    func setGradientBackground2() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = gameView.bounds
-        gradientLayer.colors = [
-            UIColor.systemPink.cgColor,
-            UIColor.systemOrange.cgColor,
-            UIColor.systemRed.cgColor,
-        ]
-        gameView.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    func setGradientBackground3() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = gameView.bounds
-        gradientLayer.colors = [
-            UIColor.systemBlue.cgColor,
-            UIColor.systemGray.cgColor,
-            UIColor.systemBrown.cgColor,
-        ]
-        gameView.layer.insertSublayer(gradientLayer, at: 0)
-    }
+    }    
     
     //MARK: - setup Settings Appearence:
     
