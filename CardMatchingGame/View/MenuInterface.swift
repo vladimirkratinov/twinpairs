@@ -290,17 +290,17 @@ class MenuInterface: UIView {
             hardcoreModeButton.heightAnchor.constraint(equalToConstant: 50),
             hardcoreModeButton.widthAnchor.constraint(equalToConstant: 120),
             
-            collectionButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 50),
-            collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            collectionButton.heightAnchor.constraint(equalToConstant: 50),
-            collectionButton.widthAnchor.constraint(equalToConstant: 120),
-            
-            difficultyButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 10),
+            difficultyButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 10),
             difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             difficultyButton.heightAnchor.constraint(equalToConstant: 50),
             difficultyButton.widthAnchor.constraint(equalToConstant: 120),
             
-            resetButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 50),
+            collectionButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 50),
+            collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            collectionButton.heightAnchor.constraint(equalToConstant: 50),
+            collectionButton.widthAnchor.constraint(equalToConstant: 120),
+
+            resetButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 50),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             resetButton.heightAnchor.constraint(equalToConstant: 50),
             resetButton.widthAnchor.constraint(equalToConstant: 120),

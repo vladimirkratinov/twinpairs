@@ -186,18 +186,19 @@ extension UIView {
         gradientLayer.colors = [
             UIColor.systemTeal.cgColor,
             UIColor.systemBlue.cgColor,
-            UIColor.systemPink.cgColor,
+            UIColor.systemBrown.cgColor,
         ]
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func setGradientBackground3() {
         let gradientLayer = CAGradientLayer()
+        let palette = Palette()
         gradientLayer.frame = self.bounds
         gradientLayer.colors = [
-            UIColor.systemBlue.cgColor,
-            UIColor.systemGray.cgColor,
-            UIColor.systemBrown.cgColor,
+            palette.pastelRed.cgColor,
+            palette.cyanite.cgColor,
+            palette.amour.cgColor,
         ]
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
@@ -391,5 +392,28 @@ extension CollectionController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 //        navigationController?.navigationBar.isHidden = false
         return true
+    }
+}
+
+//MARK: - Array
+
+extension Array {
+  mutating func remove(at indexes: [Int]) {
+      for index in indexes.sorted(by: >) {
+      remove(at: index)
+    }
+  }
+}
+
+//MARK: - Random Elements:
+
+extension RangeExpression where Bound: FixedWidthInteger {
+    func randomElements(_ n: Int) -> [Bound] {
+        precondition(n > 0)
+        switch self {
+        case let range as Range<Bound>: return (0..<n).map { _ in .random(in: range) }
+        case let range as ClosedRange<Bound>: return (0..<n).map { _ in .random(in: range) }
+        default: return []
+        }
     }
 }

@@ -149,7 +149,9 @@ class SettingController {
             GameInterface.backgroundImageView.layer.sublayers = nil
             GameInterface.backgroundImageView.setGradientBackground3()
         } else {
-            Properties.backgroundGradientSwitcher = 0
+            Properties.backgroundGradientSwitcher = 1
+            GameInterface.backgroundImageView.layer.sublayers = nil
+            GameInterface.backgroundImageView.setGradientBackground1()
         }
     }
 }

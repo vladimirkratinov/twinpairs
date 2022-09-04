@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 15
+    var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -31,6 +31,7 @@ struct Properties {
     static var rows = 3
     static var columns = 2
     
+    //background switcher state:
     static var backgroundGradientSwitcher = 1
     
     //CollectionView InfoButton message:

@@ -22,7 +22,7 @@ struct LockerModel: Codable {
             if Properties.collectionOfLockedSets.count < Properties.listOfSets.count {
                 
                 //create Model:
-                let newModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: i * 10)
+                let newModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: i * 100)
                 Properties.collectionOfLockedSets.append(newModel)
                 
                 //autoFill Bool list with true - to show locked UI:
