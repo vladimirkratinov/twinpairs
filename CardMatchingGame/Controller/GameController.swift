@@ -73,8 +73,7 @@ class GameController: UIViewController {
             
             self.loadLevel()
         }
-        
-        
+
         print("selectedCardList: \(Properties.selectedCardList)")
         print("selectedCardSet: \(Properties.selectedCollection)")
         
@@ -121,6 +120,19 @@ class GameController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
         
+        //randomizer nextLevelLabel.text:
+        let randomCongratulation = Int.random(in: 1...5)
+        
+        switch randomCongratulation {
+        case 1: gameInterface.nextLevelLabel.text = "Superb!"
+        case 2: gameInterface.nextLevelLabel.text = "Great!"
+        case 3: gameInterface.nextLevelLabel.text = "Amazing!"
+        case 4: gameInterface.nextLevelLabel.text = "Well Done!"
+        case 5: gameInterface.nextLevelLabel.text = "Good Job!"
+        default:
+            gameInterface.nextLevelLabel.text = "Bang!"
+        }
+        
         //nextLevelLabel animation:
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.nextLevelLabel.alpha = 1
@@ -146,6 +158,7 @@ class GameController: UIViewController {
 //                Properties.rows += 1
 //                Properties.columns += 1
 //            }
+            
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
             self.loadLevel()
             

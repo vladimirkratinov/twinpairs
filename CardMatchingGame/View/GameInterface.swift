@@ -320,7 +320,7 @@ class GameInterface: UIView {
     lazy var backgroundButton: UIButton = {
         let backgroundButton = UIButton()
         backgroundButton.setTitle(" Change ", for: .normal)
-        backgroundButton.backgroundColor = .green
+        backgroundButton.backgroundColor = .systemPink
         setupSettingsButtons(backgroundButton)
         return backgroundButton
     }()
@@ -563,6 +563,6 @@ class GameInterface: UIView {
     func setupSettingsLabels(_ thisLabel: UILabel) {
         thisLabel.translatesAutoresizingMaskIntoConstraints = false
         thisLabel.textAlignment = .left
-        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 30)
+        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
     }
 }

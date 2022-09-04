@@ -411,6 +411,6 @@ class MenuInterface: UIView {
     func setupSettingsLabels(_ thisLabel: UILabel) {
         thisLabel.translatesAutoresizingMaskIntoConstraints = false
         thisLabel.textAlignment = .left
-        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 30)
+        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
     }
 }
