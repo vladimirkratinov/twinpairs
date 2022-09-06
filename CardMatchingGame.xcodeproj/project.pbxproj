@@ -26,6 +26,7 @@
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F764E17428B478BE00F4575F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingController.swift */; };
+		F774A79C28C6AC3000AAB936 /* HardcoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F774A79B28C6AC3000AAB936 /* HardcoreController.swift */; };
 		F781AD7828931921002993E7 /* AudioFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioFX.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
 		F781AD7F28931C40002993E7 /* victory_old.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory_old.wav */; };
@@ -78,6 +79,7 @@
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F764E17328B478BE00F4575F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		F774A79B28C6AC3000AAB936 /* HardcoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcoreController.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFX.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		F781AD7A28931C40002993E7 /* victory_old.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory_old.wav; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				F711BF28289238C300C3E0E8 /* MenuController.swift */,
 				F711938D2890C5EF00BC1DAA /* GameController.swift */,
+				F774A79B28C6AC3000AAB936 /* HardcoreController.swift */,
 				F72837BF28ADA788000B9567 /* CollectionController.swift */,
 				F700123428AEEDA1007DEA94 /* CardListController.swift */,
 				F72837C328ADC167000B9567 /* DetailController.swift */,
@@ -383,6 +386,7 @@
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */,
 				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,
+				F774A79C28C6AC3000AAB936 /* HardcoreController.swift in Sources */,
 				F72837C428ADC167000B9567 /* DetailController.swift in Sources */,
 				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,

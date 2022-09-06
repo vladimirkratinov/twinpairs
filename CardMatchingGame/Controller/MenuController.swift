@@ -26,6 +26,7 @@ class MenuController: UIViewController {
         menuInterface.setupConstraints()
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
         menuInterface.difficultyButton.addTarget(self, action: #selector(difficultyButtonTapped), for: .touchUpInside)
         
@@ -122,6 +123,17 @@ class MenuController: UIViewController {
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //transition:
         transitionToVC(duration: 0.2, identifier: "GameController")
+    }
+    
+    //MARK: - HardcoreButtonTapped:
+    
+    @objc func hardcoreButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+        transitionToVC(duration: 0.2, identifier: "HardcoreController")
     }
     
     //MARK: - CollectionButtonTapped:
@@ -273,6 +285,12 @@ class MenuController: UIViewController {
             }
         case "GameController":
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? GameController else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+        case "HardcoreController":
+            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? HardcoreController else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)

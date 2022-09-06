@@ -28,6 +28,21 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="95.758928571428569"/>
         </scene>
+        <!--Hardcore Controller-->
+        <scene sceneID="iF9-bi-RgP">
+            <objects>
+                <viewController storyboardIdentifier="HardcoreController" id="Dwg-ZM-9SD" customClass="HardcoreController" customModule="CardMatchingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hUt-YW-B48">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cxf-W0-hhv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="agu-VS-A5z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1888" y="-565"/>
+        </scene>
         <!--GameController-->
         <scene sceneID="tne-QT-ifu">
             <objects>

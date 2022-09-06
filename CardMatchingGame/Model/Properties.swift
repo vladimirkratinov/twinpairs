@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 15
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -93,6 +93,8 @@ struct Properties {
     var flipAnimationTime = 0.4
     var flipBackAnimationTime = 0.4
     var timeToShowBothCards = 1.0
+    
+    var hardcoreReduceTime = 0.5
     
     var syncDisableAnimation: Double {
         flipBackAnimationTime + timeToShowBothCards

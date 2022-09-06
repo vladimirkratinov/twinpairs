@@ -86,7 +86,7 @@ class MenuInterface: UIView {
         let hardcoreModeButton = UIButton()
         hardcoreModeButton.setTitle("Hardcore", for: .normal)
         setupAppearence(hardcoreModeButton)
-        hardcoreModeButton.alpha = 0.3
+        hardcoreModeButton.alpha = 1
         return hardcoreModeButton
     }()
     
