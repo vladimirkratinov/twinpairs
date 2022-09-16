@@ -21,8 +21,9 @@ class MenuInterface: UIView {
 
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.3
-        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
+        backgroundImageView.alpha = 1
+//        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -32,7 +33,8 @@ class MenuInterface: UIView {
         let coverImageView = UIImageView(frame: .zero)
         coverImageView.isHidden = true
         coverImageView.alpha = 1
-        coverImageView.image = UIImage(named: ImageKey.envelope4Large.rawValue)
+//        coverImageView.image = UIImage(named: ImageKey.envelope4Large.rawValue)
+        coverImageView.image = UIImage(named: FigmaKey.backgroundSettings.rawValue)
         coverImageView.contentMode = .scaleAspectFill
         coverImageView.translatesAutoresizingMaskIntoConstraints = false
         return coverImageView
@@ -78,7 +80,7 @@ class MenuInterface: UIView {
         let timeModeButton = UIButton()
         timeModeButton.setTitle("Time", for: .normal)
         setupAppearence(timeModeButton)
-        timeModeButton.alpha = 0.3
+        timeModeButton.alpha = 1
         return timeModeButton
     }()
     
@@ -145,11 +147,19 @@ class MenuInterface: UIView {
         settingsView.translatesAutoresizingMaskIntoConstraints = false
         settingsView.isHidden = true
         settingsView.alpha = 1
-        settingsView.layer.borderWidth = 5
-        settingsView.layer.cornerRadius = 20
-        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
+        settingsView.layer.borderWidth = 0
+        settingsView.layer.cornerRadius = 0
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
+    }()
+    
+    lazy var settingsBackground: UIImageView = {
+        let settingsBackground = UIImageView(frame: .zero)
+        settingsBackground.alpha = 1
+        settingsBackground.image = UIImage(named: FigmaKey.settings.rawValue)
+        settingsBackground.contentMode = .scaleAspectFill
+        settingsBackground.translatesAutoresizingMaskIntoConstraints = false
+        return settingsBackground
     }()
     
     //MARK: - Settings - Labels:
@@ -247,6 +257,8 @@ class MenuInterface: UIView {
         
 //        settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
+        settingsView.addSubview(settingsBackground)
+        settingsView.sendSubviewToBack(settingsBackground)
         
         menuView.bringSubviewToFront(coverImageView)
         menuView.bringSubviewToFront(settingsButton)
@@ -275,40 +287,42 @@ class MenuInterface: UIView {
             titleLabel.topAnchor.constraint(greaterThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 50),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             
-            playButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-            playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            playButton.heightAnchor.constraint(equalToConstant: 50),
-            playButton.widthAnchor.constraint(equalToConstant: 120),
+            //MARK: - Buttons:
             
-            timeModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 10),
-            timeModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            timeModeButton.heightAnchor.constraint(equalToConstant: 50),
-            timeModeButton.widthAnchor.constraint(equalToConstant: 120),
-            
-            hardcoreModeButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 10),
-            hardcoreModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            hardcoreModeButton.heightAnchor.constraint(equalToConstant: 50),
-            hardcoreModeButton.widthAnchor.constraint(equalToConstant: 120),
-            
-            difficultyButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 10),
+            difficultyButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            difficultyButton.heightAnchor.constraint(equalToConstant: 50),
-            difficultyButton.widthAnchor.constraint(equalToConstant: 120),
+            difficultyButton.heightAnchor.constraint(equalToConstant: 57),
+            difficultyButton.widthAnchor.constraint(equalToConstant: 137),
             
-            collectionButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 50),
+            playButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 30),
+            playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            playButton.heightAnchor.constraint(equalToConstant: 57), // 50
+            playButton.widthAnchor.constraint(equalToConstant: 137), // 120
+            
+            timeModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 30),
+            timeModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            timeModeButton.heightAnchor.constraint(equalToConstant: 57),
+            timeModeButton.widthAnchor.constraint(equalToConstant: 137),
+            
+            hardcoreModeButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 30),
+            hardcoreModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            hardcoreModeButton.heightAnchor.constraint(equalToConstant: 57),
+            hardcoreModeButton.widthAnchor.constraint(equalToConstant: 137),
+            
+            collectionButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 30),
             collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            collectionButton.heightAnchor.constraint(equalToConstant: 50),
-            collectionButton.widthAnchor.constraint(equalToConstant: 120),
+            collectionButton.heightAnchor.constraint(equalToConstant: 57),
+            collectionButton.widthAnchor.constraint(equalToConstant: 137),
 
-            resetButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 50),
+            resetButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 30),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            resetButton.heightAnchor.constraint(equalToConstant: 50),
-            resetButton.widthAnchor.constraint(equalToConstant: 120),
+            resetButton.heightAnchor.constraint(equalToConstant: 57),
+            resetButton.widthAnchor.constraint(equalToConstant: 137),
             
-            addCoinButton.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 10),
+            addCoinButton.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 30),
             addCoinButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            addCoinButton.heightAnchor.constraint(equalToConstant: 50),
-            addCoinButton.widthAnchor.constraint(equalToConstant: 120),
+            addCoinButton.heightAnchor.constraint(equalToConstant: 57),
+            addCoinButton.widthAnchor.constraint(equalToConstant: 137),
             addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: menuView.bottomAnchor, constant: -170),
             
             settingsButton.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor, constant: -10),
@@ -316,42 +330,52 @@ class MenuInterface: UIView {
             settingsButton.widthAnchor.constraint(equalToConstant: 50),
             settingsButton.heightAnchor.constraint(equalToConstant: 50),
             
-            //settings:
-            settingsView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 30),
-            settingsView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -30),
+            //MARK: - Settings:
+            
+            settingsView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 0),
+            settingsView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: 0),
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
             settingsView.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             settingsView.centerYAnchor.constraint(equalTo: menuView.centerYAnchor),
             
-            settingsMusic.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 20),
-            settingsMusic.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+            settingsBackground.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
+            settingsBackground.topAnchor.constraint(equalTo: settingsView.topAnchor),
+            settingsBackground.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor),
             
-            settingsSound.topAnchor.constraint(equalTo: settingsMusic.bottomAnchor, constant: 20),
-            settingsSound.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            //MARK: - Settings Labels:
             
-            settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 20),
-            settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
-
-            muteMusicButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteMusicButton.topAnchor.constraint(equalTo: settingsMusic.topAnchor, constant: 0),
-            muteMusicButton.widthAnchor.constraint(equalToConstant: 80),
+            settingsMusic.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 60),
+            settingsMusic.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            muteSoundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteSoundButton.topAnchor.constraint(equalTo: settingsSound.topAnchor, constant: 0),
-            muteSoundButton.widthAnchor.constraint(equalToConstant: 80),
+            settingsSound.topAnchor.constraint(equalTo: settingsMusic.bottomAnchor, constant: 23),
+            settingsSound.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            muteVibrationButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteVibrationButton.topAnchor.constraint(equalTo: settingsVibration.topAnchor, constant: 0),
-            muteVibrationButton.widthAnchor.constraint(equalToConstant: 80),
+            settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 23),
+            settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-//            quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-//            quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
-//            quitButton.widthAnchor.constraint(equalToConstant: 100),
+            //MARK: - Settings Buttons:
             
-//            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
-            rateButton.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor),
-            rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
-            rateButton.widthAnchor.constraint(equalToConstant: 100),
+            muteMusicButton.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 58),
+            muteMusicButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteMusicButton.widthAnchor.constraint(equalToConstant: 77),
+            muteMusicButton.heightAnchor.constraint(equalToConstant: 34),
+            
+            muteSoundButton.topAnchor.constraint(equalTo: muteMusicButton.bottomAnchor, constant: 19),
+            muteSoundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteSoundButton.widthAnchor.constraint(equalToConstant: 77),
+            muteSoundButton.heightAnchor.constraint(equalToConstant: 34),
+            
+            muteVibrationButton.topAnchor.constraint(equalTo: muteSoundButton.bottomAnchor, constant: 19),
+            muteVibrationButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteVibrationButton.widthAnchor.constraint(equalToConstant: 77),
+            muteVibrationButton.heightAnchor.constraint(equalToConstant: 34),
+                        
+            rateButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
+            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
+            rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
+            rateButton.widthAnchor.constraint(equalToConstant: 130),
+            rateButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
     
@@ -383,7 +407,8 @@ class MenuInterface: UIView {
         thisButton.layer.shadowRadius = 6
         thisButton.layer.shadowOpacity = 1.0
         thisButton.isUserInteractionEnabled = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
+//        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
+        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
         thisButton.backgroundColor = palette.wildCarribeanGrean
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
@@ -394,15 +419,16 @@ class MenuInterface: UIView {
     func setupSettingsButtons(_ thisButton: UIButton) {
         thisButton.translatesAutoresizingMaskIntoConstraints = false
         thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
+//        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
+        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
         thisButton.setTitleColor(UIColor.black, for: .normal)
         thisButton.layer.borderColor = UIColor.black.cgColor
-        thisButton.layer.borderWidth = 3
-        thisButton.layer.cornerRadius = 10
+        thisButton.layer.borderWidth = 0
+        thisButton.layer.cornerRadius = 8
         thisButton.isUserInteractionEnabled = true
         thisButton.layer.shadowColor = UIColor.black.cgColor
         thisButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        thisButton.layer.shadowRadius = 1
+        thisButton.layer.shadowRadius = 3
         thisButton.layer.shadowOpacity = 1.0
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
@@ -411,6 +437,7 @@ class MenuInterface: UIView {
     func setupSettingsLabels(_ thisLabel: UILabel) {
         thisLabel.translatesAutoresizingMaskIntoConstraints = false
         thisLabel.textAlignment = .left
-        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
+//        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
+        thisLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
     }
 }

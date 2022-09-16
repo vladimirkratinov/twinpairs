@@ -40,6 +40,7 @@
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
+		F7D7D5AD28D501BC0004F936 /* Staatliches-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */; };
 		F7E1652228C2BA63004089E9 /* CardListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E1652128C2BA63004089E9 /* CardListModel.swift */; };
 		F7E50B1728B0C02D00DCA3BF /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */; };
 		F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E53529289F6AE10019B770 /* MenuInterface.swift */; };
@@ -93,6 +94,7 @@
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
+		F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Staatliches-Regular.ttf"; sourceTree = "<group>"; };
 		F7E1652128C2BA63004089E9 /* CardListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListModel.swift; sourceTree = "<group>"; };
 		F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		F7E53529289F6AE10019B770 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				F7815855289CBA8F0016A41D /* Model */,
 				F7815854289CBA850016A41D /* View */,
 				F7815853289CBA7C0016A41D /* Controller */,
+				F7D7D5A928D501380004F936 /* Fonts */,
 				F781AD8328931C4F002993E7 /* AudioFX */,
 				F711938F2890C5EF00BC1DAA /* Main.storyboard */,
 				F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */,
@@ -239,6 +242,14 @@
 			path = AudioFX;
 			sourceTree = "<group>";
 		};
+		F7D7D5A928D501380004F936 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,6 +313,7 @@
 				F7F0A7D928B9D2D400AD5EA3 /* magic.flac in Resources */,
 				F7C2626228B1C62700A24724 /* Images.bundle in Resources */,
 				F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */,
+				F7D7D5AD28D501BC0004F936 /* Staatliches-Regular.ttf in Resources */,
 				F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */,
 				F781AD8028931C40002993E7 /* victory.wav in Resources */,
 				F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */,

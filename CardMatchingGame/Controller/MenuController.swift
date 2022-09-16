@@ -79,19 +79,21 @@ class MenuController: UIViewController {
         let ceremonial =    AudioFileKey.Ceremonial.rawValue
         let mp3File =       AudioTypeKey.mp3.rawValue
         
-        switch randomNumber {
-        case 1: try? self.audioFX.playBackgroundMusic(file: snowfall, type: mp3File)
-        case 2: try? self.audioFX.playBackgroundMusic(file: ceremonial, type: mp3File)
-        default: return
+        if !Properties.generalBackgroundSoundIsMutedForTestPurposes {
+            switch randomNumber {
+            case 1: try? self.audioFX.playBackgroundMusic(file: snowfall, type: mp3File)
+            case 2: try? self.audioFX.playBackgroundMusic(file: ceremonial, type: mp3File)
+            default: return
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //background:
-        menuInterface.setGradientBackground()
+//        menuInterface.setGradientBackground()
         //animation:
-        menuInterface.backgroundImageView.pulsateSlow()
+//        menuInterface.backgroundImageView.pulsateSlow()
         //update Coins label:
         menuInterface.coins = Properties.coins
         

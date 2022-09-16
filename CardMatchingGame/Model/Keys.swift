@@ -11,6 +11,17 @@ enum CoinsKey: String {
     case coins = "Coins"
 }
 
+enum FigmaKey: String {
+    case backgroundCardList1 = "BackgroundList1"
+    case backgroundCardList2 = "BackgroundList2"
+    case backgroundGame = "BackgroundGame"
+    case backgroundMenu = "BackgroundMenu"
+    case backgroundSettings = "BackgroundSettings"
+    case backgroundGameOver = "BackgroundGameOver"
+    case logo = "Logo"
+    case settings = "Settings"
+}
+
 enum ImageKey: String {
     case wood1 = "wood1"
     case wood2 = "wood2"
@@ -38,6 +49,8 @@ enum ImageKey: String {
 }
 
 enum FontKey: String {
+    case staatliches =                      "Staatliches-Regular"
+    
     case FuturaExtraBold =                  "Futura-CondensedExtraBold"
     case AcademyEngravedLetPlain =          "AcademyEngravedLetPlain"
     case AmericanTypewriter =               "AmericanTypewriter"

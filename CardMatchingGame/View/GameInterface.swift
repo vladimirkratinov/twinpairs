@@ -63,6 +63,8 @@ class GameInterface: UIView {
     static var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
+        
         backgroundImageView.backgroundColor = .white
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -239,11 +241,20 @@ class GameInterface: UIView {
         settingsView.translatesAutoresizingMaskIntoConstraints = false
         settingsView.isHidden = true
         settingsView.alpha = 1
-        settingsView.layer.borderWidth = 5
-        settingsView.layer.cornerRadius = 20
-        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
+        settingsView.layer.borderWidth = 0
+        settingsView.layer.cornerRadius = 0
+//        settingsView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
         settingsView.layer.borderColor = UIColor.black.cgColor
         return settingsView
+    }()
+    
+    lazy var settingsBackground: UIImageView = {
+        let settingsBackground = UIImageView(frame: .zero)
+        settingsBackground.alpha = 1
+        settingsBackground.image = UIImage(named: FigmaKey.settings.rawValue)
+        settingsBackground.contentMode = .scaleAspectFill
+        settingsBackground.translatesAutoresizingMaskIntoConstraints = false
+        return settingsBackground
     }()
     
     //MARK: - Settings - Labels:
@@ -269,12 +280,12 @@ class GameInterface: UIView {
         return settingsVibration
     }()
     
-    lazy var settingsBackground: UILabel = {
-       let settingsBackground = UILabel()
-        settingsBackground.text = "Background"
-        setupSettingsLabels(settingsBackground)
-        return settingsBackground
-    }()
+//    lazy var settingsBackground: UILabel = {
+//       let settingsBackground = UILabel()
+//        settingsBackground.text = "Background"
+//        setupSettingsLabels(settingsBackground)
+//        return settingsBackground
+//    }()
     
     //MARK: - Settings - Buttons:
     
@@ -317,13 +328,13 @@ class GameInterface: UIView {
         return muteVibrationButton
     }()
     
-    lazy var backgroundButton: UIButton = {
-        let backgroundButton = UIButton()
-        backgroundButton.setTitle(" Change ", for: .normal)
-        backgroundButton.backgroundColor = .systemPink
-        setupSettingsButtons(backgroundButton)
-        return backgroundButton
-    }()
+//    lazy var backgroundButton: UIButton = {
+//        let backgroundButton = UIButton()
+//        backgroundButton.setTitle(" Change ", for: .normal)
+//        backgroundButton.backgroundColor = .systemPink
+//        setupSettingsButtons(backgroundButton)
+//        return backgroundButton
+//    }()
     
     lazy var quitButton: UIButton = {
         let quitButton = UIButton()
@@ -382,12 +393,15 @@ class GameInterface: UIView {
         settingsView.addSubview(settingsMusic)
         settingsView.addSubview(settingsSound)
         settingsView.addSubview(settingsVibration)
-        settingsSound.addSubview(settingsBackground)
+//        settingsSound.addSubview(settingsBackground)
         
         settingsView.addSubview(muteMusicButton)
         settingsView.addSubview(muteSoundButton)
         settingsView.addSubview(muteVibrationButton)
-        settingsView.addSubview(backgroundButton)
+//        settingsView.addSubview(backgroundButton)
+        
+        settingsView.addSubview(settingsBackground)
+        settingsView.sendSubviewToBack(settingsBackground)
         
         settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
@@ -428,48 +442,58 @@ class GameInterface: UIView {
             woodenBack.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 60),
             woodenBack.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
-            //settings:
-            settingsView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor, constant: 30),
-            settingsView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor, constant: -30),
+            //MARK: - Settings:
+            
+            settingsView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor, constant: 0),
+            settingsView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor, constant: 0),
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
             settingsView.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             settingsView.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
             
-            settingsMusic.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 20),
-            settingsMusic.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+            settingsBackground.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
+            settingsBackground.topAnchor.constraint(equalTo: settingsView.topAnchor),
+            settingsBackground.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor),
             
-            settingsSound.topAnchor.constraint(equalTo: settingsMusic.bottomAnchor, constant: 20),
-            settingsSound.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            //MARK: - Settings Labels:
             
-            settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 20),
-            settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
+            settingsMusic.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 60),
+            settingsMusic.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            settingsBackground.topAnchor.constraint(equalTo: settingsVibration.bottomAnchor, constant: 20),
-            settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
-
-            muteMusicButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteMusicButton.topAnchor.constraint(equalTo: settingsMusic.topAnchor, constant: 0),
-            muteMusicButton.widthAnchor.constraint(equalToConstant: 80),
+            settingsSound.topAnchor.constraint(equalTo: settingsMusic.bottomAnchor, constant: 23),
+            settingsSound.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            muteSoundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteSoundButton.topAnchor.constraint(equalTo: settingsSound.topAnchor, constant: 0),
-            muteSoundButton.widthAnchor.constraint(equalToConstant: 80),
+            settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 23),
+            settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            muteVibrationButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            muteVibrationButton.topAnchor.constraint(equalTo: settingsVibration.topAnchor, constant: 0),
-            muteVibrationButton.widthAnchor.constraint(equalToConstant: 80),
+            //MARK: - Settings Buttons:
             
-            backgroundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            backgroundButton.topAnchor.constraint(equalTo: settingsBackground.topAnchor, constant: 0),
-            backgroundButton.widthAnchor.constraint(equalToConstant: 80),
+            muteMusicButton.topAnchor.constraint(equalTo: settingsView.topAnchor, constant: 58),
+            muteMusicButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteMusicButton.widthAnchor.constraint(equalToConstant: 77),
+            muteMusicButton.heightAnchor.constraint(equalToConstant: 34),
             
-            quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -20),
-            quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
-            quitButton.widthAnchor.constraint(equalToConstant: 100),
+            muteSoundButton.topAnchor.constraint(equalTo: muteMusicButton.bottomAnchor, constant: 19),
+            muteSoundButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteSoundButton.widthAnchor.constraint(equalToConstant: 77),
+            muteSoundButton.heightAnchor.constraint(equalToConstant: 34),
             
-            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 20),
-            rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -20),
-            rateButton.widthAnchor.constraint(equalToConstant: 100),
+            muteVibrationButton.topAnchor.constraint(equalTo: muteSoundButton.bottomAnchor, constant: 19),
+            muteVibrationButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -56),
+            muteVibrationButton.widthAnchor.constraint(equalToConstant: 77),
+            muteVibrationButton.heightAnchor.constraint(equalToConstant: 34),
+                        
+            rateButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
+            rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
+            rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
+            rateButton.widthAnchor.constraint(equalToConstant: 130),
+            rateButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            quitButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
+            quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -52),
+            quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
+            quitButton.widthAnchor.constraint(equalToConstant: 130),
+            quitButton.heightAnchor.constraint(equalToConstant: 44),
             
             //Views:
             buttonsView.topAnchor.constraint(equalTo: woodenBack.bottomAnchor, constant: 0),
@@ -546,15 +570,16 @@ class GameInterface: UIView {
     func setupSettingsButtons(_ thisButton: UIButton) {
         thisButton.translatesAutoresizingMaskIntoConstraints = false
         thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
+//        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
+        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
         thisButton.setTitleColor(UIColor.black, for: .normal)
         thisButton.layer.borderColor = UIColor.black.cgColor
-        thisButton.layer.borderWidth = 3
-        thisButton.layer.cornerRadius = 10
+        thisButton.layer.borderWidth = 0
+        thisButton.layer.cornerRadius = 8
         thisButton.isUserInteractionEnabled = true
         thisButton.layer.shadowColor = UIColor.black.cgColor
         thisButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        thisButton.layer.shadowRadius = 1
+        thisButton.layer.shadowRadius = 3
         thisButton.layer.shadowOpacity = 1.0
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
@@ -563,6 +588,7 @@ class GameInterface: UIView {
     func setupSettingsLabels(_ thisLabel: UILabel) {
         thisLabel.translatesAutoresizingMaskIntoConstraints = false
         thisLabel.textAlignment = .left
-        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
+//        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
+        thisLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
     }
 }

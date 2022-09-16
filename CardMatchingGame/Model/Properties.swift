@@ -24,6 +24,8 @@ struct Properties {
     static var hideAdminButtons = false
     //debug gameOver:
     static var gameIsOver = false
+    //turn off music:
+    static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

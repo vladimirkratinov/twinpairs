@@ -38,7 +38,7 @@ class HardcoreController: UIViewController {
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
-        gameInterface.backgroundButton.addTarget(self, action: #selector(backgroundButtonTapped), for: .touchUpInside)
+//        gameInterface.backgroundButton.addTarget(self, action: #selector(backgroundButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
