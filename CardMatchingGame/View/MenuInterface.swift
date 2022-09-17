@@ -94,7 +94,7 @@ class MenuInterface: UIView {
         let playButton = UIButton()
         playButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysOriginal), for: .normal)
         playButton.titleLabel?.textAlignment = .left
-        playButton.setTitle("Classic", for: .normal)
+        playButton.setTitle("Play", for: .normal)
         setupAppearence(playButton)
         playButton.backgroundColor = UIColor(red: 0.20, green: 0.89, blue: 0.27, alpha: 1.00)
         return playButton
@@ -102,7 +102,7 @@ class MenuInterface: UIView {
     
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
-        timeModeButton.setTitle("Time", for: .normal)
+        timeModeButton.setTitle("Time Mode", for: .normal)
         timeModeButton.setImage(UIImage(systemName: "clock.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(timeModeButton)
         timeModeButton.backgroundColor = UIColor(red: 0.95, green: 0.75, blue: 0.36, alpha: 1.00)
