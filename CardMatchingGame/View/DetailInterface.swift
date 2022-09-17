@@ -21,8 +21,8 @@ class DetailInterface: UIView {
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.8
-        backgroundImageView.image = UIImage(named: "LaunchScreen1")
+        backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundCardList2.rawValue)
         backgroundImageView.contentMode = .scaleToFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView

@@ -14,18 +14,18 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 15
+    var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
-    static var uiLabelsSize: CGFloat = 25
-    static var uiLabelsFont = FontKey.AmericanTypewriterCondensedBold.rawValue
+    static var uiLabelsSize: CGFloat = 23
+    static var uiLabelsFont = FontKey.staatliches.rawValue
     //Admin Functions:
     static var hideAdminButtons = false
     //debug gameOver:
     static var gameIsOver = false
     //turn off music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = true
+    static var generalBackgroundSoundIsMutedForTestPurposes = false
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

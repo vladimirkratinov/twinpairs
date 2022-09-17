@@ -36,9 +36,8 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.8
-//        backgroundImageView.layer.zPosition = -1
-        backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
+        backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundCardList1.rawValue)
         backgroundImageView.contentMode = .scaleToFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -47,11 +46,11 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = palette.imperialPrimer
+//        view.backgroundColor = palette.imperialPrimer
 //        let name = Properties.selectedSetName
 //        title = "\(name)"
 //
-        
+        navigationController?.isToolbarHidden = true
         navigationController?.toolbar.tintColor = .black
         navigationController?.toolbar.barTintColor = palette.wildCarribeanGrean
         navigationController?.toolbar.layer.zPosition = 1
@@ -179,7 +178,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.setToolbarHidden(false, animated: false)
+//        navigationController?.setToolbarHidden(true, animated: false)
         
         //slide animation only after CollectionView:
         if !animationHasBeenShown {
@@ -192,7 +191,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setToolbarHidden(false, animated: false)
+//        navigationController?.setToolbarHidden(true, animated: false)
 
         collectionView?.animateVisibleCells()
         
@@ -205,7 +204,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //DON'T TOUCH THIS!:
-        navigationController?.setToolbarHidden(true, animated: false)
+//        navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -218,6 +217,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @objc func selectTapped() {
         if let safeString = Properties.selectedCollection.first {
+            print(safeString)
             Properties.selectedCardList = safeString
             print("Selected as main: \(safeString)")
             
@@ -341,21 +341,21 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-
-    if(velocity.y > 0) {
-        //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
-//            self.navigationController?.setNavigationBarHidden(true, animated: true)                       //NAV BAR HERE:
-            self.navigationController?.setToolbarHidden(true, animated: true)
-            print("Hide")
-        }, completion: nil)
-
-    } else {
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
-            self.navigationController?.setToolbarHidden(false, animated: true)
-            print("Unhide")
-        }, completion: nil)
-      }
+//
+//    if(velocity.y > 0) {
+//        //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
+//        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+////            self.navigationController?.setNavigationBarHidden(true, animated: true)                       //NAV BAR HERE:
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+//            print("Hide")
+//        }, completion: nil)
+//
+//    } else {
+//        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
+////            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
+//            self.navigationController?.setToolbarHidden(false, animated: true)
+//            print("Unhide")
+//        }, completion: nil)
+//      }
    }
 }

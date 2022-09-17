@@ -28,7 +28,7 @@ class DetailController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setToolbarHidden(true, animated: false)
+//        navigationController?.setToolbarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class DetailController: UIViewController {
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
             
             detailInterface.detailImageButton.setImage(image, for: .normal)
-            detailInterface.backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
+//            detailInterface.backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
         }
     }
     

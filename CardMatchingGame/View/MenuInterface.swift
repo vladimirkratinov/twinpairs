@@ -40,14 +40,26 @@ class MenuInterface: UIView {
         return coverImageView
     }()
     
+    lazy var hub: UIView = {
+        let hub = UIView()
+        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
+        hub.translatesAutoresizingMaskIntoConstraints = false
+        hub.layer.borderWidth = 0
+        hub.alpha = 0
+        return hub
+    }()
+    
     //MARK: - Labels:
     
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .white
+        titleLabel.alpha = 0.5
         titleLabel.textAlignment = .center
-        titleLabel.text = "MATCH PAIR GAME (v.0.5)"
-        titleLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedLight.rawValue, size: 25)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.text = "MATCH PAIR"
+        titleLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
         return titleLabel
     }()
     
@@ -63,55 +75,62 @@ class MenuInterface: UIView {
         coinLabel.textColor = UIColor.black
         coinLabel.textAlignment = .left
         coinLabel.text = "🪙 \(coins)"
-        coinLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
+        coinLabel.font = UIFont(name: Properties.uiLabelsFont, size: Properties.uiLabelsSize)
         return coinLabel
     }()
 
     //MARK: - Buttons:
     
+    lazy var difficultyButton: UIButton = {
+        let difficultyButton = UIButton()
+        difficultyButton.setTitle("Easy", for: .normal)
+        difficultyButton.setImage(UIImage(systemName: "person.2.wave.2")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        setupAppearence(difficultyButton)
+        difficultyButton.backgroundColor = .green
+        return difficultyButton
+    }()
+    
     lazy var playButton: UIButton = {
         let playButton = UIButton()
+        playButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        playButton.titleLabel?.textAlignment = .left
         playButton.setTitle("Classic", for: .normal)
         setupAppearence(playButton)
+        playButton.backgroundColor = UIColor(red: 0.20, green: 0.89, blue: 0.27, alpha: 1.00)
         return playButton
     }()
     
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
         timeModeButton.setTitle("Time", for: .normal)
+        timeModeButton.setImage(UIImage(systemName: "clock.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(timeModeButton)
-        timeModeButton.alpha = 1
+        timeModeButton.backgroundColor = UIColor(red: 0.95, green: 0.75, blue: 0.36, alpha: 1.00)
         return timeModeButton
     }()
     
     lazy var hardcoreModeButton: UIButton = {
         let hardcoreModeButton = UIButton()
         hardcoreModeButton.setTitle("Hardcore", for: .normal)
+        hardcoreModeButton.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(hardcoreModeButton)
-        hardcoreModeButton.alpha = 1
+        hardcoreModeButton.backgroundColor = UIColor(red: 0.86, green: 0.44, blue: 0.44, alpha: 1.00)
         return hardcoreModeButton
     }()
     
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()
         collectionButton.setTitle("Collection", for: .normal)
+        collectionButton.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(collectionButton)
-        collectionButton.backgroundColor = palette.cyanite
+//        collectionButton.backgroundColor = palette.cyanite
+        collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
         return collectionButton
     }()
-    
-    lazy var difficultyButton: UIButton = {
-        let difficultyButton = UIButton()
-        difficultyButton.setTitle("Easy", for: .normal)
-        setupAppearence(difficultyButton)
-        difficultyButton.alpha = 1
-        difficultyButton.backgroundColor = .green
-        return difficultyButton
-    }()
-    
+
     lazy var resetButton: UIButton = {
        let resetButton = UIButton()
-        resetButton.setTitle(" ⚠️ RESET ", for: .normal)
+        resetButton.setTitle("  reset  ", for: .normal)
         setupAppearence(resetButton)
         resetButton.backgroundColor = .red
         return resetButton
@@ -119,7 +138,7 @@ class MenuInterface: UIView {
     
     lazy var addCoinButton: UIButton = {
        let addCoinButton = UIButton()
-        addCoinButton.setTitle(" 🪙 Add Coin ", for: .normal)
+        addCoinButton.setTitle("  🪙 Add Coin  ", for: .normal)
         setupAppearence(addCoinButton)
         addCoinButton.backgroundColor = .green
         return addCoinButton
@@ -157,7 +176,7 @@ class MenuInterface: UIView {
         let settingsBackground = UIImageView(frame: .zero)
         settingsBackground.alpha = 1
         settingsBackground.image = UIImage(named: FigmaKey.settings.rawValue)
-        settingsBackground.contentMode = .scaleAspectFill
+        settingsBackground.contentMode = .redraw
         settingsBackground.translatesAutoresizingMaskIntoConstraints = false
         return settingsBackground
     }()
@@ -231,6 +250,7 @@ class MenuInterface: UIView {
     
     func setupSubviews() {
         menuView.addSubview(coverImageView)
+        menuView.addSubview(hub)
         
         menuView.addSubview(titleLabel)
         menuView.addSubview(coinLabel)
@@ -281,59 +301,68 @@ class MenuInterface: UIView {
             coverImageView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
             coverImageView.bottomAnchor.constraint(equalTo: menuView.bottomAnchor),
             
-            coinLabel.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            hub.leadingAnchor.constraint(equalTo: menuView.leadingAnchor),
+            hub.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
+            hub.topAnchor.constraint(equalTo: menuView.topAnchor, constant: 52),
+            hub.widthAnchor.constraint(equalTo: menuView.widthAnchor),
+            hub.heightAnchor.constraint(equalToConstant: 53),
+    
+            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
+            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
+
+            settingsButton.topAnchor.constraint(equalTo: hub.topAnchor, constant: 6),
+            settingsButton.bottomAnchor.constraint(equalTo: hub.bottomAnchor, constant: -6),
+            settingsButton.trailingAnchor.constraint(equalTo: hub.trailingAnchor, constant: -14),
+            settingsButton.widthAnchor.constraint(equalToConstant: 40),
+            settingsButton.heightAnchor.constraint(equalToConstant: 40),
             
-            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: menuView.layoutMarginsGuide.topAnchor, constant: 50),
+            titleLabel.bottomAnchor.constraint(equalTo: menuView.bottomAnchor, constant: -45),
+            titleLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             
             //MARK: - Buttons:
             
-            difficultyButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            difficultyButton.topAnchor.constraint(greaterThanOrEqualTo: hub.topAnchor, constant: 200),
             difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             difficultyButton.heightAnchor.constraint(equalToConstant: 57),
             difficultyButton.widthAnchor.constraint(equalToConstant: 137),
             
-            playButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 30),
+            playButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 15),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 57), // 50
             playButton.widthAnchor.constraint(equalToConstant: 137), // 120
             
-            timeModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 30),
+            timeModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 15),
             timeModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             timeModeButton.heightAnchor.constraint(equalToConstant: 57),
             timeModeButton.widthAnchor.constraint(equalToConstant: 137),
             
-            hardcoreModeButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 30),
+            hardcoreModeButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 15),
             hardcoreModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             hardcoreModeButton.heightAnchor.constraint(equalToConstant: 57),
             hardcoreModeButton.widthAnchor.constraint(equalToConstant: 137),
             
-            collectionButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 30),
+            collectionButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 15),
             collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             collectionButton.heightAnchor.constraint(equalToConstant: 57),
             collectionButton.widthAnchor.constraint(equalToConstant: 137),
 
             resetButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 30),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            resetButton.heightAnchor.constraint(equalToConstant: 57),
-            resetButton.widthAnchor.constraint(equalToConstant: 137),
+            resetButton.heightAnchor.constraint(equalToConstant: 30),
+            resetButton.widthAnchor.constraint(equalToConstant: 80),
             
-            addCoinButton.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 30),
+            addCoinButton.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 10),
             addCoinButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            addCoinButton.heightAnchor.constraint(equalToConstant: 57),
-            addCoinButton.widthAnchor.constraint(equalToConstant: 137),
-            addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: menuView.bottomAnchor, constant: -170),
-            
-            settingsButton.topAnchor.constraint(equalTo: menuView.layoutMarginsGuide.topAnchor, constant: -10),
-            settingsButton.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
-            settingsButton.widthAnchor.constraint(equalToConstant: 50),
-            settingsButton.heightAnchor.constraint(equalToConstant: 50),
+            addCoinButton.heightAnchor.constraint(equalToConstant: 30),
+            addCoinButton.widthAnchor.constraint(equalToConstant: 80),
+//            addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: menuView.bottomAnchor, constant: -170),
             
             //MARK: - Settings:
             
-            settingsView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 0),
-            settingsView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: 0),
+            settingsView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor),
+            settingsView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
             settingsView.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             settingsView.centerYAnchor.constraint(equalTo: menuView.centerYAnchor),
@@ -403,9 +432,9 @@ class MenuInterface: UIView {
         thisButton.layer.borderWidth = 0
         thisButton.layer.cornerRadius = 10
         thisButton.layer.shadowColor = UIColor.black.cgColor
-        thisButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-        thisButton.layer.shadowRadius = 6
-        thisButton.layer.shadowOpacity = 1.0
+        thisButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        thisButton.layer.shadowRadius = 5
+        thisButton.layer.shadowOpacity = 0.5
         thisButton.isUserInteractionEnabled = true
 //        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
         thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
@@ -432,6 +461,7 @@ class MenuInterface: UIView {
         thisButton.layer.shadowOpacity = 1.0
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
+        thisButton.tintColor = .red
     }
     
     func setupSettingsLabels(_ thisLabel: UILabel) {

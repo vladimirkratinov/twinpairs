@@ -10,6 +10,7 @@ import Gemini
 
 protocol CollectionViewCellDelegate: AnyObject {
     func touchUpInside(delegatedFrom cell: CollectionViewCell)
+    func selectButtonTapped(delegatedFrom cell: CollectionViewCell)
 }
 
 class CollectionViewCell: GeminiCell {
@@ -28,7 +29,7 @@ class CollectionViewCell: GeminiCell {
     
     var myShadowView: UIImageView = {
         let myShadowView = UIImageView()
-        myShadowView.image = UIImage(named: "cardFrame")
+//        myShadowView.image = UIImage(named: "cardFrame")
         myShadowView.contentMode = .scaleToFill
         myShadowView.clipsToBounds = true
         return myShadowView
@@ -37,10 +38,10 @@ class CollectionViewCell: GeminiCell {
     var lockerImageView: UIImageView = {
         let lockerImageView = UIImageView()
         lockerImageView.translatesAutoresizingMaskIntoConstraints = false
-        lockerImageView.image = UIImage(named: ImageKey.lock2.rawValue)
+        lockerImageView.image = UIImage(named: FigmaKey.lock.rawValue)
 //        lockerImageView.backgroundColor = .blue
         lockerImageView.tintColor = UIColor.systemPink
-        lockerImageView.contentMode = .scaleToFill
+        lockerImageView.contentMode = .scaleAspectFit
         lockerImageView.clipsToBounds = false
         return lockerImageView
     }()
@@ -51,22 +52,44 @@ class CollectionViewCell: GeminiCell {
         unlockButton.translatesAutoresizingMaskIntoConstraints = false
         unlockButton.setTitle(" Unlock ", for: .normal)
         unlockButton.backgroundColor = UIColor.systemGreen
-        unlockButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 18)
+        unlockButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
         unlockButton.titleLabel?.adjustsFontSizeToFitWidth = true
         unlockButton.setTitleColor(UIColor.black, for: .normal)
         unlockButton.layer.borderColor = UIColor.black.cgColor
         unlockButton.tag += 1
-        unlockButton.layer.borderWidth = 3
+        unlockButton.layer.borderWidth = 0
         unlockButton.layer.cornerRadius = 10
         unlockButton.isUserInteractionEnabled = true
         unlockButton.layer.shadowColor = UIColor.black.cgColor
         unlockButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        unlockButton.layer.shadowRadius = 1
+        unlockButton.layer.shadowRadius = 3
         unlockButton.layer.shadowOpacity = 1.0
         unlockButton.layer.shouldRasterize = true
         unlockButton.layer.rasterizationScale = UIScreen.main.scale
-        
         return unlockButton
+    }()
+    
+    var selectButton: UIButton = {
+        let selectButton = UIButton()
+        selectButton.alpha = 1
+        selectButton.translatesAutoresizingMaskIntoConstraints = false
+        selectButton.setTitle(" Select ", for: .normal)
+        selectButton.backgroundColor = UIColor.systemGreen
+        selectButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
+        selectButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        selectButton.setTitleColor(UIColor.black, for: .normal)
+        selectButton.layer.borderColor = UIColor.black.cgColor
+        selectButton.tag += 1
+        selectButton.layer.borderWidth = 0
+        selectButton.layer.cornerRadius = 10
+        selectButton.isUserInteractionEnabled = true
+        selectButton.layer.shadowColor = UIColor.black.cgColor
+        selectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        selectButton.layer.shadowRadius = 3
+        selectButton.layer.shadowOpacity = 1.0
+        selectButton.layer.shouldRasterize = true
+        selectButton.layer.rasterizationScale = UIScreen.main.scale
+        return selectButton
     }()
     
     var myLabel: UILabel = {
@@ -79,10 +102,10 @@ class CollectionViewCell: GeminiCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.clipsToBounds = true
-        contentView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood2.rawValue)!)
+        contentView.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.paperTexture.rawValue)!)
         contentView.contentMode = .center
 
-//        contentView.layer.borderWidth = 5.0
+        contentView.layer.borderWidth = 2
         contentView.layer.cornerRadius = 20
         contentView.layer.borderColor = UIColor.black.cgColor
 
@@ -111,6 +134,7 @@ class CollectionViewCell: GeminiCell {
         contentView.addSubview(myShadowView)
         contentView.addSubview(lockerImageView)
         contentView.addSubview(unlockButton)
+        contentView.addSubview(selectButton)
     }
     
     required init?(coder: NSCoder) {
@@ -121,14 +145,14 @@ class CollectionViewCell: GeminiCell {
         super.layoutSubviews()
         
         myLabel.frame = CGRect(x: 0,
-                               y: contentView.frame.size.height-50,
-                               width: contentView.frame.size.width-10,
-                               height: 50)
+                               y: 5, //contentView.frame.size.height-50
+                               width: contentView.frame.size.width,
+                               height: 20)
         
         myImageView.frame = CGRect(x: 0,
-                                   y: 10,
-                                   width: contentView.frame.size.width-10,
-                                   height: contentView.frame.size.height-50)
+                                   y: 30,
+                                   width: contentView.frame.size.width,
+                                   height: contentView.frame.size.height-60)
         
         myShadowView.frame = CGRect(x: 0,
                                    y: 0,
@@ -137,31 +161,42 @@ class CollectionViewCell: GeminiCell {
         
         lockerImageView.frame = CGRect(x: 0,
                                        y: 0,
-                                   width: contentView.frame.size.width/2,
-                                   height: contentView.frame.size.height/2)
+                                   width: contentView.frame.size.width,
+                                   height: contentView.frame.size.height)
         
         unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
-                                    y: contentView.frame.size.height/1.3,
+                                    y: contentView.frame.size.height/1,
+                                   width: 100,
+                                   height: 44)
+        
+        selectButton.frame = CGRect(x: contentView.frame.size.width/5,
+                                    y: contentView.frame.size.height/1,
                                    width: 100,
                                    height: 44)
         
         NSLayoutConstraint.activate([
-            unlockButton.bottomAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: -5),
-            unlockButton.centerXAnchor.constraint(equalTo: myLabel.centerXAnchor),
-            unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
-            unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+            unlockButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            unlockButton.centerXAnchor.constraint(equalTo: myImageView.centerXAnchor),
+            unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 65),
+            unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
             
-            lockerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            lockerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
-            lockerImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
-            lockerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
+            selectButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            selectButton.centerXAnchor.constraint(equalTo: myImageView.centerXAnchor),
+            selectButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 65),
+            selectButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            
+            lockerImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            lockerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            lockerImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            lockerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
         
         unlockButton.addTarget(self, action: #selector(unlockButtonTapped), for: .touchUpInside)
+        selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
     }
     
     public func configure(label: String, image: UIImage) {
-        myLabel.font = UIFont(name: "BradleyHandITCTT-Bold", size: 20)
+        myLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
         myLabel.text = label
         myLabel.adjustsFontSizeToFitWidth = true
         myImageView.image = image
@@ -181,6 +216,12 @@ class CollectionViewCell: GeminiCell {
     @objc func unlockButtonTapped(_ sender: UIButton) {
         sender.bounce(sender)
         delegate?.touchUpInside(delegatedFrom: self)
+    }
+    
+    @objc func selectButtonTapped(_ sender: UIButton) {
+        sender.bounce(sender)
+        delegate?.selectButtonTapped(delegatedFrom: self)
+        
     }
 }
 

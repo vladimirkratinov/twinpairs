@@ -60,10 +60,18 @@ class GameInterface: UIView {
         return gameView
     }()
     
+    lazy var hub: UIView = {
+        let hub = UIView()
+        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
+        hub.translatesAutoresizingMaskIntoConstraints = false
+        hub.layer.borderWidth = 0
+        return hub
+    }()
+    
     static var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
         
         backgroundImageView.backgroundColor = .white
         backgroundImageView.contentMode = .scaleAspectFill
@@ -92,7 +100,7 @@ class GameInterface: UIView {
     lazy var woodenBack: UIImageView = {
         let woodenBack = UIImageView()
         woodenBack.image = UIImage(named: "woodenLog2.png")
-        woodenBack.alpha = 0.5
+        woodenBack.alpha = 0
         woodenBack.translatesAutoresizingMaskIntoConstraints = false
         woodenBack.layer.shadowColor = UIColor.black.cgColor
         woodenBack.layer.shadowOffset = CGSize(width: 5, height: 5)
@@ -252,7 +260,7 @@ class GameInterface: UIView {
         let settingsBackground = UIImageView(frame: .zero)
         settingsBackground.alpha = 1
         settingsBackground.image = UIImage(named: FigmaKey.settings.rawValue)
-        settingsBackground.contentMode = .scaleAspectFill
+        settingsBackground.contentMode = .redraw
         settingsBackground.translatesAutoresizingMaskIntoConstraints = false
         return settingsBackground
     }()
@@ -294,6 +302,7 @@ class GameInterface: UIView {
         settingsButton.alpha = 1
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.setImage(UIImage(named: ImageKey.SettingsButton.rawValue), for: .normal)
+//        settingsButton.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
         settingsButton.isUserInteractionEnabled = true
         settingsButton.layer.shadowColor = UIColor.black.cgColor
         settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -388,6 +397,8 @@ class GameInterface: UIView {
         gameView.addSubview(statisticsView)
         gameView.addSubview(woodenBack)
         gameView.addSubview(plusCoinsAnimationsLabel)
+        gameView.addSubview(hub)
+        gameView.bringSubviewToFront(hub)
         
         //Inside Settings:
         settingsView.addSubview(settingsMusic)
@@ -434,10 +445,10 @@ class GameInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            GameInterface.backgroundImageView.topAnchor.constraint(equalTo: gameView.topAnchor),
-            GameInterface.backgroundImageView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
-            GameInterface.backgroundImageView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
-            GameInterface.backgroundImageView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
+//            GameInterface.backgroundImageView.topAnchor.constraint(equalTo: gameView.topAnchor),
+//            GameInterface.backgroundImageView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
+//            GameInterface.backgroundImageView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
+//            GameInterface.backgroundImageView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
             //top level:
             woodenBack.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 60),
             woodenBack.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
@@ -449,6 +460,12 @@ class GameInterface: UIView {
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
             settingsView.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             settingsView.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
+            
+            hub.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
+            hub.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
+            hub.topAnchor.constraint(equalTo: gameView.topAnchor, constant: 52),
+            hub.widthAnchor.constraint(equalTo: gameView.widthAnchor),
+            hub.heightAnchor.constraint(equalToConstant: 53),
             
             settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
             settingsBackground.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
@@ -523,25 +540,27 @@ class GameInterface: UIView {
             
             //NEW COINS & PAIRS:
             
-            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
+            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
             
-            pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            pairsLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
             pairsLabel.leadingAnchor.constraint(equalTo: coinLabel.trailingAnchor, constant: 10),
             
 //            flipsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
 //            flipsLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 5),
             
-            difficultylabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
+            difficultylabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
             difficultylabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
-            timeLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-            timeLabel.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -10),
+            timeLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
+            timeLabel.leadingAnchor.constraint(lessThanOrEqualTo: difficultylabel.trailingAnchor, constant: 65),
 
-            settingsButton.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor, constant: -10),
-            settingsButton.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
-            settingsButton.widthAnchor.constraint(equalToConstant: 50),
-            settingsButton.heightAnchor.constraint(equalToConstant: 50),
+            settingsButton.topAnchor.constraint(equalTo: hub.topAnchor, constant: 6),
+            settingsButton.bottomAnchor.constraint(equalTo: hub.bottomAnchor, constant: -6),
+            settingsButton.trailingAnchor.constraint(equalTo: hub.trailingAnchor, constant: -14),
+            settingsButton.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 6),
+            settingsButton.widthAnchor.constraint(equalToConstant: 40),
+            settingsButton.heightAnchor.constraint(equalToConstant: 40),
             
             //Pop-up:
             gameOverLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),

@@ -17,11 +17,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     let palette = Palette()
     var contentLoader = ContentLoader()
     let audioFX = AudioFX()
-    
+    var temporaryIndexPath = Int()
+
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 0.8
-        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
+        backgroundImageView.alpha = 1
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -43,10 +44,10 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 5, bottom: 0, right: 5)
 //        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/5)-4)           //x8 horisontal
         layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+30)  //+15     //x6 horisontal
-        layout.minimumLineSpacing = 0           //default 5
+        layout.minimumLineSpacing = 10           //default 5
         layout.minimumInteritemSpacing = 0       //default 0
         
 //        horizontal x1
@@ -74,9 +75,10 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.backgroundView = backgroundImageView
  
         collectionView.frame = view.bounds
-//        collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: (view.bounds.height))
         
-        configureAnimation()
+        //implement animations:
+//        configureAnimation()
+        
         view.addSubview(collectionView)
         view.addSubview(coinLabel)
         view.bringSubviewToFront(coinLabel)
@@ -121,7 +123,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         navigationController?.toolbar.isHidden = true
-        navigationController?.setToolbarHidden(true, animated: false)
+//        navigationController?.setToolbarHidden(true, animated: false)
         
         navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -133,7 +135,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
+//        navigationController?.setToolbarHidden(true, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -290,6 +292,46 @@ extension CollectionController: CollectionViewCellDelegate {
                     let ac = AlertController.presentAC(confirm, cancel, price: price)
                     
                     self.present(ac, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    //MARK: - selectButtonTapped:
+    func selectButtonTapped(delegatedFrom cell: CollectionViewCell) {
+        if let indexPath = collectionView!.indexPath(for: cell) {
+            print("Button pressed in cell: \(indexPath.item)")
+            
+            //audioFX:
+            let shiny = AudioFileKey.shiny.rawValue
+            audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            
+            if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
+                
+                //if Not locked:
+                if !Properties.collectionOfLockedSets[indexPath.item].isLocked {
+                    
+                    Properties.selectedSetName = Properties.listOfSets[indexPath.item]
+                    Properties.selectedCollection = Properties.cardCollection[indexPath.item]
+                    print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
+                    temporaryIndexPath = indexPath.item
+                    
+                    if let safeString = Properties.selectedCollection.first {
+                        print(safeString)
+                        Properties.selectedCardList = safeString
+                        print("Selected as main: \(safeString)")
+                        
+                        Properties.selectedCardListNumber = temporaryIndexPath
+                        
+                        print("SELECTED INDEXPATH.ITEM: \(Properties.selectedCardListNumber)")
+                        navigationController?.toolbar.barTintColor = palette.fuelTown
+//                        cell.selectButton.backgroundColor = .gray
+                        Properties.cardSetIsSelected = true
+                        print(Properties.cardSetIsSelected)
+                        
+                        
+                        
+                    }
                 }
             }
         }

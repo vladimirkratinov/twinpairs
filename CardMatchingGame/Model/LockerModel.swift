@@ -61,13 +61,18 @@ struct LockerModel: Codable {
             //prepare label and shadow layer before animation
             cell.myLabel.isHidden = false
             cell.myLabel.alpha = 0
+            
             cell.myShadowView.isHidden = false
             cell.myShadowView.alpha = 1
+            
+            cell.selectButton.isHidden = false
+            cell.selectButton.alpha = 0
             
             //animation block:
             UIView.animate(withDuration: 1.0, animations: {
                 cell.myImageView.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.1)
                 cell.unlockButton.layer.transform = CATransform3DMakeTranslation(0, 80, 0)
+                cell.selectButton.alpha = 1
                 cell.myShadowView.alpha = 0
                 cell.myImageView.alpha = 1
                 cell.myLabel.alpha = 1
@@ -85,6 +90,8 @@ struct LockerModel: Codable {
                 cell.myLabel.isHidden = false
                 cell.lockerImageView.isHidden = true
                 cell.unlockButton.isHidden = true
+                cell.selectButton.isHidden = false
+//                cell.selectButton.alpha = 1
             }
             
             //change property in Locker Class:
@@ -113,6 +120,7 @@ struct LockerModel: Codable {
             cell.lockerImageView.isHidden = false
             cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
             cell.myLabel.isHidden = true
+            cell.selectButton.isHidden = true
             cell.myImageView.alpha = 0.5
             
             //price button color & mechanics:
@@ -131,6 +139,7 @@ struct LockerModel: Codable {
             cell.unlockButton.isHidden = true
             cell.myShadowView.isHidden = true
             cell.myLabel.isHidden = false
+            cell.selectButton.isHidden = false
             cell.myLabel.alpha = 1
             cell.myImageView.alpha = 1
         }

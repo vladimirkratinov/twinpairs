@@ -228,12 +228,26 @@ class MenuController: UIViewController {
         if menuInterface.settingsView.isHidden {
             menuInterface.settingsView.isHidden = false
             menuInterface.coverImageView.isHidden = false
-            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = false
+//            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = false
+            
+            menuInterface.resetButton.isHidden = true
+            menuInterface.addCoinButton.isHidden = true
+            menuInterface.difficultyButton.isHidden = true
+
+            menuInterface.settingsView.addSubview(menuInterface.titleLabel)
+            menuInterface.titleLabel.text = "SETTINGS"
             
         } else {
             menuInterface.settingsView.isHidden = true
             menuInterface.coverImageView.isHidden = true
-            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = true
+//            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = true
+            
+            menuInterface.resetButton.isHidden = false
+            menuInterface.addCoinButton.isHidden = false
+            menuInterface.difficultyButton.isHidden = false
+ 
+            menuInterface.menuView.addSubview(menuInterface.titleLabel)
+            menuInterface.titleLabel.text = "MATCH PAIR"
         }
         
     }
