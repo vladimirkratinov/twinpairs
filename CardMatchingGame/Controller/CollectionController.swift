@@ -44,9 +44,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 35, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 40, left: 5, bottom: 1, right: 5)
 //        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/5)-4)           //x8 horisontal
-        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+30)  //+15     //x6 horisontal
+//        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+30)  //+15     //x6 horisontal
+        
+        
+        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/3.6))  //+15     //x6 horisontal
         layout.minimumLineSpacing = 10           //default 5
         layout.minimumInteritemSpacing = 0       //default 0
         
@@ -70,11 +73,13 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.isScrollEnabled = true
         collectionView.isUserInteractionEnabled = true
         collectionView.alwaysBounceHorizontal = true
+//        collectionView.alwaysBounceVertical = true
         
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
- 
+        
         collectionView.frame = view.bounds
+//        collectionView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: view.bounds.height)
         
         //implement animations:
 //        configureAnimation()
@@ -309,10 +314,13 @@ extension CollectionController: CollectionViewCellDelegate {
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 
                 //update UI:
-                for case let item as CollectionViewCell in self.collectionView!.visibleCells {
-                    UIView.animate(withDuration: 1.0, animations: {
-                        item.selectButton.backgroundColor = .green
-                    })
+                if !Properties.collectionOfLockedSets[indexPath.item].isSelected {
+                    for case let item as CollectionViewCell in self.collectionView!.visibleCells {
+                        UIView.animate(withDuration: 1.0, animations: {
+                            item.selectButton.backgroundColor = self.palette.UIGreen
+                            item.selectButton.setTitle("select", for: .normal)
+                        })
+                    }
                 }
                 
                 //if Not locked:

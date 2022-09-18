@@ -114,3 +114,9 @@ enum DifficultyKey: String {
     case medium = "Medium"
     case hard = "Hard"
 }
+
+enum TimeKey: String {
+    case threeMinutes = "3 min."
+    case fiveMinutes = "5 min."
+    case tenMinutes = "10 min."
+}

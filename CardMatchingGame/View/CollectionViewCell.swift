@@ -146,20 +146,20 @@ class CollectionViewCell: GeminiCell {
         NSLayoutConstraint.activate([
             unlockButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             unlockButton.centerXAnchor.constraint(equalTo: myImageView.centerXAnchor),
-            unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 90),
-            unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 35),
+            unlockButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            unlockButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             
             selectButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             selectButton.centerXAnchor.constraint(equalTo: myImageView.centerXAnchor),
-            selectButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 90),
-            selectButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 35),
+            selectButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            selectButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             
             myLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             myLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             myImageView.topAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: 2),
             myImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            myImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
+            myImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
             myImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             myShadowView.topAnchor.constraint(equalTo: contentView.topAnchor),

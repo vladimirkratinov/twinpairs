@@ -29,6 +29,7 @@ class MenuController: UIViewController {
         menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
         menuInterface.difficultyButton.addTarget(self, action: #selector(difficultyButtonTapped), for: .touchUpInside)
+        menuInterface.timeModeButton.addTarget(self, action: #selector(timeModeButtonTapped), for: .touchUpInside)
         
         menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
@@ -135,7 +136,7 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //transition:
-        transitionToVC(duration: 0.2, identifier: "HardcoreController")
+//        transitionToVC(duration: 0.2, identifier: "HardcoreController")
     }
     
     //MARK: - CollectionButtonTapped:
@@ -157,7 +158,11 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        if sender.titleLabel?.text == DifficultyKey.easy.rawValue {
+        if sender.titleLabel?.text == "Difficulty" {
+            sender.setTitle("Easy", for: .normal)
+            Properties.selectedDifficulty = DifficultyKey.easy.rawValue
+            sender.backgroundColor = .green
+        } else if sender.titleLabel?.text == DifficultyKey.easy.rawValue {
             sender.setTitle("Medium", for: .normal)
             Properties.selectedDifficulty = DifficultyKey.medium.rawValue
             sender.backgroundColor = .orange
@@ -175,6 +180,35 @@ class MenuController: UIViewController {
             sender.backgroundColor = .green
             Properties.rows = 3
             Properties.columns = 2
+        }
+    }
+    
+    //MARK: - TimeModeButtonTapped:
+    
+    @objc func timeModeButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        if sender.titleLabel?.text == "Time" {
+            sender.setTitle("3 min.", for: .normal)
+            Properties.standardTimeCounter = 180
+            sender.backgroundColor = .yellow
+        } else if sender.titleLabel?.text == TimeKey.threeMinutes.rawValue {
+            sender.setTitle("5 min.", for: .normal)
+            Properties.standardTimeCounter = 300
+            sender.backgroundColor = .orange
+            
+        } else if sender.titleLabel?.text == TimeKey.fiveMinutes.rawValue {
+            sender.setTitle("10 min.", for: .normal)
+            Properties.standardTimeCounter = 600
+            sender.backgroundColor = .red
+            
+        } else if sender.titleLabel?.text == TimeKey.tenMinutes.rawValue {
+            sender.setTitle("3 min.", for: .normal)
+            Properties.standardTimeCounter = 180
+            sender.backgroundColor = .yellow
         }
     }
     

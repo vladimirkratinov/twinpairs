@@ -20,4 +20,6 @@ struct Palette {
     let stormPetrel = UIColor(red: 0.51, green: 0.58, blue: 0.65, alpha: 1.00)
     let jadeDust = UIColor(red: 0.00, green: 0.82, blue: 0.83, alpha: 1.00)
     let aquaVelvet = UIColor(red: 0.00, green: 0.64, blue: 0.64, alpha: 1.00)
+    
+    let UIGreen = UIColor(red: 0.00, green: 0.66, blue: 0.47, alpha: 1.00)
 }

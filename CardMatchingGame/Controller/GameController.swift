@@ -66,7 +66,7 @@ class GameController: UIViewController {
             let widthButtonsView = self.gameInterface.buttonsView.frame.width
             print("ButtonsView width: \(widthButtonsView)")
             //setup time:
-            self.gameInterface.timeCounter = self.prop.standardTimeCounter
+            self.gameInterface.timeCounter = Properties.standardTimeCounter
             //total time for statistics:
             self.prop.totalTime = self.gameInterface.timeCounter
             print("total time: \(self.prop.totalTime)")
@@ -124,7 +124,7 @@ class GameController: UIViewController {
         let randomCongratulation = Int.random(in: 1...5)
         
         switch randomCongratulation {
-        case 1: gameInterface.nextLevelLabel.text = "Superb!"
+        case 1: gameInterface.nextLevelLabel.text = "Super!"
         case 2: gameInterface.nextLevelLabel.text = "Great!"
         case 3: gameInterface.nextLevelLabel.text = "Amazing!"
         case 4: gameInterface.nextLevelLabel.text = "Well Done!"
@@ -139,29 +139,28 @@ class GameController: UIViewController {
             self.gameInterface.gameOverLabel.pulsate()
         })
         
+        UIView.animate(withDuration: 2, animations: {
+//            self.gameInterface.buttonsView.alpha = 0
+            self.gameInterface.nextLevelLabel.alpha = 0
+        })
+                
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             //remove old subview:
+            
             self.gameInterface.buttonsView.subviews.forEach { $0.removeFromSuperview() }
-            
-            //invalidateTimer:
-//            self.prop.timer.invalidate()
-            
-            self.gameInterface.nextLevelLabel.alpha = 0
-            
+
             //RESET CARDS:
             self.resetCards()
-            //  fixed bug - reset cardButtons array
-                        
-            //update level:
-//            if Properties.rows < 5 && Properties.columns < 4 {
-//                Properties.rows += 1
-//                Properties.columns += 1
-//            }
             
-            self.setupButtons(rows: Properties.rows, columns: Properties.columns)
-            self.loadLevel()
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                UIView.animate(withDuration: 0.6, animations: {
+                    self.gameInterface.buttonsView.alpha = 1
+                    self.setupButtons(rows: Properties.rows, columns: Properties.columns)
+                })
+                self.loadLevel()
+            }
+
             //reset cards color:
             for card in Properties.cardButtons {
                 UIButton.animate(withDuration: 1, animations: {
@@ -293,7 +292,7 @@ class GameController: UIViewController {
             //MARK: - Flip Back
             
             //flip back:
-            let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
+            let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
             sender.setBackgroundImage(backgroundImage, for: .normal)
             
             //flip back animation:
@@ -409,7 +408,7 @@ class GameController: UIViewController {
                     UIView.transition(with: Properties.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //show card cover:
-                    let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
+                    let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
                     Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
                     Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
@@ -544,7 +543,7 @@ class GameController: UIViewController {
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
-                let backgroundImage = UIImage(named: ImageKey.envelope4Large.rawValue)
+                let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
                 cardButton.setTitleColor(prop.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)

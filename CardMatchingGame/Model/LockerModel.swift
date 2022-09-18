@@ -115,6 +115,7 @@ struct LockerModel: Codable {
         //animation block:
         UIView.animate(withDuration: 1.0, animations: {
             cell.selectButton.backgroundColor = .gray
+            cell.selectButton.setTitle("selected", for: .normal)
         })
 
         for i in 0..<Properties.listOfSets.count {
@@ -168,12 +169,15 @@ struct LockerModel: Codable {
     //MARK: - updateUISelectButtons:
         
         static func updateUISelectButtons(cell: CollectionViewCell,index: IndexPath.Index) {
+            let palette = Palette()
+            
             if Properties.collectionOfLockedSets[index].isSelected {
-                cell.selectButton.isEnabled = true
+//                cell.selectButton.isEnabled = true
                 cell.selectButton.backgroundColor = .gray
+                cell.selectButton.setTitle("selected", for: .normal)
             } else { //if not locked
-                cell.selectButton.isEnabled = true
-                cell.selectButton.backgroundColor = .green
+//                cell.selectButton.isEnabled = true
+                cell.selectButton.backgroundColor = palette.UIGreen
             }
         }
 }

@@ -17,7 +17,6 @@
 		F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71193942890C5F000BC1DAA /* LaunchScreen.storyboard */; };
 		F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711939D28910ECE00BC1DAA /* Extensions.swift */; };
 		F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F711BF28289238C300C3E0E8 /* MenuController.swift */; };
-		F7273DF328B8316A00B37F11 /* CollectionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7273DF228B8316A00B37F11 /* CollectionInterface.swift */; };
 		F72837C028ADA788000B9567 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837BF28ADA788000B9567 /* CollectionController.swift */; };
 		F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */; };
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
@@ -71,7 +70,6 @@
 		F71193972890C5F000BC1DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F711939D28910ECE00BC1DAA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F711BF28289238C300C3E0E8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		F7273DF228B8316A00B37F11 /* CollectionInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionInterface.swift; sourceTree = "<group>"; };
 		F72837BF28ADA788000B9567 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 			children = (
 				F7E53529289F6AE10019B770 /* MenuInterface.swift */,
 				F760AF6A289C6EA2007ABE11 /* GameInterface.swift */,
-				F7273DF228B8316A00B37F11 /* CollectionInterface.swift */,
 				F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */,
 				F700123228AEED89007DEA94 /* CardListViewCell.swift */,
 				F72837C528ADC2E8000B9567 /* DetailInterface.swift */,
@@ -386,7 +383,6 @@
 				F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */,
 				F7F2343828B5B609005C75A4 /* LockerModel.swift in Sources */,
 				F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */,
-				F7273DF328B8316A00B37F11 /* CollectionInterface.swift in Sources */,
 				F72ED08628B9345F007FE584 /* AlertController.swift in Sources */,
 				F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */,
 				F7F49CC228B0272D0064A069 /* ContentLoader.swift in Sources */,

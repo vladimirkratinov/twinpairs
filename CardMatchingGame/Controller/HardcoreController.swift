@@ -67,7 +67,7 @@ class HardcoreController: UIViewController {
             let widthButtonsView = self.gameInterface.buttonsView.frame.width
             print("ButtonsView width: \(widthButtonsView)")
             //setup time:
-            self.gameInterface.timeCounter = self.prop.standardTimeCounter
+            self.gameInterface.timeCounter = Properties.standardTimeCounter
             //total time for statistics:
             self.prop.totalTime = self.gameInterface.timeCounter
             print("total time: \(self.prop.totalTime)")
