@@ -182,6 +182,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         //updating UI Locking mechanism:
         LockerModel.updateUILockerButtons(cell: cell, index: indexPath.item)
+        LockerModel.updateUISelectButtons(cell: cell, index: indexPath.item)
         
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
@@ -246,7 +247,6 @@ extension CollectionController: CollectionViewCellDelegate {
             audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
-                
                 //if locked:
                 if Properties.collectionOfLockedSets[indexPath.item].isLocked {
                     
@@ -281,7 +281,6 @@ extension CollectionController: CollectionViewCellDelegate {
                                 item.unlockButton.isEnabled = true
                             }
                             counter += 1
-//                            print("counter: \(counter)")
                         }
                     }
                     
@@ -298,6 +297,7 @@ extension CollectionController: CollectionViewCellDelegate {
     }
     
     //MARK: - selectButtonTapped:
+    
     func selectButtonTapped(delegatedFrom cell: CollectionViewCell) {
         if let indexPath = collectionView!.indexPath(for: cell) {
             print("Button pressed in cell: \(indexPath.item)")
@@ -308,8 +308,17 @@ extension CollectionController: CollectionViewCellDelegate {
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 
+                //update UI:
+                for case let item as CollectionViewCell in self.collectionView!.visibleCells {
+                    UIView.animate(withDuration: 1.0, animations: {
+                        item.selectButton.backgroundColor = .green
+                    })
+                }
+                
                 //if Not locked:
                 if !Properties.collectionOfLockedSets[indexPath.item].isLocked {
+                    //select item:
+                    LockerModel.select(cell: cell, index: indexPath.item)
                     
                     Properties.selectedSetName = Properties.listOfSets[indexPath.item]
                     Properties.selectedCollection = Properties.cardCollection[indexPath.item]
@@ -317,20 +326,9 @@ extension CollectionController: CollectionViewCellDelegate {
                     temporaryIndexPath = indexPath.item
                     
                     if let safeString = Properties.selectedCollection.first {
-                        print(safeString)
                         Properties.selectedCardList = safeString
-                        print("Selected as main: \(safeString)")
-                        
                         Properties.selectedCardListNumber = temporaryIndexPath
-                        
-                        print("SELECTED INDEXPATH.ITEM: \(Properties.selectedCardListNumber)")
-                        navigationController?.toolbar.barTintColor = palette.fuelTown
-//                        cell.selectButton.backgroundColor = .gray
                         Properties.cardSetIsSelected = true
-                        print(Properties.cardSetIsSelected)
-                        
-                        
-                        
                     }
                 }
             }

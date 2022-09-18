@@ -12,6 +12,7 @@ struct LockerModel: Codable {
     var cellNumber: Int
     var isLocked: Bool
     var unlockPrice: Int
+    var isSelected: Bool
     
     //MARK: - loadLockerModel:
     
@@ -22,7 +23,7 @@ struct LockerModel: Codable {
             if Properties.collectionOfLockedSets.count < Properties.listOfSets.count {
                 
                 //create Model:
-                let newModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: i * 100)
+                let newModel = LockerModel(cellNumber: i, isLocked: true, unlockPrice: i * 100, isSelected: false)
                 Properties.collectionOfLockedSets.append(newModel)
                 
                 //autoFill Bool list with true - to show locked UI:
@@ -32,16 +33,18 @@ struct LockerModel: Codable {
             }
         }
         
-        let values = defaults.object(forKey: "unlockedList") as? [Bool]
+        let unlockedValues = defaults.object(forKey: "unlockedList") as? [Bool]
 
         for i in 0..<Properties.listOfSets.count {
-            Properties.collectionOfLockedSets[i].isLocked = values?[i] ?? true
-            Properties.unlockedList[i] = values?[i] ?? true
+            Properties.collectionOfLockedSets[i].isLocked = unlockedValues?[i] ?? true
+            Properties.unlockedList[i] = unlockedValues?[i] ?? true
         }
         
         //unlock first cell in UI and in Bool list:
         Properties.collectionOfLockedSets[0].isLocked = false
         Properties.unlockedList[0] = false
+
+        print("loading Locker Model: \(Properties.collectionOfLockedSets)")
     }
     
     //MARK: - Unlock:
@@ -63,7 +66,7 @@ struct LockerModel: Codable {
             cell.myLabel.alpha = 0
             
             cell.myShadowView.isHidden = false
-            cell.myShadowView.alpha = 1
+            cell.myShadowView.alpha = 0.4
             
             cell.selectButton.isHidden = false
             cell.selectButton.alpha = 0
@@ -91,7 +94,6 @@ struct LockerModel: Codable {
                 cell.lockerImageView.isHidden = true
                 cell.unlockButton.isHidden = true
                 cell.selectButton.isHidden = false
-//                cell.selectButton.alpha = 1
             }
             
             //change property in Locker Class:
@@ -101,12 +103,30 @@ struct LockerModel: Codable {
             let defaults = UserDefaults.standard
             
             Properties.unlockedList[index] = Properties.collectionOfLockedSets[index].isLocked
-            print("Unlocked List Index: \(index) \(Properties.unlockedList[index]) = \(Properties.collectionOfLockedSets[index].cellNumber) is \(Properties.collectionOfLockedSets[index].isLocked) ")
-            
             defaults.set(Properties.unlockedList, forKey: "unlockedList")
-            print(defaults.array(forKey: "unlockedList") as Any)
-            print(Properties.unlockedList)
         }
+    }
+    
+    //MARK: - Select:
+    
+    static func select(cell: CollectionViewCell, index: IndexPath.Index) {
+        Properties.selectedList.removeAll()
+        
+        //animation block:
+        UIView.animate(withDuration: 1.0, animations: {
+            cell.selectButton.backgroundColor = .gray
+        })
+
+        for i in 0..<Properties.listOfSets.count {
+            Properties.collectionOfLockedSets[i].isSelected = false
+            Properties.selectedList.append(false)
+        }
+        //unlock selected cell in UI and in Bool list:
+        Properties.collectionOfLockedSets[index].isSelected = true
+        Properties.selectedList[index] = Properties.collectionOfLockedSets[index].isSelected
+        
+        print("Selected Locker Model: \(Properties.collectionOfLockedSets)")
+        print("selected list: \(Properties.selectedList)")
     }
     
 //MARK: - updateUILockerButtons:
@@ -144,4 +164,16 @@ struct LockerModel: Codable {
             cell.myImageView.alpha = 1
         }
     }
+    
+    //MARK: - updateUISelectButtons:
+        
+        static func updateUISelectButtons(cell: CollectionViewCell,index: IndexPath.Index) {
+            if Properties.collectionOfLockedSets[index].isSelected {
+                cell.selectButton.isEnabled = true
+                cell.selectButton.backgroundColor = .gray
+            } else { //if not locked
+                cell.selectButton.isEnabled = true
+                cell.selectButton.backgroundColor = .green
+            }
+        }
 }

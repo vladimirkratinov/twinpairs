@@ -204,9 +204,9 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //add Coin:
-        menuInterface.coins += 60
-        Properties.coins += 60
-        gameInterface.coins += 60
+        menuInterface.coins += 1000
+        Properties.coins += 1000
+        gameInterface.coins += 1000
         
         Properties.defaults.set(Properties.coins, forKey: CoinsKey.coins.rawValue)
         

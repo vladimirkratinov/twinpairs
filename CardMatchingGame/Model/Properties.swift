@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 15
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -25,7 +25,7 @@ struct Properties {
     //debug gameOver:
     static var gameIsOver = false
     //turn off music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = false
+    static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)
@@ -67,6 +67,7 @@ struct Properties {
     
     //collection settings unlock:
     static var unlockedList = [Bool]()
+    static var selectedList = [Bool]()
     //LockerModel:
     static var collectionOfLockedSets = [LockerModel]()
     

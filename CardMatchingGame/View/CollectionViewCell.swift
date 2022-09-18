@@ -143,36 +143,6 @@ class CollectionViewCell: GeminiCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        myLabel.frame = CGRect(x: 0,
-//                               y: 5, //contentView.frame.size.height-50
-//                               width: contentView.frame.size.width,
-//                               height: 20)
-//
-//        myImageView.frame = CGRect(x: 0,
-//                                   y: 30,
-//                                   width: contentView.frame.size.width,
-//                                   height: contentView.frame.size.height-60)
-//
-//        myShadowView.frame = CGRect(x: 0,
-//                                   y: 0,
-//                                   width: contentView.frame.size.width,
-//                                   height: contentView.frame.size.height)
-//
-//        lockerImageView.frame = CGRect(x: 0,
-//                                       y: 0,
-//                                   width: contentView.frame.size.width,
-//                                   height: contentView.frame.size.height)
-//
-//        unlockButton.frame = CGRect(x: contentView.frame.size.width/5,
-//                                    y: contentView.frame.size.height/1,
-//                                   width: 100,
-//                                   height: 44)
-//
-//        selectButton.frame = CGRect(x: contentView.frame.size.width/5,
-//                                    y: contentView.frame.size.height/1,
-//                                   width: 100,
-//                                   height: 44)
-        
         NSLayoutConstraint.activate([
             unlockButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             unlockButton.centerXAnchor.constraint(equalTo: myImageView.centerXAnchor),
@@ -233,8 +203,5 @@ class CollectionViewCell: GeminiCell {
     @objc func selectButtonTapped(_ sender: UIButton) {
         sender.bounce(sender)
         delegate?.selectButtonTapped(delegatedFrom: self)
-        
     }
 }
-
-
