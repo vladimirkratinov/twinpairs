@@ -56,7 +56,6 @@ enum ImageKey: String {
 
 enum FontKey: String {
     case staatliches =                      "Staatliches-Regular"
-    
     case FuturaExtraBold =                  "Futura-CondensedExtraBold"
     case AcademyEngravedLetPlain =          "AcademyEngravedLetPlain"
     case AmericanTypewriter =               "AmericanTypewriter"
@@ -68,9 +67,20 @@ enum FontKey: String {
 }
 
 enum StatisticsKey: String {
-    case time =     "time"
-    case pairs =    "pairs"
-    case flips =    "flips"
+    case easyTime =     "easyTime"
+    case easyPairs =    "easyPairs"
+    case easyFlips =    "easyFlips"
+    case easyScore =    "easyScore"
+    
+    case mediumTime =   "mediumTime"
+    case mediumPairs =  "mediumPairs"
+    case mediumFlips =  "mediumFlips"
+    case mediumScore =  "mediumScore"
+    
+    case hardTime =     "hardTime"
+    case hardPairs =    "hardPairs"
+    case hardFlips =    "hardFlips"
+    case hardScore =    "hardScore"
 }
 
 enum AudioFileKey: String {

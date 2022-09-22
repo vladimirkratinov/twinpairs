@@ -15,11 +15,13 @@ class GameInterface: UIView {
     var flipsCounter: Int = 0 {
         didSet {
             flipsLabel.text = "♠️ \(flipsCounter)"
+            Properties.statisticsFlipsCounter = flipsCounter
         }
     }
     var pairsCounter: Int = 0 {
         didSet {
             pairsLabel.text = "🃏 \(pairsCounter)"
+            Properties.statisticsPairsCounter = pairsCounter
         }
     }
     var coins: Int = Properties.coins {
@@ -38,13 +40,20 @@ class GameInterface: UIView {
             let minutes = convertedTime.0
             let seconds = convertedTime.1
             var secondZero = ""
+            var firstZero = ""
             
             if seconds == 0 {
                 secondZero = "0"
             } else {
                 secondZero.removeAll()
             }
-            timeLabel.text = "⏳ \(minutes):\(seconds)\(secondZero)"
+            
+            if seconds < 10 && seconds != 0 {
+                firstZero = "0"
+            } else {
+                firstZero.removeAll()
+            }
+            timeLabel.text = "⏳ \(minutes):\(firstZero)\(seconds)\(secondZero)"
         }
     }
     
@@ -232,29 +241,28 @@ class GameInterface: UIView {
     lazy var yourResultTimeViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(prop.totalTime)"
+        label.text = "0"
         return label
     }()
     
     lazy var yourResultPairsViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(pairsCounter)"
+        label.text = "0"
         return label
     }()
     
     lazy var yourResultFlipsViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(flipsCounter)"
+        label.text = "0"
         return label
     }()
     
     lazy var yourResultScoreViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "55%"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 45)
+        label.text = "n/a"
         return label
     }()
     
@@ -320,29 +328,24 @@ class GameInterface: UIView {
     lazy var bestResultTimeViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.time.rawValue))"
         return label
     }()
     
     lazy var bestResultPairsViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue))"
         return label
     }()
     
     lazy var bestResultFlipsViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
         return label
     }()
     
     lazy var bestResultScoreViewLabel: UILabel = {
         let label = UILabel()
         setupStatisticsLabelsInsideViews(label)
-        label.text = "97%"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 45)
         return label
     }()
 
@@ -548,9 +551,10 @@ class GameInterface: UIView {
     
     lazy var rateButton: UIButton = {
         let rateButton = UIButton()
-        rateButton.setTitle(" Rate Us ", for: .normal)
+        rateButton.setTitle(" game over (test) ", for: .normal)
+        rateButton.titleLabel?.adjustsFontSizeToFitWidth = true
         setupSettingsButtons(rateButton)
-        rateButton.alpha = 0.3
+        rateButton.alpha = 1
         rateButton.backgroundColor = .systemGreen
         return rateButton
     }()

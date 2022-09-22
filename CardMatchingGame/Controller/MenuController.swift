@@ -191,11 +191,7 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        if sender.titleLabel?.text == "Time" {
-            sender.setTitle("3 min.", for: .normal)
-            Properties.standardTimeCounter = 180
-            sender.backgroundColor = .yellow
-        } else if sender.titleLabel?.text == TimeKey.threeMinutes.rawValue {
+        if sender.titleLabel?.text == TimeKey.threeMinutes.rawValue {
             sender.setTitle("5 min.", for: .normal)
             Properties.standardTimeCounter = 300
             sender.backgroundColor = .orange
@@ -339,12 +335,12 @@ class MenuController: UIViewController {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-        case "HardcoreController":
-            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? HardcoreController else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                self.navigationController?.view.layer.add(transition, forKey: nil)
-                self.navigationController?.pushViewController(vc, animated: false)
-            }
+//        case "HardcoreController":
+//            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? HardcoreController else { return }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+//                self.navigationController?.view.layer.add(transition, forKey: nil)
+//                self.navigationController?.pushViewController(vc, animated: false)
+//            }
         default: return
         }
     }

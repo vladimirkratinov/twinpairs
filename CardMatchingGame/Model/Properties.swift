@@ -91,7 +91,10 @@ struct Properties {
     
     var cardCounter = 0
     var totalTime = 0
-    static var standardTimeCounter = 10
+    static var standardTimeCounter = 180
+    
+    static var statisticsPairsCounter = 0
+    static var statisticsFlipsCounter = 0
     
     var flipAnimationTime = 0.4
     var flipBackAnimationTime = 0.4
