@@ -86,17 +86,6 @@ class GameInterface: UIView {
         return buttonsView
     }()
     
-    var statisticsView: UIView = {
-        let statisticsView = UIView()
-        statisticsView.alpha = 0
-        statisticsView.layer.borderColor = UIColor.black.cgColor
-        statisticsView.layer.borderWidth = 1
-        statisticsView.layer.cornerRadius = 10
-        statisticsView.translatesAutoresizingMaskIntoConstraints = false
-        statisticsView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        return statisticsView
-    }()
-    
     lazy var woodenBack: UIImageView = {
         let woodenBack = UIImageView()
         woodenBack.image = UIImage(named: "woodenLog2.png")
@@ -111,6 +100,252 @@ class GameInterface: UIView {
         return woodenBack
     }()
     
+    //MARK: - GameOverView:
+    
+    lazy var gameOverView: UIView = {
+        let gameOverView = UIView()
+        gameOverView.alpha = 0
+        gameOverView.layer.borderColor = UIColor.black.cgColor
+        gameOverView.layer.borderWidth = 0
+        gameOverView.layer.cornerRadius = 0
+        gameOverView.translatesAutoresizingMaskIntoConstraints = false
+        gameOverView.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.backgroundGameOver.rawValue)!)
+        return gameOverView
+    }()
+    
+    lazy var statisticsView: UIView = {
+        let statisticsView = UIView()
+        statisticsView.alpha = 1
+        statisticsView.layer.borderColor = UIColor.black.cgColor
+        statisticsView.layer.borderWidth = 0
+        statisticsView.layer.cornerRadius = 10
+        statisticsView.translatesAutoresizingMaskIntoConstraints = false
+        statisticsView.backgroundColor = UIColor(red: 0.82, green: 0.75, blue: 0.75, alpha: 0.9)
+        return statisticsView
+    }()
+    
+    lazy var separatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    lazy var gameOverLabel: UILabel = {
+        let gameOverLabel = UILabel()
+        gameOverLabel.alpha = 0
+        gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameOverLabel.textAlignment = .center
+        gameOverLabel.text = "game over"
+        gameOverLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
+        gameOverLabel.textColor = UIColor(red: 0.85, green: 0.95, blue: 0.63, alpha: 1.00)
+        gameOverLabel.layer.shadowColor = UIColor.black.cgColor
+        gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
+        gameOverLabel.layer.shadowRadius = 1
+        gameOverLabel.layer.shadowOpacity = 1.0
+        gameOverLabel.layer.shouldRasterize = true
+        gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
+        return gameOverLabel
+    }()
+    
+    lazy var yourResultLabel: UILabel = {
+        let yourResultLabel = UILabel()
+        yourResultLabel.alpha = 1
+        yourResultLabel.translatesAutoresizingMaskIntoConstraints = false
+        yourResultLabel.textAlignment = .center
+        yourResultLabel.text = "your result"
+        yourResultLabel.textColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        yourResultLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 55)
+        return yourResultLabel
+    }()
+    
+    lazy var bestResultLabel: UILabel = {
+        let bestResultLabel = UILabel()
+        bestResultLabel.alpha = 1
+        bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
+        bestResultLabel.textAlignment = .center
+        bestResultLabel.text = "best result"
+        bestResultLabel.textColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        bestResultLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 55)
+        return bestResultLabel
+    }()
+    
+    //MARK: - Your Results Labels:
+    
+    lazy var yourResultTimeLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "⏰ time"
+        return label
+    }()
+
+    lazy var yourResultPairsLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "👥 pairs"
+        return label
+    }()
+
+    lazy var yourResultFlipsLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "👇 flips"
+        return label
+    }()
+
+    lazy var yourResultScoreLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "🏆 score"
+        return label
+    }()
+    
+    //MARK: - Your Results Views:
+    
+    lazy var yourResultTimeView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var yourResultPairsView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var yourResultFlipsView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var yourResultScoreView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    //MARK: - Your Results Views Labels:
+    
+    lazy var yourResultTimeViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(prop.totalTime)"
+        return label
+    }()
+    
+    lazy var yourResultPairsViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(pairsCounter)"
+        return label
+    }()
+    
+    lazy var yourResultFlipsViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(flipsCounter)"
+        return label
+    }()
+    
+    lazy var yourResultScoreViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "55%"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 45)
+        return label
+    }()
+    
+    
+    //MARK: - Best Results Labels:
+    
+    lazy var bestResultTimeLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "⏰ time"
+        return label
+    }()
+
+    lazy var bestResultPairsLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "👥 pairs"
+        return label
+    }()
+
+    lazy var bestResultFlipsLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "👇 flips"
+        return label
+    }()
+
+    lazy var bestResultScoreLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabels(label)
+        label.text = "🏆 score"
+        return label
+    }()
+    
+    //MARK: - Best Results Views:
+    
+    lazy var bestResultTimeView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var bestResultPairsView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var bestResultFlipsView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    lazy var bestResultScoreView: UIView = {
+        let view = UIView()
+        setupStatisticsViews(view)
+        return view
+    }()
+    
+    //MARK: - Best Results Views Labels:
+    
+    lazy var bestResultTimeViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.time.rawValue))"
+        return label
+    }()
+    
+    lazy var bestResultPairsViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue))"
+        return label
+    }()
+    
+    lazy var bestResultFlipsViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "\(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
+        return label
+    }()
+    
+    lazy var bestResultScoreViewLabel: UILabel = {
+        let label = UILabel()
+        setupStatisticsLabelsInsideViews(label)
+        label.text = "97%"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 45)
+        return label
+    }()
+
     //MARK: - UI Labels:
 
     var timeLabel: UILabel = {
@@ -163,50 +398,8 @@ class GameInterface: UIView {
         return flipsLabel
     }()
     
-    //MARK: - Statistics Label:
-    
-    lazy var statisticsLabel: UILabel = {
-        let statisticsLabel = UILabel()
-        statisticsLabel.alpha = 1
-        statisticsLabel.translatesAutoresizingMaskIntoConstraints = false
-        statisticsLabel.textAlignment = .center
-        statisticsLabel.numberOfLines = 5
-        statisticsLabel.text = "statistics"
-        statisticsLabel.textColor = UIColor.gray
-        statisticsLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
-        return statisticsLabel
-    }()
-    
-    lazy var bestResultLabel: UILabel = {
-        let bestResultLabel = UILabel()
-        bestResultLabel.alpha = 1
-        bestResultLabel.translatesAutoresizingMaskIntoConstraints = false
-        bestResultLabel.textColor = UIColor.darkGray
-        bestResultLabel.textAlignment = .center
-        bestResultLabel.numberOfLines = 5
-        bestResultLabel.text = "best results"
-        bestResultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
-        return bestResultLabel
-    }()
 
     //MARK: - Pop-up Label:
-    
-    lazy var gameOverLabel: UILabel = {
-        let gameOverLabel = UILabel()
-        gameOverLabel.alpha = 0
-        gameOverLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameOverLabel.textAlignment = .center
-        gameOverLabel.text = "GAME OVER"
-        gameOverLabel.font = UIFont(name: FontKey.FuturaExtraBold.rawValue, size: 55)
-        gameOverLabel.textColor = UIColor.yellow
-        gameOverLabel.layer.shadowColor = UIColor.black.cgColor
-        gameOverLabel.layer.shadowOffset = CGSize(width: 5, height: 5)
-        gameOverLabel.layer.shadowRadius = 1
-        gameOverLabel.layer.shadowOpacity = 1.0
-        gameOverLabel.layer.shouldRasterize = true
-        gameOverLabel.layer.rasterizationScale = UIScreen.main.scale
-        return gameOverLabel
-    }()
 
     lazy var nextLevelLabel: UILabel = {
         let nextLevelLabel = UILabel()
@@ -379,13 +572,13 @@ class GameInterface: UIView {
         return restartButton
     }()
 
-    lazy var backToMenuButton: UIButton = {
-        let backToMenuButton = UIButton()
-        backToMenuButton.setTitle(" Menu ", for: .normal)
-        setupSettingsButtons(backToMenuButton)
-        backToMenuButton.backgroundColor = .systemPink
-        backToMenuButton.alpha = 0
-        return backToMenuButton
+    lazy var menuButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("back", for: .normal)
+        setupSettingsButtons(button)
+        button.backgroundColor = UIColor(red: 0.85, green: 0.95, blue: 0.63, alpha: 1.00)
+        button.alpha = 0
+        return button
     }()
     
     //MARK: - Subview:
@@ -394,7 +587,7 @@ class GameInterface: UIView {
         //Views:
         gameView.addSubview(GameInterface.backgroundImageView)
         gameView.addSubview(buttonsView)
-        gameView.addSubview(statisticsView)
+        gameView.addSubview(gameOverView)
         gameView.addSubview(woodenBack)
         gameView.addSubview(plusCoinsAnimationsLabel)
         gameView.addSubview(hub)
@@ -426,15 +619,52 @@ class GameInterface: UIView {
         gameView.addSubview(settingsButton)
         
         //statistics:
+//        gameOverView.addSubview(bestResultLabel)
+//        gameOverView.addSubview(yourResultLabel)
+        gameOverView.addSubview(gameOverLabel)
+        gameOverView.addSubview(statisticsView)
+        
+        statisticsView.addSubview(yourResultLabel)
         statisticsView.addSubview(bestResultLabel)
-        statisticsView.addSubview(statisticsLabel)
+        statisticsView.addSubview(separatorLine)
+        
+        statisticsView.addSubview(yourResultTimeLabel)
+        statisticsView.addSubview(yourResultPairsLabel)
+        statisticsView.addSubview(yourResultFlipsLabel)
+        statisticsView.addSubview(yourResultScoreLabel)
+        
+        statisticsView.addSubview(yourResultTimeView)
+        statisticsView.addSubview(yourResultPairsView)
+        statisticsView.addSubview(yourResultFlipsView)
+        statisticsView.addSubview(yourResultScoreView)
+        
+        statisticsView.addSubview(yourResultTimeViewLabel)
+        statisticsView.addSubview(yourResultPairsViewLabel)
+        statisticsView.addSubview(yourResultFlipsViewLabel)
+        statisticsView.addSubview(yourResultScoreViewLabel)
+        
+        statisticsView.addSubview(bestResultTimeLabel)
+        statisticsView.addSubview(bestResultPairsLabel)
+        statisticsView.addSubview(bestResultFlipsLabel)
+        statisticsView.addSubview(bestResultScoreLabel)
+        
+        statisticsView.addSubview(bestResultTimeView)
+        statisticsView.addSubview(bestResultPairsView)
+        statisticsView.addSubview(bestResultFlipsView)
+        statisticsView.addSubview(bestResultScoreView)
+        
+        statisticsView.addSubview(bestResultTimeViewLabel)
+        statisticsView.addSubview(bestResultPairsViewLabel)
+        statisticsView.addSubview(bestResultFlipsViewLabel)
+        statisticsView.addSubview(bestResultScoreViewLabel)
+        
         
         //pop-up:
-        gameView.addSubview(gameOverLabel)
+//        gameView.addSubview(gameOverLabel)
         gameView.addSubview(nextLevelLabel)
         
         gameView.addSubview(restartButton)
-        gameView.addSubview(backToMenuButton)
+        gameView.addSubview(menuButton)
         
         //Settings:
         gameView.addSubview(settingsView)
@@ -518,27 +748,116 @@ class GameInterface: UIView {
             buttonsView.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: -40),
             
-            statisticsView.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 5),
-            statisticsView.leadingAnchor.constraint(equalTo: buttonsView.leadingAnchor, constant: 20),
-            statisticsView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -20),
-            statisticsView.bottomAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 10),
+            //MARK: - GameOverView:
             
-            statisticsLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 10),
-            statisticsLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
+            gameOverView.topAnchor.constraint(equalTo: gameView.topAnchor),
+            gameOverView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
+            gameOverView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
+            gameOverView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
+            
+            gameOverLabel.topAnchor.constraint(equalTo: gameOverView.topAnchor, constant: 99),
+            gameOverLabel.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor, constant: 5),
+            
+            statisticsView.topAnchor.constraint(equalTo: gameOverLabel.bottomAnchor, constant: 62),
+            statisticsView.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor, constant: 20),
+            statisticsView.trailingAnchor.constraint(equalTo: gameOverView.trailingAnchor, constant: -20),
+            statisticsView.bottomAnchor.constraint(equalTo: gameOverView.bottomAnchor, constant: -256),
+            
+            separatorLine.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            separatorLine.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+            separatorLine.centerYAnchor.constraint(equalTo: statisticsView.centerYAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: 5),
+            
+            //MARK: - YourResults:
+            
+            yourResultLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 2),
+            yourResultLabel.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor, constant: 16),
+            
+            yourResultTimeView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
+            yourResultTimeView.leadingAnchor.constraint(equalTo: yourResultLabel.leadingAnchor),
+            yourResultTimeView.widthAnchor.constraint(equalToConstant: 75),
+            yourResultTimeView.heightAnchor.constraint(equalToConstant: 75),
+            
+            yourResultPairsView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
+            yourResultPairsView.leadingAnchor.constraint(equalTo: yourResultTimeView.trailingAnchor, constant: 16),
+            yourResultPairsView.widthAnchor.constraint(equalToConstant: 75),
+            yourResultPairsView.heightAnchor.constraint(equalToConstant: 75),
+            
+            yourResultFlipsView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
+            yourResultFlipsView.leadingAnchor.constraint(equalTo: yourResultPairsView.trailingAnchor, constant: 16),
+            yourResultFlipsView.widthAnchor.constraint(equalToConstant: 75),
+            yourResultFlipsView.heightAnchor.constraint(equalToConstant: 75),
+            
+            yourResultScoreView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
+            yourResultScoreView.leadingAnchor.constraint(equalTo: yourResultFlipsView.trailingAnchor, constant: 16),
+            yourResultScoreView.widthAnchor.constraint(equalToConstant: 75),
+            yourResultScoreView.heightAnchor.constraint(equalToConstant: 75),
+            
+            yourResultTimeLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
+            yourResultTimeLabel.centerXAnchor.constraint(equalTo: yourResultTimeView.centerXAnchor),
+            yourResultPairsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
+            yourResultPairsLabel.centerXAnchor.constraint(equalTo: yourResultPairsView.centerXAnchor),
+            yourResultFlipsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
+            yourResultFlipsLabel.centerXAnchor.constraint(equalTo: yourResultFlipsView.centerXAnchor),
+            yourResultScoreLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
+            yourResultScoreLabel.centerXAnchor.constraint(equalTo: yourResultScoreView.centerXAnchor),
+            
+            yourResultTimeViewLabel.centerXAnchor.constraint(equalTo: yourResultTimeView.centerXAnchor),
+            yourResultTimeViewLabel.centerYAnchor.constraint(equalTo: yourResultTimeView.centerYAnchor),
+            yourResultPairsViewLabel.centerXAnchor.constraint(equalTo: yourResultPairsView.centerXAnchor),
+            yourResultPairsViewLabel.centerYAnchor.constraint(equalTo: yourResultPairsView.centerYAnchor),
+            yourResultFlipsViewLabel.centerXAnchor.constraint(equalTo: yourResultFlipsView.centerXAnchor),
+            yourResultFlipsViewLabel.centerYAnchor.constraint(equalTo: yourResultFlipsView.centerYAnchor),
+            yourResultScoreViewLabel.centerXAnchor.constraint(equalTo: yourResultScoreView.centerXAnchor),
+            yourResultScoreViewLabel.centerYAnchor.constraint(equalTo: yourResultScoreView.centerYAnchor),
 
-            bestResultLabel.topAnchor.constraint(equalTo: statisticsLabel.bottomAnchor, constant: 0),
-            bestResultLabel.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
+            //MARK: - Best results:
             
-            //UI:
+            bestResultLabel.topAnchor.constraint(equalTo: separatorLine.topAnchor, constant: 2),
+            bestResultLabel.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor, constant: 16),
             
-            //OLD COINS & PAIRS:
-//            coinLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-//            coinLabel.leadingAnchor.constraint(equalTo: pairsLabel.trailingAnchor, constant: 10),
-//
-//            pairsLabel.topAnchor.constraint(equalTo: gameView.layoutMarginsGuide.topAnchor),
-//            pairsLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor, constant: 5),
+            bestResultTimeView.topAnchor.constraint(equalTo: bestResultTimeLabel.bottomAnchor, constant: 5),
+            bestResultTimeView.leadingAnchor.constraint(equalTo: bestResultLabel.leadingAnchor),
+            bestResultTimeView.widthAnchor.constraint(equalToConstant: 75),
+            bestResultTimeView.heightAnchor.constraint(equalToConstant: 75),
             
-            //NEW COINS & PAIRS:
+            bestResultPairsView.topAnchor.constraint(equalTo: bestResultTimeLabel.bottomAnchor, constant: 5),
+            bestResultPairsView.leadingAnchor.constraint(equalTo: bestResultTimeView.trailingAnchor, constant: 16),
+            bestResultPairsView.widthAnchor.constraint(equalToConstant: 75),
+            bestResultPairsView.heightAnchor.constraint(equalToConstant: 75),
+            
+            bestResultFlipsView.topAnchor.constraint(equalTo: bestResultTimeLabel.bottomAnchor, constant: 5),
+            bestResultFlipsView.leadingAnchor.constraint(equalTo: bestResultPairsView.trailingAnchor, constant: 16),
+            bestResultFlipsView.widthAnchor.constraint(equalToConstant: 75),
+            bestResultFlipsView.heightAnchor.constraint(equalToConstant: 75),
+            
+            bestResultScoreView.topAnchor.constraint(equalTo: bestResultTimeLabel.bottomAnchor, constant: 5),
+            bestResultScoreView.leadingAnchor.constraint(equalTo: bestResultFlipsView.trailingAnchor, constant: 16),
+            bestResultScoreView.widthAnchor.constraint(equalToConstant: 75),
+            bestResultScoreView.heightAnchor.constraint(equalToConstant: 75),
+            
+            bestResultTimeLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
+            bestResultTimeLabel.centerXAnchor.constraint(equalTo: bestResultTimeView.centerXAnchor),
+            bestResultPairsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
+            bestResultPairsLabel.centerXAnchor.constraint(equalTo: bestResultPairsView.centerXAnchor),
+            bestResultFlipsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
+            bestResultFlipsLabel.centerXAnchor.constraint(equalTo: bestResultFlipsView.centerXAnchor),
+            bestResultScoreLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
+            bestResultScoreLabel.centerXAnchor.constraint(equalTo: bestResultScoreView.centerXAnchor),
+            
+            bestResultTimeViewLabel.centerXAnchor.constraint(equalTo: bestResultTimeView.centerXAnchor),
+            bestResultTimeViewLabel.centerYAnchor.constraint(equalTo: bestResultTimeView.centerYAnchor),
+            bestResultPairsViewLabel.centerXAnchor.constraint(equalTo: bestResultPairsView.centerXAnchor),
+            bestResultPairsViewLabel.centerYAnchor.constraint(equalTo: bestResultPairsView.centerYAnchor),
+            bestResultFlipsViewLabel.centerXAnchor.constraint(equalTo: bestResultFlipsView.centerXAnchor),
+            bestResultFlipsViewLabel.centerYAnchor.constraint(equalTo: bestResultFlipsView.centerYAnchor),
+            bestResultScoreViewLabel.centerXAnchor.constraint(equalTo: bestResultScoreView.centerXAnchor),
+            bestResultScoreViewLabel.centerYAnchor.constraint(equalTo: bestResultScoreView.centerYAnchor),
+
+            menuButton.topAnchor.constraint(equalTo: statisticsView.bottomAnchor, constant: 25),
+            menuButton.centerXAnchor.constraint(equalTo: gameOverView.centerXAnchor),
+            menuButton.widthAnchor.constraint(equalToConstant: 210),
+            menuButton.heightAnchor.constraint(equalToConstant: 60),
             
             coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
             coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
@@ -563,20 +882,12 @@ class GameInterface: UIView {
             settingsButton.heightAnchor.constraint(equalToConstant: 40),
             
             //Pop-up:
-            gameOverLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
-            gameOverLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
-
             nextLevelLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             nextLevelLabel.centerYAnchor.constraint(equalTo: gameView.centerYAnchor),
 
             restartButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             restartButton.centerYAnchor.constraint(equalTo: gameView.centerYAnchor, constant: 100),
             restartButton.widthAnchor.constraint(equalToConstant: 120),
-
-            backToMenuButton.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
-            backToMenuButton.centerYAnchor.constraint(equalTo: gameView.centerYAnchor, constant: 100),
-//            backToMenuButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
-            backToMenuButton.widthAnchor.constraint(equalToConstant: 120),
             
             //Animations:
             plusCoinsAnimationsLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
@@ -586,28 +897,62 @@ class GameInterface: UIView {
     
     //MARK: - setup Settings Appearence:
     
-    func setupSettingsButtons(_ thisButton: UIButton) {
-        thisButton.translatesAutoresizingMaskIntoConstraints = false
-        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
+    func setupSettingsButtons(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
 //        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
-        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        thisButton.setTitleColor(UIColor.black, for: .normal)
-        thisButton.layer.borderColor = UIColor.black.cgColor
-        thisButton.layer.borderWidth = 0
-        thisButton.layer.cornerRadius = 8
-        thisButton.isUserInteractionEnabled = true
-        thisButton.layer.shadowColor = UIColor.black.cgColor
-        thisButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        thisButton.layer.shadowRadius = 3
-        thisButton.layer.shadowOpacity = 1.0
-        thisButton.layer.shouldRasterize = true
-        thisButton.layer.rasterizationScale = UIScreen.main.scale
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 8
+        button.isUserInteractionEnabled = true
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        button.layer.shadowRadius = 3
+        button.layer.shadowOpacity = 1.0
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func setupSettingsLabels(_ thisLabel: UILabel) {
-        thisLabel.translatesAutoresizingMaskIntoConstraints = false
-        thisLabel.textAlignment = .left
-//        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
-        thisLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
+    func setupSettingsLabels(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
     }
+    
+    //MARK: - setup Statistics Appearence:
+    
+    func setupStatisticsLabels(_ label: UILabel) {
+        label.alpha = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+    }
+    
+    func setupStatisticsViews(_ view: UIView) {
+        view.alpha = 1
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 0
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white.withAlphaComponent(1)
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 1, height: 1)
+        view.layer.shadowRadius = 1
+        view.layer.shadowOpacity = 1.0
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func setupStatisticsLabelsInsideViews(_ label: UILabel) {
+        label.alpha = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 50)
+    }
+    
 }

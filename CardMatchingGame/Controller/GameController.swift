@@ -30,7 +30,7 @@ class GameController: UIViewController {
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
 //        gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
-        gameInterface.backToMenuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        gameInterface.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         
         gameInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         gameInterface.quitButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
@@ -185,8 +185,8 @@ class GameController: UIViewController {
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.gameOverLabel.alpha = 1
-            self.gameInterface.statisticsView.alpha = 1
-            self.gameInterface.backToMenuButton.alpha = 1
+            self.gameInterface.gameOverView.alpha = 1
+            self.gameInterface.menuButton.alpha = 1
             self.gameInterface.restartButton.alpha = 1
             self.gameInterface.gameOverLabel.pulsate()
 //            self.gameInterface.restartButton.pulsate()
@@ -194,9 +194,9 @@ class GameController: UIViewController {
         
         //update statistics UI:
         DispatchQueue.main.async {
-            self.gameInterface.statisticsLabel.text = "Your Result: \n Total Time: \(self.prop.totalTime) sec. \n Found Pairs: \(self.gameInterface.pairsCounter) \n Total Flips: \(self.gameInterface.flipsCounter) \n ------------------------------"
+            self.gameInterface.yourResultLabel.text = "your result"
             
-            self.gameInterface.bestResultLabel.text = "Best result: \n Total Time: \(Properties.defaults.integer(forKey: StatisticsKey.time.rawValue)) sec. \n Found Pairs: \(Properties.defaults.integer(forKey: StatisticsKey.pairs.rawValue)) \n Total Flips: \(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))"
+            self.gameInterface.bestResultLabel.text = "best result"
         }
         
         //update Properties.defaults if result is better:
@@ -214,7 +214,7 @@ class GameController: UIViewController {
         print("default flips: \(Properties.defaults.integer(forKey: StatisticsKey.flips.rawValue))")
         
         //restart and menu button animations:
-        UIView.transition(with: self.gameInterface.backToMenuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
+        UIView.transition(with: self.gameInterface.menuButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
         UIView.transition(with: self.gameInterface.restartButton, duration: 1, options: .transitionFlipFromTop, animations: nil, completion: nil)
         
         //cards animations:
@@ -292,7 +292,7 @@ class GameController: UIViewController {
             //MARK: - Flip Back
             
             //flip back:
-            let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
+            let backgroundImage = UIImage(named: FigmaKey.cardCover2.rawValue)
             sender.setBackgroundImage(backgroundImage, for: .normal)
             
             //flip back animation:
@@ -408,7 +408,8 @@ class GameController: UIViewController {
                     UIView.transition(with: Properties.activatedButtons.first!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromBottom, animations: nil, completion: nil)
                     
                     //show card cover:
-                    let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
+                    let backgroundImage = UIImage(named: FigmaKey.cardCover2.rawValue)
+                                        
                     Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
                     Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
@@ -543,7 +544,7 @@ class GameController: UIViewController {
         for row in 0..<rows {
             for column in 0..<columns {
                 let cardButton = UIButton(type: .system)
-                let backgroundImage = UIImage(named: ImageKey.stampBackground.rawValue)
+                let backgroundImage = UIImage(named: FigmaKey.cardCover2.rawValue)
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
                 cardButton.setTitleColor(prop.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)

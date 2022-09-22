@@ -22,6 +22,10 @@ enum FigmaKey: String {
     case settings = "Settings"
     case paperTexture = "PaperTexture"
     case lock = "Lock"
+    
+    case cardCover1 = "CardCover1"
+    case cardCover2 = "CardCover2"
+    case cardCover3 = "CardCover3"
 }
 
 enum ImageKey: String {
