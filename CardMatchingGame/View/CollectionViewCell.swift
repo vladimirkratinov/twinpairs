@@ -190,6 +190,7 @@ class CollectionViewCell: GeminiCell {
         myLabel.text = nil
         myImageView.image = nil
         lockerImageView.image = UIImage(systemName: "lock.fill")
+//        selectButton.backgroundColor = .green
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

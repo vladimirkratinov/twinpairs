@@ -63,7 +63,7 @@ struct LockerModel: Codable {
      
             //prepare label and shadow layer before animation
             cell.myLabel.isHidden = false
-            cell.myLabel.alpha = 0
+//            cell.myLabel.alpha = 0
             
             cell.myShadowView.isHidden = false
             cell.myShadowView.alpha = 0.4
@@ -78,7 +78,7 @@ struct LockerModel: Codable {
                 cell.selectButton.alpha = 1
                 cell.myShadowView.alpha = 0
                 cell.myImageView.alpha = 1
-                cell.myLabel.alpha = 1
+//                cell.myLabel.alpha = 1
                 cell.lockerImageView.alpha = 0
                 cell.lockerImageView.shake()
                 cell.lockerImageView.rotate(angle: 45)
@@ -90,7 +90,7 @@ struct LockerModel: Codable {
                     cell.myImageView.layer.transform = CATransform3DMakeScale(1, 1, 1)
                 }
                 //hide all views that already were animated:
-                cell.myLabel.isHidden = false
+//                cell.myLabel.isHidden = false
                 cell.lockerImageView.isHidden = true
                 cell.unlockButton.isHidden = true
                 cell.selectButton.isHidden = false
@@ -140,7 +140,7 @@ struct LockerModel: Codable {
             
             cell.lockerImageView.isHidden = false
             cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
-            cell.myLabel.isHidden = true
+            cell.myLabel.isHidden = false
             cell.selectButton.isHidden = true
             cell.myImageView.alpha = 0.5
             

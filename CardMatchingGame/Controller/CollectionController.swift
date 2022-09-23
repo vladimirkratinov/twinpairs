@@ -192,6 +192,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
         let label = Properties.cardCollection[indexPath.item][0]
+//        let label = "label"
 
         if let imageString = UIImage(named: label) {
             let image = imageString
@@ -308,8 +309,8 @@ extension CollectionController: CollectionViewCellDelegate {
             print("Button pressed in cell: \(indexPath.item)")
             
             //audioFX:
-            let shiny = AudioFileKey.shiny.rawValue
-            audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            let tinyButton = AudioFileKey.tinyButtonPress.rawValue
+            audioFX.playSoundFX(name: tinyButton, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 

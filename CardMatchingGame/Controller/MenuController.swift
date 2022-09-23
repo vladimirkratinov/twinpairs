@@ -44,14 +44,13 @@ class MenuController: UIViewController {
         super.viewDidLoad()
         
         //loadFiles:
-        for i in 1...6 {
+        for i in 1...Properties.listOfSets.count {
             contentLoader.loadSet(setNumber: i)
         }
         
-        print("PROPERTIES: CARD COLLECTION:::: \(Properties.cardCollection) \n")
-        print()
+        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
+        print("PROPERTIES: CARD COLLECTION: \(Properties.cardCollection) \n")
         print("SELECTED SET: \(Properties.selectedCollection)")
-        
         print("SELECTED CARD LIST: \(Properties.selectedCardList)")
         
         //admin functions:

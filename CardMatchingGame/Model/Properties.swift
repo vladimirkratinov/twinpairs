@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 15
+    var debugFontSize: CGFloat = 0
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -25,7 +25,7 @@ struct Properties {
     //Admin Functions:
     static var hideAdminButtons = false
     //debug gameOver:
-    static var gameIsOver = true
+    static var gameIsOver = false
     //turn off music:
     static var generalBackgroundSoundIsMutedForTestPurposes = true
     
@@ -43,11 +43,12 @@ struct Properties {
     
     //CollectionView list:
     static let listOfSets = ["Food",
-                             "Space",
                              "Animals",
                              "Music",
-                             "Ukraine 1",
-                             "Ukraine 2",
+                             "Space",
+                             "Ukraine",
+                             "Canada",
+                             
     ]
     
     //Large Title in CollectionView
