@@ -141,6 +141,79 @@ class GameInterface: UIView {
         return view
     }()
     
+    lazy var verticalCentralSeparatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    lazy var verticalLeftSeparatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    lazy var verticalRightSeparatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    lazy var verticalLeftPart: UIView = {
+        let view = UIView()
+        view.alpha = 0.3
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemPink
+        return view
+    }()
+    
+    lazy var verticalRightPart: UIView = {
+        let view = UIView()
+        view.alpha = 0.3
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemPink
+        return view
+    }()
+    
+    lazy var horizontalUpPart: UIView = {
+        let view = UIView()
+        view.alpha = 0.3
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .blue
+        return view
+    }()
+    
+    lazy var horizontalDownPart: UIView = {
+        let view = UIView()
+        view.alpha = 0.3
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .blue
+        return view
+    }()
+    
+    lazy var horizontalUpSeparatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    lazy var horizontalDownSeparatorLine: UIView = {
+        let view = UIView()
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        return view
+    }()
+    
+    
     lazy var gameOverLabel: UILabel = {
         let gameOverLabel = UILabel()
         gameOverLabel.alpha = 0
@@ -639,6 +712,15 @@ class GameInterface: UIView {
         statisticsView.addSubview(yourResultLabel)
         statisticsView.addSubview(bestResultLabel)
         statisticsView.addSubview(separatorLine)
+        statisticsView.addSubview(verticalCentralSeparatorLine)
+        statisticsView.addSubview(verticalLeftSeparatorLine)
+        statisticsView.addSubview(verticalRightSeparatorLine)
+        statisticsView.addSubview(verticalLeftPart)
+        statisticsView.addSubview(verticalRightPart)
+        statisticsView.addSubview(horizontalUpPart)
+        statisticsView.addSubview(horizontalDownPart)
+        statisticsView.addSubview(horizontalUpSeparatorLine)
+        statisticsView.addSubview(horizontalDownSeparatorLine)
         
         statisticsView.addSubview(yourResultTimeLabel)
         statisticsView.addSubview(yourResultPairsLabel)
@@ -707,7 +789,7 @@ class GameInterface: UIView {
             hub.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
             hub.topAnchor.constraint(equalTo: gameView.topAnchor, constant: 52),
             hub.widthAnchor.constraint(equalTo: gameView.widthAnchor),
-            hub.heightAnchor.constraint(equalToConstant: 53),
+//            hub.heightAnchor.constraint(equalToConstant: 53),
             
             settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
             settingsBackground.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
@@ -768,8 +850,9 @@ class GameInterface: UIView {
             gameOverView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
             
             gameOverLabel.topAnchor.constraint(equalTo: gameOverView.topAnchor, constant: 99),
-            gameOverLabel.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor, constant: 5),
-            gameOverView.trailingAnchor.constraint(equalTo: gameOverView.trailingAnchor, constant: -5),
+            gameOverLabel.centerXAnchor.constraint(equalTo: gameOverView.centerXAnchor),
+//            gameOverLabel.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor),
+//            gameOverView.trailingAnchor.constraint(equalTo: gameOverView.trailingAnchor),
             
             statisticsView.topAnchor.constraint(greaterThanOrEqualTo: gameOverLabel.bottomAnchor, constant: 20),
             statisticsView.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor, constant: 20),
@@ -781,6 +864,53 @@ class GameInterface: UIView {
             separatorLine.centerYAnchor.constraint(equalTo: statisticsView.centerYAnchor),
             separatorLine.heightAnchor.constraint(equalToConstant: 5),
             
+            verticalCentralSeparatorLine.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            verticalCentralSeparatorLine.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            verticalCentralSeparatorLine.centerXAnchor.constraint(equalTo: statisticsView.centerXAnchor),
+            verticalCentralSeparatorLine.widthAnchor.constraint(equalToConstant: 5),
+            
+            verticalLeftPart.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            verticalLeftPart.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            verticalLeftPart.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            verticalLeftPart.trailingAnchor.constraint(equalTo: verticalCentralSeparatorLine.leadingAnchor),
+            
+            verticalRightPart.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            verticalRightPart.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            verticalRightPart.leadingAnchor.constraint(equalTo: verticalCentralSeparatorLine.trailingAnchor),
+            verticalRightPart.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+            
+            verticalLeftSeparatorLine.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            verticalLeftSeparatorLine.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            verticalLeftSeparatorLine.centerXAnchor.constraint(equalTo: verticalLeftPart.centerXAnchor),
+            verticalLeftSeparatorLine.widthAnchor.constraint(equalToConstant: 5),
+            
+            verticalRightSeparatorLine.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            verticalRightSeparatorLine.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            verticalRightSeparatorLine.centerXAnchor.constraint(equalTo: verticalRightPart.centerXAnchor),
+            verticalRightSeparatorLine.widthAnchor.constraint(equalToConstant: 5),
+            
+            horizontalUpPart.topAnchor.constraint(equalTo: statisticsView.topAnchor),
+            horizontalUpPart.bottomAnchor.constraint(equalTo: separatorLine.topAnchor),
+            horizontalUpPart.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            horizontalUpPart.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+
+            horizontalDownPart.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
+            horizontalDownPart.bottomAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            horizontalDownPart.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            horizontalDownPart.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+            
+            horizontalUpSeparatorLine.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            horizontalUpSeparatorLine.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+            horizontalUpSeparatorLine.centerYAnchor.constraint(equalTo: horizontalUpPart.centerYAnchor),
+            horizontalUpSeparatorLine.heightAnchor.constraint(equalToConstant: 5),
+
+            horizontalDownSeparatorLine.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
+            horizontalDownSeparatorLine.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
+            horizontalDownSeparatorLine.centerYAnchor.constraint(equalTo: horizontalDownPart.centerYAnchor),
+            horizontalDownSeparatorLine.heightAnchor.constraint(equalToConstant: 5),
+            
+            
+            
             //MARK: - YourResults:
             
             yourResultLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 2),
@@ -789,26 +919,26 @@ class GameInterface: UIView {
             yourResultTimeView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
             yourResultTimeView.bottomAnchor.constraint(equalTo: separatorLine.topAnchor, constant: -10),
             yourResultTimeView.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor, constant: 10),
-            yourResultTimeView.trailingAnchor.constraint(equalTo: yourResultPairsView.leadingAnchor, constant: -5),
-            yourResultTimeView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.22, constant: 0),
+            yourResultTimeView.trailingAnchor.constraint(equalTo: yourResultPairsView.leadingAnchor),
+            yourResultTimeView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.25, constant: 0),
             yourResultTimeView.heightAnchor.constraint(equalToConstant: 75),
             
             yourResultPairsView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
             yourResultPairsView.leadingAnchor.constraint(equalTo: yourResultTimeView.trailingAnchor, constant: 5),
-            yourResultPairsView.trailingAnchor.constraint(equalTo: yourResultFlipsView.leadingAnchor, constant: -5),
-            yourResultPairsView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.22, constant: 0),
+            yourResultPairsView.trailingAnchor.constraint(equalTo: yourResultFlipsView.leadingAnchor),
+            yourResultPairsView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.25, constant: 0),
             yourResultPairsView.heightAnchor.constraint(equalToConstant: 75),
             
             yourResultFlipsView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
             yourResultFlipsView.leadingAnchor.constraint(equalTo: yourResultPairsView.trailingAnchor, constant: 5),
-            yourResultFlipsView.trailingAnchor.constraint(equalTo: yourResultScoreView.leadingAnchor, constant: -5),
-            yourResultFlipsView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.22, constant: 0),
+            yourResultFlipsView.trailingAnchor.constraint(equalTo: yourResultScoreView.leadingAnchor),
+            yourResultFlipsView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.25, constant: 0),
             yourResultFlipsView.heightAnchor.constraint(equalToConstant: 75),
             
             yourResultScoreView.topAnchor.constraint(equalTo: yourResultTimeLabel.bottomAnchor, constant: 5),
             yourResultScoreView.leadingAnchor.constraint(equalTo: yourResultFlipsView.trailingAnchor, constant: 5),
             yourResultScoreView.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor, constant: -10),
-            yourResultScoreView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.22, constant: 0),
+            yourResultScoreView.widthAnchor.constraint(equalTo: statisticsView.widthAnchor, multiplier: 0.25, constant: 0),
             yourResultScoreView.heightAnchor.constraint(equalToConstant: 75),
             
             yourResultTimeLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),

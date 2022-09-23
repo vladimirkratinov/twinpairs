@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
+    var debugFontSize: CGFloat = 10
     var debugFontColor: UIColor = UIColor.white
     //UI Color:
     static var uiLabelsColor = UIColor.black
@@ -25,7 +25,7 @@ struct Properties {
     //Admin Functions:
     static var hideAdminButtons = false
     //debug gameOver:
-    static var gameIsOver = false
+    static var gameIsOver = true
     //turn off music:
     static var generalBackgroundSoundIsMutedForTestPurposes = true
     

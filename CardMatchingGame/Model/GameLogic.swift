@@ -18,23 +18,65 @@ public class GameLogic {
     public func setupCards(set: [String]) {
         Properties.pairList = set
         
-        print(Properties.pairList)
-        
         if Properties.pairList.count == 24 {
             //default code:
-            print("deleted item is: \(String(describing: Properties.pairList.first))")
-            Properties.pairList.removeFirst()
-            print("deleted item is: \(String(describing: Properties.pairList.first))")
-            Properties.pairList.removeFirst()
-            print("deleted item is: \(String(describing: Properties.pairList.last))")
-            Properties.pairList.removeLast()
-            print("deleted item is: \(String(describing: Properties.pairList.last))")
-            Properties.pairList.removeLast()
+//            print("deleted item is: \(String(describing: Properties.pairList.first))")
+//            Properties.pairList.removeFirst()
+//            print("deleted item is: \(String(describing: Properties.pairList.first))")
+//            Properties.pairList.removeFirst()
+//            print("deleted item is: \(String(describing: Properties.pairList.last))")
+//            Properties.pairList.removeLast()
+//            print("deleted item is: \(String(describing: Properties.pairList.last))")
+//            Properties.pairList.removeLast()
             
+            print("24 cards set activated. Deleting of 4 cards!")
             //randomize code:
-
+            let randomNumber1 = Int.random(in: 2...12)
+            let randomNumber2 = Int.random(in: 14...20)
+//            let randomNumber2 = 20
+            
+            var pairListCopy = Properties.pairList
+            
+            if randomNumber1.isMultiple(of: 2) {
+                print()
+                print("first random number is multiple of 2: \(randomNumber1)")
+                print("first 2 words what will be removed with new randomization mechanism: \(pairListCopy[randomNumber1]) and \(pairListCopy[randomNumber1 + 1])")
+                pairListCopy.remove(at: [randomNumber1, randomNumber1 + 1])
+            } else {
+                print()
+                print("first random number is not multiple of 2: \(randomNumber1)")
+                print("first 2 words what will be removed with new randomization mechanism: \(pairListCopy[randomNumber1]) and \(pairListCopy[randomNumber1 - 1])")
+                pairListCopy.remove(at: [randomNumber1, randomNumber1 - 1])
+            }
+            
+            if randomNumber2.isMultiple(of: 2) {
+                print()
+                print("second random number is multiple of 2: \(randomNumber2)")
+                print("second 2 words what will be removed with new randomization mechanism: \(pairListCopy[randomNumber2]) and \(pairListCopy[randomNumber2 + 1])")
+                pairListCopy.remove(at: [randomNumber2, randomNumber2 + 1])
+            } else {
+                print()
+                print("second random number is not multiple of 2: \(randomNumber2)")
+                print("second 2 words what will be removed with new randomization mechanism: \(pairListCopy[randomNumber2]) and \(pairListCopy[randomNumber2 - 1])")
+                pairListCopy.remove(at: [randomNumber2, randomNumber2 - 1])
+            }
+            
+            let shuffledList = pairListCopy.shuffled()
+            for i in 0..<Properties.cardButtons.count {
+                Properties.cardButtons[i].setTitle(shuffledList[i], for: .normal)
+            }
+            
+            Properties.pairList = pairListCopy
+            
+            print()
+            print("pairListCopy count: \(pairListCopy.count)")
+            print("pairList count: \(Properties.pairList.count)")
+            print()
             
             //end of randomize
+            
+            
+            
         }
         
         print("SETUP CARDBUTTONS: \(Properties.cardButtons.count)")
@@ -47,7 +89,7 @@ public class GameLogic {
             //            }
             
             print("howManyCardsToDelete: \(howManyCardsToDelete)")
-            
+   
             //3 pairs:
             if howManyCardsToDelete == 14 {
                 
