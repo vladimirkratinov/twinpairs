@@ -11,11 +11,25 @@ import UIKit
 
 extension UIButton {
     
+    func centerTextAndImage(spacing: CGFloat) {
+            let insetAmount = spacing / 2
+            let isRTL = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
+            if isRTL {
+               imageEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
+               titleEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
+               contentEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: -insetAmount)
+            } else {
+               imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
+               titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
+               contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+            }
+        }
+    
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         pulse.duration = 0.4
-        pulse.fromValue = 0.98
-        pulse.toValue = 1.0
+        pulse.fromValue = 1
+        pulse.toValue = 0.99
         pulse.autoreverses = true
         pulse.repeatCount = .infinity
         pulse.initialVelocity = 0.5
@@ -88,6 +102,33 @@ extension UILabel {
     func update(completion: (UILabel) -> Void) {
             completion(self)
         }
+    
+    func addImage(imageName: String) {
+        let attachment:NSTextAttachment = NSTextAttachment()
+        attachment.image = UIImage(named: imageName)
+        
+        let attachmentString:NSAttributedString = NSAttributedString(attachment: attachment)
+        let myString:NSMutableAttributedString = NSMutableAttributedString(string: self.text!)
+        myString.append(attachmentString)
+        
+        self.attributedText = myString
+    }
+    
+    func addSystemImage(imageName: String) {
+        let attachment:NSTextAttachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: imageName)
+        
+        let attachmentString:NSAttributedString = NSAttributedString(attachment: attachment)
+        let myString:NSMutableAttributedString = NSMutableAttributedString(string: self.text!)
+        
+        //insert image before text:
+        myString.insert(attachmentString, at: 0)
+        
+        //insert image after text:
+//        myString.append(attachmentString)
+        
+        self.attributedText = myString
+    }
     
     func spring(_ sender: UILabel) {
         sender.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)

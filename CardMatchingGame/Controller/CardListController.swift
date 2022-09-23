@@ -59,11 +59,19 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
 //        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = -20
-        layout.minimumInteritemSpacing = -20
+        layout.minimumLineSpacing = -10
+        layout.minimumInteritemSpacing = 0
         
-        //vertical View x6:
-        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
+        //vertical View x6: (standard)
+//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
+        
+        //vertical View x2 (looks good)
+//        layout.itemSize = CGSize(width: (view.frame.width/1.3), height: (view.frame.height/2.1))
+        
+        
+        layout.itemSize = CGSize(width: (view.frame.width/3), height: (view.frame.height/4.2))
+        
+        
         
         //horisontal View x6:
 //        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
@@ -263,16 +271,15 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // Configure animation and properties
         func configureAnimation() {
-//            collectionView?.gemini
-//                .rollRotationAnimation()
-//                    .degree(45)
-//                    .rollEffect(.rollUp)
+            collectionView?.gemini
+                .rollRotationAnimation()
+                    .degree(45)
+                    .rollEffect(.rollUp)
             
             //that's nice:
-            collectionView?.gemini
-                .yawRotationAnimation()
-//                .degree(180)
-                .yawEffect(.yawDown)
+//            collectionView?.gemini
+//                .yawRotationAnimation()
+//                .yawEffect(.yawDown)
             
 //            collectionView.gemini
 //                .circleRotationAnimation()

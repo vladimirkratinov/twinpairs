@@ -20,10 +20,12 @@ struct Properties {
     static var uiLabelsColor = UIColor.black
     static var uiLabelsSize: CGFloat = 23
     static var uiLabelsFont = FontKey.staatliches.rawValue
+    
+    static var cardCoverImage = UIImage(named: FigmaKey.cardCover3.rawValue)
     //Admin Functions:
     static var hideAdminButtons = false
     //debug gameOver:
-    static var gameIsOver = false
+    static var gameIsOver = true
     //turn off music:
     static var generalBackgroundSoundIsMutedForTestPurposes = true
     
@@ -40,10 +42,10 @@ struct Properties {
     static let infoMessage = "Game Version: ver 0.5 (stable build) \n Unlock items in Collections Shop! \n Collect 🪙 coins in Game Mode \n 10 match pairs = 1 coin \n New Game Modes coming soon!"
     
     //CollectionView list:
-    static let listOfSets = ["Standart",
-                             "New Zealand",
-                             "Australia",
-                             "Japan 1961 Flowers",
+    static let listOfSets = ["Food",
+                             "Space",
+                             "Animals",
+                             "Music",
                              "Ukraine 1",
                              "Ukraine 2",
     ]

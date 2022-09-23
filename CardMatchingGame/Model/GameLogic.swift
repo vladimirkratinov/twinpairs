@@ -18,6 +18,25 @@ public class GameLogic {
     public func setupCards(set: [String]) {
         Properties.pairList = set
         
+        print(Properties.pairList)
+        
+        if Properties.pairList.count == 24 {
+            //default code:
+            print("deleted item is: \(String(describing: Properties.pairList.first))")
+            Properties.pairList.removeFirst()
+            print("deleted item is: \(String(describing: Properties.pairList.first))")
+            Properties.pairList.removeFirst()
+            print("deleted item is: \(String(describing: Properties.pairList.last))")
+            Properties.pairList.removeLast()
+            print("deleted item is: \(String(describing: Properties.pairList.last))")
+            Properties.pairList.removeLast()
+            
+            //randomize code:
+
+            
+            //end of randomize
+        }
+        
         print("SETUP CARDBUTTONS: \(Properties.cardButtons.count)")
         
         if Properties.pairList.count > Properties.cardButtons.count {
@@ -71,7 +90,6 @@ public class GameLogic {
                     .map { $0.element }
                 
                 print("Remaining Cards after randomization: \(arrayRemainingCards)")
-//                Properties.pairList.removeAll()
                 Properties.pairList = arrayRemainingCards
                 
                 shuffleAndSetTitle()

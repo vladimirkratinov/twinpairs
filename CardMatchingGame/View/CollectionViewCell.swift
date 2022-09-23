@@ -57,20 +57,21 @@ class CollectionViewCell: GeminiCell {
         unlockButton.translatesAutoresizingMaskIntoConstraints = false
         unlockButton.setTitle(" Unlock ", for: .normal)
         unlockButton.backgroundColor = UIColor.systemGreen
-        unlockButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        unlockButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 24)
         unlockButton.titleLabel?.adjustsFontSizeToFitWidth = true
         unlockButton.setTitleColor(UIColor.black, for: .normal)
         unlockButton.layer.borderColor = UIColor.black.cgColor
         unlockButton.tag += 1
-        unlockButton.layer.borderWidth = 2
+        unlockButton.layer.borderWidth = 0
         unlockButton.layer.cornerRadius = 10
         unlockButton.isUserInteractionEnabled = true
-//        unlockButton.layer.shadowColor = UIColor.black.cgColor
-//        unlockButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        unlockButton.layer.shadowRadius = 3
-//        unlockButton.layer.shadowOpacity = 1.0
-//        unlockButton.layer.shouldRasterize = true
-//        unlockButton.layer.rasterizationScale = UIScreen.main.scale
+        
+        unlockButton.layer.shadowColor = UIColor.black.cgColor
+        unlockButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        unlockButton.layer.shadowRadius = 3
+        unlockButton.layer.shadowOpacity = 1.0
+        unlockButton.layer.shouldRasterize = true
+        unlockButton.layer.rasterizationScale = UIScreen.main.scale
         return unlockButton
     }()
     
@@ -79,21 +80,21 @@ class CollectionViewCell: GeminiCell {
         selectButton.alpha = 1
         selectButton.translatesAutoresizingMaskIntoConstraints = false
         selectButton.setTitle(" Select ", for: .normal)
-        selectButton.backgroundColor = UIColor.systemGreen
-        selectButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        selectButton.backgroundColor = UIColor(red: 0.28, green: 0.92, blue: 0.18, alpha: 1.00)
+        selectButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
         selectButton.titleLabel?.adjustsFontSizeToFitWidth = true
         selectButton.setTitleColor(UIColor.black, for: .normal)
         selectButton.layer.borderColor = UIColor.black.cgColor
         selectButton.tag += 1
-        selectButton.layer.borderWidth = 2
+        selectButton.layer.borderWidth = 0
         selectButton.layer.cornerRadius = 10
         selectButton.isUserInteractionEnabled = true
-//        selectButton.layer.shadowColor = UIColor.black.cgColor
-//        selectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        selectButton.layer.shadowRadius = 3
-//        selectButton.layer.shadowOpacity = 1.0
-//        selectButton.layer.shouldRasterize = true
-//        selectButton.layer.rasterizationScale = UIScreen.main.scale
+        selectButton.layer.shadowColor = UIColor.black.cgColor
+        selectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        selectButton.layer.shadowRadius = 3
+        selectButton.layer.shadowOpacity = 1.0
+        selectButton.layer.shouldRasterize = true
+        selectButton.layer.rasterizationScale = UIScreen.main.scale
         return selectButton
     }()
     

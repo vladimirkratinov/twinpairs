@@ -25,7 +25,7 @@ class ContentLoader {
                 let fileString = item.lastPathComponent
                 if fileString.hasPrefix("set\(setNumber)_") {
                     
-                    if generatedArray.count < 20 {
+                    if generatedArray.count < 24 {
                         generatedArray.append(fileString)
                         generatedArray.append(fileString)
                         generatedArray.sort()

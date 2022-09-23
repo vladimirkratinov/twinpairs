@@ -22,7 +22,6 @@ class MenuInterface: UIView {
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-//        backgroundImageView.image = UIImage(named: ImageKey.envelope1.rawValue)
         backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +32,6 @@ class MenuInterface: UIView {
         let coverImageView = UIImageView(frame: .zero)
         coverImageView.isHidden = true
         coverImageView.alpha = 1
-//        coverImageView.image = UIImage(named: ImageKey.envelope4Large.rawValue)
         coverImageView.image = UIImage(named: FigmaKey.backgroundSettings.rawValue)
         coverImageView.contentMode = .scaleAspectFill
         coverImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,9 +141,10 @@ class MenuInterface: UIView {
 
     lazy var playButton: UIButton = {
         let playButton = UIButton()
-        playButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        playButton.titleLabel?.textAlignment = .left
         playButton.setTitle("Play", for: .normal)
+        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        playButton.titleLabel?.textAlignment = .center
+        playButton.centerTextAndImage(spacing: 5)
         setupAppearence(playButton)
         playButton.backgroundColor = UIColor(red: 0.20, green: 0.89, blue: 0.27, alpha: 1.00)
         return playButton
@@ -154,7 +153,9 @@ class MenuInterface: UIView {
     lazy var difficultyButton: UIButton = {
         let difficultyButton = UIButton()
         difficultyButton.setTitle("Easy", for: .normal)
-        difficultyButton.setImage(UIImage(systemName: "person.2.wave.2")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        difficultyButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        difficultyButton.titleLabel?.textAlignment = .center
+        difficultyButton.centerTextAndImage(spacing: 5)
         setupAppearence(difficultyButton)
         difficultyButton.backgroundColor = .green
         return difficultyButton
@@ -163,7 +164,9 @@ class MenuInterface: UIView {
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
         timeModeButton.setTitle("3 min.", for: .normal)
-        timeModeButton.setImage(UIImage(systemName: "clock.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        timeModeButton.setImage(UIImage(systemName: "clock.circle")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        timeModeButton.titleLabel?.textAlignment = .center
+        timeModeButton.centerTextAndImage(spacing: 5)
         setupAppearence(timeModeButton)
         timeModeButton.backgroundColor = .yellow
         return timeModeButton
@@ -174,6 +177,8 @@ class MenuInterface: UIView {
         hardcoreModeButton.setTitle("Hardcore", for: .normal)
         hardcoreModeButton.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(hardcoreModeButton)
+        hardcoreModeButton.titleLabel?.textAlignment = .center
+        hardcoreModeButton.centerTextAndImage(spacing: 5)
         hardcoreModeButton.backgroundColor = UIColor(red: 0.86, green: 0.44, blue: 0.44, alpha: 1.00)
         return hardcoreModeButton
     }()
@@ -183,7 +188,8 @@ class MenuInterface: UIView {
         collectionButton.setTitle("Collection", for: .normal)
         collectionButton.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysOriginal), for: .normal)
         setupAppearence(collectionButton)
-//        collectionButton.backgroundColor = palette.cyanite
+        collectionButton.titleLabel?.textAlignment = .center
+        collectionButton.centerTextAndImage(spacing: 5)
         collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
         return collectionButton
     }()
