@@ -663,7 +663,7 @@ class GameController: UIViewController {
                 let backgroundImage = Properties.cardCoverImage
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
                 cardButton.setTitleColor(prop.debugFontColor, for: .normal)
-                cardButton.titleLabel?.font = UIFont(name: "AvenirNextCondensed-Bold", size: prop.debugFontSize)
+                cardButton.titleLabel?.font = UIFont(name: "Helvetica", size: prop.debugFontSize)
                 cardButton.layer.borderWidth = 0
                 cardButton.layer.cornerRadius = 10
                 cardButton.layer.borderColor = UIColor.systemBrown.cgColor
@@ -692,23 +692,24 @@ class GameController: UIViewController {
         
         let thePath = CGMutablePath()
         let randomNumber = Int.random(in: 1...3)
+//        let randomNumber = 1
         
         switch randomNumber {
         case 1:
-            thePath.move(to: CGPoint(x: 200, y: 150))
+            thePath.move(to: CGPoint(x: 100, y: 200))
             thePath.addCurve(to: CGPoint(x: 200, y: 100),
                              control1: CGPoint(x: 0, y: 0),
-                             control2: CGPoint(x:200, y: 0))
+                             control2: CGPoint(x:0, y: 0))
         case 2:
-            thePath.move(to: CGPoint(x: 60, y: 200))
-            thePath.addCurve(to: CGPoint(x: 100, y: 100),
-                             control1: CGPoint(x: 100, y: 20),
-                             control2: CGPoint(x:200, y: 20))
+            thePath.move(to: CGPoint(x: 100, y: 600))
+            thePath.addCurve(to: CGPoint(x: 50, y: 50),
+                             control1: CGPoint(x: 50, y: 100),
+                             control2: CGPoint(x:50, y: 300))
         case 3:
-            thePath.move(to: CGPoint(x: 300, y: 100))
-            thePath.addCurve(to: CGPoint(x: 300, y: 100),
-                             control1: CGPoint(x: 0, y: 25),
-                             control2: CGPoint(x: 0, y: 25))
+            thePath.move(to: CGPoint(x: 300, y: 300))
+            thePath.addCurve(to: CGPoint(x: 0, y: 0),
+                             control1: CGPoint(x: 100, y: 100),
+                             control2: CGPoint(x: 0, y: 0))
         default:
             break
         }

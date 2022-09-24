@@ -250,62 +250,67 @@ class MenuInterface: UIView {
     //MARK: - Settings - Labels:
     
     lazy var settingsMusic: UILabel = {
-       let settingsMusic = UILabel()
-        settingsMusic.text = "Music"
-        setupSettingsLabels(settingsMusic)
-        return settingsMusic
+       let label = UILabel()
+        label.text = "Music"
+//        label.addSystemImage(imageName: "pianokeys")
+        setupSettingsLabels(label)
+        return label
     }()
     
     lazy var settingsSound: UILabel = {
-       let settingsSound = UILabel()
-        settingsSound.text = "Sound"
-        setupSettingsLabels(settingsSound)
-        return settingsSound
+       let label = UILabel()
+        label.text = "Sound"
+//        label.addSystemImage(imageName: "speaker.wave.3")
+        setupSettingsLabels(label)
+        return label
     }()
     
     lazy var settingsVibration: UILabel = {
-       let settingsVibration = UILabel()
-        settingsVibration.text = "Vibration"
-        setupSettingsLabels(settingsVibration)
-        return settingsVibration
+       let label = UILabel()
+        label.text = "Vibration"
+        setupSettingsLabels(label)
+        return label
     }()
     
     //MARK: - Settings - Buttons:
 
     lazy var muteMusicButton: UIButton = {
-        let muteMusicButton = UIButton()
-        muteMusicButton.setTitle(" Mute ", for: .normal)
-        muteMusicButton.backgroundColor = Properties.defaultMusicButtonColor
-        setupSettingsButtons(muteMusicButton)
-        return muteMusicButton
+        let button = UIButton()
+        setupSettingsButtons(button)
+        button.setTitle("mute", for: .normal)
+        button.backgroundColor = Properties.defaultMusicButtonColor
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        return button
     }()
     
     lazy var muteSoundButton: UIButton = {
-        let muteSoundButton = UIButton()
-        muteSoundButton.setTitle(" Mute ", for: .normal)
-        muteSoundButton.backgroundColor = Properties.defaultSoundButtonColor
-        setupSettingsButtons(muteSoundButton)
-        return muteSoundButton
+        let button = UIButton()
+        setupSettingsButtons(button)
+        button.setTitle("mute", for: .normal)
+        button.backgroundColor = Properties.defaultSoundButtonColor
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        return button
     }()
     
     lazy var muteVibrationButton: UIButton = {
-        let muteVibrationButton = UIButton()
-        muteVibrationButton.setTitle(" Mute ", for: .normal)
-        muteVibrationButton.backgroundColor = Properties.defaultVibroButtonColor
-        setupSettingsButtons(muteVibrationButton)
-        return muteVibrationButton
+        let button = UIButton()
+        setupSettingsButtons(button)
+        button.setTitle("mute", for: .normal)
+        button.backgroundColor = Properties.defaultSoundButtonColor
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        return button
     }()
     
     lazy var quitButton: UIButton = {
         let quitButton = UIButton()
-        quitButton.setTitle(" Quit ", for: .normal)
+        quitButton.setTitle("quit", for: .normal)
         setupSettingsButtons(quitButton)
         return quitButton
     }()
     
     lazy var rateButton: UIButton = {
         let rateButton = UIButton()
-        rateButton.setTitle(" Rate Us ", for: .normal)
+        rateButton.setTitle("rate us", for: .normal)
         setupSettingsButtons(rateButton)
         rateButton.alpha = 0.3
         rateButton.backgroundColor = .systemGreen
