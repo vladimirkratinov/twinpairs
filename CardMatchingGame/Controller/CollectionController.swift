@@ -115,13 +115,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     //MARK: - viewDidAppear:
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        navigationController?.toolbar.isHidden = true
-//        navigationController?.setToolbarHidden(true, animated: false)
-    }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //enable gestures:

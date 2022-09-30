@@ -113,7 +113,8 @@ class MenuInterface: UIView {
         let collectionDescriptionLabel = UILabel()
         collectionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         collectionDescriptionLabel.textColor = .white
-        collectionDescriptionLabel.alpha = 0.5
+//        collectionDescriptionLabel.alpha = 0.5
+        collectionDescriptionLabel.alpha = 0
         collectionDescriptionLabel.textAlignment = .left
         collectionDescriptionLabel.adjustsFontSizeToFitWidth = true
         collectionDescriptionLabel.text = "card sets >"
@@ -164,11 +165,11 @@ class MenuInterface: UIView {
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
         timeModeButton.setTitle("3 min.", for: .normal)
-        timeModeButton.setImage(UIImage(systemName: "clock.circle")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        timeModeButton.setImage(UIImage(systemName: "timer")?.withRenderingMode(.alwaysOriginal), for: .normal)
         timeModeButton.titleLabel?.textAlignment = .center
         timeModeButton.centerTextAndImage(spacing: 5)
         setupAppearence(timeModeButton)
-        timeModeButton.backgroundColor = .yellow
+        timeModeButton.backgroundColor = .green
         return timeModeButton
     }()
     
@@ -192,6 +193,17 @@ class MenuInterface: UIView {
         collectionButton.centerTextAndImage(spacing: 5)
         collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
         return collectionButton
+    }()
+    
+    lazy var shopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("shop", for: .normal)
+        button.setImage(UIImage(systemName: "tag")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        setupAppearence(button)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
+        return button
     }()
 
     lazy var resetButton: UIButton = {
@@ -336,6 +348,7 @@ class MenuInterface: UIView {
         menuView.addSubview(hardcoreModeButton)
         menuView.addSubview(collectionButton)
         menuView.addSubview(difficultyButton)
+        menuView.addSubview(shopButton)
         menuView.addSubview(resetButton)
         menuView.addSubview(addCoinButton)
         
@@ -426,7 +439,7 @@ class MenuInterface: UIView {
             
             //MARK: - Buttons:
 
-            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 100),
+            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 50),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 57), // 50
             playButton.widthAnchor.constraint(equalToConstant: 137), // 120
@@ -450,8 +463,13 @@ class MenuInterface: UIView {
             collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             collectionButton.heightAnchor.constraint(equalToConstant: 57),
             collectionButton.widthAnchor.constraint(equalToConstant: 137),
+            
+            shopButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 15),
+            shopButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            shopButton.heightAnchor.constraint(equalToConstant: 57),
+            shopButton.widthAnchor.constraint(equalToConstant: 137),
 
-            resetButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 30),
+            resetButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 30),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             resetButton.heightAnchor.constraint(equalToConstant: 30),
             resetButton.widthAnchor.constraint(equalToConstant: 80),

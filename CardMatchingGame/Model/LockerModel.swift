@@ -43,6 +43,11 @@ struct LockerModel: Codable {
         //unlock first cell in UI and in Bool list:
         Properties.collectionOfLockedSets[0].isLocked = false
         Properties.unlockedList[0] = false
+        
+        //select first set default:
+        if Properties.selectedList.isEmpty {
+            Properties.collectionOfLockedSets[0].isSelected = true
+        }
 
         print("loading Locker Model: \(Properties.collectionOfLockedSets)")
     }

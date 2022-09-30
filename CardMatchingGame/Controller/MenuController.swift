@@ -26,14 +26,13 @@ class MenuController: UIViewController {
         menuInterface.setupConstraints()
         
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
-        menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
         menuInterface.difficultyButton.addTarget(self, action: #selector(difficultyButtonTapped), for: .touchUpInside)
         menuInterface.timeModeButton.addTarget(self, action: #selector(timeModeButtonTapped), for: .touchUpInside)
-        
+        menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
+        menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
+        menuInterface.shopButton.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
         menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
-        
         menuInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         menuInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         menuInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
@@ -149,6 +148,17 @@ class MenuController: UIViewController {
         transitionToVC(duration: 0.2, identifier: "CollectionController")
     }
     
+    //MARK: - ShopButtonTapped:
+    
+    @objc func shopButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+        transitionToVC(duration: 0.2, identifier: "ShopController")
+    }
+    
     //MARK: - DifficultyButtonTapped:
     
     @objc func difficultyButtonTapped(_ sender: UIButton) {
@@ -203,7 +213,7 @@ class MenuController: UIViewController {
         } else if sender.titleLabel?.text == TimeKey.tenMinutes.rawValue {
             sender.setTitle("3 min.", for: .normal)
             Properties.standardTimeCounter = 180
-            sender.backgroundColor = .yellow
+            sender.backgroundColor = .green
         }
     }
     
@@ -340,6 +350,12 @@ class MenuController: UIViewController {
 //                self.navigationController?.view.layer.add(transition, forKey: nil)
 //                self.navigationController?.pushViewController(vc, animated: false)
 //            }
+        case "ShopController":
+            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? ShopController else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
         default: return
         }
     }

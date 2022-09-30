@@ -60,7 +60,7 @@ class DetailController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //animation:
-        detailInterface.detailImageButton.pulsateSlow()
+//        detailInterface.detailImageButton.pulsateSlow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +74,8 @@ class DetailController: UIViewController {
         if !isTapped {
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
+            print(selectedImage!)
             
             let image = UIImage(named: ImageKey.stampBackground.rawValue)?
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
@@ -99,14 +101,14 @@ class DetailController: UIViewController {
                     self.detailInterface.titleLabel.alpha = 1
                     self.detailInterface.detailLabel.alpha = 1
                 })
-                self.detailInterface.detailImageButton.pulsateRemove()
+//                self.detailInterface.detailImageButton.pulsateRemove()
             }
    
         } else {
             //audioFX
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
             //pulsate:
-            detailInterface.detailImageButton.pulsateSlow()
+//            detailInterface.detailImageButton.pulsateSlow()
             
             //flip back:
             let image = UIImage(named: selectedImage!)!

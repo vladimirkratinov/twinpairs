@@ -22,6 +22,7 @@
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
 		F72ED08628B9345F007FE584 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ED08528B9345F007FE584 /* AlertController.swift */; };
+		F75CEBF528E65AC9001A646D /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75CEBF428E65AC9001A646D /* ShopController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F764E17428B478BE00F4575F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingController.swift */; };
@@ -37,6 +38,7 @@
 		F781AD8C28935088002993E7 /* buttonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8B28935088002993E7 /* buttonPress.wav */; };
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
+		F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795C8E128E7866A003A29E7 /* ShopInterface.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
 		F7D7D5AD28D501BC0004F936 /* Staatliches-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */; };
@@ -75,6 +77,7 @@
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
 		F72ED08528B9345F007FE584 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		F75CEBF428E65AC9001A646D /* ShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F764E17328B478BE00F4575F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		F781AD8B28935088002993E7 /* buttonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonPress.wav; sourceTree = "<group>"; };
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		F795C8E128E7866A003A29E7 /* ShopInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInterface.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Staatliches-Regular.ttf"; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				F72837BF28ADA788000B9567 /* CollectionController.swift */,
 				F700123428AEEDA1007DEA94 /* CardListController.swift */,
 				F72837C328ADC167000B9567 /* DetailController.swift */,
+				F75CEBF428E65AC9001A646D /* ShopController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */,
 				F700123228AEED89007DEA94 /* CardListViewCell.swift */,
 				F72837C528ADC2E8000B9567 /* DetailInterface.swift */,
+				F795C8E128E7866A003A29E7 /* ShopInterface.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,10 +399,12 @@
 				F764E17428B478BE00F4575F /* SettingController.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
 				F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */,
+				F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */,
 				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,
 				F774A79C28C6AC3000AAB936 /* HardcoreController.swift in Sources */,
 				F72837C428ADC167000B9567 /* DetailController.swift in Sources */,
 				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
+				F75CEBF528E65AC9001A646D /* ShopController.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,
 				F72837C028ADA788000B9567 /* CollectionController.swift in Sources */,
