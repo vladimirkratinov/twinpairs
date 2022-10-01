@@ -55,7 +55,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             //deselect another button:
-            
             if Properties.cardSet1isUnlocked && Properties.cardSet1isSelected {
                 self.shopInterface.cardSet1UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = .gray
@@ -65,6 +64,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
                 }
             }
+            
             //update set2:
             
             if !Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
@@ -76,8 +76,8 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
             }
-            //deselect another button:
             
+            //deselect another button:
             if Properties.cardSet2isUnlocked && Properties.cardSet2isSelected {
                 self.shopInterface.cardSet2UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = .gray
@@ -110,8 +110,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
                 }
             }
-            
-            
             
             //update cover set2:
             
@@ -147,11 +145,12 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-  
     }
     
     //MARK: - cardSet Image Buttons:
@@ -410,5 +409,4 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         print("coverSet2isUnlocked: \(Properties.coverSet2isUnlocked)")
         print("coverSet2isSelected: \(Properties.coverSet2isSelected)")
     }
-    
 }
