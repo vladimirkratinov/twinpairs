@@ -22,7 +22,33 @@ Try to match the cards with its respective pair with as few moves as possible
 
 # 📷 Screenshots:
 
-## ver. 0.5 (NEW!)
+## ver. 0.7 (NEW!)
+
+- Added Shop
+- Added unlock and select mechanics to the Shop
+
+![IMG_7795](https://user-images.githubusercontent.com/78992253/193423021-1feb7934-be43-41a9-b7ea-79f41e89e927.PNG)
+![IMG_7796](https://user-images.githubusercontent.com/78992253/193423024-53f99748-ed69-42a9-ab1e-434738b075c9.PNG)
+![IMG_7798](https://user-images.githubusercontent.com/78992253/193423025-6608bde3-4d72-4072-86cf-7d4621d758c2.PNG)
+![IMG_7799](https://user-images.githubusercontent.com/78992253/193423026-74117e10-8f3f-46dd-8ded-5a3007f028d6.PNG)
+![IMG_7800](https://user-images.githubusercontent.com/78992253/193423027-e28f04c9-cd06-454e-b99d-b889a622cb86.PNG)
+![IMG_7801](https://user-images.githubusercontent.com/78992253/193423028-d56c68f9-ee23-4dc6-8c20-65f71f912aee.PNG)
+![IMG_7802](https://user-images.githubusercontent.com/78992253/193423163-9fc82ed2-d543-4662-82b0-f58780d6ebdd.PNG)
+![IMG_7803](https://user-images.githubusercontent.com/78992253/193423165-d418fffe-636c-4e86-ae37-bb7051578393.PNG)
+![IMG_7804](https://user-images.githubusercontent.com/78992253/193423166-3298880b-a34f-4da6-b730-9c0eb304ecb4.PNG)
+
+## ver. 0.6
+
+- Global redesign!
+- Added brand new Game Over screen with statistics
+- Collections are reworked
+- Added new animations to Collections
+- Added new card sets
+- Sets are upsized to 24 cards in each set
+- Added Difficulty Mode
+- Added Time Mode
+
+## ver. 0.5 
 
 - Added new feature - unlock mechanism in CollectionView
 - Added prices and purchase function
@@ -42,9 +68,6 @@ Try to match the cards with its respective pair with as few moves as possible
 ![4](https://user-images.githubusercontent.com/78992253/186836948-e1666ad4-1a95-4f72-a61c-66a69dbd147b.PNG)
 ![5](https://user-images.githubusercontent.com/78992253/186836951-8de7becb-7baf-4589-90e9-89f0daaf60fb.PNG)
 ![6](https://user-images.githubusercontent.com/78992253/186836953-6a9b8c00-a99e-47c7-b035-a13906b4fa50.PNG)
-
-
-
 
 ## ver. 0.4
 
