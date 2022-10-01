@@ -17,8 +17,9 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     let palette = Palette()
     
     override func loadView() {
-        view = shopInterface.shopView
-        view.insertSubview(shopInterface.backgroundImageView, at: 0)
+//        view = shopInterface.shopView
+        view = shopInterface.contentView
+//        view.insertSubview(shopInterface.backgroundImageView, at: 0)
                 
         shopInterface.setupSubviews()
         shopInterface.setupConstraints()
@@ -34,9 +35,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         shopInterface.coverSet2UnlockButton.addTarget(self, action: #selector(coverSet2UnlockButtonTapped), for: .touchUpInside)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //setup UIScrollView scroll effect:
+        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.bounds.width, height: shopInterface.contentView.bounds.height - 80)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
@@ -66,7 +72,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             //update set2:
-            
+
             if !Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
                 self.shopInterface.cardSet2UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
@@ -134,10 +140,8 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        print()
         print("cardSet1isUnlocked: \(Properties.cardSet1isUnlocked)")
         print("cardSet1isSelected: \(Properties.cardSet1isSelected)")
-        print()
         print("cardSet2isUnlocked: \(Properties.cardSet2isUnlocked)")
         print("cardSet2isSelected: \(Properties.cardSet2isSelected)")
 
@@ -145,7 +149,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
@@ -253,9 +256,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 print(Properties.selectedCardListNumber)
             }
         }
-        
-        print("cardSet1isUnlocked: \(Properties.cardSet1isUnlocked)")
-        print("cardSet1isSelected: \(Properties.cardSet1isSelected)")
     }
     
     //MARK: - cardSet2 Unlock:
@@ -309,9 +309,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 print(Properties.selectedCardListNumber)
             }
         }
-        
-        print("cardSet2isUnlocked: \(Properties.cardSet2isUnlocked)")
-        print("cardSet2isSelected: \(Properties.cardSet2isSelected)")
     }
     
     //MARK: - coverSet1 Unlcok:
@@ -357,9 +354,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             // change cover image
             Properties.cardCoverImage = UIImage(named: FigmaKey.shop_cover_1.rawValue)
         }
-        
-        print("coverSet1isUnlocked: \(Properties.coverSet1isUnlocked)")
-        print("coverSet1isSelected: \(Properties.coverSet1isSelected)")
     }
     
     //MARK: - coverSet2 Unlock:
@@ -405,8 +399,5 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             //change cover image
             Properties.cardCoverImage = UIImage(named: FigmaKey.shop_cover_2.rawValue)
         }
-        
-        print("coverSet2isUnlocked: \(Properties.coverSet2isUnlocked)")
-        print("coverSet2isSelected: \(Properties.coverSet2isSelected)")
     }
 }

@@ -11,8 +11,25 @@ class ShopInterface: UIView {
     
     let palette = Palette()
     
+    var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.init(patternImage: UIImage(named: FigmaKey.backgroundMenu.rawValue)!)
+        return view
+    }()
+
+        var scrollView: UIScrollView = {
+            let scrollView = UIScrollView(frame: .zero)
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.isUserInteractionEnabled = true
+            scrollView.isScrollEnabled = true
+//            scrollView.backgroundColor = .green
+            return scrollView
+        }()
+
     var shopView: UIView = {
         let view = UIView()
+        view.backgroundColor = .systemPink
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -54,7 +71,7 @@ class ShopInterface: UIView {
     lazy var contentBlock1: UIView = {
         let view = UIView()
         setupViewAppearence(view)
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(1)
         return view
     }()
     
@@ -103,7 +120,7 @@ class ShopInterface: UIView {
     lazy var contentBlock2: UIView = {
         let view = UIView()
         setupViewAppearence(view)
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(1)
         return view
     }()
     
@@ -146,13 +163,20 @@ class ShopInterface: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    
+
     func setupSubviews() {
-        shopView.addSubview(contentBlock1)
-        shopView.addSubview(contentBlock2)
-        shopView.addSubview(title1)
-        shopView.addSubview(title2)
+        contentView.addSubview(scrollView)
+        scrollView.addSubview(shopView)
+
+//        shopView.addSubview(contentBlock1)
+//        shopView.addSubview(contentBlock2)
+//        shopView.addSubview(title1)
+//        shopView.addSubview(title2)
+        
+        scrollView.addSubview(contentBlock1)
+        scrollView.addSubview(contentBlock2)
+        scrollView.addSubview(title1)
+        scrollView.addSubview(title2)
         
         contentBlock1.addSubview(verticalSeparatorInBlock1)
         contentBlock1.addSubview(cardSet1ImageButton)
@@ -169,20 +193,27 @@ class ShopInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: shopView.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: shopView.bottomAnchor),
             
+            scrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            shopView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            shopView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            shopView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            shopView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            shopView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+
             //MARK: - title 1:
             
-            title1.topAnchor.constraint(equalTo: shopView.layoutMarginsGuide.topAnchor, constant: 20),
+            title1.topAnchor.constraint(equalTo: shopView.layoutMarginsGuide.topAnchor, constant: 0),
             title1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 15),
             
             contentBlock1.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 5),
             contentBlock1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
             contentBlock1.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
-            contentBlock1.heightAnchor.constraint(equalToConstant: 270),
+            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 270),
             
             verticalSeparatorInBlock1.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
             verticalSeparatorInBlock1.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor),
@@ -217,7 +248,7 @@ class ShopInterface: UIView {
             contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
             contentBlock2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
             contentBlock2.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
-            contentBlock2.heightAnchor.constraint(equalToConstant: 270),
+            contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 270),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),

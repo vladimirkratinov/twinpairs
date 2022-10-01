@@ -40,26 +40,14 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func loadView() {
         super.loadView()
-        //TESTING UI:
-
+        
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 40, left: 5, bottom: 1, right: 5)
-//        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/5)-4)           //x8 horisontal
-//        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/4)+30)  //+15     //x6 horisontal
-        
-        
         layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/3.6))  //+15     //x6 horisontal
         layout.minimumLineSpacing = 10           //default 5
         layout.minimumInteritemSpacing = 0       //default 0
-        
-//        horizontal x1
-//        layout.itemSize = CGSize(width: (view.frame.size.width), height: (view.frame.size.height/2))
-        
-//        Horizontal x6
-//        layout.itemSize = CGSize(width: (view.frame.size.width/2), height: (view.frame.size.height/4)-10)
-        
-//        layout.itemSize = CGSize(width: 150, height: 150)
+
         print("layout.itemSize: \(layout.itemSize)")
 
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -72,14 +60,14 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         collectionView.isScrollEnabled = true
         collectionView.isUserInteractionEnabled = true
-        collectionView.alwaysBounceHorizontal = true
-//        collectionView.alwaysBounceVertical = true
+        
+//        collectionView.alwaysBounceHorizontal = true
+        collectionView.alwaysBounceVertical = true
         
         collectionView.backgroundColor = palette.imperialPrimer
         collectionView.backgroundView = backgroundImageView
         
         collectionView.frame = view.bounds
-//        collectionView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: view.bounds.height)
         
         //implement animations:
 //        configureAnimation()
@@ -111,7 +99,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print("\(view.bounds.width) x \(view.bounds.height)")
-
     }
     
     //MARK: - viewDidAppear:
@@ -254,7 +241,7 @@ extension CollectionController: CollectionViewCellDelegate {
                     
                     //YES button:
                     let confirm = UIAlertAction(title: "Yes", style: .default) {_ in
-                                                
+                        
                         //audioFX2:
                         let magic = AudioFileKey.magic.rawValue
                         self.audioFX.playAnotherSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
