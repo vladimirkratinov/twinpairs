@@ -439,7 +439,7 @@ class MenuInterface: UIView {
             
             //MARK: - Buttons:
 
-            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 50),
+            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 70),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 57), // 50
             playButton.widthAnchor.constraint(equalToConstant: 137), // 120

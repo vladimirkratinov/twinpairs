@@ -48,10 +48,35 @@ struct Properties {
                              "Animals",
                              "Music",
                              "Space",
-                             "Ukraine",
-                             "Canada",
+                             "NONE",
+                             "NONE",
                              
     ]
+    
+    //shop unlocked list:
+    static var cardSet1isUnlocked = defaults.bool(forKey: "cardSet1isUnlocked")
+    static var cardSet2isUnlocked = defaults.bool(forKey: "cardSet2isUnlocked")
+    static var coverSet1isUnlocked = defaults.bool(forKey: "coverSet1isUnlocked")
+    static var coverSet2isUnlocked = defaults.bool(forKey: "coverSet2isUnlocked")
+
+//    static var cardSet1isSelected = defaults.bool(forKey: "cardSet1isSelected")
+//    static var cardSet2isSelected = defaults.bool(forKey: "cardSet2isSelected")
+    
+    static var cardSet1isSelected = false
+    static var cardSet2isSelected = false
+    
+    static var coverSet1isSelected = defaults.bool(forKey: "coverSet1isSelected")
+    static var coverSet2isSelected = defaults.bool(forKey: "coverSet2isSelected")
+    
+//    static var cardSet1isUnlocked =  false
+//    static var cardSet2isUnlocked =  false
+//    static var coverSet1isUnlocked = false
+//    static var coverSet2isUnlocked = false
+//
+//    static var cardSet1isSelected =  false
+//    static var cardSet2isSelected =  false
+//    static var coverSet1isSelected = false
+//    static var coverSet2isSelected = false
     
     //Large Title in CollectionView
     static public var selectedSetName = String()

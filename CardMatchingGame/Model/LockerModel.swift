@@ -45,9 +45,22 @@ struct LockerModel: Codable {
         Properties.unlockedList[0] = false
         
         //select first set default:
-        if Properties.selectedList.isEmpty {
-            Properties.collectionOfLockedSets[0].isSelected = true
+        
+        
+        //select first set default:
+        if !Properties.cardSet1isSelected || !Properties.cardSet1isSelected {
+            if Properties.selectedList.isEmpty {
+                Properties.collectionOfLockedSets[0].isSelected = true
+            }
+        } else {
+            Properties.collectionOfLockedSets[0].isSelected = false
         }
+        
+//        if Properties.selectedList.isEmpty {
+//            Properties.collectionOfLockedSets[0].isSelected = true
+//        } else {
+//            Properties.collectionOfLockedSets[0].isSelected = false
+//        }
 
         print("loading Locker Model: \(Properties.collectionOfLockedSets)")
     }
@@ -183,6 +196,11 @@ struct LockerModel: Codable {
             } else { //if not locked
 //                cell.selectButton.isEnabled = true
                 cell.selectButton.backgroundColor = palette.UIGreen
+            }
+            
+            if Properties.cardSet1isSelected || Properties.cardSet2isSelected {
+                cell.selectButton.backgroundColor = .green
+                cell.selectButton.setTitle("select", for: .normal)
             }
         }
 }

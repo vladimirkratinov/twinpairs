@@ -253,7 +253,7 @@ extension CollectionController: CollectionViewCellDelegate {
                     let price = Properties.collectionOfLockedSets[indexPath.item].unlockPrice
                     
                     //YES button:
-                    let confirm = UIAlertAction(title: "Open", style: .destructive) {_ in
+                    let confirm = UIAlertAction(title: "Yes", style: .default) {_ in
                                                 
                         //audioFX2:
                         let magic = AudioFileKey.magic.rawValue
@@ -333,6 +333,10 @@ extension CollectionController: CollectionViewCellDelegate {
                         Properties.selectedCardListNumber = temporaryIndexPath
                         Properties.cardSetIsSelected = true
                     }
+                    
+                    //update select buttons from the Shop view:
+                    Properties.cardSet1isSelected = false
+                    Properties.cardSet2isSelected = false
                 }
             }
         }

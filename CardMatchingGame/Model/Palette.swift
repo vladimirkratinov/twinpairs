@@ -23,4 +23,6 @@ struct Palette {
     
 //    let UIGreen = UIColor(red: 0.00, green: 0.66, blue: 0.47, alpha: 1.00)
     let UIGreen = UIColor(red: 0.28, green: 0.92, blue: 0.18, alpha: 1.00)
+    
+    let shopUnlockButtonOrange = UIColor(red: 0.99, green: 0.70, blue: 0.35, alpha: 1.00)
 }

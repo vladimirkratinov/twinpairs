@@ -9,6 +9,8 @@ import UIKit
 
 class ShopInterface: UIView {
     
+    let palette = Palette()
+    
     var shopView: UIView = {
         let view = UIView()
         return view
@@ -215,7 +217,7 @@ class ShopInterface: UIView {
             contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
             contentBlock2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
             contentBlock2.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
-            contentBlock2.heightAnchor.constraint(equalToConstant: 290),
+            contentBlock2.heightAnchor.constraint(equalToConstant: 270),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),
@@ -268,7 +270,7 @@ class ShopInterface: UIView {
         thisButton.layer.shadowOpacity = 0.5
         thisButton.isUserInteractionEnabled = true
         thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        thisButton.backgroundColor = UIColor(red: 0.99, green: 0.70, blue: 0.35, alpha: 1.00)
+        thisButton.backgroundColor = palette.shopUnlockButtonOrange
         thisButton.layer.shouldRasterize = true
         thisButton.layer.rasterizationScale = UIScreen.main.scale
     }
