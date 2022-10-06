@@ -766,14 +766,14 @@ class GameController: UIViewController {
             let muteVibrationColor =    Properties.defaults.colorForKey(key: ColorKey.vibrationButton.rawValue)
             
             //Menu UI:
-            self.menuInterface.muteMusicButton.backgroundColor =        muteMusicColor ?? UIColor.systemPink
-            self.menuInterface.muteSoundButton.backgroundColor =        muteSoundColor ?? UIColor.systemPink
-            self.menuInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ?? UIColor.systemPink
+            self.menuInterface.muteMusicButton.backgroundColor =        muteMusicColor ??       .green
+            self.menuInterface.muteSoundButton.backgroundColor =        muteSoundColor ??       .green
+            self.menuInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ??   .green
             
             //Game UI:
-            self.gameInterface.muteMusicButton.backgroundColor =        muteMusicColor ?? UIColor.systemPink
-            self.gameInterface.muteSoundButton.backgroundColor =        muteSoundColor ?? UIColor.systemPink
-            self.gameInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ?? UIColor.systemPink
+            self.gameInterface.muteMusicButton.backgroundColor =        muteMusicColor ??       .green
+            self.gameInterface.muteSoundButton.backgroundColor =        muteSoundColor ??       .green
+            self.gameInterface.muteVibrationButton.backgroundColor =    muteVibrationColor ??   .green
         }
     }
 }

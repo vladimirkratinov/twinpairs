@@ -156,7 +156,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     }
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Properties.listOfSets.count
+        return Properties.listOfSets.count - 2
     }
     
     //MARK: - cellForItemAt

@@ -48,9 +48,10 @@ struct Properties {
                              "Animals",
                              "Music",
                              "Space",
-                             "NONE",
-                             "NONE",
-                             
+                             "Flowers",
+                             "Art",
+                             "Canada",
+                             "Ukraine"
     ]
     
     //shop unlocked list:

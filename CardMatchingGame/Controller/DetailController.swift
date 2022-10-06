@@ -48,8 +48,10 @@ class DetailController: UIViewController {
 
         if let notEmptyString = selectedImage {
             
+            let transformedImage = "\(notEmptyString)@3x.png"
+            
             //SCALING IMAGE:
-            let image = UIImage(named: notEmptyString)!
+            let image = UIImage(named: transformedImage)!
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
             
             detailInterface.detailImageButton.setImage(image, for: .normal)
@@ -77,7 +79,7 @@ class DetailController: UIViewController {
             
             print(selectedImage!)
             
-            let image = UIImage(named: ImageKey.stampBackground.rawValue)?
+            let image = UIImage(named: FigmaKey.cardCover3.rawValue)?
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
             
             sender.setImage(image, for: .normal)
@@ -97,9 +99,10 @@ class DetailController: UIViewController {
             isTapped = true
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                //detail title and description label animation:
                 UIView.animate(withDuration: 0.5, animations: {
-                    self.detailInterface.titleLabel.alpha = 1
-                    self.detailInterface.detailLabel.alpha = 1
+//                    self.detailInterface.titleLabel.alpha = 1
+//                    self.detailInterface.detailLabel.alpha = 1
                 })
 //                self.detailInterface.detailImageButton.pulsateRemove()
             }

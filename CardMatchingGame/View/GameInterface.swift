@@ -595,7 +595,7 @@ class GameInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultMusicButtonColor
-        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
     }()
     
@@ -604,7 +604,7 @@ class GameInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
-        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
     }()
     
@@ -613,7 +613,7 @@ class GameInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultVibroButtonColor
-        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
     }()
     

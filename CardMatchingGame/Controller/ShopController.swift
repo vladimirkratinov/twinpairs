@@ -159,7 +159,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     //MARK: - cardSet Image Buttons:
     
     @objc func cardSet1ImageButtonTapped(_ sender: UIButton) {
-        if sender.imageView?.image != UIImage(named: "set6_Stamp1") {
+        if sender.imageView?.image != UIImage(named: "set7_canada02") {
             //flip animation:
             UIView.transition(with: sender,
                               duration: prop.flipAnimationTime,
@@ -167,7 +167,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                               animations: nil,
                               completion: nil)
             
-            sender.setImage(UIImage(named: "set6_Stamp1"), for: .normal)
+            sender.setImage(UIImage(named: "set7_canada02"), for: .normal)
             
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
@@ -201,14 +201,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func cardSet2ImageButtonTapped(_ sender: UIButton) {
         //flip animation:
-        if sender.imageView?.image != UIImage(named: "set5_Stamp1") {
+        if sender.imageView?.image != UIImage(named: "set8_ukraine01") {
             UIView.transition(with: sender,
                               duration: prop.flipAnimationTime,
                               options: .transitionFlipFromLeft,
                               animations: nil,
                               completion: nil)
             
-            sender.setImage(UIImage(named: "set5_Stamp1"), for: .normal)
+            sender.setImage(UIImage(named: "set8_ukraine01"), for: .normal)
             
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
@@ -342,13 +342,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 }
             })
             
-            Properties.selectedSetName = Properties.listOfSets[5]
-            Properties.selectedCollection = Properties.cardCollection[5]
+            //hardcoded selected list (set7 = [6])
+            Properties.selectedSetName = Properties.listOfSets[6]
+            Properties.selectedCollection = Properties.cardCollection[6]
             print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
             
             if let safeString = Properties.selectedCollection.first {
                 Properties.selectedCardList = safeString
-                Properties.selectedCardListNumber = 5
+                Properties.selectedCardListNumber = 6
                 print("Selected CardList: \(Properties.selectedCardList)")
                 print(Properties.selectedCardListNumber)
             }
@@ -395,13 +396,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 }
             })
             
-            Properties.selectedSetName = Properties.listOfSets[4]
-            Properties.selectedCollection = Properties.cardCollection[4]
+            //hardcoded selected list (set8 = [7])
+            Properties.selectedSetName = Properties.listOfSets[7]
+            Properties.selectedCollection = Properties.cardCollection[7]
             print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
             
             if let safeString = Properties.selectedCollection.first {
                 Properties.selectedCardList = safeString
-                Properties.selectedCardListNumber = 4
+                Properties.selectedCardListNumber = 7
                 print("Selected CardList: \(Properties.selectedCardList)")
                 print(Properties.selectedCardListNumber)
             }

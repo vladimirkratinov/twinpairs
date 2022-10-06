@@ -113,7 +113,7 @@ class ShopInterface: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.setImage(UIImage(named: "set6_Stamp1"), for: .normal)
+        button.setImage(UIImage(named: "set7_canada02"), for: .normal)
         return button
     }()
     
@@ -121,7 +121,7 @@ class ShopInterface: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.setImage(UIImage(named: "set5_Stamp1"), for: .normal)
+        button.setImage(UIImage(named: "set8_ukraine01"), for: .normal)
         return button
     }()
     

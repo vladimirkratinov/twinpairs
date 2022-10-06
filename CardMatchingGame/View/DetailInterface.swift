@@ -33,26 +33,26 @@ class DetailInterface: UIView {
         detailUIView.translatesAutoresizingMaskIntoConstraints = false
         detailUIView.isHidden = false
         detailUIView.alpha = 1
-//        imageUIView.layer.borderWidth = 5
-//        imageUIView.layer.cornerRadius = 20
-//        imageUIView.backgroundColor = UIColor(patternImage: UIImage(named: ImageKey.wood3.rawValue)!)
+//        detailUIView.layer.borderWidth = 5
+//        detailUIView.layer.cornerRadius = 20
+//        detailUIView.backgroundColor = .yellow
         detailUIView.layer.borderColor = UIColor.black.cgColor
         detailUIView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         return detailUIView
     }()
     
-//    var detailImageView: UIImageView = {
-//        let detailImageView = UIImageView()
-//        detailImageView.translatesAutoresizingMaskIntoConstraints = false
-//        detailImageView.isUserInteractionEnabled = true
-//        detailImageView.image = UIImage(named: "LaunchScreen1")
-//        detailImageView.contentMode = .scaleAspectFit
+    var detailImageView: UIImageView = {
+        let detailImageView = UIImageView()
+        detailImageView.translatesAutoresizingMaskIntoConstraints = false
+        detailImageView.isUserInteractionEnabled = true
+        detailImageView.image = UIImage(named: "LaunchScreen1")
+        detailImageView.contentMode = .scaleAspectFit
 //        detailImageView.backgroundColor = .red
-//        detailImageView.clipsToBounds = true
-//        detailImageView.contentMode = .redraw
-//        detailImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
-//        return detailImageView
-//    }()
+        detailImageView.clipsToBounds = true
+        detailImageView.contentMode = .redraw
+        detailImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+        return detailImageView
+    }()
     
     var detailImageButton: UIButton = {
         let detailImageButton = UIButton()
@@ -77,6 +77,15 @@ class DetailInterface: UIView {
         return titleLabel
     }()
     
+    var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.text = "description label"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
+        return label
+    }()
+    
     var detailLabel: UILabel = {
         let detailLabel = UILabel()
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -93,36 +102,44 @@ class DetailInterface: UIView {
     func setupSubviews() {
         detailView.addSubview(backgroundView)
         detailView.addSubview(detailUIView)
+        detailView.addSubview(descriptionLabel)
         backgroundView.addSubview(backgroundImageView)
         
         detailUIView.addSubview(detailImageButton)
         detailUIView.addSubview(titleLabel)
         detailUIView.addSubview(detailLabel)
         
-        detailView.bringSubviewToFront(detailUIView)
+//        detailView.addSubview(detailImageButton)
+//        detailView.bringSubviewToFront(detailUIView)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            detailUIView.leadingAnchor.constraint(equalTo: detailView.layoutMarginsGuide.leadingAnchor),
-            detailUIView.trailingAnchor.constraint(equalTo: detailView.layoutMarginsGuide.trailingAnchor),
-            detailUIView.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
-            
             backgroundImageView.topAnchor.constraint(equalTo: detailView.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
             
+            descriptionLabel.topAnchor.constraint(equalTo: detailUIView.bottomAnchor, constant: 20),
+            descriptionLabel.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            
+            detailUIView.leadingAnchor.constraint(equalTo: detailView.layoutMarginsGuide.leadingAnchor),
+            detailUIView.trailingAnchor.constraint(equalTo: detailView.layoutMarginsGuide.trailingAnchor),
+//            detailUIView.topAnchor.constraint(equalTo: detailView.layoutMarginsGuide.topAnchor),
+//            detailUIView.bottomAnchor.constraint(equalTo: detailView.layoutMarginsGuide.bottomAnchor),
+//            detailUIView.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            detailUIView.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
+            
             detailImageButton.topAnchor.constraint(equalTo: detailUIView.topAnchor, constant: 10),
-            detailImageButton.leadingAnchor.constraint(equalTo: detailUIView.leadingAnchor),
-            detailImageButton.trailingAnchor.constraint(equalTo: detailUIView.trailingAnchor),
+            detailImageButton.leadingAnchor.constraint(equalTo: detailUIView.leadingAnchor, constant: 10),
+            detailImageButton.trailingAnchor.constraint(equalTo: detailUIView.trailingAnchor, constant: -10),
             detailImageButton.bottomAnchor.constraint(equalTo: detailUIView.bottomAnchor, constant: -10),
             
             titleLabel.topAnchor.constraint(equalTo: detailUIView.topAnchor, constant: 40),
             titleLabel.centerXAnchor.constraint(equalTo: detailUIView.centerXAnchor),
             titleLabel.widthAnchor.constraint(equalToConstant: 150),
             titleLabel.heightAnchor.constraint(equalToConstant: 44),
-            
+
             detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             detailLabel.leadingAnchor.constraint(equalTo: detailUIView.leadingAnchor, constant: 75),
             detailLabel.trailingAnchor.constraint(equalTo: detailUIView.trailingAnchor, constant: -75),
