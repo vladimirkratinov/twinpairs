@@ -379,7 +379,6 @@ class GameController: UIViewController {
     @objc func cardTapped(_ sender: UIButton) {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
-//        try? audioFX.playFX(file: AudioFileKey.flip1.rawValue, type: AudioTypeKey.wav.rawValue)
         
         //flip card:
         if !Properties.activatedButtons.contains(sender) {
@@ -416,7 +415,6 @@ class GameController: UIViewController {
             
             //audioFX
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-//            try? audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
             
             //kill pulse animation:
             DispatchQueue.main.asyncAfter(deadline: .now() + prop.flipAnimationTime) {

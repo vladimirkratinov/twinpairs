@@ -66,6 +66,32 @@ class ShopInterface: UIView {
         return label
     }()
     
+    lazy var cardSet1DescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.alpha = 0
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Stamps of Canada"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    lazy var cardSet2DescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.alpha = 0
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Stamps of Ukraine"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     //MARK: - Block 1:
     
     lazy var contentBlock1: UIView = {
@@ -183,6 +209,8 @@ class ShopInterface: UIView {
         contentBlock1.addSubview(cardSet1UnlockButton)
         contentBlock1.addSubview(cardSet2ImageButton)
         contentBlock1.addSubview(cardSet2UnlockButton)
+        contentBlock1.addSubview(cardSet1DescriptionLabel)
+        contentBlock1.addSubview(cardSet2DescriptionLabel)
         
         contentBlock2.addSubview(verticalSeparatorInBlock2)
         contentBlock2.addSubview(coverSet1ImageButton)
@@ -219,6 +247,12 @@ class ShopInterface: UIView {
             verticalSeparatorInBlock1.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor),
             verticalSeparatorInBlock1.centerXAnchor.constraint(equalTo: contentBlock1.centerXAnchor),
             verticalSeparatorInBlock1.widthAnchor.constraint(equalToConstant: 5),
+            
+            cardSet1DescriptionLabel.centerXAnchor.constraint(equalTo: cardSet1ImageButton.centerXAnchor),
+            cardSet1DescriptionLabel.centerYAnchor.constraint(equalTo: cardSet1ImageButton.centerYAnchor),
+            
+            cardSet2DescriptionLabel.centerXAnchor.constraint(equalTo: cardSet2ImageButton.centerXAnchor),
+            cardSet2DescriptionLabel.centerYAnchor.constraint(equalTo: cardSet2ImageButton.centerYAnchor),
             
             cardSet1ImageButton.topAnchor.constraint(equalTo: contentBlock1.topAnchor, constant: 10),
             cardSet1ImageButton.leadingAnchor.constraint(equalTo: contentBlock1.leadingAnchor, constant: 10),

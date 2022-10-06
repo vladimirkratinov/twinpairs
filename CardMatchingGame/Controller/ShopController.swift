@@ -159,49 +159,146 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     //MARK: - cardSet Image Buttons:
     
     @objc func cardSet1ImageButtonTapped(_ sender: UIButton) {
-        //flip animation:
         if sender.imageView?.image != UIImage(named: "set6_Stamp1") {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromLeft,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "set6_Stamp1"), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
+            //animation:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.shopInterface.cardSet1DescriptionLabel.alpha = 0
+            })
+            
         } else {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromRight,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "stamp_back"), for: .normal)
+            
+            //audioFX
+            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
+            //animation:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.shopInterface.cardSet1DescriptionLabel.alpha = 1
+                })
+            }
         }
     }
     
     @objc func cardSet2ImageButtonTapped(_ sender: UIButton) {
         //flip animation:
         if sender.imageView?.image != UIImage(named: "set5_Stamp1") {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromLeft,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "set5_Stamp1"), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
+            //animation:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.shopInterface.cardSet2DescriptionLabel.alpha = 0
+            })
+            
         } else {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromRight,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "stamp_back"), for: .normal)
+            
+            //audioFX
+            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
+            //animation:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.shopInterface.cardSet2DescriptionLabel.alpha = 1
+                })
+            }
         }
     }
     
     //MARK: - Cover Image Buttons:
     
     @objc func coverSet1ImageButtonTapped(_ sender: UIButton) {
-        //flip animation:
         if sender.imageView?.image != UIImage(named: FigmaKey.cardCover3.rawValue) {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration:
+                                prop.flipAnimationTime,
+                              options: .transitionFlipFromRight,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: FigmaKey.cardCover3.rawValue), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
         } else {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromLeft,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "shop_cover_1"), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
         
     }
     
     @objc func coverSet2ImageButtonTapped(_ sender: UIButton) {
-        //flip animation:
         if sender.imageView?.image != UIImage(named: FigmaKey.cardCover3.rawValue) {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromRight,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: FigmaKey.cardCover3.rawValue), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            
         } else {
-            UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            //flip animation:
+            UIView.transition(with: sender,
+                              duration: prop.flipAnimationTime,
+                              options: .transitionFlipFromLeft,
+                              animations: nil,
+                              completion: nil)
+            
             sender.setImage(UIImage(named: "shop_cover_2"), for: .normal)
+            
+            //audioFX:
+            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
     }
     

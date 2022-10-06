@@ -83,7 +83,7 @@ class AudioFX {
             throw AudioError.FileNotExist
         }
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
             print("AVAudioSession Category Playback - OK!")
             do {
                 try AVAudioSession.sharedInstance().setActive(true)

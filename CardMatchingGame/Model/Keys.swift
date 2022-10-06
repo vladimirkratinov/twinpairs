@@ -137,3 +137,9 @@ enum TimeKey: String {
     case fiveMinutes = "5 min."
     case tenMinutes = "10 min."
 }
+
+enum SettingsKey: String {
+    case musicLabel = "musicLabel"
+    case soundLabel = "soundLabel"
+    case vibrationLabel = "vibrationLabel"
+}

@@ -106,6 +106,7 @@ class MenuInterface: UIView {
         hardcoreDescriptionLabel.adjustsFontSizeToFitWidth = true
         hardcoreDescriptionLabel.text = "hard mode >"
         hardcoreDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        hardcoreDescriptionLabel.isHidden = true
         return hardcoreDescriptionLabel
     }()
     
@@ -181,6 +182,7 @@ class MenuInterface: UIView {
         hardcoreModeButton.titleLabel?.textAlignment = .center
         hardcoreModeButton.centerTextAndImage(spacing: 5)
         hardcoreModeButton.backgroundColor = UIColor(red: 0.86, green: 0.44, blue: 0.44, alpha: 1.00)
+        hardcoreModeButton.isHidden = true
         return hardcoreModeButton
     }()
     
@@ -289,7 +291,7 @@ class MenuInterface: UIView {
     lazy var muteMusicButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultMusicButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
@@ -298,7 +300,7 @@ class MenuInterface: UIView {
     lazy var muteSoundButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
@@ -307,7 +309,7 @@ class MenuInterface: UIView {
     lazy var muteVibrationButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
@@ -459,7 +461,7 @@ class MenuInterface: UIView {
             hardcoreModeButton.heightAnchor.constraint(equalToConstant: 57),
             hardcoreModeButton.widthAnchor.constraint(equalToConstant: 137),
             
-            collectionButton.topAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor, constant: 40),
+            collectionButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 40),
             collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             collectionButton.heightAnchor.constraint(equalToConstant: 57),
             collectionButton.widthAnchor.constraint(equalToConstant: 137),

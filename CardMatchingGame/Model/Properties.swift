@@ -127,9 +127,15 @@ struct Properties {
     var userInterfaceFontSize: CGFloat = 10
     
     //COLORS:
-    static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.systemPink
-    static let defaultSoundButtonColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.systemPink
-    static let defaultVibroButtonColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.systemPink
+    static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.green
+    static let defaultSoundButtonColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.green
+    static let defaultVibroButtonColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.green
+    
+    //settings labels:
+    
+    static var defaultMusicButtonLabel = "ON"
+    static var defaultSoundButtonLabel = "ON"
+    static var defaultVibrationButtonLabel = "ON"
 }
 
 

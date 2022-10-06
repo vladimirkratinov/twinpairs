@@ -593,7 +593,7 @@ class GameInterface: UIView {
     lazy var muteMusicButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultMusicButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
@@ -602,7 +602,7 @@ class GameInterface: UIView {
     lazy var muteSoundButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button
@@ -611,7 +611,7 @@ class GameInterface: UIView {
     lazy var muteVibrationButton: UIButton = {
         let button = UIButton()
         setupSettingsButtons(button)
-        button.setTitle("mute", for: .normal)
+        button.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultVibroButtonColor
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         return button

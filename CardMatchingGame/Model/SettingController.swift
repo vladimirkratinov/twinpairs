@@ -24,13 +24,18 @@ class SettingController {
         
         if muted {
             //set UserProperties.defaults:
-            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.musicButton.rawValue)
+            Properties.defaults.setColor(color: .green, forKey: ColorKey.musicButton.rawValue)
             Properties.defaults.set(false, forKey: AudioKey.musicIsMuted.rawValue)
             Properties.defaults.set(0.1, forKey: AudioKey.musicVolumeLevel.rawValue)
             
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            
+            //set title:
+            Properties.defaultMusicButtonLabel = "ON"
+            sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
+            
             AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
@@ -41,6 +46,8 @@ class SettingController {
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.musicIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
+            Properties.defaultMusicButtonLabel = "OFF"
+            sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
             AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         }
         print("Music is Muted: \(muted)")
@@ -62,13 +69,19 @@ class SettingController {
         
         if muted {
             //set UserProperties.defaults:
-            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.soundButton.rawValue)
+            Properties.defaults.setColor(color: UIColor.green, forKey: ColorKey.soundButton.rawValue)
             Properties.defaults.set(false, forKey: AudioKey.soundIsMuted.rawValue)
             Properties.defaults.set(0.1, forKey: AudioKey.soundVolumeLevel.rawValue)
             
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            
+            //set title:
+            Properties.defaultSoundButtonLabel = "ON"
+            sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
+            
+            //audio:
             AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
             AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         } else {
@@ -80,6 +93,11 @@ class SettingController {
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.soundButton.rawValue)
+            
+            //set title:
+            Properties.defaultSoundButtonLabel = "OFF"
+            sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
+            
             AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
             AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         }
@@ -102,12 +120,16 @@ class SettingController {
         
         if muted {
             //set UserProperties.defaults:
-            Properties.defaults.setColor(color: UIColor.systemPink, forKey: ColorKey.vibrationButton.rawValue)
+            Properties.defaults.setColor(color: UIColor.green, forKey: ColorKey.vibrationButton.rawValue)
             Properties.defaults.set(false, forKey: AudioKey.vibrationIsMuted.rawValue)
             
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.vibrationButton.rawValue)
+            
+            //set title:
+            Properties.defaultVibrationButtonLabel = "ON"
+            sender.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         } else {
             //set UserProperties.defaults:
             Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.vibrationButton.rawValue)
@@ -116,6 +138,10 @@ class SettingController {
             //get UserProperties.defaults:
             muted = Properties.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue)
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.vibrationButton.rawValue)
+            
+            //set title:
+            Properties.defaultVibrationButtonLabel = "OFF"
+            sender.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         }
         print("Vibration is Muted: \(muted)")
     }
@@ -136,6 +162,7 @@ class SettingController {
         print(Properties.backgroundGradientSwitcher)
     }
     
+    //turned off
     static func changingBackgroundGradient() {
         if Properties.backgroundGradientSwitcher == 1 {
             GameInterface.backgroundImageView.layer.sublayers = nil
