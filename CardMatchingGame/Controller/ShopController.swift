@@ -15,6 +15,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     let audioFX = AudioFX()
     let prop = Properties()
     let palette = Palette()
+    var counter1 = 0
+    var counter2 = 0
+    var newArray1WithoutDuplicates: [String] = []
+    var newArray2WithoutDuplicates: [String] = []
     
     override func loadView() {
 //        view = shopInterface.shopView
@@ -38,13 +42,17 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //setup UIScrollView scroll effect:
-        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.bounds.width, height: shopInterface.contentView.bounds.height - 80)
+//        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.bounds.width, height: shopInterface.contentView.bounds.height - 80)
+//        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.frame.width, height: shopInterface.contentView.frame.height + 10)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        loadNewSetsIntoImageButtonsForTapAnimation()
+        
         
         DispatchQueue.main.async {
             
@@ -159,85 +167,150 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     //MARK: - cardSet Image Buttons:
     
     @objc func cardSet1ImageButtonTapped(_ sender: UIButton) {
-        if sender.imageView?.image != UIImage(named: "set7_canada02") {
-            //flip animation:
-            UIView.transition(with: sender,
-                              duration: prop.flipAnimationTime,
-                              options: .transitionFlipFromLeft,
-                              animations: nil,
-                              completion: nil)
-            
-            sender.setImage(UIImage(named: "set7_canada02"), for: .normal)
-            
-            //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-            
-            //animation:
-            UIView.animate(withDuration: 0.2, animations: {
-                self.shopInterface.cardSet1DescriptionLabel.alpha = 0
-            })
+        //new code with scroll card list animation:
+        UIView.transition(with: sender,
+                          duration:
+                            prop.flipAnimationTime,
+                          options: .transitionFlipFromRight,
+                          animations: nil,
+                          completion: nil)
+        
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        if counter1 == 0 {
+            let imageName = newArray1WithoutDuplicates[counter1]
+            sender.setImage(UIImage(named: imageName), for: .normal)
+            counter1 += 1
+        }
+
+        if counter1 < newArray1WithoutDuplicates.count {
+            let imageName = newArray1WithoutDuplicates[counter1]
+            sender.setImage(UIImage(named: imageName), for: .normal)
+            counter1 += 1
             
         } else {
-            //flip animation:
-            UIView.transition(with: sender,
-                              duration: prop.flipAnimationTime,
-                              options: .transitionFlipFromRight,
-                              animations: nil,
-                              completion: nil)
-            
-            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
-            
-            //audioFX
-            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
-            
-            //animation:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.shopInterface.cardSet1DescriptionLabel.alpha = 1
-                })
-            }
+            counter1 = 0
+            let imageName = newArray1WithoutDuplicates[counter1]
+            sender.setImage(UIImage(named: imageName), for: .normal)
         }
+        
+//        print(counter1)
+
+        //old code with back side with description:
+        
+        
+//        if sender.imageView?.image != UIImage(named: "set7_canada02") {
+//            //flip animation:
+//            UIView.transition(with: sender,
+//                              duration: prop.flipAnimationTime,
+//                              options: .transitionFlipFromLeft,
+//                              animations: nil,
+//                              completion: nil)
+//
+//            sender.setImage(UIImage(named: "set7_canada02"), for: .normal)
+//
+//            //audioFX:
+//            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+//
+//            //animation:
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.shopInterface.cardSet1DescriptionLabel.alpha = 0
+//            })
+//
+//        } else {
+//            //flip animation:
+//            UIView.transition(with: sender,
+//                              duration: prop.flipAnimationTime,
+//                              options: .transitionFlipFromRight,
+//                              animations: nil,
+//                              completion: nil)
+//
+//            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
+//
+//            //audioFX
+//            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+//
+//            //animation:
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    self.shopInterface.cardSet1DescriptionLabel.alpha = 1
+//                })
+//            }
+//        }
     }
     
     @objc func cardSet2ImageButtonTapped(_ sender: UIButton) {
-        //flip animation:
-        if sender.imageView?.image != UIImage(named: "set8_ukraine01") {
-            UIView.transition(with: sender,
-                              duration: prop.flipAnimationTime,
-                              options: .transitionFlipFromLeft,
-                              animations: nil,
-                              completion: nil)
-            
-            sender.setImage(UIImage(named: "set8_ukraine01"), for: .normal)
-            
-            //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-            
-            //animation:
-            UIView.animate(withDuration: 0.2, animations: {
-                self.shopInterface.cardSet2DescriptionLabel.alpha = 0
-            })
+        //new code with scroll card list animation:
+        UIView.transition(with: sender,
+                          duration:
+                            prop.flipAnimationTime,
+                          options: .transitionFlipFromRight,
+                          animations: nil,
+                          completion: nil)
+        
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        if counter2 == 0 {
+            let imageName = newArray2WithoutDuplicates[counter2]
+            sender.setImage(UIImage(named: imageName), for: .normal)
+            counter2 += 1
+        }
+
+        if counter2 < newArray2WithoutDuplicates.count {
+            let imageName = newArray2WithoutDuplicates[counter2]
+            sender.setImage(UIImage(named: imageName), for: .normal)
+            counter2 += 1
             
         } else {
-            //flip animation:
-            UIView.transition(with: sender,
-                              duration: prop.flipAnimationTime,
-                              options: .transitionFlipFromRight,
-                              animations: nil,
-                              completion: nil)
-            
-            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
-            
-            //audioFX
-            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
-            
-            //animation:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.shopInterface.cardSet2DescriptionLabel.alpha = 1
-                })
-            }
+            counter2 = 0
+            let imageName = newArray2WithoutDuplicates[counter2]
+            sender.setImage(UIImage(named: imageName), for: .normal)
         }
+        
+//        print(counter2)
+
+        //old code with back side with description:
+        
+//        //flip animation:
+//        if sender.imageView?.image != UIImage(named: "set8_ukraine01") {
+//            UIView.transition(with: sender,
+//                              duration: prop.flipAnimationTime,
+//                              options: .transitionFlipFromLeft,
+//                              animations: nil,
+//                              completion: nil)
+//
+//            sender.setImage(UIImage(named: "set8_ukraine01"), for: .normal)
+//
+//            //audioFX:
+//            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+//
+//            //animation:
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.shopInterface.cardSet2DescriptionLabel.alpha = 0
+//            })
+//
+//        } else {
+//            //flip animation:
+//            UIView.transition(with: sender,
+//                              duration: prop.flipAnimationTime,
+//                              options: .transitionFlipFromRight,
+//                              animations: nil,
+//                              completion: nil)
+//
+//            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
+//
+//            //audioFX
+//            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+//
+//            //animation:
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    self.shopInterface.cardSet2DescriptionLabel.alpha = 1
+//                })
+//            }
+//        }
     }
     
     //MARK: - Cover Image Buttons:
@@ -251,12 +324,12 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                               options: .transitionFlipFromRight,
                               animations: nil,
                               completion: nil)
-            
+
             sender.setImage(UIImage(named: FigmaKey.cardCover3.rawValue), for: .normal)
-            
+
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-            
+
         } else {
             //flip animation:
             UIView.transition(with: sender,
@@ -264,11 +337,11 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                               options: .transitionFlipFromLeft,
                               animations: nil,
                               completion: nil)
-            
+
             sender.setImage(UIImage(named: "shop_cover_1"), for: .normal)
-            
+
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
         
     }
@@ -298,7 +371,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             sender.setImage(UIImage(named: "shop_cover_2"), for: .normal)
             
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
     }
     
@@ -498,5 +571,23 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             //change cover image
             Properties.cardCoverImage = UIImage(named: FigmaKey.shop_cover_2.rawValue)
         }
+    }
+    
+    func loadNewSetsIntoImageButtonsForTapAnimation() {
+        //creating set to avoid duplicates:
+        let copySet1WithoutDuplicates = Set(Properties.cardCollection[6])
+        let copySet2WithoutDuplicates = Set(Properties.cardCollection[7])
+        let sortedSet1 = copySet1WithoutDuplicates.sorted()
+        let sortedSet2 = copySet2WithoutDuplicates.sorted()
+        for element in sortedSet1 {
+            newArray1WithoutDuplicates.append(element)
+        }
+        
+        for element in sortedSet2 {
+            newArray2WithoutDuplicates.append(element)
+        }
+        
+        print(newArray1WithoutDuplicates)
+        print(newArray2WithoutDuplicates)
     }
 }

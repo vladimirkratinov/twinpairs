@@ -10,6 +10,8 @@ import UIKit
 class ShopInterface: UIView {
     
     let palette = Palette()
+    let topGuide = UILayoutGuide()
+    let bottomGuide = UILayoutGuide()
     
     var contentView: UIView = {
         let view = UIView()
@@ -22,13 +24,36 @@ class ShopInterface: UIView {
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.isUserInteractionEnabled = true
             scrollView.isScrollEnabled = true
-//            scrollView.backgroundColor = .green
+//            scrollView.backgroundColor = .orange
             return scrollView
         }()
 
     var shopView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemPink
+//        view.backgroundColor = .systemPink
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var horizontalSeparatorLine: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var topContainer: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .yellow
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var bottomContainer: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .purple
+        view.alpha = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -109,11 +134,33 @@ class ShopInterface: UIView {
         return view
     }()
     
+    lazy var cardSet1Label: UILabel = {
+       let label = UILabel()
+        label.text = "stamps of canada (12 cards)"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var cardSet2Label: UILabel = {
+       let label = UILabel()
+        label.text = "stamps of ukraine (12 cards)"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var cardSet1ImageButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.setImage(UIImage(named: "set7_canada02"), for: .normal)
+        button.setImage(UIImage(named: "set7_canada01"), for: .normal)
         return button
     }()
     
@@ -149,13 +196,35 @@ class ShopInterface: UIView {
         view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(1)
         return view
     }()
-    
+
     lazy var verticalSeparatorInBlock2: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    lazy var coverSet1Label: UILabel = {
+       let label = UILabel()
+        label.text = "white paper texture"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var coverSet2Label: UILabel = {
+       let label = UILabel()
+        label.text = "pink classic cover"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     lazy var coverSet1ImageButton: UIButton = {
@@ -193,17 +262,27 @@ class ShopInterface: UIView {
     func setupSubviews() {
         contentView.addSubview(scrollView)
         scrollView.addSubview(shopView)
-
-//        shopView.addSubview(contentBlock1)
-//        shopView.addSubview(contentBlock2)
-//        shopView.addSubview(title1)
-//        shopView.addSubview(title2)
+        scrollView.addSubview(horizontalSeparatorLine)
         
-        scrollView.addSubview(contentBlock1)
-        scrollView.addSubview(contentBlock2)
-        scrollView.addSubview(title1)
-        scrollView.addSubview(title2)
+        //new code
+        shopView.addSubview(topContainer)
+        shopView.addSubview(bottomContainer)
         
+        topContainer.addSubview(title1)
+        topContainer.addSubview(contentBlock1)
+        
+        bottomContainer.addSubview(title2)
+        bottomContainer.addSubview(contentBlock2)
+        
+        
+        //working code with scroll:
+//        scrollView.addSubview(contentBlock1)
+//        scrollView.addSubview(contentBlock2)
+//        scrollView.addSubview(title1)
+//        scrollView.addSubview(title2)
+        
+        contentBlock1.addSubview(cardSet1Label)
+        contentBlock1.addSubview(cardSet2Label)
         contentBlock1.addSubview(verticalSeparatorInBlock1)
         contentBlock1.addSubview(cardSet1ImageButton)
         contentBlock1.addSubview(cardSet1UnlockButton)
@@ -212,6 +291,8 @@ class ShopInterface: UIView {
         contentBlock1.addSubview(cardSet1DescriptionLabel)
         contentBlock1.addSubview(cardSet2DescriptionLabel)
         
+        contentBlock2.addSubview(coverSet1Label)
+        contentBlock2.addSubview(coverSet2Label)
         contentBlock2.addSubview(verticalSeparatorInBlock2)
         contentBlock2.addSubview(coverSet1ImageButton)
         contentBlock2.addSubview(coverSet1UnlockButton)
@@ -221,27 +302,52 @@ class ShopInterface: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            
-            scrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
+
+            scrollView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
+
             shopView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             shopView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             shopView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             shopView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             shopView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-
+            
+            horizontalSeparatorLine.centerYAnchor.constraint(equalTo: shopView.centerYAnchor, constant: 0),
+            horizontalSeparatorLine.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
+            horizontalSeparatorLine.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+            horizontalSeparatorLine.heightAnchor.constraint(equalToConstant: 5),
+            
+            topContainer.topAnchor.constraint(equalTo: shopView.topAnchor),
+            topContainer.bottomAnchor.constraint(equalTo: horizontalSeparatorLine.topAnchor),
+            topContainer.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
+            topContainer.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+            
+            bottomContainer.topAnchor.constraint(equalTo: horizontalSeparatorLine.bottomAnchor),
+            bottomContainer.bottomAnchor.constraint(equalTo: shopView.bottomAnchor),
+            bottomContainer.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
+            bottomContainer.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+            
             //MARK: - title 1:
             
-            title1.topAnchor.constraint(equalTo: shopView.layoutMarginsGuide.topAnchor, constant: 0),
-            title1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 15),
+//            title1.topAnchor.constraint(equalTo: shopView.topAnchor),
+//            title1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 15),
             
+//            contentBlock1.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 5),
+//            contentBlock1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
+//            contentBlock1.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
+//            contentBlock1.bottomAnchor.constraint(equalTo: horizontalSeparatorLine.topAnchor, constant: -10),
+//            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
+
+            title1.topAnchor.constraint(equalTo: topContainer.topAnchor),
+            title1.leadingAnchor.constraint(equalTo: topContainer.leadingAnchor, constant: 15),
+
             contentBlock1.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 5),
-            contentBlock1.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
-            contentBlock1.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
-            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 270),
+            contentBlock1.leadingAnchor.constraint(equalTo: topContainer.leadingAnchor, constant: 10),
+            contentBlock1.trailingAnchor.constraint(equalTo: topContainer.trailingAnchor, constant: -10),
+            contentBlock1.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -10),
+            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 280),
             
             verticalSeparatorInBlock1.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
             verticalSeparatorInBlock1.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor),
@@ -254,12 +360,18 @@ class ShopInterface: UIView {
             cardSet2DescriptionLabel.centerXAnchor.constraint(equalTo: cardSet2ImageButton.centerXAnchor),
             cardSet2DescriptionLabel.centerYAnchor.constraint(equalTo: cardSet2ImageButton.centerYAnchor),
             
-            cardSet1ImageButton.topAnchor.constraint(equalTo: contentBlock1.topAnchor, constant: 10),
+            cardSet1Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
+            cardSet1Label.centerXAnchor.constraint(equalTo: cardSet1ImageButton.centerXAnchor),
+            
+            cardSet2Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
+            cardSet2Label.centerXAnchor.constraint(equalTo: cardSet2ImageButton.centerXAnchor),
+            
+            cardSet1ImageButton.topAnchor.constraint(equalTo: cardSet1Label.topAnchor, constant: 20),
             cardSet1ImageButton.leadingAnchor.constraint(equalTo: contentBlock1.leadingAnchor, constant: 10),
             cardSet1ImageButton.trailingAnchor.constraint(equalTo: verticalSeparatorInBlock1.leadingAnchor, constant: -10),
             cardSet1ImageButton.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor, constant: -55),
 
-            cardSet2ImageButton.topAnchor.constraint(equalTo: contentBlock1.topAnchor, constant: 10),
+            cardSet2ImageButton.topAnchor.constraint(equalTo: cardSet2Label.topAnchor, constant: 20),
             cardSet2ImageButton.leadingAnchor.constraint(equalTo: verticalSeparatorInBlock1.trailingAnchor, constant: 10),
             cardSet2ImageButton.trailingAnchor.constraint(equalTo: contentBlock1.trailingAnchor, constant: -10),
             cardSet2ImageButton.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor, constant: -55),
@@ -276,25 +388,41 @@ class ShopInterface: UIView {
             
             //MARK: - title 2:
             
-            title2.topAnchor.constraint(equalTo: contentBlock1.bottomAnchor, constant: 20),
-            title2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 15),
-
+//            title2.topAnchor.constraint(equalTo: horizontalSeparatorLine.bottomAnchor),
+//            title2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 15),
+//
+//            contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
+//            contentBlock2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
+//            contentBlock2.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
+//            contentBlock2.bottomAnchor.constraint(equalTo: shopView.bottomAnchor, constant: -10),
+//            contentBlock2.heightAnchor.constraint(equalTo: contentBlock1.heightAnchor),
+            
+            title2.topAnchor.constraint(equalTo: bottomContainer.topAnchor),
+            title2.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 15),
+            
             contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
-            contentBlock2.leadingAnchor.constraint(equalTo: shopView.leadingAnchor, constant: 10),
-            contentBlock2.trailingAnchor.constraint(equalTo: shopView.trailingAnchor, constant: -10),
-            contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 270),
+            contentBlock2.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 10),
+            contentBlock2.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -10),
+            contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
+            contentBlock2.heightAnchor.constraint(equalTo: contentBlock1.heightAnchor),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),
             verticalSeparatorInBlock2.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
             verticalSeparatorInBlock2.widthAnchor.constraint(equalToConstant: 5),
             
-            coverSet1ImageButton.topAnchor.constraint(equalTo: contentBlock2.topAnchor, constant: 10),
+            coverSet1Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
+            coverSet1Label.centerXAnchor.constraint(equalTo: coverSet1ImageButton.centerXAnchor),
+            
+            coverSet2Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
+            coverSet2Label.centerXAnchor.constraint(equalTo: coverSet2ImageButton.centerXAnchor),
+            
+            coverSet1ImageButton.topAnchor.constraint(equalTo: coverSet1Label.topAnchor, constant: 20),
             coverSet1ImageButton.leadingAnchor.constraint(equalTo: contentBlock2.leadingAnchor, constant: 10),
             coverSet1ImageButton.trailingAnchor.constraint(equalTo: verticalSeparatorInBlock2.leadingAnchor, constant: -10),
             coverSet1ImageButton.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: -55),
 
-            coverSet2ImageButton.topAnchor.constraint(equalTo: contentBlock2.topAnchor, constant: 10),
+            coverSet2ImageButton.topAnchor.constraint(equalTo: coverSet2Label.topAnchor, constant: 20),
             coverSet2ImageButton.leadingAnchor.constraint(equalTo: verticalSeparatorInBlock2.trailingAnchor, constant: 10),
             coverSet2ImageButton.trailingAnchor.constraint(equalTo: contentBlock2.trailingAnchor, constant: -10),
             coverSet2ImageButton.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: -55),

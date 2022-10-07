@@ -12,6 +12,30 @@ class GameInterface: UIView {
     let palette = Palette()
     let defaults = UserDefaults.standard
     
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0.5
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "settings"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
+        return label
+    }()
+    
+    lazy var titleTipLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0.5
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "(tap to dismiss)"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
+        return label
+    }()
+    
     var flipsCounter: Int = 0 {
         didSet {
             flipsLabel.text = "♠️ \(flipsCounter)"
@@ -695,6 +719,9 @@ class GameInterface: UIView {
         settingsView.addSubview(settingsBackground)
         settingsView.sendSubviewToBack(settingsBackground)
         
+        settingsView.addSubview(titleLabel)
+        settingsView.addSubview(titleTipLabel)
+        
         settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
         
@@ -786,7 +813,8 @@ class GameInterface: UIView {
             
             hub.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
             hub.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
-            hub.topAnchor.constraint(equalTo: gameView.topAnchor, constant: 52),
+//            hub.topAnchor.constraint(equalTo: gameView.topAnchor, constant: 52),
+            hub.topAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.topAnchor, constant: 0),
             hub.widthAnchor.constraint(equalTo: gameView.widthAnchor),
 //            hub.heightAnchor.constraint(equalToConstant: 53),
             
@@ -805,6 +833,16 @@ class GameInterface: UIView {
             
             settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 23),
             settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
+            
+            titleLabel.bottomAnchor.constraint(equalTo: gameView.bottomAnchor, constant: -45),
+            titleLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
+            
+            titleTipLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -20),
+            titleTipLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
+            titleTipLabel.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
+            titleTipLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
             //MARK: - Settings Buttons:
             
@@ -836,10 +874,10 @@ class GameInterface: UIView {
             quitButton.heightAnchor.constraint(equalToConstant: 44),
             
             //Views:
-            buttonsView.topAnchor.constraint(equalTo: woodenBack.bottomAnchor, constant: 0),
-            buttonsView.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
-            buttonsView.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
-            buttonsView.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: -40),
+            buttonsView.topAnchor.constraint(equalTo: hub.bottomAnchor, constant: 10),
+            buttonsView.leadingAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            buttonsView.trailingAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            buttonsView.bottomAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
             
             //MARK: - GameOverView:
             

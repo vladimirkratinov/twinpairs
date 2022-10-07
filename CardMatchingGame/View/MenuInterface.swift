@@ -394,9 +394,8 @@ class MenuInterface: UIView {
             
             hub.leadingAnchor.constraint(equalTo: menuView.leadingAnchor),
             hub.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
-            hub.topAnchor.constraint(equalTo: menuView.topAnchor, constant: 52),
+            hub.topAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.topAnchor, constant: 0),
             hub.widthAnchor.constraint(equalTo: menuView.widthAnchor),
-//            hub.heightAnchor.constraint(equalToConstant: 53),
     
             coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
             coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),

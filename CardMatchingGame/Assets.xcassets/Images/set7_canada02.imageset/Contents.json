@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "set7_canada02.png",
+      "filename" : "set7_canada01.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "set7_canada02@2x.png",
+      "filename" : "set7_canada01@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "set7_canada02@3x.png",
+      "filename" : "set7_canada01@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

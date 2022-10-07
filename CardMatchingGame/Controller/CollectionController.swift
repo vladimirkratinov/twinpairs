@@ -18,6 +18,22 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var contentLoader = ContentLoader()
     let audioFX = AudioFX()
     var temporaryIndexPath = Int()
+    
+    var collectionContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var hub: UIView = {
+        let hub = UIView()
+        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
+        hub.translatesAutoresizingMaskIntoConstraints = false
+        hub.layer.borderWidth = 10
+        hub.alpha = 1
+        return hub
+    }()
 
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
@@ -43,9 +59,9 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 40, left: 5, bottom: 1, right: 5)
-        layout.itemSize = CGSize(width: (view.frame.width/2)-10, height: (view.frame.height/3.6))  //+15     //x6 horisontal
-        layout.minimumLineSpacing = 10           //default 5
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 1, right: 5)
+        layout.itemSize = CGSize(width: (view.frame.width/2)-15, height: (view.frame.height/3.6))  //+15     //x6 horisontal
+        layout.minimumLineSpacing = 10         //default 5
         layout.minimumInteritemSpacing = 0       //default 0
 
         print("layout.itemSize: \(layout.itemSize)")
@@ -54,32 +70,46 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 
         guard let collectionView = collectionView else { return }
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
-        
         collectionView.isScrollEnabled = true
         collectionView.isUserInteractionEnabled = true
-        
-//        collectionView.alwaysBounceHorizontal = true
         collectionView.alwaysBounceVertical = true
-        
-        collectionView.backgroundColor = palette.imperialPrimer
-        collectionView.backgroundView = backgroundImageView
-        
-        collectionView.frame = view.bounds
+        collectionView.backgroundColor = .clear
+//        collectionView.backgroundView = backgroundImageView
+//        collectionView.frame = view.frame
         
         //implement animations:
 //        configureAnimation()
         
-        view.addSubview(collectionView)
-        view.addSubview(coinLabel)
-        view.bringSubviewToFront(coinLabel)
-        view.backgroundColor = palette.imperialPrimer
-        
+        view.addSubview(collectionContainerView)
+        collectionContainerView.addSubview(backgroundImageView)
+        collectionContainerView.addSubview(hub)
+        collectionContainerView.addSubview(coinLabel)
+        collectionContainerView.addSubview(collectionView)
+        collectionContainerView.bringSubviewToFront(hub)
+        collectionContainerView.bringSubviewToFront(coinLabel)
+
         NSLayoutConstraint.activate([
-            coinLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 5),
+            collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            hub.leadingAnchor.constraint(equalTo: collectionContainerView.leadingAnchor),
+            hub.trailingAnchor.constraint(equalTo: collectionContainerView.trailingAnchor),
+            hub.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor, constant: 0),
+            hub.widthAnchor.constraint(equalTo: collectionContainerView.widthAnchor),
+            
+            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
+            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
+            
+            collectionView.topAnchor.constraint(equalTo: coinLabel.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            collectionView.trailingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
         ])
     }
 
