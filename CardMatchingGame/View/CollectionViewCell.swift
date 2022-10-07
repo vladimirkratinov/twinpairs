@@ -31,7 +31,6 @@ class CollectionViewCell: GeminiCell {
     
     var myShadowView: UIImageView = {
         let myShadowView = UIImageView()
-//        myShadowView.image = UIImage(named: "cardFrame")
         myShadowView.translatesAutoresizingMaskIntoConstraints = false
         myShadowView.backgroundColor = .black
         myShadowView.alpha = 0.4
@@ -110,25 +109,28 @@ class CollectionViewCell: GeminiCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.clipsToBounds = true
-        contentView.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.paperTexture.rawValue)!)
+        contentView.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.gradientTexture2.rawValue)!)
         contentView.contentMode = .center
-
-        contentView.layer.borderWidth = 0
+        
         contentView.layer.cornerRadius = 20
-        contentView.layer.borderColor = UIColor.black.cgColor
-
+        myShadowView.layer.cornerRadius = 20
+        
+//        let borderWidth: CGFloat = 3
+//        self.frame = frame.inset(by: UIEdgeInsets(top: -50, left: -50, bottom: -50, right: -50))
+//        self.frame = frame.insetBy(dx: -borderWidth, dy: -borderWidth)
+//        contentView.layer.borderColor = UIColor(red: 255, green: 255, blue: 235, alpha: 1).cgColor
+//        contentView.layer.borderWidth = borderWidth
+        
         contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        contentView.layer.shadowRadius = 2.0
-        contentView.layer.shadowOpacity = 1.0
+        contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        contentView.layer.shadowRadius = 5
+        contentView.layer.shadowOpacity = 0.5
         contentView.layer.masksToBounds = false
         contentView.layer.shadowPath = UIBezierPath(roundedRect:
                                                         self.bounds,
                                                     cornerRadius:
                                                         self.contentView.layer.cornerRadius).cgPath
-                
-        myShadowView.layer.cornerRadius = 20
-        
+ 
         contentView.addSubview(myLabel)
         contentView.addSubview(myImageView)
         contentView.addSubview(myShadowView)

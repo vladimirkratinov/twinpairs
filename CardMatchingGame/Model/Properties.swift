@@ -29,7 +29,7 @@ struct Properties {
     //debug gameOver:
     static var gameIsOver = false
     //turn off music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = false
+    static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

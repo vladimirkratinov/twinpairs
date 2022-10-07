@@ -122,7 +122,7 @@ class ShopInterface: UIView {
     lazy var contentBlock1: UIView = {
         let view = UIView()
         setupViewAppearence(view)
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(1)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.shopBlockBackground2.rawValue)!).withAlphaComponent(1)
         return view
     }()
     
@@ -193,7 +193,7 @@ class ShopInterface: UIView {
     lazy var contentBlock2: UIView = {
         let view = UIView()
         setupViewAppearence(view)
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "ShopBlockBackground")!).withAlphaComponent(1)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: FigmaKey.shopBlockBackground2.rawValue)!).withAlphaComponent(1)
         return view
     }()
 

@@ -370,7 +370,7 @@ class GameController: UIViewController {
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        
+        gameInterface.settingsView.isHidden = true
         gameOver()
     }
     
@@ -508,13 +508,11 @@ class GameController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + prop.timeToShowBothCards) {
                     //audioFX:
                     self.audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-//                    try? self.audioFX.playFX(file: AudioFileKey.flip2.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
                     if Properties.vibrationMutedSwitcher {
                         HapticsManager.shared.vibrate(for: .error)
                     }
-                    
                     
                     //animations:
                     UIView.transition(with: Properties.activatedButtons.last!, duration: self.prop.flipBackAnimationTime, options: .transitionFlipFromTop, animations: nil, completion: nil)
@@ -523,7 +521,7 @@ class GameController: UIViewController {
                     
                     //show card cover:
                     let backgroundImage = Properties.cardCoverImage
-                                        
+                    
                     Properties.activatedButtons.last!.setBackgroundImage(backgroundImage, for: .normal)
                     Properties.activatedButtons.first!.setBackgroundImage(backgroundImage, for: .normal)
                 }
@@ -541,6 +539,8 @@ class GameController: UIViewController {
                     //reset counter:
                     self.prop.cardCounter = 0
                 }
+                // end kill pulsate animation
+
             }
         }
         
@@ -558,17 +558,29 @@ class GameController: UIViewController {
         
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-//        try? audioFX.playFX(file: AudioFileKey.tinyButtonPress.rawValue, type: AudioTypeKey.wav.rawValue)
+        
+//        for button in Properties.cardButtons {
+//            button.layer.removeAllAnimations()
+//        }
         
         //UI Hide/Enable
         if gameInterface.settingsView.isHidden {
-            gameInterface.settingsView.isHidden = false
-            gameInterface.buttonsView.alpha = 0.3
-            gameInterface.buttonsView.isUserInteractionEnabled = false
+            
+            UIView.animate(withDuration: 0.3) {
+                self.gameInterface.settingsView.isHidden = false
+                self.gameInterface.settingsView.alpha = 1
+                self.gameInterface.buttonsView.alpha = 0.5
+                self.gameInterface.buttonsView.isUserInteractionEnabled = false
+            }
+            
         } else if !gameInterface.settingsView.isHidden {
-            gameInterface.settingsView.isHidden = true
-            gameInterface.buttonsView.alpha = 1
-            gameInterface.buttonsView.isUserInteractionEnabled = true
+            
+            UIView.animate(withDuration: 0.3) {
+                self.gameInterface.settingsView.alpha = 0
+                self.gameInterface.buttonsView.alpha = 1
+                self.gameInterface.buttonsView.isUserInteractionEnabled = true
+                self.gameInterface.settingsView.isHidden = true
+            }
         }
 
         print("settings Button is Hidden: \(gameInterface.settingsView.isHidden)")
@@ -612,10 +624,14 @@ class GameController: UIViewController {
         let location = tapGestureRecognizer.location(in: gameInterface.settingsView)
         guard gameInterface.settingsView.isHidden == false,
               !gameInterface.settingsView.bounds.contains(location) else { return }
-        gameInterface.settingsView.isHidden = true
-        gameInterface.buttonsView.alpha = 1
-        gameInterface.buttonsView.isUserInteractionEnabled = true
         
+        UIView.animate(withDuration: 0.3) {
+            self.gameInterface.settingsView.alpha = 0
+            self.gameInterface.buttonsView.alpha = 1
+            self.gameInterface.buttonsView.isUserInteractionEnabled = true
+            self.gameInterface.settingsView.isHidden = true
+        }
+
         //Check if timer is nil:
         if prop.timer != nil {
             print("Settings: timer is NOT NIL")
