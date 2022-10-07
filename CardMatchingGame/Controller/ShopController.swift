@@ -385,6 +385,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
 
         if !Properties.cardSet1isUnlocked {
             let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
+                //audioFX:
+                let shiny = AudioFileKey.shiny.rawValue
+                self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+                
                 //animation:
                 UIView.animate(withDuration: 1.0, animations: {
                     Properties.cardSet1isUnlocked = true
@@ -439,6 +443,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         
         if !Properties.cardSet2isUnlocked {
             let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
+                //audioFX:
+                let shiny = AudioFileKey.shiny.rawValue
+                self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+                
                 //animation:
                 UIView.animate(withDuration: 1.0, animations: {
                     Properties.cardSet2isUnlocked = true
@@ -493,6 +501,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         //alertController:
         if !Properties.coverSet1isUnlocked {
             let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
+                //audioFX:
+                let shiny = AudioFileKey.shiny.rawValue
+                self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+                
                 //animation:
                 UIView.animate(withDuration: 1.0, animations: {
                     Properties.coverSet1isUnlocked = true
@@ -538,6 +550,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         
         if !Properties.coverSet2isUnlocked {
             let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
+                //audioFX:
+                let shiny = AudioFileKey.shiny.rawValue
+                self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+                
                 //animation:
                 UIView.animate(withDuration: 1.0, animations: {
                     Properties.coverSet2isUnlocked = true
