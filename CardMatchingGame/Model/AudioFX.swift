@@ -48,6 +48,19 @@ class AudioFX {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
         }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
+            print("audioFX: AVAudioSession Category Playback - OK!")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("audioFX: AVAudioSession is Active!")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
     
     func openAnotherAudioFile(file: String, type: String) throws {
@@ -64,6 +77,19 @@ class AudioFX {
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
+            print("additionalAudioFX: AVAudioSession Category Playback - OK!")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("additionalAudioFX: AVAudioSession is Active!")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -82,12 +108,13 @@ class AudioFX {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
         }
+        
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
-            print("AVAudioSession Category Playback - OK!")
+            print("backgroundMusic: AVAudioSession Category Playback - OK!")
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
-                print("AVAudioSession is Active!")
+                print("backgroundMusic: AVAudioSession is Active!")
             } catch let error as NSError {
                 print(error.localizedDescription)
             }

@@ -47,10 +47,26 @@ class MenuController: UIViewController {
             contentLoader.loadSet(setNumber: i)
         }
         
-        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
-        print("PROPERTIES: CARD COLLECTION: \(Properties.cardCollection) \n")
-        print("SELECTED SET: \(Properties.selectedCollection)")
-        print("SELECTED CARD LIST: \(Properties.selectedCardList)")
+        //load Audio: (FIX BACKGROUND MUSIC INTERRUPTION)
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
+            print("AVAudioSession Category Playback - OK!")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("AVAudioSession is Active!")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        //DEBUGGING:
+        
+//        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
+//        print("PROPERTIES: CARD COLLECTION: \(Properties.cardCollection) \n")
+//        print("SELECTED SET: \(Properties.selectedCollection)")
+//        print("SELECTED CARD LIST: \(Properties.selectedCardList)")
         
         //admin functions:
         if Properties.hideAdminButtons {
