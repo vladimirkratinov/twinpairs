@@ -39,6 +39,7 @@
 		F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD8D2893508E002993E7 /* tinyButtonPress.wav */; };
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79528C328F0D5F3000C11D0 /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79528C228F0D5F3000C11D0 /* StatisticsModel.swift */; };
+		F79528C728F0F34B000C11D0 /* StatisticsUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79528C628F0F34B000C11D0 /* StatisticsUpdate.swift */; };
 		F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795C8E128E7866A003A29E7 /* ShopInterface.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
 		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
@@ -95,6 +96,7 @@
 		F781AD8D2893508E002993E7 /* tinyButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tinyButtonPress.wav; sourceTree = "<group>"; };
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79528C228F0D5F3000C11D0 /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
+		F79528C628F0F34B000C11D0 /* StatisticsUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsUpdate.swift; sourceTree = "<group>"; };
 		F795C8E128E7866A003A29E7 /* ShopInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInterface.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				F7E1652128C2BA63004089E9 /* CardListModel.swift */,
 				F7F2343728B5B609005C75A4 /* LockerModel.swift */,
 				F79528C228F0D5F3000C11D0 /* StatisticsModel.swift */,
+				F79528C628F0F34B000C11D0 /* StatisticsUpdate.swift */,
 				F7EDF98228A634D2009CA17B /* HapticsManager.swift */,
 				F764E17328B478BE00F4575F /* SettingController.swift */,
 				F72ED08528B9345F007FE584 /* AlertController.swift */,
@@ -401,6 +404,7 @@
 				F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */,
 				F764E17428B478BE00F4575F /* SettingController.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
+				F79528C728F0F34B000C11D0 /* StatisticsUpdate.swift in Sources */,
 				F79528C328F0D5F3000C11D0 /* StatisticsModel.swift in Sources */,
 				F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */,
 				F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */,

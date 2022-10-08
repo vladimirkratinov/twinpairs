@@ -79,20 +79,48 @@ enum FontKey: String {
 }
 
 enum StatisticsKey: String {
-    case easyTime =     "easyTime"
-    case easyPairs =    "easyPairs"
-    case easyFlips =    "easyFlips"
-    case easyScore =    "easyScore"
     
-    case mediumTime =   "mediumTime"
-    case mediumPairs =  "mediumPairs"
-    case mediumFlips =  "mediumFlips"
-    case mediumScore =  "mediumScore"
+    //180:
     
-    case hardTime =     "hardTime"
-    case hardPairs =    "hardPairs"
-    case hardFlips =    "hardFlips"
-    case hardScore =    "hardScore"
+    case Easy180Pairs = "Easy180Pairs"
+    case Easy180Flips = "Easy180Flips"
+    case Easy180Score = "Easy180Score"
+    
+    case Medium180Pairs = "Medium180Pairs"
+    case Medium180Flips = "Medium180Flips"
+    case Medium180Score = "Medium180Score"
+    
+    case Hard180Pairs = "Hard180Pairs"
+    case Hard180Flips = "Hard180Flips"
+    case Hard180Score = "Hard180Score"
+    
+    //300:
+    
+    case Easy300Pairs = "Easy300Pairs"
+    case Easy300Flips = "Easy300Flips"
+    case Easy300Score = "Easy300Score"
+    
+    case Medium300Pairs = "Medium300Pairs"
+    case Medium300Flips = "Medium300Flips"
+    case Medium300Score = "Medium300Score"
+    
+    case Hard300Pairs = "Hard300Pairs"
+    case Hard300Flips = "Hard300Flips"
+    case Hard300Score = "Hard300Score"
+    
+    //600:
+    
+    case Easy600Pairs = "Easy600Pairs"
+    case Easy600Flips = "Easy600Flips"
+    case Easy600Score = "Easy600Score"
+    
+    case Medium600Pairs = "Medium600Pairs"
+    case Medium600Flips = "Medium600Flips"
+    case Medium600Score = "Medium600Score"
+    
+    case Hard600Pairs = "Hard600Pairs"
+    case Hard600Flips = "Hard600Flips"
+    case Hard600Score = "Hard600Score"
 }
 
 enum AudioFileKey: String {

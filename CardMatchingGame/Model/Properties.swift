@@ -14,25 +14,32 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    var debugFontSize: CGFloat = 0
-    var debugFontColor: UIColor = UIColor.white
+    static var debugFontSize: CGFloat = 0
+    static var debugFontColor: UIColor = UIColor.white
+    
     //game over statistics helping lines:
     static var debugGameOverStatisticsViewAlpha: CGFloat = 0.0
+    
     //UI Color:
     static var uiLabelsColor = UIColor.black
     static var uiLabelsSize: CGFloat = 23
     static var uiLabelsFont = FontKey.staatliches.rawValue
     
+    //cards cover:
     static var cardCoverImage = UIImage(named: FigmaKey.cardCover3.rawValue)
+    
     //Admin Functions:
     static var hideAdminButtons = false
-    //debug gameOver:
+    
+    //debug Game Over:
     static var gameIsOver = false
-    //turn off music:
+    
+    //debug background Music:
     static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)
+    
     //Card View Configuration:
     static var rows = 3
     static var columns = 2
@@ -54,7 +61,7 @@ struct Properties {
                              "Ukraine"
     ]
     
-    //shop unlocked list:
+    //Shop unlocked list:
     static var cardSet1isUnlocked = defaults.bool(forKey: "cardSet1isUnlocked")
     static var cardSet2isUnlocked = defaults.bool(forKey: "cardSet2isUnlocked")
     
@@ -75,68 +82,61 @@ struct Properties {
     
     //Selected Collection from "Selected" Button in CardListController
     static var selectedCollection = [String]()
-    
 
     //Setup Selected Cards (Check if have Set1...6 in GameController
     static var selectedCardList = String()
     static var selectedCardListNumber = 0
     
-    //select difficulty leve:
+    //statistics block:
     static var selectedDifficulty = "Easy"
+    static var standardTimeCounter = 180
+    static var statisticsPairsCounter = 0
+    static var statisticsFlipsCounter = 0
+    static var statisticsScoreCounter = "D"
     
     //collection settings unlock:
     static var unlockedList = [Bool]()
     static var selectedList = [Bool]()
+    
     //LockerModel:
     static var collectionOfLockedSets = [LockerModel]()
     
     //Card Collections:
     static var cardCollection = [[String]]()
 
-    //Game Mechanics
+    //Game Mechanics:
+    static var cardCounter = 0
     static var cardButtons = [UIButton]()
     static var activatedButtons = [UIButton]()
     static var activatedCards = [String]()
     static var pairList = [String]()
+    
+    //Timer and Pause:
+    var timer: Timer!
+    var isPaused = false
+    
+    //Animations timing block:
+    var flipAnimationTime = 0.4
+    var flipBackAnimationTime = 0.4
+    var timeToShowBothCards = 1.0
+    var syncDisableAnimation: Double {
+        flipBackAnimationTime + timeToShowBothCards
+    }
 
     //Settings Buttons:
     static var musicMutedSwitcher = true
     static var soundMutedSwitcher = true
     static var vibrationMutedSwitcher = true
     
-    //Timer and pause:
-    var timer: Timer!
-    var isPaused = false
-    
-    var cardCounter = 0
-    var totalTime = 0
-    static var standardTimeCounter = 180
-    
-    static var statisticsPairsCounter = 0
-    static var statisticsFlipsCounter = 0
-    
-    var flipAnimationTime = 0.4
-    var flipBackAnimationTime = 0.4
-    var timeToShowBothCards = 1.0
-    
-    var hardcoreReduceTime = 0.5
-    
-    var syncDisableAnimation: Double {
-        flipBackAnimationTime + timeToShowBothCards
-    }
-    
-    var userInterfaceFontSize: CGFloat = 10
-    
-    //COLORS:
-    static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.green
-    static let defaultSoundButtonColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.green
-    static let defaultVibroButtonColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.green
-    
-    //settings labels:
-    
+    //Settings labels:
     static var defaultMusicButtonLabel = "ON"
     static var defaultSoundButtonLabel = "ON"
     static var defaultVibrationButtonLabel = "ON"
+    
+    //Settings buttons color:
+    static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.green
+    static let defaultSoundButtonColor = defaults.colorForKey(key: ColorKey.soundButton.rawValue) ?? UIColor.green
+    static let defaultVibroButtonColor = defaults.colorForKey(key: ColorKey.vibrationButton.rawValue) ?? UIColor.green
 }
 
 

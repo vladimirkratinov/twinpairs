@@ -39,13 +39,13 @@ class GameInterface: UIView {
     var flipsCounter: Int = 0 {
         didSet {
             flipsLabel.text = "♠️ \(flipsCounter)"
-            Properties.statisticsFlipsCounter = flipsCounter
+//            Properties.statisticsFlipsCounter = flipsCounter
         }
     }
     var pairsCounter: Int = 0 {
         didSet {
             pairsLabel.text = "🃏 \(pairsCounter)"
-            Properties.statisticsPairsCounter = pairsCounter
+//            Properties.statisticsPairsCounter = pairsCounter
         }
     }
     var coins: Int = Properties.coins {

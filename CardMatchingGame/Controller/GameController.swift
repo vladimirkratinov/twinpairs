@@ -68,9 +68,6 @@ class GameController: UIViewController {
             print("ButtonsView width: \(widthButtonsView)")
             //setup time:
             self.gameInterface.timeCounter = Properties.standardTimeCounter
-            //total time for statistics:
-            self.prop.totalTime = self.gameInterface.timeCounter
-            print("total time: \(self.prop.totalTime)")
             
             self.loadLevel()
         }
@@ -104,7 +101,7 @@ class GameController: UIViewController {
     
     func loadLevel() {
         //reset card counter:
-        prop.cardCounter = 0
+        Properties.cardCounter = 0
         
         if Properties.gameIsOver {
             gameOver()              //test Game Over
@@ -196,133 +193,9 @@ class GameController: UIViewController {
         print ("statisticsPairCounter: \(Properties.statisticsPairsCounter)")
         print ("statisticsFlipsCounter: \(Properties.statisticsFlipsCounter)")
         
-        var result = "D"
-        
-//        60 sec = 20 pairs
-//        180 sec = 60 pairs
-//        300 sec = 100 pairs
-//        600 sec = 200 pairs
-        
-        switch Properties.selectedDifficulty {
-            
-        case DifficultyKey.easy.rawValue:
-            
-            //update score label:
-            if Properties.statisticsPairsCounter > 40 {
-                result = "S+"
-            } else if Properties.statisticsPairsCounter > 30 {
-                result = "S"
-            } else if Properties.statisticsPairsCounter > 20 {
-                result = "A"
-            } else if Properties.statisticsPairsCounter > 10 {
-                result = "B"
-            } else {
-                result = "C"
-            }
-            
-            //update Properties.defaults if result is better:
-            if gameInterface.pairsCounter > Properties.defaults.integer(forKey: StatisticsKey.easyPairs.rawValue) {
-                Properties.defaults.set(Properties.standardTimeCounter, forKey: StatisticsKey.easyTime.rawValue)
-                Properties.defaults.set(Properties.statisticsPairsCounter, forKey: StatisticsKey.easyPairs.rawValue)
-                Properties.defaults.set(Properties.statisticsFlipsCounter, forKey: StatisticsKey.easyFlips.rawValue)
-                Properties.defaults.set(result, forKey: StatisticsKey.easyScore.rawValue)
-                print("results EASY level updated!")
-            } else {
-                print("results EASY are not updated!")
-            }
-            
-        case DifficultyKey.medium.rawValue:
-            
-            //update score label:
-            if Properties.statisticsPairsCounter > 80 {
-                result = "S+"
-            } else if Properties.statisticsPairsCounter > 60 {
-                result = "S"
-            } else if Properties.statisticsPairsCounter > 40 {
-                result = "A"
-            } else if Properties.statisticsPairsCounter > 20 {
-                result = "B"
-            } else {
-                result = "C"
-            }
-            
-            //update Properties.defaults if result is better:
-            if gameInterface.pairsCounter > Properties.defaults.integer(forKey: StatisticsKey.mediumPairs.rawValue) {
-                Properties.defaults.set(Properties.standardTimeCounter, forKey: StatisticsKey.mediumTime.rawValue)
-                Properties.defaults.set(Properties.statisticsPairsCounter, forKey: StatisticsKey.mediumPairs.rawValue)
-                Properties.defaults.set(Properties.statisticsFlipsCounter, forKey: StatisticsKey.mediumFlips.rawValue)
-                Properties.defaults.set(result, forKey: StatisticsKey.mediumScore.rawValue)
-                print("results MEDIUM level updated!")
-            } else {
-                print("results MEDIUM are not updated!")
-            }
-            
-        case DifficultyKey.hard.rawValue:
-            
-            //update score label:
-            if Properties.statisticsPairsCounter > 100 {
-                result = "S+"
-            } else if Properties.statisticsPairsCounter > 80 {
-                result = "S"
-            } else if Properties.statisticsPairsCounter > 60 {
-                result = "A"
-            } else if Properties.statisticsPairsCounter > 30 {
-                result = "B"
-            } else {
-                result = "C"
-            }
-            
-            //update Properties.defaults if result is better:
-            if gameInterface.pairsCounter > Properties.defaults.integer(forKey: StatisticsKey.hardPairs.rawValue) {
-                Properties.defaults.set(Properties.standardTimeCounter, forKey: StatisticsKey.hardTime.rawValue)
-                Properties.defaults.set(Properties.statisticsPairsCounter, forKey: StatisticsKey.hardPairs.rawValue)
-                Properties.defaults.set(Properties.statisticsFlipsCounter, forKey: StatisticsKey.hardFlips.rawValue)
-                Properties.defaults.set(result, forKey: StatisticsKey.hardScore.rawValue)
-                print("results HARD level updated!")
-            } else {
-                print("results HARD are not updated!")
-            }
-            
-        default: return
-            
-        }
+        //UPDATE STATISTICS:
+        updateStatistics()
 
-        //update score label:
-        DispatchQueue.main.async {
-            self.gameInterface.yourResultTimeViewLabel.text =   String(Properties.standardTimeCounter)
-            self.gameInterface.yourResultFlipsViewLabel.text =  String(Properties.statisticsFlipsCounter)
-            self.gameInterface.yourResultPairsViewLabel.text =  String(Properties.statisticsPairsCounter)
-            self.gameInterface.yourResultScoreViewLabel.text = "\(result)"
-            
-            self.gameInterface.bestResultTimeViewLabel.text =   String(Properties.standardTimeCounter)
-            
-            switch Properties.selectedDifficulty {
-            case DifficultyKey.easy.rawValue:
-                self.gameInterface.bestResultPairsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.easyPairs.rawValue))"
-                self.gameInterface.bestResultFlipsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.easyFlips.rawValue))"
-                self.gameInterface.bestResultScoreViewLabel.text = Properties.defaults.string(forKey: StatisticsKey.easyScore.rawValue) ?? "n/a"
-            case DifficultyKey.medium.rawValue:
-                self.gameInterface.bestResultPairsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.mediumPairs.rawValue))"
-                self.gameInterface.bestResultFlipsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.mediumFlips.rawValue))"
-                self.gameInterface.bestResultScoreViewLabel.text = Properties.defaults.string(forKey: StatisticsKey.mediumScore.rawValue) ??
-                "n/a"
-            case DifficultyKey.hard.rawValue:
-                self.gameInterface.bestResultPairsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.hardPairs.rawValue))"
-                self.gameInterface.bestResultFlipsViewLabel.text = "\(Properties.defaults.integer(forKey: StatisticsKey.hardFlips.rawValue))"
-                self.gameInterface.bestResultScoreViewLabel.text = Properties.defaults.string(forKey: StatisticsKey.hardScore.rawValue) ?? "n/a"
-            default: return
-            }
-        }
-        
-        
-        
-        //menu button animations:
-//        UIView.transition(with: self.gameInterface.menuButton,
-//                          duration: 1,
-//                          options: .transitionFlipFromTop,
-//                          animations: nil,
-//                          completion: nil)
-        
         //cards animations:
         for card in Properties.cardButtons {
             card.pulsateRemove()
@@ -400,7 +273,7 @@ class GameController: UIViewController {
                 setupTimer()
             }
             
-            prop.cardCounter += 1    //0 - 2
+            Properties.cardCounter += 1    //0 - 2
             gameInterface.flipsCounter += 1
             
         } else {
@@ -426,13 +299,13 @@ class GameController: UIViewController {
             Properties.activatedCards.removeLast()
             
             //reset counter:
-            prop.cardCounter = 0
+            Properties.cardCounter = 0
             
         }
         print(Properties.activatedCards)
         
         //auto-disable cards after 2 clicked:
-        if prop.cardCounter == 2 {
+        if Properties.cardCounter == 2 {
             
             //SYNC UserInteractionEnabled with Kill animation:
             for card in Properties.cardButtons {
@@ -470,7 +343,6 @@ class GameController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
                     self.audioFX.playAnotherSoundFX(name: AudioFileKey.matchIgnite.rawValue, isMuted: Properties.soundMutedSwitcher)
-//                    try? self.audioFX.playGameStateFX(file: AudioFileKey.matchIgnite.rawValue, type: AudioTypeKey.wav.rawValue)
                     
                     //haptics:
                     if Properties.vibrationMutedSwitcher {
@@ -495,7 +367,7 @@ class GameController: UIViewController {
                     Properties.activatedButtons.removeAll()
                     
                     //reset counter:
-                    self.prop.cardCounter = 0
+                    Properties.cardCounter = 0
                 }
                 
                 //MARK: - Not Match:
@@ -537,10 +409,9 @@ class GameController: UIViewController {
                     Properties.activatedButtons.removeAll()
                     
                     //reset counter:
-                    self.prop.cardCounter = 0
+                    Properties.cardCounter = 0
                 }
                 // end kill pulsate animation
-
             }
         }
         
@@ -558,10 +429,6 @@ class GameController: UIViewController {
         
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        
-//        for button in Properties.cardButtons {
-//            button.layer.removeAllAnimations()
-//        }
         
         //UI Hide/Enable
         if gameInterface.settingsView.isHidden {
@@ -676,8 +543,8 @@ class GameController: UIViewController {
                 let cardButton = UIButton(type: .system)
                 let backgroundImage = Properties.cardCoverImage
                 cardButton.setBackgroundImage(backgroundImage, for: .normal)
-                cardButton.setTitleColor(prop.debugFontColor, for: .normal)
-                cardButton.titleLabel?.font = UIFont(name: "Helvetica", size: prop.debugFontSize)
+                cardButton.setTitleColor(Properties.debugFontColor, for: .normal)
+                cardButton.titleLabel?.font = UIFont(name: "Helvetica", size: Properties.debugFontSize)
                 cardButton.layer.borderWidth = 0
                 cardButton.layer.cornerRadius = 10
                 cardButton.layer.borderColor = UIColor.systemBrown.cgColor

@@ -14,3 +14,11 @@ struct StatisticsModel: Codable {
     var flips: Int
     var score: String
 }
+
+struct BestResult: Codable {
+    var time: Int
+    var difficulty: String
+    var pairs: Int
+    var flips: Int
+    var score: String
+}
