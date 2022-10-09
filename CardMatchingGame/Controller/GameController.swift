@@ -29,24 +29,15 @@ class GameController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
-//        gameInterface.restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         gameInterface.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         gameInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
-        
         gameInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         gameInterface.quitButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
-//        gameInterface.backgroundButton.addTarget(self, action: #selector(backgroundButtonTapped), for: .touchUpInside)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //Changing background color:
-//        SettingController.changingBackgroundGradient()
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -76,8 +67,6 @@ class GameController: UIViewController {
         print("selectedCardSet: \(Properties.selectedCollection)")
         
         //debugging Constraints error message:
-//        UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -109,7 +98,6 @@ class GameController: UIViewController {
         
         //SETUP SELECTED CARDS:
         gameLogic.setupSelectedSet(prefix: Properties.selectedCardListNumber)
-
     }
 
     //MARK: - nextLevel:
@@ -144,8 +132,8 @@ class GameController: UIViewController {
                 
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //remove old subview:
             
+            //remove old subview:
             self.gameInterface.buttonsView.subviews.forEach { $0.removeFromSuperview() }
 
             //RESET CARDS:
@@ -256,7 +244,9 @@ class GameController: UIViewController {
         //flip card:
         if !Properties.activatedButtons.contains(sender) {
             guard let imageName = sender.titleLabel?.text else { return }
-            let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
+//            let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)     //What the difference? Rendering mode (?)
+            let image = UIImage(named: imageName)
+//            let scaledImage = image?.scaleImage(toSize: CGSize(width: 100, height: 100))
             sender.setBackgroundImage(image, for: .normal)
             
             //pulse animation:
@@ -273,7 +263,7 @@ class GameController: UIViewController {
                 setupTimer()
             }
             
-            Properties.cardCounter += 1    //0 - 2
+            Properties.cardCounter += 1         //0 - 2
             gameInterface.flipsCounter += 1
             
         } else {
@@ -432,9 +422,10 @@ class GameController: UIViewController {
         
         //UI Hide/Enable
         if gameInterface.settingsView.isHidden {
+            self.gameInterface.settingsView.isHidden = false
+            self.gameInterface.settingsView.alpha = 0
             
             UIView.animate(withDuration: 0.3) {
-                self.gameInterface.settingsView.isHidden = false
                 self.gameInterface.settingsView.alpha = 1
                 self.gameInterface.buttonsView.alpha = 0.5
                 self.gameInterface.buttonsView.isUserInteractionEnabled = false
@@ -446,14 +437,20 @@ class GameController: UIViewController {
                 self.gameInterface.settingsView.alpha = 0
                 self.gameInterface.buttonsView.alpha = 1
                 self.gameInterface.buttonsView.isUserInteractionEnabled = true
-                self.gameInterface.settingsView.isHidden = true
             }
+            
+            self.gameInterface.settingsView.isHidden = true
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                
+//            }
+            
         }
 
         print("settings Button is Hidden: \(gameInterface.settingsView.isHidden)")
         
-        //Pause & Resume Timer:
-        //Check if timer is nil:
+        //Pause & Resume Timer
+        //Check if timer is nil
         if prop.timer != nil {
             print("Settings: timer is NOT NIL")
             if prop.isPaused {
@@ -496,8 +493,13 @@ class GameController: UIViewController {
             self.gameInterface.settingsView.alpha = 0
             self.gameInterface.buttonsView.alpha = 1
             self.gameInterface.buttonsView.isUserInteractionEnabled = true
-            self.gameInterface.settingsView.isHidden = true
         }
+        
+        self.gameInterface.settingsView.isHidden = true
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//
+//        }
 
         //Check if timer is nil:
         if prop.timer != nil {

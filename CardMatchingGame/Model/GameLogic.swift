@@ -19,21 +19,10 @@ public class GameLogic {
         Properties.pairList = set
         
         if Properties.pairList.count == 24 {
-            //default code:
-//            print("deleted item is: \(String(describing: Properties.pairList.first))")
-//            Properties.pairList.removeFirst()
-//            print("deleted item is: \(String(describing: Properties.pairList.first))")
-//            Properties.pairList.removeFirst()
-//            print("deleted item is: \(String(describing: Properties.pairList.last))")
-//            Properties.pairList.removeLast()
-//            print("deleted item is: \(String(describing: Properties.pairList.last))")
-//            Properties.pairList.removeLast()
-            
             print("24 cards set activated. Deleting of 4 cards!")
             //randomize code:
             let randomNumber1 = Int.random(in: 2...12)
             let randomNumber2 = Int.random(in: 14...20)
-//            let randomNumber2 = 20
             
             var pairListCopy = Properties.pairList
             
@@ -68,15 +57,9 @@ public class GameLogic {
             
             Properties.pairList = pairListCopy
             
-            print()
             print("pairListCopy count: \(pairListCopy.count)")
             print("pairList count: \(Properties.pairList.count)")
-            print()
-            
             //end of randomize
-            
-            
-            
         }
         
         print("SETUP CARDBUTTONS: \(Properties.cardButtons.count)")
@@ -100,8 +83,7 @@ public class GameLogic {
                 
                 let sortedRandomElements = randomElements.sorted()
                 print("NEW RANDOMIZED ELEMENTS: \(sortedRandomElements)")
-                
-                
+
                 listOfIndexes = [[0,1], [2,3], [4,5], [6,7], [8,9], [10,11], [12,13], [14,15], [16,17], [18,19]]
                 selectedIndexes = [listOfIndexes[randomNumber1],
                                    listOfIndexes[randomNumber2],
@@ -225,5 +207,5 @@ public class GameLogic {
     
     public func setupSelectedSet(prefix: Int) {
         setupCards(set: Properties.cardCollection[prefix])
-        }
+    }
 }

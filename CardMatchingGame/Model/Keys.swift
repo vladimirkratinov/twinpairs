@@ -16,6 +16,7 @@ enum FigmaKey: String {
     case backgroundCardList2 = "BackgroundCardList2"
     case backgroundGame = "BackgroundGame"
     case backgroundMenu = "BackgroundMenu"
+    case backgroundShop = "BackgroundShop"
     case backgroundSettings = "BackgroundSettings"
     case backgroundGameOver = "BackgroundGameOver"
     

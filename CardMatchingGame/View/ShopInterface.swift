@@ -15,7 +15,7 @@ class ShopInterface: UIView {
     
     var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.init(patternImage: UIImage(named: FigmaKey.backgroundMenu.rawValue)!)
+        view.backgroundColor = UIColor.init(patternImage: UIImage(named: FigmaKey.backgroundGameOver.rawValue)!)
         return view
     }()
 
@@ -24,6 +24,7 @@ class ShopInterface: UIView {
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.isUserInteractionEnabled = true
             scrollView.isScrollEnabled = true
+            scrollView.alwaysBounceVertical = true
 //            scrollView.backgroundColor = .orange
             return scrollView
         }()
