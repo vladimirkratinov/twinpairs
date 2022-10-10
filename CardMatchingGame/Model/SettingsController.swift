@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingController {
+class SettingsController {
  
     //MARK: - Mute Music Tapped:
     
@@ -144,6 +144,16 @@ class SettingController {
             sender.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         }
         print("Vibration is Muted: \(muted)")
+    }
+    
+    //MARK: - Rate Button Tapped:
+    
+    static func rateButtonTapped(sender: UIButton) {
+        let audioFX = AudioFX()
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
     }
     
     //MARK: - Background Button Tapped:

@@ -37,6 +37,7 @@ class MenuController: UIViewController {
         menuInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         menuInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         menuInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
+        menuInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -287,10 +288,17 @@ class MenuController: UIViewController {
             
             menuInterface.resetButton.isHidden = true
             menuInterface.addCoinButton.isHidden = true
-            menuInterface.difficultyButton.isHidden = true
+//            menuInterface.difficultyButton.isHidden = true
 
-            menuInterface.settingsView.addSubview(menuInterface.titleLabel)
+//            menuInterface.settingsView.addSubview(menuInterface.titleLabel)
             menuInterface.titleLabel.text = "SETTINGS"
+            
+//            menuInterface.settingsView.alpha = 0
+            
+//            UIView.animate(withDuration: 0.3) {
+//                self.menuInterface.settingsView.alpha = 1
+//            }
+            
             
         } else {
             menuInterface.settingsView.isHidden = true
@@ -299,26 +307,29 @@ class MenuController: UIViewController {
             
             menuInterface.resetButton.isHidden = false
             menuInterface.addCoinButton.isHidden = false
-            menuInterface.difficultyButton.isHidden = false
+//            menuInterface.difficultyButton.isHidden = false
  
-            menuInterface.menuView.addSubview(menuInterface.titleLabel)
+//            menuInterface.menuView.addSubview(menuInterface.titleLabel)
             menuInterface.titleLabel.text = "MATCH PAIR"
         }
         
     }
     
     @objc func muteMusicTapped(_ sender: UIButton) {
-        SettingController.muteMusicTapped(sender: sender)
+        SettingsController.muteMusicTapped(sender: sender)
     }
     
     @objc func muteSoundTapped(_ sender: UIButton) {
-        SettingController.muteSoundTapped(sender: sender)
+        SettingsController.muteSoundTapped(sender: sender)
     }
     
     @objc func muteVibrationTapped(_ sender: UIButton) {
-        SettingController.muteVibrationTapped(sender: sender)
+        SettingsController.muteVibrationTapped(sender: sender)
     }
     
+    @objc func rateButtonTapped(_ sender: UIButton) {
+        SettingsController.rateButtonTapped(sender: sender)
+    }
     //MARK: - updateSettingsUIButtonsColor:
     
     func updateSettingsUIButtonsColor() {

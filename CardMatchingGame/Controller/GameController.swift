@@ -324,10 +324,10 @@ class GameController: UIViewController {
                 }
                 
                 //add Coin each 10 pairs:
-                if gameInterface.pairsCounter.isMultiple(of: 10) {
-                    print("+ COIN!")
-                    addCoin()
-                }
+//                if gameInterface.pairsCounter.isMultiple(of: 10) {
+//                    print("+ COIN!")
+//                    addCoin()
+//                }
                 
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
@@ -341,12 +341,14 @@ class GameController: UIViewController {
 
                     //animation:
                     UIView.transition(with: Properties.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        Properties.activatedButtons.last?.layer.cornerRadius = 35
                         Properties.activatedButtons.last?.alpha = 0.3
                         Properties.activatedButtons.last?.isEnabled = false
                         Properties.activatedButtons.last?.pulsateRemove()
                     })
                     
                     UIView.transition(with: Properties.activatedButtons.first!, duration: 0.7, options: .transitionCurlUp, animations: {
+                        Properties.activatedButtons.first?.layer.cornerRadius = 35
                         Properties.activatedButtons.first?.alpha = 0.3
                         Properties.activatedButtons.first?.isEnabled = false
                         Properties.activatedButtons.first?.pulsateRemove()
@@ -466,19 +468,19 @@ class GameController: UIViewController {
     }
     
     @objc func muteMusicTapped(_ sender: UIButton) {
-        SettingController.muteMusicTapped(sender: sender)
+        SettingsController.muteMusicTapped(sender: sender)
     }
     
     @objc func muteSoundTapped(_ sender: UIButton) {
-        SettingController.muteSoundTapped(sender: sender)
+        SettingsController.muteSoundTapped(sender: sender)
     }
     
     @objc func muteVibrationTapped(_ sender: UIButton) {
-        SettingController.muteVibrationTapped(sender: sender)
+        SettingsController.muteVibrationTapped(sender: sender)
     }
     
     @objc func backgroundButtonTapped(_ sender: UIButton) {
-        SettingController.backgroundButtonTapped(sender: sender)
+        SettingsController.backgroundButtonTapped(sender: sender)
     }
     
     //MARK: - Dismiss Settings Veiw:
@@ -548,17 +550,18 @@ class GameController: UIViewController {
                 cardButton.setTitleColor(Properties.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "Helvetica", size: Properties.debugFontSize)
                 cardButton.layer.borderWidth = 0
-                cardButton.layer.cornerRadius = 10
+                
                 cardButton.layer.borderColor = UIColor.systemBrown.cgColor
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
                 cardButton.frame = CGRect(x: column * resultWidth, y: row * resultHeight, width: resultWidth, height: resultHeight)
+                cardButton.layer.cornerRadius = 35
                 //shadows {
-                cardButton.titleLabel?.layer.shadowColor = UIColor.black.cgColor
-                cardButton.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
-                cardButton.titleLabel?.layer.shadowRadius = 2
-                cardButton.titleLabel?.layer.shadowOpacity = 2
-                cardButton.titleLabel?.layer.shouldRasterize = true
-                cardButton.titleLabel?.layer.rasterizationScale = UIScreen.main.scale
+//                cardButton.titleLabel?.layer.shadowColor = UIColor.black.cgColor
+//                cardButton.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
+//                cardButton.titleLabel?.layer.shadowRadius = 2
+//                cardButton.titleLabel?.layer.shadowOpacity = 2
+//                cardButton.titleLabel?.layer.shouldRasterize = true
+//                cardButton.titleLabel?.layer.rasterizationScale = UIScreen.main.scale
                 //shadows }
                 
                 gameInterface.buttonsView.addSubview(cardButton)

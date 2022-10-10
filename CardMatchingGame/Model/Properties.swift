@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    static var debugFontSize: CGFloat = 0
+    static var debugFontSize: CGFloat = 20
     static var debugFontColor: UIColor = UIColor.white
     
     //game over statistics helping lines:
@@ -35,7 +35,10 @@ struct Properties {
     static var gameIsOver = false
     
     //debug background Music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = true
+    static var generalBackgroundSoundIsMutedForTestPurposes = false
+    
+    //unlock price:
+    static var unlockPriceGlobal: Int = 200
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

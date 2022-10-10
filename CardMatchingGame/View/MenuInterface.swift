@@ -114,7 +114,6 @@ class MenuInterface: UIView {
         let collectionDescriptionLabel = UILabel()
         collectionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         collectionDescriptionLabel.textColor = .white
-//        collectionDescriptionLabel.alpha = 0.5
         collectionDescriptionLabel.alpha = 0
         collectionDescriptionLabel.textAlignment = .left
         collectionDescriptionLabel.adjustsFontSizeToFitWidth = true
@@ -144,7 +143,7 @@ class MenuInterface: UIView {
     lazy var playButton: UIButton = {
         let playButton = UIButton()
         playButton.setTitle("Play", for: .normal)
-        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.titleLabel?.textAlignment = .center
         playButton.centerTextAndImage(spacing: 5)
         setupAppearence(playButton)
@@ -155,7 +154,7 @@ class MenuInterface: UIView {
     lazy var difficultyButton: UIButton = {
         let difficultyButton = UIButton()
         difficultyButton.setTitle("Easy", for: .normal)
-        difficultyButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        difficultyButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
         difficultyButton.titleLabel?.textAlignment = .center
         difficultyButton.centerTextAndImage(spacing: 5)
         setupAppearence(difficultyButton)
@@ -166,7 +165,7 @@ class MenuInterface: UIView {
     lazy var timeModeButton: UIButton = {
         let timeModeButton = UIButton()
         timeModeButton.setTitle("3 min.", for: .normal)
-        timeModeButton.setImage(UIImage(systemName: "timer")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        timeModeButton.setImage(UIImage(systemName: "timer")?.withRenderingMode(.alwaysTemplate), for: .normal)
         timeModeButton.titleLabel?.textAlignment = .center
         timeModeButton.centerTextAndImage(spacing: 5)
         setupAppearence(timeModeButton)
@@ -177,7 +176,7 @@ class MenuInterface: UIView {
     lazy var hardcoreModeButton: UIButton = {
         let hardcoreModeButton = UIButton()
         hardcoreModeButton.setTitle("Hardcore", for: .normal)
-        hardcoreModeButton.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        hardcoreModeButton.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysTemplate), for: .normal)
         setupAppearence(hardcoreModeButton)
         hardcoreModeButton.titleLabel?.textAlignment = .center
         hardcoreModeButton.centerTextAndImage(spacing: 5)
@@ -189,7 +188,7 @@ class MenuInterface: UIView {
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()
         collectionButton.setTitle("Collection", for: .normal)
-        collectionButton.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        collectionButton.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysTemplate), for: .normal)
         setupAppearence(collectionButton)
         collectionButton.titleLabel?.textAlignment = .center
         collectionButton.centerTextAndImage(spacing: 5)
@@ -200,7 +199,7 @@ class MenuInterface: UIView {
     lazy var shopButton: UIButton = {
         let button = UIButton()
         button.setTitle("shop", for: .normal)
-        button.setImage(UIImage(systemName: "tag")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(UIImage(systemName: "tag")?.withRenderingMode(.alwaysTemplate), for: .normal)
         setupAppearence(button)
         button.titleLabel?.textAlignment = .center
         button.centerTextAndImage(spacing: 5)
@@ -266,7 +265,6 @@ class MenuInterface: UIView {
     lazy var settingsMusic: UILabel = {
        let label = UILabel()
         label.text = "Music"
-//        label.addSystemImage(imageName: "pianokeys")
         setupSettingsLabels(label)
         return label
     }()
@@ -274,7 +272,6 @@ class MenuInterface: UIView {
     lazy var settingsSound: UILabel = {
        let label = UILabel()
         label.text = "Sound"
-//        label.addSystemImage(imageName: "speaker.wave.3")
         setupSettingsLabels(label)
         return label
     }()
@@ -293,7 +290,6 @@ class MenuInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultMusicButtonColor
-//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
         return button
     }()
     
@@ -302,7 +298,6 @@ class MenuInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
-//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
         return button
     }()
     
@@ -311,7 +306,6 @@ class MenuInterface: UIView {
         setupSettingsButtons(button)
         button.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         button.backgroundColor = Properties.defaultSoundButtonColor
-//        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
         return button
     }()
     
@@ -326,7 +320,7 @@ class MenuInterface: UIView {
         let rateButton = UIButton()
         rateButton.setTitle("rate us", for: .normal)
         setupSettingsButtons(rateButton)
-        rateButton.alpha = 0.3
+        rateButton.alpha = 1
         rateButton.backgroundColor = .systemGreen
         return rateButton
     }()
@@ -546,50 +540,48 @@ class MenuInterface: UIView {
     
     //MARK: - setup Appearence:
     
-    func setupAppearence(_ thisButton: UIButton) {
-        thisButton.translatesAutoresizingMaskIntoConstraints = false
-        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        thisButton.tag = 1
-        thisButton.setTitleColor(UIColor.black, for: .normal)
-        thisButton.layer.borderWidth = 0
-        thisButton.layer.cornerRadius = 10
-        thisButton.layer.shadowColor = UIColor.black.cgColor
-        thisButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        thisButton.layer.shadowRadius = 5
-        thisButton.layer.shadowOpacity = 0.5
-        thisButton.isUserInteractionEnabled = true
-//        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterBold.rawValue, size: 20)
-        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        thisButton.backgroundColor = palette.wildCarribeanGrean
-        thisButton.layer.shouldRasterize = true
-        thisButton.layer.rasterizationScale = UIScreen.main.scale
+    func setupAppearence(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.tag = 1
+        button.tintColor = .black
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 10
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        button.isUserInteractionEnabled = true
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        button.backgroundColor = palette.wildCarribeanGrean
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
     }
     
     //MARK: - setup Settings Appearence:
     
-    func setupSettingsButtons(_ thisButton: UIButton) {
-        thisButton.translatesAutoresizingMaskIntoConstraints = false
-        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-//        thisButton.titleLabel?.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 20)
-        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        thisButton.setTitleColor(UIColor.black, for: .normal)
-        thisButton.layer.borderColor = UIColor.black.cgColor
-        thisButton.layer.borderWidth = 0
-        thisButton.layer.cornerRadius = 8
-        thisButton.isUserInteractionEnabled = true
-        thisButton.layer.shadowColor = UIColor.black.cgColor
-        thisButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        thisButton.layer.shadowRadius = 3
-        thisButton.layer.shadowOpacity = 1.0
-        thisButton.layer.shouldRasterize = true
-        thisButton.layer.rasterizationScale = UIScreen.main.scale
-        thisButton.tintColor = .red
+    func setupSettingsButtons(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 8
+        button.isUserInteractionEnabled = true
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        button.layer.shadowRadius = 3
+        button.layer.shadowOpacity = 1.0
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        button.tintColor = .red
     }
     
-    func setupSettingsLabels(_ thisLabel: UILabel) {
-        thisLabel.translatesAutoresizingMaskIntoConstraints = false
-        thisLabel.textAlignment = .left
-//        thisLabel.font = UIFont(name: FontKey.AmericanTypewriterCondensedBold.rawValue, size: 25)
-        thisLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
+    func setupSettingsLabels(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
     }
 }

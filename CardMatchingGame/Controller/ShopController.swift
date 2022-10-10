@@ -21,9 +21,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     var newArray2WithoutDuplicates: [String] = []
     
     override func loadView() {
-//        view = shopInterface.shopView
         view = shopInterface.contentView
-//        view.insertSubview(shopInterface.backgroundImageView, at: 0)
                 
         shopInterface.setupSubviews()
         shopInterface.setupConstraints()
@@ -38,14 +36,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         shopInterface.coverSet1UnlockButton.addTarget(self, action: #selector(coverSet1UnlockButtonTapped), for: .touchUpInside)
         shopInterface.coverSet2UnlockButton.addTarget(self, action: #selector(coverSet2UnlockButtonTapped), for: .touchUpInside)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //setup UIScrollView scroll effect:
-//        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.bounds.width, height: shopInterface.contentView.bounds.height - 80)
-//        self.shopInterface.scrollView.contentSize = CGSize(width:shopInterface.contentView.frame.width, height: shopInterface.contentView.frame.height + 10)
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         //Gesture recognizer:
@@ -53,34 +44,35 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
         
         loadNewSetsIntoImageButtonsForTapAnimation()
         
-        
         DispatchQueue.main.async {
             
             //update set1:
-            
             if !Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
                 self.shopInterface.cardSet1UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
+                
             }
             
             if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
                 self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
+                self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
             }
             
             //deselect another button:
             if Properties.cardSet1isUnlocked && Properties.cardSet1isSelected {
                 self.shopInterface.cardSet1UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = .gray
+                self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 if Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
                     self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
+                    self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             }
             
             //update set2:
-
             if !Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
                 self.shopInterface.cardSet2UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
@@ -89,21 +81,23 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             if Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
                 self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
+                self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
             }
             
             //deselect another button:
             if Properties.cardSet2isUnlocked && Properties.cardSet2isSelected {
                 self.shopInterface.cardSet2UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = .gray
+                self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
                     self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
+                    self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             }
             
             //update cover set1:
-            
             if !Properties.coverSet1isUnlocked && !Properties.coverSet1isSelected {
                 self.shopInterface.coverSet1UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.coverSet1UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
@@ -112,21 +106,23 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             if Properties.coverSet1isUnlocked && !Properties.coverSet1isSelected {
                 self.shopInterface.coverSet1UnlockButton.setTitle("select", for: .normal)
                 self.shopInterface.coverSet1UnlockButton.backgroundColor = .green
+                self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
             }
             
             //deselect another button:
             if Properties.coverSet1isUnlocked && Properties.coverSet1isSelected {
                 self.shopInterface.coverSet1UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.coverSet1UnlockButton.backgroundColor = .gray
+                self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 if Properties.coverSet2isUnlocked && !Properties.coverSet2isSelected {
                     self.shopInterface.coverSet2UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
+                    self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             }
             
             //update cover set2:
-            
             if !Properties.coverSet2isUnlocked && !Properties.coverSet2isSelected {
                 self.shopInterface.coverSet2UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.coverSet2UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
@@ -135,15 +131,18 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             if Properties.coverSet2isUnlocked && !Properties.coverSet2isSelected {
                 self.shopInterface.coverSet2UnlockButton.setTitle("select", for: .normal)
                 self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
+                self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
             }
             //deselect another button:
             if Properties.coverSet2isUnlocked && Properties.coverSet2isSelected {
                 self.shopInterface.coverSet2UnlockButton.setTitle("selected", for: .normal)
                 self.shopInterface.coverSet2UnlockButton.backgroundColor = .gray
+                self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 if Properties.coverSet1isUnlocked && !Properties.coverSet1isSelected {
                     self.shopInterface.coverSet1UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.coverSet1UnlockButton.backgroundColor = .green
+                    self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             }
         }
@@ -158,10 +157,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     //MARK: - cardSet Image Buttons:
@@ -194,50 +189,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             let imageName = newArray1WithoutDuplicates[counter1]
             sender.setImage(UIImage(named: imageName), for: .normal)
         }
-        
-//        print(counter1)
-
-        //old code with back side with description:
-        
-        
-//        if sender.imageView?.image != UIImage(named: "set7_canada02") {
-//            //flip animation:
-//            UIView.transition(with: sender,
-//                              duration: prop.flipAnimationTime,
-//                              options: .transitionFlipFromLeft,
-//                              animations: nil,
-//                              completion: nil)
-//
-//            sender.setImage(UIImage(named: "set7_canada02"), for: .normal)
-//
-//            //audioFX:
-//            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-//
-//            //animation:
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.shopInterface.cardSet1DescriptionLabel.alpha = 0
-//            })
-//
-//        } else {
-//            //flip animation:
-//            UIView.transition(with: sender,
-//                              duration: prop.flipAnimationTime,
-//                              options: .transitionFlipFromRight,
-//                              animations: nil,
-//                              completion: nil)
-//
-//            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
-//
-//            //audioFX
-//            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
-//
-//            //animation:
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    self.shopInterface.cardSet1DescriptionLabel.alpha = 1
-//                })
-//            }
-//        }
     }
     
     @objc func cardSet2ImageButtonTapped(_ sender: UIButton) {
@@ -268,49 +219,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
             let imageName = newArray2WithoutDuplicates[counter2]
             sender.setImage(UIImage(named: imageName), for: .normal)
         }
-        
-//        print(counter2)
-
-        //old code with back side with description:
-        
-//        //flip animation:
-//        if sender.imageView?.image != UIImage(named: "set8_ukraine01") {
-//            UIView.transition(with: sender,
-//                              duration: prop.flipAnimationTime,
-//                              options: .transitionFlipFromLeft,
-//                              animations: nil,
-//                              completion: nil)
-//
-//            sender.setImage(UIImage(named: "set8_ukraine01"), for: .normal)
-//
-//            //audioFX:
-//            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
-//
-//            //animation:
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.shopInterface.cardSet2DescriptionLabel.alpha = 0
-//            })
-//
-//        } else {
-//            //flip animation:
-//            UIView.transition(with: sender,
-//                              duration: prop.flipAnimationTime,
-//                              options: .transitionFlipFromRight,
-//                              animations: nil,
-//                              completion: nil)
-//
-//            sender.setImage(UIImage(named: "stamp_back"), for: .normal)
-//
-//            //audioFX
-//            audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
-//
-//            //animation:
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    self.shopInterface.cardSet2DescriptionLabel.alpha = 1
-//                })
-//            }
-//        }
     }
     
     //MARK: - Cover Image Buttons:
@@ -396,6 +304,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
                     self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
+                    self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 })
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -410,12 +319,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 Properties.cardSet1isSelected = true
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = .gray
                 self.shopInterface.cardSet1UnlockButton.setTitle("selected", for: .normal)
+                self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 //deselect another button:
                 if Properties.cardSet2isUnlocked {
                     Properties.cardSet2isSelected = false
                     self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
+                    self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             })
             
@@ -454,6 +365,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
                     self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
+                    self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 })
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -468,12 +380,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 Properties.cardSet2isSelected = true
                 self.shopInterface.cardSet2UnlockButton.backgroundColor = .gray
                 self.shopInterface.cardSet2UnlockButton.setTitle("selected", for: .normal)
+                self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 //deselect another button:
                 if Properties.cardSet1isUnlocked {
                     Properties.cardSet1isSelected = false
                     self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
+                    self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             })
             
@@ -512,6 +426,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.shopInterface.coverSet1UnlockButton.backgroundColor = .green
                     self.shopInterface.coverSet1UnlockButton.setTitle("select", for: .normal)
+                    self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 })
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -526,12 +441,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 Properties.coverSet1isSelected = true
                 self.shopInterface.coverSet1UnlockButton.backgroundColor = .gray
                 self.shopInterface.coverSet1UnlockButton.setTitle("selected", for: .normal)
+                self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 //deselect another button:
                 if Properties.coverSet2isUnlocked {
                     Properties.coverSet2isSelected = false
                     self.shopInterface.coverSet2UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
+                    self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             })
             
@@ -561,6 +478,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
                     self.shopInterface.coverSet2UnlockButton.setTitle("select", for: .normal)
+                    self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 })
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -575,12 +493,14 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate {
                 Properties.coverSet2isSelected = true
                 self.shopInterface.coverSet2UnlockButton.backgroundColor = .gray
                 self.shopInterface.coverSet2UnlockButton.setTitle("selected", for: .normal)
+                self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 
                 //deselect another button:
                 if Properties.coverSet1isUnlocked {
                     Properties.coverSet1isSelected = false
                     self.shopInterface.coverSet1UnlockButton.setTitle("select", for: .normal)
                     self.shopInterface.coverSet1UnlockButton.backgroundColor = .green
+                    self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             })
             

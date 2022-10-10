@@ -176,8 +176,7 @@ class ShopInterface: UIView {
     lazy var cardSet1UnlockButton: UIButton = {
         let button = UIButton()
         setupButtonAppearence(button)
-        button.setTitle("unlock", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -208,7 +207,7 @@ class ShopInterface: UIView {
     
     lazy var coverSet1Label: UILabel = {
        let label = UILabel()
-        label.text = "white paper texture"
+        label.text = "pink classic cover"
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -219,7 +218,7 @@ class ShopInterface: UIView {
     
     lazy var coverSet2Label: UILabel = {
        let label = UILabel()
-        label.text = "pink classic cover"
+        label.text = "orange classic cover"
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -348,7 +347,7 @@ class ShopInterface: UIView {
             contentBlock1.leadingAnchor.constraint(equalTo: topContainer.leadingAnchor, constant: 10),
             contentBlock1.trailingAnchor.constraint(equalTo: topContainer.trailingAnchor, constant: -10),
             contentBlock1.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -10),
-            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
+            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 280),
             
             verticalSeparatorInBlock1.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
             verticalSeparatorInBlock1.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor),
@@ -361,10 +360,10 @@ class ShopInterface: UIView {
             cardSet2DescriptionLabel.centerXAnchor.constraint(equalTo: cardSet2ImageButton.centerXAnchor),
             cardSet2DescriptionLabel.centerYAnchor.constraint(equalTo: cardSet2ImageButton.centerYAnchor),
             
-            cardSet1Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
+            cardSet1Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor, constant: 5),
             cardSet1Label.centerXAnchor.constraint(equalTo: cardSet1ImageButton.centerXAnchor),
             
-            cardSet2Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
+            cardSet2Label.topAnchor.constraint(equalTo: contentBlock1.topAnchor, constant: 5),
             cardSet2Label.centerXAnchor.constraint(equalTo: cardSet2ImageButton.centerXAnchor),
             
             cardSet1ImageButton.topAnchor.constraint(equalTo: cardSet1Label.topAnchor, constant: 20),
@@ -404,18 +403,18 @@ class ShopInterface: UIView {
             contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
             contentBlock2.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 10),
             contentBlock2.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -10),
-            contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
-            contentBlock2.heightAnchor.constraint(equalTo: contentBlock1.heightAnchor),
+            contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: 10),
+            contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 290),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),
             verticalSeparatorInBlock2.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
             verticalSeparatorInBlock2.widthAnchor.constraint(equalToConstant: 5),
             
-            coverSet1Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
+            coverSet1Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor, constant: 5),
             coverSet1Label.centerXAnchor.constraint(equalTo: coverSet1ImageButton.centerXAnchor),
             
-            coverSet2Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
+            coverSet2Label.topAnchor.constraint(equalTo: contentBlock2.topAnchor, constant: 5),
             coverSet2Label.centerXAnchor.constraint(equalTo: coverSet2ImageButton.centerXAnchor),
             
             coverSet1ImageButton.topAnchor.constraint(equalTo: coverSet1Label.topAnchor, constant: 20),
@@ -451,21 +450,29 @@ class ShopInterface: UIView {
         view.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func setupButtonAppearence(_ thisButton: UIButton) {
-        thisButton.translatesAutoresizingMaskIntoConstraints = false
-        thisButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        thisButton.tag = 1
-        thisButton.setTitleColor(UIColor.black, for: .normal)
-        thisButton.layer.borderWidth = 0
-        thisButton.layer.cornerRadius = 10
-        thisButton.layer.shadowColor = UIColor.black.cgColor
-        thisButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        thisButton.layer.shadowRadius = 5
-        thisButton.layer.shadowOpacity = 0.5
-        thisButton.isUserInteractionEnabled = true
-        thisButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        thisButton.backgroundColor = palette.shopUnlockButtonOrange
-        thisButton.layer.shouldRasterize = true
-        thisButton.layer.rasterizationScale = UIScreen.main.scale
+    func setupButtonAppearence(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.tintColor = .black
+        button.tag = 1
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 10
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        button.isUserInteractionEnabled = true
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        button.backgroundColor = palette.shopUnlockButtonOrange
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        button.setTitle("unlock", for: .normal)
+        button.setImage(UIImage(systemName: "lock.open")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.centerTextAndImage(spacing: 5)
+    }
+    
+    func setupUnlockButton(_ button: UIButton) {
+        
     }
 }
