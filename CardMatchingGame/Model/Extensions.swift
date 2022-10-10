@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 //MARK: - UIButton:
 
@@ -456,5 +457,32 @@ extension RangeExpression where Bound: FixedWidthInteger {
         case let range as ClosedRange<Bound>: return (0..<n).map { _ in .random(in: range) }
         default: return []
         }
+    }
+}
+
+extension MenuController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        if let _ = error {
+            //show error alert
+            controller.dismiss(animated: true)
+            return
+        }
+        
+        switch result {
+        case .cancelled:
+            print("Cancelled")
+        case .saved:
+            print("Save d")
+        case .sent:
+            print("Email Sent")
+        case .failed:
+            print("Failed to send")
+        @unknown default:
+            fatalError(description)
+        }
+        
+        controller.dismiss(animated: true)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class SettingsController {
  
@@ -144,16 +145,6 @@ class SettingsController {
             sender.setTitle(Properties.defaultVibrationButtonLabel, for: .normal)
         }
         print("Vibration is Muted: \(muted)")
-    }
-    
-    //MARK: - Rate Button Tapped:
-    
-    static func rateButtonTapped(sender: UIButton) {
-        let audioFX = AudioFX()
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
     }
     
     //MARK: - Background Button Tapped:

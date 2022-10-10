@@ -310,19 +310,28 @@ class MenuInterface: UIView {
     }()
     
     lazy var quitButton: UIButton = {
-        let quitButton = UIButton()
+        let button = UIButton()
         quitButton.setTitle("quit", for: .normal)
-        setupSettingsButtons(quitButton)
-        return quitButton
+        setupSettingsButtons(button)
+        return button
     }()
     
     lazy var rateButton: UIButton = {
-        let rateButton = UIButton()
-        rateButton.setTitle("rate us", for: .normal)
-        setupSettingsButtons(rateButton)
-        rateButton.alpha = 1
-        rateButton.backgroundColor = .systemGreen
-        return rateButton
+        let button = UIButton()
+        button.setTitle("rate us", for: .normal)
+        setupSettingsButtons(button)
+        button.alpha = 1
+        button.backgroundColor = .systemGreen
+        return button
+    }()
+    
+    lazy var contactButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("contact us", for: .normal)
+        setupSettingsButtons(button)
+        button.alpha = 1
+        button.backgroundColor = .systemGreen
+        return button
     }()
     
     //MARK: - setupSubviews:
@@ -359,9 +368,8 @@ class MenuInterface: UIView {
         settingsView.addSubview(muteMusicButton)
         settingsView.addSubview(muteSoundButton)
         settingsView.addSubview(muteVibrationButton)
-        
-//        settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
+        settingsView.addSubview(contactButton)
         settingsView.addSubview(settingsBackground)
         settingsView.sendSubviewToBack(settingsBackground)
         
@@ -521,6 +529,12 @@ class MenuInterface: UIView {
             rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
             rateButton.widthAnchor.constraint(equalToConstant: 130),
             rateButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            contactButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
+            contactButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -50),
+            contactButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
+            contactButton.widthAnchor.constraint(equalToConstant: 130),
+            contactButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
     

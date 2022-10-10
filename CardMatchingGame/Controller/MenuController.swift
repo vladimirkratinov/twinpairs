@@ -7,6 +7,8 @@
 
 import UIKit
 import AVFoundation
+import StoreKit
+import MessageUI
 
 class MenuController: UIViewController {
     
@@ -38,6 +40,7 @@ class MenuController: UIViewController {
         menuInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         menuInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
         menuInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
+        menuInterface.contactButton.addTarget(self, action: #selector(contactButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -327,9 +330,38 @@ class MenuController: UIViewController {
         SettingsController.muteVibrationTapped(sender: sender)
     }
     
-    @objc func rateButtonTapped(_ sender: UIButton) {
-        SettingsController.rateButtonTapped(sender: sender)
+    @objc func rateButtonTapped(_ sender: UIButton) {        
+        let audioFX = AudioFX()
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        guard let scene = menuInterface.menuView.window?.windowScene else {
+            print("no scene")
+            return
+        }
+        
+        SKStoreReviewController.requestReview(in: scene)
     }
+    
+    @objc func contactButtonTapped(_ sender: UIButton) {
+        guard MFMailComposeViewController.canSendMail() else {
+            //show alert informing the user
+            return
+        }
+        
+        //extension: MFMailComposeViewControllerDelegate
+        
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients(["matchpairgame@gmail.com"])
+        composer.setSubject("Match Pair Feedback")
+//        composer.setMessageBody("Greetings Match Pair Team,", isHTML: false)
+        
+        present(composer, animated: true)
+    }
+    
     //MARK: - updateSettingsUIButtonsColor:
     
     func updateSettingsUIButtonsColor() {
