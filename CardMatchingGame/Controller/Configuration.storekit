@@ -1,0 +1,78 @@
+{
+  "identifier" : "5666E2FE",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "D20DC8B9",
+      "localizations" : [
+        {
+          "description" : "Set of 12 Cards",
+          "displayName" : "Stamps of Canada",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.vladimirkratinov.matchpair.cardSet1",
+      "referenceName" : "Card Set 1",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B9271F58",
+      "localizations" : [
+        {
+          "description" : "Set of 12 Cards",
+          "displayName" : "Stamps of Ukraine",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.vladimirkratinov.matchpair.cardSet2",
+      "referenceName" : "Card Set 2",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B30F17A6",
+      "localizations" : [
+        {
+          "description" : "Card Cover",
+          "displayName" : "Classic Cover 1",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.vladimirkratinov.matchpair.cardCover1",
+      "referenceName" : "Card Cover 1",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "9254F180",
+      "localizations" : [
+        {
+          "description" : "Card Cover",
+          "displayName" : "Classic Cover 2",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.vladimirkratinov.matchpair.cardCover2",
+      "referenceName" : "Card Cover 2",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 2
+  }
+}

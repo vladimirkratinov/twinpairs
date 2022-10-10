@@ -96,7 +96,7 @@ class GameInterface: UIView {
     lazy var hub: UIView = {
         let hub = UIView()
 //        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5) //orange
-        hub.backgroundColor = UIColor(red: 0.06, green: 0.67, blue: 0.52, alpha: 1.00)
+        hub.backgroundColor = UIColor(red: 0.06, green: 0.67, blue: 0.52, alpha: 0.5)
         hub.translatesAutoresizingMaskIntoConstraints = false
         hub.layer.borderWidth = 0
         return hub
