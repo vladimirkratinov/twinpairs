@@ -442,11 +442,6 @@ class GameController: UIViewController {
             }
             
             self.gameInterface.settingsView.isHidden = true
-            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                
-//            }
-            
         }
 
         print("settings Button is Hidden: \(gameInterface.settingsView.isHidden)")
@@ -498,10 +493,6 @@ class GameController: UIViewController {
         }
         
         self.gameInterface.settingsView.isHidden = true
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//
-//        }
 
         //Check if timer is nil:
         if prop.timer != nil {
@@ -555,14 +546,6 @@ class GameController: UIViewController {
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
                 cardButton.frame = CGRect(x: column * resultWidth, y: row * resultHeight, width: resultWidth, height: resultHeight)
                 cardButton.layer.cornerRadius = 35
-                //shadows {
-//                cardButton.titleLabel?.layer.shadowColor = UIColor.black.cgColor
-//                cardButton.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
-//                cardButton.titleLabel?.layer.shadowRadius = 2
-//                cardButton.titleLabel?.layer.shadowOpacity = 2
-//                cardButton.titleLabel?.layer.shouldRasterize = true
-//                cardButton.titleLabel?.layer.rasterizationScale = UIScreen.main.scale
-                //shadows }
                 
                 gameInterface.buttonsView.addSubview(cardButton)
                 Properties.cardButtons.append(cardButton)

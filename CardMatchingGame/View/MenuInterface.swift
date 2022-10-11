@@ -192,7 +192,7 @@ class MenuInterface: UIView {
         setupAppearence(collectionButton)
         collectionButton.titleLabel?.textAlignment = .center
         collectionButton.centerTextAndImage(spacing: 5)
-        collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
+        collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
         return collectionButton
     }()
     
@@ -203,13 +203,14 @@ class MenuInterface: UIView {
         setupAppearence(button)
         button.titleLabel?.textAlignment = .center
         button.centerTextAndImage(spacing: 5)
-        button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00)
+//        button.backgroundColor = UIColor(red: 1.00, green: 0.42, blue: 0.42, alpha: 1.00) //pink
+        button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
         return button
     }()
 
     lazy var resetButton: UIButton = {
        let resetButton = UIButton()
-        resetButton.setTitle("  reset  ", for: .normal)
+        resetButton.setTitle("reset", for: .normal)
         setupAppearence(resetButton)
         resetButton.backgroundColor = .red
         return resetButton
@@ -217,7 +218,7 @@ class MenuInterface: UIView {
     
     lazy var addCoinButton: UIButton = {
        let addCoinButton = UIButton()
-        addCoinButton.setTitle("  🪙 Add Coin  ", for: .normal)
+        addCoinButton.setTitle("Add Coin", for: .normal)
         setupAppearence(addCoinButton)
         addCoinButton.backgroundColor = .green
         return addCoinButton
@@ -320,6 +321,9 @@ class MenuInterface: UIView {
         let button = UIButton()
         button.setTitle("rate us", for: .normal)
         setupSettingsButtons(button)
+        button.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.centerTextAndImage(spacing: 5)
+        button.tintColor = .black
         button.alpha = 1
         button.backgroundColor = .systemGreen
         return button
@@ -329,6 +333,10 @@ class MenuInterface: UIView {
         let button = UIButton()
         button.setTitle("contact us", for: .normal)
         setupSettingsButtons(button)
+        button.setImage(UIImage(systemName: "questionmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.centerTextAndImage(spacing: 1)
+        button.tintColor = .black
         button.alpha = 1
         button.backgroundColor = .systemGreen
         return button
@@ -336,13 +344,13 @@ class MenuInterface: UIView {
     
     lazy var restorePurchasesButton: UIButton = {
         let button = UIButton()
-//        setupSettingsButtons(button)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = true
+        button.alpha = 0.5
         button.setTitle("restore purchases", for: .normal)
         button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
         button.setTitleColor(UIColor.black, for: .normal)
-//        button.backgroundColor = palette.shopUnlockButtonOrange
         button.backgroundColor = .clear
         button.tintColor = .black
         button.layer.cornerRadius = 5
@@ -543,13 +551,13 @@ class MenuInterface: UIView {
             rateButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
             rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
-            rateButton.widthAnchor.constraint(equalToConstant: 130),
+            rateButton.widthAnchor.constraint(equalToConstant: 120),
             rateButton.heightAnchor.constraint(equalToConstant: 44),
             
             contactButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
             contactButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -50),
             contactButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
-            contactButton.widthAnchor.constraint(equalToConstant: 130),
+            contactButton.widthAnchor.constraint(equalToConstant: 120),
             contactButton.heightAnchor.constraint(equalToConstant: 44),
             
             restorePurchasesButton.topAnchor.constraint(equalTo: contactButton.bottomAnchor, constant: 40),

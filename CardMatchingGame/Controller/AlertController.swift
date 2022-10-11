@@ -12,7 +12,8 @@ class AlertController {
     static func presentAC(_ action1: UIAlertAction, _ action2: UIAlertAction, price: Int) -> UIAlertController {
         //attributed AlertController:
         let titleAttributes = [
-            NSAttributedString.Key.font: UIFont(name: FontKey.staatliches.rawValue, size: 24)!,
+//            NSAttributedString.Key.font: UIFont(name: FontKey.staatliches.rawValue, size: 24)!
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20),
             NSAttributedString.Key.foregroundColor: UIColor.black,
         ]
         
@@ -25,8 +26,9 @@ class AlertController {
             string: "Open this card set for \(price) coins?",
             attributes: [
                 NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                NSAttributedString.Key.foregroundColor : UIColor.red,
-                NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 14)!,
+                NSAttributedString.Key.foregroundColor : UIColor.black,
+//                NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 16)!,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),
             ]
         )
         let ac = UIAlertController(title: "", message: "", preferredStyle: .alert)

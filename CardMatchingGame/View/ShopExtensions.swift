@@ -9,6 +9,40 @@ import UIKit
 
 extension ShopController {
     
+    func selectAnimation(button: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, animations: {
+                button.backgroundColor = .green
+                button.setTitle("select", for: .normal)
+                button.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            })
+        }
+    }
+    
+    func selectedAnimation(button: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, animations: {
+                button.backgroundColor = .gray
+                button.setTitle("selected", for: .normal)
+                button.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            })
+        }
+    }
+        
+    func hardcodedSelectedList(_ number: Int) {
+        //hardcoded selected list (set7 = [6])
+        Properties.selectedSetName = Properties.listOfSets[number]
+        Properties.selectedCollection = Properties.cardCollection[number]
+        print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
+        
+        if let safeString = Properties.selectedCollection.first {
+            Properties.selectedCardList = safeString
+            Properties.selectedCardListNumber = number
+            print("Selected CardList: \(Properties.selectedCardList)")
+            print(Properties.selectedCardListNumber)
+        }
+    }
+    
     func updateShopUI() {
         
             //update set1:

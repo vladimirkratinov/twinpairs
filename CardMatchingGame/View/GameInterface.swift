@@ -710,19 +710,13 @@ class GameInterface: UIView {
         settingsView.addSubview(settingsMusic)
         settingsView.addSubview(settingsSound)
         settingsView.addSubview(settingsVibration)
-//        settingsSound.addSubview(settingsBackground)
-        
         settingsView.addSubview(muteMusicButton)
         settingsView.addSubview(muteSoundButton)
         settingsView.addSubview(muteVibrationButton)
-//        settingsView.addSubview(backgroundButton)
-        
         settingsView.addSubview(settingsBackground)
         settingsView.sendSubviewToBack(settingsBackground)
-        
         settingsView.addSubview(titleLabel)
         settingsView.addSubview(titleTipLabel)
-        
         settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
         
@@ -730,13 +724,10 @@ class GameInterface: UIView {
         gameView.addSubview(timeLabel)
         gameView.addSubview(coinLabel)
         gameView.addSubview(difficultylabel)
-//        gameView.addSubview(flipsLabel)
         gameView.addSubview(pairsLabel)
         gameView.addSubview(settingsButton)
         
         //statistics:
-//        gameOverView.addSubview(bestResultLabel)
-//        gameOverView.addSubview(yourResultLabel)
         gameOverView.addSubview(gameOverLabel)
         gameOverView.addSubview(statisticsView)
         
@@ -814,10 +805,8 @@ class GameInterface: UIView {
             
             hub.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
             hub.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
-//            hub.topAnchor.constraint(equalTo: gameView.topAnchor, constant: 52),
             hub.topAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.topAnchor, constant: 0),
             hub.widthAnchor.constraint(equalTo: gameView.widthAnchor),
-//            hub.heightAnchor.constraint(equalToConstant: 53),
             
             settingsBackground.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
             settingsBackground.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
@@ -865,13 +854,13 @@ class GameInterface: UIView {
             rateButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
             rateButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             rateButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
-            rateButton.widthAnchor.constraint(equalToConstant: 130),
+            rateButton.widthAnchor.constraint(equalToConstant: 120),
             rateButton.heightAnchor.constraint(equalToConstant: 44),
             
             quitButton.topAnchor.constraint(equalTo: muteVibrationButton.bottomAnchor, constant: 92),
             quitButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -52),
             quitButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
-            quitButton.widthAnchor.constraint(equalToConstant: 130),
+            quitButton.widthAnchor.constraint(equalToConstant: 120),
             quitButton.heightAnchor.constraint(equalToConstant: 44),
             
             //Views:

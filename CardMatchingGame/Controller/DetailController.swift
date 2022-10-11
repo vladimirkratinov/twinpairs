@@ -25,11 +25,6 @@ class DetailController: UIViewController {
         detailInterface.setupSubviews()
         detailInterface.setupConstraints()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        navigationController?.setToolbarHidden(true, animated: false)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,18 +50,7 @@ class DetailController: UIViewController {
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
             
             detailInterface.detailImageButton.setImage(image, for: .normal)
-//            detailInterface.backgroundImageView.image = UIImage(named: ImageKey.envelope3.rawValue)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //animation:
-//        detailInterface.detailImageButton.pulsateSlow()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     //MARK: - Card Tapped:
@@ -83,7 +67,6 @@ class DetailController: UIViewController {
                 .scaleImage(toSize: CGSize(width: 120, height: 150))
             
             sender.setImage(image, for: .normal)
-//            let imageOriginal = UIImage(named: ImageKey.envelope2.rawValue)?.withRenderingMode(.alwaysOriginal)
 
             //flip animation:
             UIView.transition(with: sender,

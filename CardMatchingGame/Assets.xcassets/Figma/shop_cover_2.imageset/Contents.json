@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "shop_cover_2.png",
+      "filename" : "shop_cover_7.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "shop_cover_2@2x.png",
+      "filename" : "shop_cover_7@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "shop_cover_2@3x.png",
+      "filename" : "shop_cover_7@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

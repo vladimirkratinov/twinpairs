@@ -38,7 +38,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundCardList2.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -137,10 +137,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidAppear(animated)
         //enable gestures:
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
         navigationController?.toolbar.isHidden = true
-//        navigationController?.setToolbarHidden(true, animated: false)
-        
         navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -151,7 +148,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.setToolbarHidden(true, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -203,7 +199,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         //Load Label & Image:
         let name = Properties.listOfSets[indexPath.item]
         let label = Properties.cardCollection[indexPath.item][0]
-//        let label = "label"
 
         if let imageString = UIImage(named: label) {
             let image = imageString
@@ -223,7 +218,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
-        
         
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CardListController") as? CardListController else { return }
         Properties.selectedCollection = Properties.cardCollection[indexPath.item]

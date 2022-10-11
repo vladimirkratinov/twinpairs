@@ -11,7 +11,7 @@ import StoreKit
 import MessageUI
 import StoreKit
 
-class MenuController: UIViewController {
+class MenuController: UIViewController, SKPaymentTransactionObserver {
     
     var prop = Properties()
     var audioFX = AudioFX()
@@ -53,7 +53,7 @@ class MenuController: UIViewController {
             contentLoader.loadSet(setNumber: i)
         }
         
-        //load Audio: (FIX BACKGROUND MUSIC INTERRUPTION)
+        //load Audio: (fix background music interruption)
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
             print("AVAudioSession Category Playback - OK!")
@@ -67,8 +67,10 @@ class MenuController: UIViewController {
             print(error.localizedDescription)
         }
         
-        //DEBUGGING:
+        //shop observer:
+        SKPaymentQueue.default().add(self)
         
+        //DEBUGGING:
 //        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
 //        print("PROPERTIES: CARD COLLECTION: \(Properties.cardCollection) \n")
 //        print("SELECTED SET: \(Properties.selectedCollection)")
@@ -91,8 +93,7 @@ class MenuController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setToolbarHidden(true, animated: true)
         }, completion: nil)
-        
-        
+    
         //Background AudioFX:
         let randomNumber = Int.random(in: 1...2)
         
@@ -285,37 +286,28 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        //UI Hide/Enable
+        //UI: Hide/Enable
         if menuInterface.settingsView.isHidden {
-            menuInterface.settingsView.isHidden = false
-            menuInterface.coverImageView.isHidden = false
-//            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = false
-            
-            menuInterface.resetButton.isHidden = true
-            menuInterface.addCoinButton.isHidden = true
-//            menuInterface.difficultyButton.isHidden = true
-
-//            menuInterface.settingsView.addSubview(menuInterface.titleLabel)
-            menuInterface.titleLabel.text = "SETTINGS"
-            
-//            menuInterface.settingsView.alpha = 0
-            
-//            UIView.animate(withDuration: 0.3) {
-//                self.menuInterface.settingsView.alpha = 1
-//            }
-            
-            
+            menuInterface.settingsView.isHidden =                   false
+            menuInterface.coverImageView.isHidden =                 false
+            menuInterface.classicModeDescriptionLabel.isHidden =    true
+            menuInterface.difficultyDescriptionLabel.isHidden =     true
+            menuInterface.timeModeDescriptionLabel.isHidden =       true
+            menuInterface.playButton.isHidden =                     true
+            menuInterface.difficultyButton.isHidden =               true
+            menuInterface.timeModeButton.isHidden =                 true
+            menuInterface.titleLabel.text = "settings"
+   
         } else {
-            menuInterface.settingsView.isHidden = true
-            menuInterface.coverImageView.isHidden = true
-//            menuInterface.menuView.viewWithTag(1)?.isUserInteractionEnabled = true
-            
-            menuInterface.resetButton.isHidden = false
-            menuInterface.addCoinButton.isHidden = false
-//            menuInterface.difficultyButton.isHidden = false
- 
-//            menuInterface.menuView.addSubview(menuInterface.titleLabel)
-            menuInterface.titleLabel.text = "MATCH PAIR"
+            menuInterface.settingsView.isHidden =                   true
+            menuInterface.coverImageView.isHidden =                 true
+            menuInterface.classicModeDescriptionLabel.isHidden =    false
+            menuInterface.difficultyDescriptionLabel.isHidden =     false
+            menuInterface.timeModeDescriptionLabel.isHidden =       false
+            menuInterface.playButton.isHidden =                     false
+            menuInterface.difficultyButton.isHidden =               false
+            menuInterface.timeModeButton.isHidden =                 false
+            menuInterface.titleLabel.text = "Match Pair"
         }
         
     }
@@ -352,6 +344,12 @@ class MenuController: UIViewController {
     //MARK: - Contact Button
     
     @objc func contactButtonTapped(_ sender: UIButton) {
+        let audioFX = AudioFX()
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
         guard MFMailComposeViewController.canSendMail() else {
             //show alert informing the user
             return
@@ -377,9 +375,32 @@ class MenuController: UIViewController {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        SKPaymentQueue.default().restoreCompletedTransactions()
-        
-        
+        if (SKPaymentQueue.canMakePayments()) {
+          SKPaymentQueue.default().restoreCompletedTransactions()
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("Received Payment Transaction Response from Apple");
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                print("Purchased")
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
+            case .restored:
+                print("Restored")
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
+            case .failed:
+                print("Purchased Failed")
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
+            default:
+                print("default")
+                break
+            }
+        }
     }
     
     //MARK: - updateSettingsUIButtonsColor:
@@ -427,12 +448,6 @@ class MenuController: UIViewController {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-//        case "HardcoreController":
-//            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? HardcoreController else { return }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-//                self.navigationController?.view.layer.add(transition, forKey: nil)
-//                self.navigationController?.pushViewController(vc, animated: false)
-//            }
         case "ShopController":
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? ShopController else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {

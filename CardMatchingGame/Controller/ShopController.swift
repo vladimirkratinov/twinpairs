@@ -45,6 +45,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
+        //observer:
         SKPaymentQueue.default().add(self)
         
         loadNewSetsIntoImageButtonsForTapAnimation()
@@ -350,28 +351,34 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        //no implementation
+        print("Received Payment Transaction Response from Apple")
         transactions.forEach({ transaction in
             switch transaction.transactionState {
-            case .purchasing:
-                print("purchasing")
             case .purchased:
                 print("purchased")
                 handlePurchase(transaction.payment.productIdentifier)
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
             case .failed:
                 print("failed")
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
             case .restored:
                 print("restored")
-            case .deferred:
-                print("deferred")
-            default: return
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                break
+            default:
+                print("default")
+                break
             }
         })
     }
     
     private func paymentInitiation(setNumber: Int) {
-        let payment = SKPayment(product: self.models[setNumber])
-        SKPaymentQueue.default().add(payment)
+        if (SKPaymentQueue.canMakePayments()) {
+            let payment = SKPayment(product: self.models[setNumber])
+            SKPaymentQueue.default().add(payment)
+        }
     }
     
     private func handlePurchase(_ id: String) {
@@ -425,36 +432,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             selectAnimation(button: shopInterface.coverSet2UnlockButton)
             
         default: return
-        }
-    }
-    
-    func selectAnimation(button: UIButton) {
-        UIView.animate(withDuration: 1.0, animations: {
-            button.backgroundColor = .green
-            button.setTitle("select", for: .normal)
-            button.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        })
-    }
-    
-    func selectedAnimation(button: UIButton) {
-        UIView.animate(withDuration: 1.0, animations: {
-            button.backgroundColor = .gray
-            button.setTitle("selected", for: .normal)
-            button.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        })
-    }
-        
-    func hardcodedSelectedList(_ number: Int) {
-        //hardcoded selected list (set7 = [6])
-        Properties.selectedSetName = Properties.listOfSets[number]
-        Properties.selectedCollection = Properties.cardCollection[number]
-        print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
-        
-        if let safeString = Properties.selectedCollection.first {
-            Properties.selectedCardList = safeString
-            Properties.selectedCardListNumber = number
-            print("Selected CardList: \(Properties.selectedCardList)")
-            print(Properties.selectedCardListNumber)
         }
     }
 }

@@ -58,7 +58,6 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-//        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = -10
         layout.minimumInteritemSpacing = 0
         
@@ -70,9 +69,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         
         
         layout.itemSize = CGSize(width: (view.frame.width/3), height: (view.frame.height/4.2))
-        
-        
-        
+
         //horisontal View x6:
 //        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
         
@@ -91,17 +88,12 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.isPagingEnabled = false                      //stop scrollable
         collectionView.backgroundColor = .clear
         collectionView.layer.zPosition = 0
-//        collectionView.backgroundView = backgroundImageView
         
         configureAnimation()
-//        backgroundImageView.addBlurEffect()
         
         var tabPanel = [UIBarButtonItem]()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
-        //image:
-//        selectButton = UIBarButtonItem(image: UIImage(named: ImageKey.selectButton.rawValue), style: .plain, target: self, action: #selector(selectTapped))
-        
+
         //title:
         selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
         
@@ -110,53 +102,18 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         tabPanel.append(space)
         
         toolbarItems = tabPanel
-    
-        
-                
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-////        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
-////                                         style: .plain,
-////                                         target: self,
-////                                         action: #selector(backTapped))
-//
-//        navigationItem.leftBarButtonItem = backButton
-        
-        //transparent NavigationBar:
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-        
-        //transparent Toolbar:
-//        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
-//        self.navigationController?.toolbar.shadowImage(forToolbarPosition: .bottom)
-//        self.navigationController?.toolbar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-        
+
         orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
         print(orderedNoDuplicates.count)
         
         view.addSubview(backgroundImageView)
         view.addSubview(collectionView)
-//        view.bringSubviewToFront(collectionView)
-//        view.sendSubviewToBack(backgroundImageView)
-        
-//        navigationController?.toolbar.layer.zPosition = 1
-//        navigationController?.toolbar.alpha = 1
-//        navigationController?.toolbar.isTranslucent = false
-        
-//        view.bringSubviewToFront(collectionView)
-//        view.sendSubviewToBack(backgroundImageView)
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         NSLayoutConstraint.activate([
-//            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -166,17 +123,6 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
-//            backgroundImageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-//            backgroundImageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-//            backgroundImageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-//            backgroundImageView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            
-            
-            
-//            backgroundImageView.widthAnchor.constraint(equalToConstant: 150),
-//            backgroundImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -185,13 +131,9 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     //ViewAnimator:
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        navigationController?.setToolbarHidden(true, animated: false)
-        
         //slide animation only after CollectionView:
         if !animationHasBeenShown {
             let fromAnimation = AnimationType.from(direction: .bottom, offset: 40)
-//            collectionView?.backgroundView!.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             animationHasBeenShown = true
         }
@@ -199,26 +141,14 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationController?.setToolbarHidden(true, animated: false)
 
         collectionView?.animateVisibleCells()
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)                      //NAV BAR HERE:
-//            self.navigationController?.setToolbarHidden(false, animated: true)
-        }, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //DON'T TOUCH THIS!:
-//        navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
     }
     
     //MARK: - SelectTapped:

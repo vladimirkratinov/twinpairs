@@ -114,13 +114,6 @@ class CollectionViewCell: GeminiCell {
         
         contentView.layer.cornerRadius = 20
         myShadowView.layer.cornerRadius = 20
-        
-//        let borderWidth: CGFloat = 3
-//        self.frame = frame.inset(by: UIEdgeInsets(top: -50, left: -50, bottom: -50, right: -50))
-//        self.frame = frame.insetBy(dx: -borderWidth, dy: -borderWidth)
-//        contentView.layer.borderColor = UIColor(red: 255, green: 255, blue: 235, alpha: 1).cgColor
-//        contentView.layer.borderWidth = borderWidth
-        
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
         contentView.layer.shadowRadius = 5

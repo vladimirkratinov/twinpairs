@@ -82,6 +82,7 @@ class DetailInterface: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.text = "description label"
+        label.isHidden = true
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
         return label
     }()

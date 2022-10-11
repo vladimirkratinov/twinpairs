@@ -29,7 +29,7 @@ struct Properties {
     static var cardCoverImage = UIImage(named: FigmaKey.cardCover3.rawValue)
     
     //Admin Functions:
-    static var hideAdminButtons = false
+    static var hideAdminButtons = true
     
     //debug Game Over:
     static var gameIsOver = false
