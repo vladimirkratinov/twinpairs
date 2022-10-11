@@ -14,7 +14,7 @@ struct Properties {
     static let defaults = UserDefaults.standard
     
     //cards FontSize and Color:
-    static var debugFontSize: CGFloat = 20
+    static var debugFontSize: CGFloat = 0
     static var debugFontColor: UIColor = UIColor.white
     
     //game over statistics helping lines:

@@ -53,7 +53,7 @@ class MenuInterface: UIView {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textColor = .white
-        titleLabel.alpha = 0.5
+        titleLabel.alpha = 0.2
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.text = "MATCH PAIR"
@@ -334,6 +334,21 @@ class MenuInterface: UIView {
         return button
     }()
     
+    lazy var restorePurchasesButton: UIButton = {
+        let button = UIButton()
+//        setupSettingsButtons(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("restore purchases", for: .normal)
+        button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
+        button.setTitleColor(UIColor.black, for: .normal)
+//        button.backgroundColor = palette.shopUnlockButtonOrange
+        button.backgroundColor = .clear
+        button.tintColor = .black
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
     //MARK: - setupSubviews:
     
     func setupSubviews() {
@@ -370,6 +385,7 @@ class MenuInterface: UIView {
         settingsView.addSubview(muteVibrationButton)
         settingsView.addSubview(rateButton)
         settingsView.addSubview(contactButton)
+        settingsView.addSubview(restorePurchasesButton)
         settingsView.addSubview(settingsBackground)
         settingsView.sendSubviewToBack(settingsBackground)
         
@@ -535,6 +551,9 @@ class MenuInterface: UIView {
             contactButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
             contactButton.widthAnchor.constraint(equalToConstant: 130),
             contactButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            restorePurchasesButton.topAnchor.constraint(equalTo: contactButton.bottomAnchor, constant: 40),
+            restorePurchasesButton.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor),
         ])
     }
     

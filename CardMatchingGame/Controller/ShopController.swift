@@ -155,7 +155,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
                               animations: nil,
                               completion: nil)
 
-            sender.setImage(UIImage(named: "shop_cover_1"), for: .normal)
+            sender.setImage(UIImage(named: FigmaKey.shop_cover_1.rawValue), for: .normal)
 
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
@@ -185,7 +185,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
                               animations: nil,
                               completion: nil)
             
-            sender.setImage(UIImage(named: "shop_cover_2"), for: .normal)
+            sender.setImage(UIImage(named: FigmaKey.shop_cover_2.rawValue), for: .normal)
             
             //audioFX:
             audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
@@ -200,64 +200,24 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
+        //payment:
         if !Properties.cardSet1isUnlocked {
-            
-            //payment:
-            let payment = SKPayment(product: self.models[0])
-            SKPaymentQueue.default().add(payment)
-
-//            let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
-//            }
-//            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-//            let price = 0.99
-//            let ac = AlertController.buyAC(confirm, cancel, price: price)
-//            self.present(ac, animated: true, completion: nil)
+            paymentInitiation(setNumber: 0)
         }
         
-        
-        
+        //select
         if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
-            //audioFX:
-            let shiny = AudioFileKey.shiny.rawValue
-            self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            Properties.cardSet1isSelected = true
+            selectedAnimation(button: shopInterface.cardSet1UnlockButton)
             
-            //animation:
-            UIView.animate(withDuration: 1.0, animations: {
-                Properties.cardSet1isUnlocked = true
-                Properties.defaults.set(true, forKey: "cardSet1isUnlocked")
-                
-                self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
-                self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
-                self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            })
-
-            //animation:
-            UIView.animate(withDuration: 1.0, animations: {
-                Properties.cardSet1isSelected = true
-                self.shopInterface.cardSet1UnlockButton.backgroundColor = .gray
-                self.shopInterface.cardSet1UnlockButton.setTitle("selected", for: .normal)
-                self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
-                //deselect another button:
-                if Properties.cardSet2isUnlocked {
-                    Properties.cardSet2isSelected = false
-                    self.shopInterface.cardSet2UnlockButton.setTitle("select", for: .normal)
-                    self.shopInterface.cardSet2UnlockButton.backgroundColor = .green
-                    self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                }
-            })
-            
-            //hardcoded selected list (set7 = [6])
-            Properties.selectedSetName = Properties.listOfSets[6]
-            Properties.selectedCollection = Properties.cardCollection[6]
-            print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
-            
-            if let safeString = Properties.selectedCollection.first {
-                Properties.selectedCardList = safeString
-                Properties.selectedCardListNumber = 6
-                print("Selected CardList: \(Properties.selectedCardList)")
-                print(Properties.selectedCardListNumber)
+            //deselect another button:
+            if Properties.cardSet2isUnlocked {
+                Properties.cardSet2isSelected = false
+                selectAnimation(button: shopInterface.cardSet2UnlockButton)
             }
+            
+            //select list:
+            hardcodedSelectedList(6)
         }
     }
     
@@ -269,49 +229,24 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
+        //payment:
         if !Properties.cardSet2isUnlocked {
-            
-            //payment:
-            let payment = SKPayment(product: self.models[1])
-            SKPaymentQueue.default().add(payment)
-            
-            
-//            let confirm = UIAlertAction(title: "Buy", style: .default) { buy in
-//            }
-//            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-//            let price = 0.99
-//            let ac = AlertController.buyAC(confirm, cancel, price: price)
-//            self.present(ac, animated: true, completion: nil)
+            paymentInitiation(setNumber: 1)
         }
         
+        //select
         if Properties.cardSet2isUnlocked && !Properties.cardSet2isSelected {
-            //animation:
-            UIView.animate(withDuration: 1.0, animations: {
-                Properties.cardSet2isSelected = true
-                self.shopInterface.cardSet2UnlockButton.backgroundColor = .gray
-                self.shopInterface.cardSet2UnlockButton.setTitle("selected", for: .normal)
-                self.shopInterface.cardSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
-                //deselect another button:
-                if Properties.cardSet1isUnlocked {
-                    Properties.cardSet1isSelected = false
-                    self.shopInterface.cardSet1UnlockButton.setTitle("select", for: .normal)
-                    self.shopInterface.cardSet1UnlockButton.backgroundColor = .green
-                    self.shopInterface.cardSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                }
-            })
+            Properties.cardSet2isSelected = true
+            selectedAnimation(button: shopInterface.cardSet2UnlockButton)
             
-            //hardcoded selected list (set8 = [7])
-            Properties.selectedSetName = Properties.listOfSets[7]
-            Properties.selectedCollection = Properties.cardCollection[7]
-            print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
-            
-            if let safeString = Properties.selectedCollection.first {
-                Properties.selectedCardList = safeString
-                Properties.selectedCardListNumber = 7
-                print("Selected CardList: \(Properties.selectedCardList)")
-                print(Properties.selectedCardListNumber)
+            //deselect another button:
+            if Properties.cardSet1isUnlocked {
+                Properties.cardSet1isSelected = false
+                selectAnimation(button: shopInterface.cardSet1UnlockButton)
             }
+            
+            //select list:
+            hardcodedSelectedList(7)
         }
     }
     
@@ -322,32 +257,24 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        //alertController:
+        
+        //payment:
         if !Properties.coverSet1isUnlocked {
-            
-            //payment:
-            let payment = SKPayment(product: self.models[2])
-            SKPaymentQueue.default().add(payment)
+            paymentInitiation(setNumber: 2)
         }
         
+        //select:
         if Properties.coverSet1isUnlocked && !Properties.coverSet1isSelected {
-            //animation:
-            UIView.animate(withDuration: 1.0, animations: {
-                Properties.coverSet1isSelected = true
-                self.shopInterface.coverSet1UnlockButton.backgroundColor = .gray
-                self.shopInterface.coverSet1UnlockButton.setTitle("selected", for: .normal)
-                self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
-                //deselect another button:
-                if Properties.coverSet2isUnlocked {
-                    Properties.coverSet2isSelected = false
-                    self.shopInterface.coverSet2UnlockButton.setTitle("select", for: .normal)
-                    self.shopInterface.coverSet2UnlockButton.backgroundColor = .green
-                    self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                }
-            })
+            Properties.coverSet1isSelected = true
+            selectedAnimation(button: shopInterface.coverSet1UnlockButton)
             
-            // change cover image
+            //deselect another button:
+            if Properties.coverSet2isUnlocked {
+                Properties.coverSet2isSelected = false
+                selectAnimation(button: shopInterface.coverSet2UnlockButton)
+            }
+            
+            //set cover card set in game:
             Properties.cardCoverImage = UIImage(named: FigmaKey.shop_cover_1.rawValue)
         }
     }
@@ -360,32 +287,23 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
+        //payment:
         if !Properties.coverSet2isUnlocked {
-            
-            //payment:
-            let payment = SKPayment(product: self.models[3])
-            SKPaymentQueue.default().add(payment)
-
+            paymentInitiation(setNumber: 3)
         }
         
+        //select:
         if Properties.coverSet2isUnlocked && !Properties.coverSet2isSelected {
-            //animation:
-            UIView.animate(withDuration: 1.0, animations: {
-                Properties.coverSet2isSelected = true
-                self.shopInterface.coverSet2UnlockButton.backgroundColor = .gray
-                self.shopInterface.coverSet2UnlockButton.setTitle("selected", for: .normal)
-                self.shopInterface.coverSet2UnlockButton.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
-                //deselect another button:
-                if Properties.coverSet1isUnlocked {
-                    Properties.coverSet1isSelected = false
-                    self.shopInterface.coverSet1UnlockButton.setTitle("select", for: .normal)
-                    self.shopInterface.coverSet1UnlockButton.backgroundColor = .green
-                    self.shopInterface.coverSet1UnlockButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                }
-            })
+            Properties.coverSet2isSelected = true
+            selectedAnimation(button: shopInterface.coverSet2UnlockButton)
+
+            //deselect another button:
+            if Properties.coverSet1isUnlocked {
+                Properties.coverSet1isSelected = false
+                selectAnimation(button: shopInterface.coverSet1UnlockButton)
+            }
             
-            //change cover image
+            //set cover card set in game:
             Properties.cardCoverImage = UIImage(named: FigmaKey.shop_cover_2.rawValue)
         }
     }
@@ -451,8 +369,9 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         })
     }
     
-    private func paymentInitiation() {
-        
+    private func paymentInitiation(setNumber: Int) {
+        let payment = SKPayment(product: self.models[setNumber])
+        SKPaymentQueue.default().add(payment)
     }
     
     private func handlePurchase(_ id: String) {
@@ -469,7 +388,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             Properties.defaults.set(true, forKey: "cardSet1isUnlocked")
             
             //animation:
-            unlockAnimation(button: shopInterface.cardSet1UnlockButton)
+            selectAnimation(button: shopInterface.cardSet1UnlockButton)
             
         case Product.cardSet2.rawValue:
             //audioFX:
@@ -480,7 +399,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             Properties.defaults.set(true, forKey: "cardSet2isUnlocked")
             
             //animation:
-            unlockAnimation(button: shopInterface.cardSet2UnlockButton)
+            selectAnimation(button: shopInterface.cardSet2UnlockButton)
             
         case Product.cardCover1.rawValue:
             //audioFX:
@@ -491,7 +410,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             Properties.defaults.set(true, forKey: "coverSet1isUnlocked")
             
             //animation:
-            unlockAnimation(button: shopInterface.coverSet1UnlockButton)
+            selectAnimation(button: shopInterface.coverSet1UnlockButton)
             
             
         case Product.cardCover2.rawValue:
@@ -503,13 +422,13 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             Properties.defaults.set(true, forKey: "coverSet2isUnlocked")
             
             //animation:
-            unlockAnimation(button: shopInterface.coverSet2UnlockButton)
+            selectAnimation(button: shopInterface.coverSet2UnlockButton)
             
         default: return
         }
     }
     
-    func unlockAnimation(button: UIButton) {
+    func selectAnimation(button: UIButton) {
         UIView.animate(withDuration: 1.0, animations: {
             button.backgroundColor = .green
             button.setTitle("select", for: .normal)
@@ -524,12 +443,18 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
             button.setImage(UIImage(systemName: "checkmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
         })
     }
-    
-    func selectAnimation(button: UIButton) {
-        UIView.animate(withDuration: 1.0, animations: {
-            button.backgroundColor = .green
-            button.setTitle("select", for: .normal)
-            button.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        })
+        
+    func hardcodedSelectedList(_ number: Int) {
+        //hardcoded selected list (set7 = [6])
+        Properties.selectedSetName = Properties.listOfSets[number]
+        Properties.selectedCollection = Properties.cardCollection[number]
+        print("Selected Collection: \(Properties.selectedCollection.first ?? "None")")
+        
+        if let safeString = Properties.selectedCollection.first {
+            Properties.selectedCardList = safeString
+            Properties.selectedCardListNumber = number
+            print("Selected CardList: \(Properties.selectedCardList)")
+            print(Properties.selectedCardListNumber)
+        }
     }
 }

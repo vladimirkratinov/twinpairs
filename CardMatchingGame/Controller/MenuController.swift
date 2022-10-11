@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import StoreKit
 import MessageUI
+import StoreKit
 
 class MenuController: UIViewController {
     
@@ -41,6 +42,7 @@ class MenuController: UIViewController {
         menuInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
         menuInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
         menuInterface.contactButton.addTarget(self, action: #selector(contactButtonTapped), for: .touchUpInside)
+        menuInterface.restorePurchasesButton.addTarget(self, action: #selector(restorePurchasesButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -330,6 +332,8 @@ class MenuController: UIViewController {
         SettingsController.muteVibrationTapped(sender: sender)
     }
     
+    //MARK: - Rate Button:
+    
     @objc func rateButtonTapped(_ sender: UIButton) {        
         let audioFX = AudioFX()
         //animation:
@@ -344,6 +348,8 @@ class MenuController: UIViewController {
         
         SKStoreReviewController.requestReview(in: scene)
     }
+    
+    //MARK: - Contact Button
     
     @objc func contactButtonTapped(_ sender: UIButton) {
         guard MFMailComposeViewController.canSendMail() else {
@@ -360,6 +366,20 @@ class MenuController: UIViewController {
 //        composer.setMessageBody("Greetings Match Pair Team,", isHTML: false)
         
         present(composer, animated: true)
+    }
+    
+    //MARK: - Restore Button:
+    
+    @objc func restorePurchasesButtonTapped(_ sender: UIButton) {
+        print("tapped")
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        
+        SKPaymentQueue.default().restoreCompletedTransactions()
+        
+        
     }
     
     //MARK: - updateSettingsUIButtonsColor:

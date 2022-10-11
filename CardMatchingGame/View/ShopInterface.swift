@@ -176,15 +176,12 @@ class ShopInterface: UIView {
     lazy var cardSet1UnlockButton: UIButton = {
         let button = UIButton()
         setupButtonAppearence(button)
-        
         return button
     }()
     
     lazy var cardSet2UnlockButton: UIButton = {
         let button = UIButton()
         setupButtonAppearence(button)
-        button.setTitle("unlock", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -274,13 +271,6 @@ class ShopInterface: UIView {
         bottomContainer.addSubview(title2)
         bottomContainer.addSubview(contentBlock2)
         
-        
-        //working code with scroll:
-//        scrollView.addSubview(contentBlock1)
-//        scrollView.addSubview(contentBlock2)
-//        scrollView.addSubview(title1)
-//        scrollView.addSubview(title2)
-        
         contentBlock1.addSubview(cardSet1Label)
         contentBlock1.addSubview(cardSet2Label)
         contentBlock1.addSubview(verticalSeparatorInBlock1)
@@ -298,6 +288,7 @@ class ShopInterface: UIView {
         contentBlock2.addSubview(coverSet1UnlockButton)
         contentBlock2.addSubview(coverSet2ImageButton)
         contentBlock2.addSubview(coverSet2UnlockButton)
+        
     }
     
     func setupConstraints() {
@@ -470,9 +461,5 @@ class ShopInterface: UIView {
         button.setTitle("unlock", for: .normal)
         button.setImage(UIImage(systemName: "lock.open")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.centerTextAndImage(spacing: 5)
-    }
-    
-    func setupUnlockButton(_ button: UIButton) {
-        
     }
 }
