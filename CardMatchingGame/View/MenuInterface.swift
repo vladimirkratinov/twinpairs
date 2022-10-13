@@ -56,7 +56,7 @@ class MenuInterface: UIView {
         titleLabel.alpha = 0.2
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.text = "MATCH PAIR"
+        titleLabel.text = "twin pairs"
         titleLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
         return titleLabel
     }()
@@ -65,7 +65,7 @@ class MenuInterface: UIView {
         let classicModeDescriptionLabel = UILabel()
         classicModeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         classicModeDescriptionLabel.textColor = .white
-        classicModeDescriptionLabel.alpha = 0.5
+        classicModeDescriptionLabel.alpha = 0
         classicModeDescriptionLabel.textAlignment = .left
         classicModeDescriptionLabel.adjustsFontSizeToFitWidth = true
         classicModeDescriptionLabel.text = "classic mode >"
@@ -80,7 +80,8 @@ class MenuInterface: UIView {
         difficultyDescriptionLabel.alpha = 0.5
         difficultyDescriptionLabel.textAlignment = .left
         difficultyDescriptionLabel.adjustsFontSizeToFitWidth = true
-        difficultyDescriptionLabel.text = "< difficulty"
+//        difficultyDescriptionLabel.text = "< difficulty"
+        difficultyDescriptionLabel.text = "difficulty >"
         difficultyDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
         return difficultyDescriptionLabel
     }()
@@ -92,7 +93,8 @@ class MenuInterface: UIView {
         timeModeDescriptionLabel.alpha = 0.5
         timeModeDescriptionLabel.textAlignment = .left
         timeModeDescriptionLabel.adjustsFontSizeToFitWidth = true
-        timeModeDescriptionLabel.text = "< time"
+//        timeModeDescriptionLabel.text = "< time"
+        timeModeDescriptionLabel.text = "time >"
         timeModeDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
         return timeModeDescriptionLabel
     }()
@@ -143,11 +145,12 @@ class MenuInterface: UIView {
     lazy var playButton: UIButton = {
         let playButton = UIButton()
         playButton.setTitle("Play", for: .normal)
-        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.titleLabel?.textAlignment = .center
         playButton.centerTextAndImage(spacing: 5)
         setupAppearence(playButton)
-        playButton.backgroundColor = UIColor(red: 0.20, green: 0.89, blue: 0.27, alpha: 1.00)
+        playButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 36)
+        playButton.backgroundColor = palette.UIGreen
         return playButton
     }()
     
@@ -444,14 +447,25 @@ class MenuInterface: UIView {
             classicModeDescriptionLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10),
             classicModeDescriptionLabel.bottomAnchor.constraint(equalTo: playButton.bottomAnchor),
             
+            //right side:
+//            difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
+//            difficultyDescriptionLabel.leadingAnchor.constraint(equalTo: difficultyButton.trailingAnchor, constant: 10),
+//            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
+//            difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
+//
+//            timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
+//            timeModeDescriptionLabel.leadingAnchor.constraint(equalTo: timeModeButton.trailingAnchor, constant: 10),
+//            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
+//            timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
+            
             difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
-            difficultyDescriptionLabel.leadingAnchor.constraint(equalTo: difficultyButton.trailingAnchor, constant: 10),
-            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
+//            difficultyDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 10),
+            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: difficultyButton.leadingAnchor, constant: -10),
             difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
             
             timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
-            timeModeDescriptionLabel.leadingAnchor.constraint(equalTo: timeModeButton.trailingAnchor, constant: 10),
-            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
+//            timeModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 10),
+            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: timeModeButton.leadingAnchor, constant: -10),
             timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
             
             hardcoreDescriptionLabel.topAnchor.constraint(equalTo: hardcoreModeButton.topAnchor),
@@ -466,12 +480,12 @@ class MenuInterface: UIView {
             
             //MARK: - Buttons:
 
-            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 70),
+            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 100),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            playButton.heightAnchor.constraint(equalToConstant: 57), // 50
-            playButton.widthAnchor.constraint(equalToConstant: 137), // 120
+            playButton.heightAnchor.constraint(equalToConstant: 80), // 50
+            playButton.widthAnchor.constraint(equalToConstant: 160), // 120
             
-            difficultyButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 15),
+            difficultyButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 40),
             difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             difficultyButton.heightAnchor.constraint(equalToConstant: 57),
             difficultyButton.widthAnchor.constraint(equalToConstant: 137),

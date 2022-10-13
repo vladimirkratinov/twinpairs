@@ -307,7 +307,7 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
             menuInterface.playButton.isHidden =                     false
             menuInterface.difficultyButton.isHidden =               false
             menuInterface.timeModeButton.isHidden =                 false
-            menuInterface.titleLabel.text = "Match Pair"
+            menuInterface.titleLabel.text = "Twin Pairs"
         }
         
     }

@@ -358,18 +358,18 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
                 print("purchased")
                 handlePurchase(transaction.payment.productIdentifier)
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
+//                break
             case .failed:
                 print("failed")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
+//                break
             case .restored:
                 print("restored")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
+//                break
             default:
                 print("default")
-                break
+//                break
             }
         })
     }

@@ -161,7 +161,7 @@ struct LockerModel: Codable {
             cell.unlockButton.setTitle("🪙 \(price)", for: .normal)
             cell.myLabel.isHidden = false
             cell.selectButton.isHidden = true
-            cell.myImageView.alpha = 0.5
+            cell.myImageView.alpha = 1
             
             //price button color & mechanics:
             if price > Properties.coins {

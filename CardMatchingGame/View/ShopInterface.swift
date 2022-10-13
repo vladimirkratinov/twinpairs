@@ -339,6 +339,7 @@ class ShopInterface: UIView {
             contentBlock1.trailingAnchor.constraint(equalTo: topContainer.trailingAnchor, constant: -10),
             contentBlock1.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -10),
             contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 280),
+//            contentBlock1.heightAnchor.constraint(equalTo: topContainer.heightAnchor, multiplier: 1.1),
             
             verticalSeparatorInBlock1.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
             verticalSeparatorInBlock1.bottomAnchor.constraint(equalTo: contentBlock1.bottomAnchor),
@@ -394,7 +395,7 @@ class ShopInterface: UIView {
             contentBlock2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
             contentBlock2.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 10),
             contentBlock2.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -10),
-            contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: 10),
+            contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
             contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 290),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),

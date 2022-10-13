@@ -577,7 +577,7 @@
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Match Pair";
+				INFOPLIST_KEY_CFBundleDisplayName = "Twin Pairs";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -590,7 +590,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.matchpair;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.twinpairs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -609,7 +609,7 @@
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Match Pair";
+				INFOPLIST_KEY_CFBundleDisplayName = "Twin Pairs";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -622,7 +622,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.matchpair;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vladimirkratinov.twinpairs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
