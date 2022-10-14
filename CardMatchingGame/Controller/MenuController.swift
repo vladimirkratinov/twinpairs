@@ -359,8 +359,8 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
         
         let composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
-        composer.setToRecipients(["matchpairgame@gmail.com"])
-        composer.setSubject("Match Pair Feedback")
+        composer.setToRecipients(["twinpairsgame@gmail.com"])
+        composer.setSubject("Twin Pairs Game Feedback")
 //        composer.setMessageBody("Greetings Match Pair Team,", isHTML: false)
         
         present(composer, animated: true)
