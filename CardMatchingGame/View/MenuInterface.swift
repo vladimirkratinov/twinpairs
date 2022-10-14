@@ -446,25 +446,12 @@ class MenuInterface: UIView {
             classicModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
             classicModeDescriptionLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10),
             classicModeDescriptionLabel.bottomAnchor.constraint(equalTo: playButton.bottomAnchor),
-            
-            //right side:
-//            difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
-//            difficultyDescriptionLabel.leadingAnchor.constraint(equalTo: difficultyButton.trailingAnchor, constant: 10),
-//            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
-//            difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
-//
-//            timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
-//            timeModeDescriptionLabel.leadingAnchor.constraint(equalTo: timeModeButton.trailingAnchor, constant: 10),
-//            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: menuView.trailingAnchor),
-//            timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
-            
+                     
             difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
-//            difficultyDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 10),
             difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: difficultyButton.leadingAnchor, constant: -10),
             difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
             
             timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
-//            timeModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 10),
             timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: timeModeButton.leadingAnchor, constant: -10),
             timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
             
@@ -479,27 +466,22 @@ class MenuInterface: UIView {
             collectionDescriptionLabel.bottomAnchor.constraint(equalTo: collectionButton.bottomAnchor),
             
             //MARK: - Buttons:
-
-            playButton.topAnchor.constraint(greaterThanOrEqualTo: hub.bottomAnchor, constant: 100),
+            
+            playButton.bottomAnchor.constraint(equalTo: difficultyButton.topAnchor, constant: -40),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 80), // 50
             playButton.widthAnchor.constraint(equalToConstant: 160), // 120
             
-            difficultyButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 40),
+            difficultyButton.bottomAnchor.constraint(equalTo: timeModeButton.topAnchor, constant: -10),
             difficultyButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             difficultyButton.heightAnchor.constraint(equalToConstant: 57),
             difficultyButton.widthAnchor.constraint(equalToConstant: 137),
             
-            timeModeButton.topAnchor.constraint(equalTo: difficultyButton.bottomAnchor, constant: 15),
             timeModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            timeModeButton.centerYAnchor.constraint(equalTo: menuView.centerYAnchor),
             timeModeButton.heightAnchor.constraint(equalToConstant: 57),
             timeModeButton.widthAnchor.constraint(equalToConstant: 137),
-            
-            hardcoreModeButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 40),
-            hardcoreModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            hardcoreModeButton.heightAnchor.constraint(equalToConstant: 57),
-            hardcoreModeButton.widthAnchor.constraint(equalToConstant: 137),
-            
+
             collectionButton.topAnchor.constraint(equalTo: timeModeButton.bottomAnchor, constant: 40),
             collectionButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             collectionButton.heightAnchor.constraint(equalToConstant: 57),
