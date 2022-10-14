@@ -331,10 +331,10 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
 
     //Products:
     enum Product: String, CaseIterable {
-        case cardSet1 =     "com.vladimirkratinov.matchpair.cardSet1"
-        case cardSet2 =     "com.vladimirkratinov.matchpair.cardSet2"
-        case cardCover1 =   "com.vladimirkratinov.matchpair.cardCover1"
-        case cardCover2 =   "com.vladimirkratinov.matchpair.cardCover2"
+        case cardSet1 =     "com.vladimirkratinov.twinpairs.cardset1"
+        case cardSet2 =     "com.vladimirkratinov.twinpairs.cardset2"
+        case cardCover1 =   "com.vladimirkratinov.twinpairs.coverset1"
+        case cardCover2 =   "com.vladimirkratinov.twinpairs.coverset2"
     }
     
     private func fetchProducts() {
@@ -355,21 +355,21 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKProductsR
         transactions.forEach({ transaction in
             switch transaction.transactionState {
             case .purchased:
-                print("purchased")
+                print("shop controller: purchased")
                 handlePurchase(transaction.payment.productIdentifier)
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
+                break
             case .failed:
-                print("failed")
+                print("shop controller: failed")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
+                break
             case .restored:
-                print("restored")
+                print("shop controller: restored")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
+                break
             default:
-                print("default")
-//                break
+                print("shop controller: default")
+                break
             }
         })
     }

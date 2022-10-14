@@ -361,7 +361,6 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
         composer.mailComposeDelegate = self
         composer.setToRecipients(["twinpairsgame@gmail.com"])
         composer.setSubject("Twin Pairs Game Feedback")
-//        composer.setMessageBody("Greetings Match Pair Team,", isHTML: false)
         
         present(composer, animated: true)
     }
@@ -385,15 +384,15 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
-                print("Purchased")
+                print("menu controller: purchased")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 break
             case .restored:
-                print("Restored")
+                print("menu controller: restored")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 break
             case .failed:
-                print("Purchased Failed")
+                print("menu controller: failed")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 break
             default:
