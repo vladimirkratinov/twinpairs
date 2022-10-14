@@ -209,6 +209,8 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             paymentInitiation(setNumber: 0)
         }
         
+        paymentInitiation(setNumber: 0)
+        
         //select
         if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
             Properties.cardSet1isSelected = true
@@ -382,29 +384,55 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         print("Received Payment Transaction Response from Apple")
         for transaction in transactions {
-            switch transaction.transactionState {
-                
-            case .purchased:
-                
+            
+            if transaction.transactionState == .purchased {
                 print("shop controller: purchased")
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 handlePurchase(transaction.payment.productIdentifier)
                 
-            case .failed:
-
+            } else if transaction.transactionState == .failed {
                 if let error = transaction.error {
                     let errorDescription = error.localizedDescription
                     print("shop controller: failed - \(errorDescription)")
                 }
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 
-            case .restored:
+            } else if transaction.transactionState == .restored {
                 print("shop controller: restored")
+                print(transaction.payment)
+                handlePurchase(Product.cardset1.rawValue)
+                handlePurchase(Product.cardset2.rawValue)
+                handlePurchase(Product.coverset1.rawValue)
+                handlePurchase(Product.coverset2.rawValue)
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                
-            default:
-                print("shop controller: default")
             }
+//            switch transaction.transactionState {
+//
+//            case .purchased:
+//
+//                print("shop controller: purchased")
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//                handlePurchase(transaction.payment.productIdentifier)
+//
+//            case .failed:
+//
+//                if let error = transaction.error {
+//                    let errorDescription = error.localizedDescription
+//                    print("shop controller: failed - \(errorDescription)")
+//                }
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//
+//            case .restored:
+//                print("shop controller: restored")
+//
+//                print(transaction.payment)
+//                handlePurchase(transaction.payment.productIdentifier)
+//
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//
+//            default:
+//                print("shop controller: default")
+//            }
         }
     }
     

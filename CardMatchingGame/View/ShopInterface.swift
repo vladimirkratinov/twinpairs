@@ -38,14 +38,14 @@ class ShopInterface: UIView {
     
     var horizontalSeparatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     var topContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
+//        view.backgroundColor = .yellow
         view.alpha = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -53,7 +53,7 @@ class ShopInterface: UIView {
     
     var bottomContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .purple
+//        view.backgroundColor = .purple
         view.alpha = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -327,7 +327,7 @@ class ShopInterface: UIView {
             shopView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             shopView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            horizontalSeparatorLine.centerYAnchor.constraint(equalTo: shopView.centerYAnchor, constant: 0),
+            horizontalSeparatorLine.centerYAnchor.constraint(equalTo: shopView.centerYAnchor),
             horizontalSeparatorLine.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
             horizontalSeparatorLine.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
             horizontalSeparatorLine.heightAnchor.constraint(equalToConstant: 5),
@@ -336,11 +336,13 @@ class ShopInterface: UIView {
             topContainer.bottomAnchor.constraint(equalTo: horizontalSeparatorLine.topAnchor),
             topContainer.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
             topContainer.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+//            topContainer.heightAnchor.constraint(lessThanOrEqualToConstant: 280),
             
             bottomContainer.topAnchor.constraint(equalTo: horizontalSeparatorLine.bottomAnchor),
             bottomContainer.bottomAnchor.constraint(equalTo: shopView.bottomAnchor),
             bottomContainer.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
             bottomContainer.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+//            bottomContainer.heightAnchor.constraint(equalTo: shopView.heightAnchor, multiplier: 0.5),
             
             
             
@@ -362,7 +364,7 @@ class ShopInterface: UIView {
             contentBlock1.leadingAnchor.constraint(equalTo: topContainer.leadingAnchor, constant: 10),
             contentBlock1.trailingAnchor.constraint(equalTo: topContainer.trailingAnchor, constant: -10),
             contentBlock1.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -10),
-            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 280),
+            contentBlock1.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
 //            contentBlock1.heightAnchor.constraint(equalTo: topContainer.heightAnchor, multiplier: 1.1),
             
             verticalSeparatorInBlock1.topAnchor.constraint(equalTo: contentBlock1.topAnchor),
@@ -420,7 +422,7 @@ class ShopInterface: UIView {
             contentBlock2.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 10),
             contentBlock2.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -10),
             contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
-            contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 290),
+            contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
             
             restoreButton.topAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: 40),
             restoreButton.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
