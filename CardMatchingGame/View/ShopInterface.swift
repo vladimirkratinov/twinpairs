@@ -38,14 +38,14 @@ class ShopInterface: UIView {
     
     var horizontalSeparatorLine: UIView = {
         let view = UIView()
-//        view.backgroundColor = .white
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     var topContainer: UIView = {
         let view = UIView()
-//        view.backgroundColor = .yellow
+        view.backgroundColor = .yellow
         view.alpha = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -53,7 +53,7 @@ class ShopInterface: UIView {
     
     var bottomContainer: UIView = {
         let view = UIView()
-//        view.backgroundColor = .purple
+        view.backgroundColor = .purple
         view.alpha = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -255,6 +255,24 @@ class ShopInterface: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    //MARK: - restore button:
+    
+    lazy var restoreButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = true
+        button.isUserInteractionEnabled = true
+        button.alpha = 1
+        button.setTitle("restore purchases", for: .normal)
+        button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .clear
+        button.tintColor = .black
+        button.layer.cornerRadius = 5
+        return button
+    }()
 
     func setupSubviews() {
         contentView.addSubview(scrollView)
@@ -270,6 +288,7 @@ class ShopInterface: UIView {
         
         bottomContainer.addSubview(title2)
         bottomContainer.addSubview(contentBlock2)
+        
         
         contentBlock1.addSubview(cardSet1Label)
         contentBlock1.addSubview(cardSet2Label)
@@ -288,6 +307,9 @@ class ShopInterface: UIView {
         contentBlock2.addSubview(coverSet1UnlockButton)
         contentBlock2.addSubview(coverSet2ImageButton)
         contentBlock2.addSubview(coverSet2UnlockButton)
+        
+        scrollView.addSubview(restoreButton)
+        scrollView.bringSubviewToFront(restoreButton)
         
     }
     
@@ -319,6 +341,8 @@ class ShopInterface: UIView {
             bottomContainer.bottomAnchor.constraint(equalTo: shopView.bottomAnchor),
             bottomContainer.leadingAnchor.constraint(equalTo: shopView.leadingAnchor),
             bottomContainer.trailingAnchor.constraint(equalTo: shopView.trailingAnchor),
+            
+            
             
             //MARK: - title 1:
             
@@ -397,6 +421,9 @@ class ShopInterface: UIView {
             contentBlock2.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -10),
             contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
             contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 290),
+            
+            restoreButton.topAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: 40),
+            restoreButton.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),

@@ -35,7 +35,7 @@ struct Properties {
     static var gameIsOver = false
     
     //debug background Music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = false
+    static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //unlock price:
     static var unlockPriceGlobal: Int = 200

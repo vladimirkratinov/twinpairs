@@ -49,7 +49,6 @@ extension ShopController {
             if !Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
                 self.shopInterface.cardSet1UnlockButton.setTitle("unlock", for: .normal)
                 self.shopInterface.cardSet1UnlockButton.backgroundColor = self.palette.shopUnlockButtonOrange
-                
             }
             
             if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {

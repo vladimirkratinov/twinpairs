@@ -11,7 +11,8 @@ import StoreKit
 import MessageUI
 import StoreKit
 
-class MenuController: UIViewController, SKPaymentTransactionObserver {
+class MenuController: UIViewController {
+    //SKPaymentTransactionObserver
     
     var prop = Properties()
     var audioFX = AudioFX()
@@ -68,7 +69,7 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
         }
         
         //shop observer:
-        SKPaymentQueue.default().add(self)
+//        SKPaymentQueue.default().add(self)
         
         //DEBUGGING:
 //        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
@@ -374,33 +375,33 @@ class MenuController: UIViewController, SKPaymentTransactionObserver {
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        if (SKPaymentQueue.canMakePayments()) {
-          SKPaymentQueue.default().restoreCompletedTransactions()
-        }
+//        if (SKPaymentQueue.canMakePayments()) {
+//          SKPaymentQueue.default().restoreCompletedTransactions()
+//        }
     }
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("Received Payment Transaction Response from Apple");
-        for transaction in transactions {
-            switch transaction.transactionState {
-            case .purchased:
-                print("menu controller: purchased")
-                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
-            case .restored:
-                print("menu controller: restored")
-                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
-            case .failed:
-                print("menu controller: failed")
-                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-                break
-            default:
-                print("default")
-                break
-            }
-        }
-    }
+//    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+//        print("Received Payment Transaction Response from Apple");
+//        for transaction in transactions {
+//            switch transaction.transactionState {
+//            case .purchased:
+//                print("menu controller: purchased")
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//                break
+//            case .restored:
+//                print("menu controller: restored")
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//                break
+//            case .failed:
+//                print("menu controller: failed")
+//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+//                break
+//            default:
+//                print("default")
+//                break
+//            }
+//        }
+//    }
     
     //MARK: - updateSettingsUIButtonsColor:
     
