@@ -5,7 +5,7 @@
   ],
   "products" : [
     {
-      "displayPrice" : "0",
+      "displayPrice" : "0.99",
       "familyShareable" : false,
       "internalID" : "D20DC8B9",
       "localizations" : [
@@ -15,12 +15,12 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.vladimirkratinov.matchpair.cardSet1",
+      "productID" : "com.vladimirkratinov.twinpairs.cardset1",
       "referenceName" : "Card Set 1",
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "0",
+      "displayPrice" : "0.99",
       "familyShareable" : false,
       "internalID" : "B9271F58",
       "localizations" : [
@@ -30,37 +30,37 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.vladimirkratinov.matchpair.cardSet2",
+      "productID" : "com.vladimirkratinov.twinpairs.cardset2",
       "referenceName" : "Card Set 2",
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "0",
+      "displayPrice" : "0.99",
       "familyShareable" : false,
       "internalID" : "B30F17A6",
       "localizations" : [
         {
           "description" : "Card Cover",
-          "displayName" : "Classic Cover 1",
+          "displayName" : "Classic Red Cover",
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.vladimirkratinov.matchpair.cardCover1",
+      "productID" : "com.vladimirkratinov.twinpairs.coverset1",
       "referenceName" : "Card Cover 1",
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "0",
+      "displayPrice" : "0.99",
       "familyShareable" : false,
       "internalID" : "9254F180",
       "localizations" : [
         {
           "description" : "Card Cover",
-          "displayName" : "Classic Cover 2",
+          "displayName" : "Pink Cat Cover",
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.vladimirkratinov.matchpair.cardCover2",
+      "productID" : "com.vladimirkratinov.twinpairs.coverset2",
       "referenceName" : "Card Cover 2",
       "type" : "NonConsumable"
     }
@@ -72,7 +72,7 @@
 
   ],
   "version" : {
-    "major" : 1,
-    "minor" : 2
+    "major" : 2,
+    "minor" : 0
   }
 }
