@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CardCover3.png",
+      "filename" : "CardCover4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CardCover3@2x.png",
+      "filename" : "CardCover4@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CardCover3@3x.png",
+      "filename" : "CardCover4@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

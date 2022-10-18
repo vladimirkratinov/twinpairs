@@ -19,24 +19,18 @@ enum FigmaKey: String {
     case backgroundShop = "BackgroundShop"
     case backgroundSettings = "BackgroundSettings"
     case backgroundGameOver = "BackgroundGameOver"
-    
     case shopBlockBackground1 = "ShopBlockBackground1"
     case shopBlockBackground2 = "ShopBlockBackground2"
-    
     case logo = "Logo"
     case settings = "Settings"
-    
     case paperTexture = "PaperTexture"
     case gradientTexture1 = "GradientTexture1"
     case gradientTexture2 = "GradientTexture2"
     case gradientTexture3 = "GradientTexture3"
-    
     case lock = "Lock"
-    
     case cardCover1 = "CardCover1"
     case cardCover2 = "CardCover2"
     case cardCover3 = "CardCover3"
-    
     case shop_cover_1 = "shop_cover_1"
     case shop_cover_2 = "shop_cover_2"
 }

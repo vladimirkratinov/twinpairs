@@ -35,10 +35,10 @@ struct Properties {
     static var gameIsOver = false
     
     //debug background Music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = true
+    static var generalBackgroundSoundIsMutedForTestPurposes = false
     
     //unlock price:
-    static var unlockPriceGlobal: Int = 200
+    static var unlockPriceGlobal: Int = 50
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

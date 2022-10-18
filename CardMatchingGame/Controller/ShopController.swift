@@ -209,8 +209,6 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             paymentInitiation(setNumber: 0)
         }
         
-        paymentInitiation(setNumber: 0)
-        
         //select
         if Properties.cardSet1isUnlocked && !Properties.cardSet1isSelected {
             Properties.cardSet1isSelected = true
@@ -368,17 +366,38 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
 //            SKPaymentQueue.default().add(payment)
 //        }
         
-        //new code:
-        if SKPaymentQueue.canMakePayments() {
-            //Can make payments
-            let  paymentRequest = SKMutablePayment()
-            paymentRequest.productIdentifier = productID[setNumber]
-            SKPaymentQueue.default().add(paymentRequest)
-            
-        } else {
-            //Can't make payments
-            print("Can't make payment")
+        //new code (dummy - AlertController - Testing):
+        let ac = UIAlertController(title: "Purchase", message: "The operation window is temporarily unavailable due to the current testing stage (It will be available in the subsequent build updates).", preferredStyle: .alert)
+        let unlock = UIAlertAction(title: "Unlock", style: .destructive) { _ in
+            switch setNumber {
+            case 0: self.handlePurchase(self.productID[0])
+            case 1: self.handlePurchase(self.productID[1])
+            case 2: self.handlePurchase(self.productID[2])
+            case 3: self.handlePurchase(self.productID[3])
+            default: return
+            }
         }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        ac.addAction(unlock)
+        ac.addAction(cancel)
+        
+        present(ac, animated: true)
+
+        //new code (StoreKit):
+//        if SKPaymentQueue.canMakePayments() {
+//
+//            //Can make payments
+//            print("Can make payment")
+//            let  paymentRequest = SKMutablePayment()
+//            paymentRequest.productIdentifier = productID[setNumber]
+//            SKPaymentQueue.default().add(paymentRequest)
+//
+//        } else {
+//            //Can't make payments
+//            print("Can't make payment")
+//        }
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -387,66 +406,53 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             
             if transaction.transactionState == .purchased {
                 print("shop controller: purchased")
-                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+                print("payment product identifier = \(transaction.payment.productIdentifier)")
                 handlePurchase(transaction.payment.productIdentifier)
                 
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+
             } else if transaction.transactionState == .failed {
                 if let error = transaction.error {
                     let errorDescription = error.localizedDescription
                     print("shop controller: failed - \(errorDescription)")
                 }
+                
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
                 
             } else if transaction.transactionState == .restored {
                 print("shop controller: restored")
-                print(transaction.payment)
-                handlePurchase(Product.cardset1.rawValue)
-                handlePurchase(Product.cardset2.rawValue)
-                handlePurchase(Product.coverset1.rawValue)
-                handlePurchase(Product.coverset2.rawValue)
+                
+                if transaction.payment.productIdentifier == productID[0] {
+                    handlePurchase(productID[0])
+                } else if transaction.payment.productIdentifier == productID[1] {
+                    handlePurchase(productID[1])
+                } else if transaction.payment.productIdentifier == productID[2] {
+                    handlePurchase(productID[2])
+                } else if transaction.payment.productIdentifier == productID[3] {
+                    handlePurchase(productID[3])
+                }
+
                 SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
             }
-//            switch transaction.transactionState {
-//
-//            case .purchased:
-//
-//                print("shop controller: purchased")
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                handlePurchase(transaction.payment.productIdentifier)
-//
-//            case .failed:
-//
-//                if let error = transaction.error {
-//                    let errorDescription = error.localizedDescription
-//                    print("shop controller: failed - \(errorDescription)")
-//                }
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//
-//            case .restored:
-//                print("shop controller: restored")
-//
-//                print(transaction.payment)
-//                handlePurchase(transaction.payment.productIdentifier)
-//
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//
-//            default:
-//                print("shop controller: default")
-//            }
         }
     }
     
-    @objc private func restoreButtonTapped(_ sender: UIButton) {
+    @objc func restoreButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         print("restore button tapped!")
         SKPaymentQueue.default().restoreCompletedTransactions()
+        
+        let ac = UIAlertController(title: "Message", message: "Restore purchases is temporarily unavailable due to the current testing stage.", preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Ok", style: .cancel)
+        ac.addAction(dismiss)
+        present(ac, animated: true)
     }
     
-    private func handlePurchase(_ id: String) {
-        print("handle purchase method id: \(id)")
+    func handlePurchase(_ id: String) {
+        print("handle purchase method id  = \(id)")
         //audioFX:
         self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
         

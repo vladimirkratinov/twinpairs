@@ -22,7 +22,7 @@ class MenuInterface: UIView {
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
+        backgroundImageView.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -212,19 +212,17 @@ class MenuInterface: UIView {
     }()
 
     lazy var resetButton: UIButton = {
-       let resetButton = UIButton()
-        resetButton.setTitle("reset", for: .normal)
-        setupAppearence(resetButton)
-        resetButton.backgroundColor = .red
-        return resetButton
+       let button = UIButton()
+        button.setTitle("Reset", for: .normal)
+        setupAppearenceAdminButtons(button)
+        return button
     }()
     
     lazy var addCoinButton: UIButton = {
-       let addCoinButton = UIButton()
-        addCoinButton.setTitle("Add Coin", for: .normal)
-        setupAppearence(addCoinButton)
-        addCoinButton.backgroundColor = .green
-        return addCoinButton
+       let button = UIButton()
+        button.setTitle("Add Coin", for: .normal)
+        setupAppearenceAdminButtons(button)
+        return button
     }()
     
     //MARK: - Settings:
@@ -348,8 +346,8 @@ class MenuInterface: UIView {
     lazy var restorePurchasesButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = true
-        button.alpha = 0.5
+        button.isEnabled = false
+        button.alpha = 0.3
         button.setTitle("restore purchases", for: .normal)
         button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)
@@ -594,6 +592,17 @@ class MenuInterface: UIView {
         button.backgroundColor = palette.wildCarribeanGrean
         button.layer.shouldRasterize = true
         button.layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func setupAppearenceAdminButtons(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.tintColor = .black
+        button.backgroundColor = .systemPink
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont(name: "Helvetica", size: 16)
     }
     
     //MARK: - setup Settings Appearence:

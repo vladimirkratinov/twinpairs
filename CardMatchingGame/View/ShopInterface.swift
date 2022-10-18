@@ -204,7 +204,7 @@ class ShopInterface: UIView {
     
     lazy var coverSet1Label: UILabel = {
        let label = UILabel()
-        label.text = "classic red cover"
+        label.text = "classic cover"
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center

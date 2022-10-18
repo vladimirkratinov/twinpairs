@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import ViewAnimator
 
-class GameController: UIViewController {
+class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     var audioFX = AudioFX()
     var prop = Properties()
@@ -53,6 +53,9 @@ class GameController: UIViewController {
         view.addGestureRecognizer(gesture)
         self.gestureRecognizer = gesture
         
+        //Gesture recognizer:
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
         //timer to load and get the width & height properties! (cheating)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             let widthButtonsView = self.gameInterface.buttonsView.frame.width
@@ -72,7 +75,7 @@ class GameController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //disable gestures:
+        //disable gestures: (enable - test)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         //update Coins label:

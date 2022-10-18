@@ -103,14 +103,14 @@ class GameInterface: UIView {
     }()
     
     static var backgroundImageView: UIImageView = {
-        let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
-        
-        backgroundImageView.backgroundColor = .white
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundImageView
+        let view = UIImageView(frame: .zero)
+        view.alpha = 1
+//        view.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
+        view.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
+        view.contentMode = .scaleAspectFill
+        view.backgroundColor = .systemPink
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var buttonsView: UIView = {
