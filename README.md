@@ -21,7 +21,7 @@ Try to match the cards with its respective pair with as few moves as possible
 - Used UICollectionView to organize and sort the pack of cards
 - Implemented StoreKit for the In-App purchases
 
-# 📷 Versions:
+# 📷 Version History:
 
 ## ver. 0.9 (New!)
 
