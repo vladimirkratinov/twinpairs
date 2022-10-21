@@ -13,12 +13,13 @@ Try to match the cards with its respective pair with as few moves as possible
 
 # 🚀 Features: 
 
-- Match Pair is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
+- Twin Pairs is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
 - This application is written in Swift and uses UIKit as the main framework
 - The game’s main feature is a unique graphic design with smooth and entertaining UI animations <br /> that improve and complements the user experience
 - Added additional CocoaPods libraries to diversify the gameplay and present customized animations <br /> within collections of cards available to the player
 - The impactful sound design emphasizes gameplay, including immersive background music and various effects
 - Used UICollectionView to organize and sort the pack of cards
+- Implemented StoreKit for the In-App purchases
 
 # 📷 Versions:
 
