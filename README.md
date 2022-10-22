@@ -1,5 +1,5 @@
-# 🎮 Match Pair Game 
-Match Pair is a memory game where you need to match pairs of cards <br />
+# 🎮 Twin Pairs
+Twin Pairs is a memory game where you need to match pairs of cards <br />
 Playing is very simple - you turn over one card and then try to find a matching card
 
 # ❓ How to play:
@@ -13,19 +13,58 @@ Try to match the cards with its respective pair with as few moves as possible
 
 # 🚀 Features: 
 
-- Match Pair is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
+- Twin Pairs is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
 - This application is written in Swift and uses UIKit as the main framework
 - The game’s main feature is a unique graphic design with smooth and entertaining UI animations <br /> that improve and complements the user experience
 - Added additional CocoaPods libraries to diversify the gameplay and present customized animations <br /> within collections of cards available to the player
 - The impactful sound design emphasizes gameplay, including immersive background music and various effects
 - Used UICollectionView to organize and sort the pack of cards
+- Implemented StoreKit for the In-App purchases
 
-# 📷 Screenshots:
+# 📷 Version History:
 
-## ver. 0.7 (NEW!)
+## ver. 0.9 (New!)
 
-- Added Shop
-- Added unlock and select mechanics to the Shop
+- [x] [Design] Add “Unlock” image to Unlock button in the ShopController
+- [x] [Design] Add “Select” image to Select button in the ShopController
+- [x] [Design] Add “Selected” image to Selected button in the ShopController
+- [x] Button: Rate Us
+- [x] Button: Contacts
+- [x] [Shop] Add support of AppStore purchase
+- [x] [Shop] Restore Purchases (?)
+- [x] [Refactor] shop design code
+
+![1](https://user-images.githubusercontent.com/78992253/197074774-2b14af44-3c57-4c17-bdc5-a1966ab011d4.PNG)
+![2](https://user-images.githubusercontent.com/78992253/197074776-ff94df74-c245-446d-b04b-9bcf89b2abf2.PNG)
+![3](https://user-images.githubusercontent.com/78992253/197074778-8687ae77-c194-400b-9f61-769b1c13d8e2.PNG)
+![4](https://user-images.githubusercontent.com/78992253/197074779-dae77a32-0c0e-4e62-9ca6-8c59db510590.PNG)
+![5](https://user-images.githubusercontent.com/78992253/197074780-75e9780f-611b-4c96-b848-f75f67c0ffdf.PNG)
+![6](https://user-images.githubusercontent.com/78992253/197074782-51225fc4-fadc-4665-aa3c-d74b1a740c8d.PNG)
+![7](https://user-images.githubusercontent.com/78992253/197074784-32e3923c-2a92-4b2f-a9ce-b530dd37d758.PNG)
+![8](https://user-images.githubusercontent.com/78992253/197074785-ddc51712-ef4f-4281-930c-02777d7677ac.PNG)
+![9](https://user-images.githubusercontent.com/78992253/197074786-beb25201-ebd3-4092-874a-3a8d6b8b399a.PNG)
+
+## ver. 0.8
+
+- [x] Add description labels in the ShopController
+- [x] Fix: OFF/ON labels in settings
+- [x] Fix: ShopInterface Constraints
+- [x] Fix: ShopInterface ScrollView
+- [x] Fix: CollectionController Interface (added Hub with Coins + Constraints)
+- [x] Shop: Added new animations to Card Sets
+- [x] Shop: Added labels to Card Sets
+- [x] Shop: Added labels to Card Covers
+- [x] Rework Design: card cover color
+- [x] Rework Design: collectionView background item color
+- [x] Rework: GameOver Statistics (9 different)
+- [x] Fix: music stop play when game turn on
+
+
+
+## ver. 0.7 
+
+- [x] Added Shop
+- [x] Added unlock and select mechanics to the Shop
 
 ![IMG_7795](https://user-images.githubusercontent.com/78992253/193423021-1feb7934-be43-41a9-b7ea-79f41e89e927.PNG)
 ![IMG_7796](https://user-images.githubusercontent.com/78992253/193423024-53f99748-ed69-42a9-ab1e-434738b075c9.PNG)
@@ -39,28 +78,28 @@ Try to match the cards with its respective pair with as few moves as possible
 
 ## ver. 0.6
 
-- Global redesign!
-- Added brand new Game Over screen with statistics
-- Collections are reworked
-- Added new animations to Collections
-- Added new card sets
-- Sets are upsized to 24 cards in each set
-- Added Difficulty Mode
-- Added Time Mode
+- [x] Global redesign
+- [x] Added brand new Game Over screen with statistics
+- [x] Collections are reworked
+- [x] Added new animations to Collections
+- [x] Added new card sets
+- [x] Sets are upsized to 24 cards in each set
+- [x] Added Difficulty Mode
+- [x] Added Time Mode
 
 ## ver. 0.5 
 
-- Added new feature - unlock mechanism in CollectionView
-- Added prices and purchase function
-- Coins are presented in every view
-- Settings, Coins and Unlocked Sets of Cards are preserved
-- Fixed UI bugs in CollectionView and CardView
-- Removed Navigation Controller
-- Brand New Animations!
-- Re-design of Collections and Details views
-- UI optimized for swipe gestures
-- Presented new DetailView: clickable picture with details on the other side
-- Tap to dismiss DetailView'
+- [x] Added new feature - unlock mechanism in CollectionView
+- [x] Added prices and purchase function
+- [x] oins are presented in every view
+- [x] Settings, Coins and Unlocked Sets of Cards are preserved
+- [x] Fixed UI bugs in CollectionView and CardView
+- [x] Removed Navigation Controller
+- [x] Brand New Animations!
+- [x] Re-design of Collections and Details views
+- [x] UI optimized for swipe gestures
+- [x] Presented new DetailView: clickable picture with details on the other side
+- [x] Tap to dismiss DetailView'
 
 ![1](https://user-images.githubusercontent.com/78992253/186836937-28e20dec-a11b-4e18-99c1-b646eea4d58a.PNG)
 ![2](https://user-images.githubusercontent.com/78992253/186836940-1f32943d-12e2-4053-9a5f-0dd0c88c6b99.PNG)
@@ -71,12 +110,12 @@ Try to match the cards with its respective pair with as few moves as possible
 
 ## ver. 0.4
 
-- Presented new feature - Collections!
-- Add custom animations in the Collection view
-- Add a selection of card sets to use in Game Mode
-- Updated settings design
-- Updated UI
-- Updated Settings
+- [x] Presented new feature - Collections!
+- [x] Add custom animations in the Collection view
+- [x] Add a selection of card sets to use in Game Mode
+- [x] Updated settings design
+- [x] Updated UI
+- [x] Updated Settings
 
 ![1](https://user-images.githubusercontent.com/78992253/186224130-fdbe5c7b-76c9-4038-be6e-ac3cd6f82eb1.PNG)
 ![2](https://user-images.githubusercontent.com/78992253/186224131-baa91a71-31ec-4891-bf6e-232dd3002a72.PNG)
@@ -87,15 +126,15 @@ Try to match the cards with its respective pair with as few moves as possible
 
 ## ver. 0.3
 
-- Added Coin mechanics 
-- Added Coin animation
-- Added Haptics
-- Added LaunchScreen
-- Added New Background Music
-- Added Settings Button
-- UI Re-Design
-- Menu Re-Design
-- Fixed Constraints bugs
+- [x] Added Coin mechanics 
+- [x] Added Coin animation
+- [x] Added Haptics
+- [x] Added LaunchScreen
+- [x] Added New Background Music
+- [x] Added Settings Button
+- [x] UI Re-Design
+- [x] Menu Re-Design
+- [x] Fixed Constraints bugs
 
 ![1](https://user-images.githubusercontent.com/78992253/184504598-2386865c-b6ef-41a7-95b7-f908f380af61.PNG)
 ![2](https://user-images.githubusercontent.com/78992253/184504602-98b4f85a-aad9-4ce4-baaf-d78b3e73dfc1.PNG)
@@ -104,16 +143,16 @@ Try to match the cards with its respective pair with as few moves as possible
 
 ## ver. 0.2
 
-- Changed game mechanics  (rendering full images to cards)
-- Added a new set of cards
-- Fixed move animations
-- Deleted old mechanics code
-- Refactor Menu Interface
-- Refactor to MVC
-- Added key enums for default values
-- Added Game Statistics
-- Fixed card size design
-- Fixed level system
+- [x] Changed game mechanics  (rendering full images to cards)
+- [x] Added a new set of cards
+- [x] Fixed move animations
+- [x] Deleted old mechanics code
+- [x] Refactor Menu Interface
+- [x] Refactor to MVC
+- [x] Added key enums for default values
+- [x] Added Game Statistics
+- [x] Fixed card size design
+- [x] Fixed level system
 
 ![1](https://user-images.githubusercontent.com/78992253/183592049-12385b55-7503-4ec8-80ec-361e85d56f6f.PNG)
 ![2](https://user-images.githubusercontent.com/78992253/183592055-624fd608-ed95-4a82-b376-1d6a5c6fb98d.PNG)
@@ -122,12 +161,12 @@ Try to match the cards with its respective pair with as few moves as possible
 
 ## ver. 0.1
 
-- Basic Game Logic
-- Added Animations
-- Added Game Over Logic
-- Added Restart Button
-- Added SoundFX
-- General bug fixes
+- [x] Basic Game Logic
+- [x] Added Animations
+- [x] Added Game Over Logic
+- [x] Added Restart Button
+- [x] Added SoundFX
+- [x] General bug fixes
 
 ![1small](https://user-images.githubusercontent.com/78992253/181661754-e914cc74-076f-4903-83d5-e27f2b8c6568.PNG)
 ![2small](https://user-images.githubusercontent.com/78992253/181661760-24bafb8e-e176-4849-940b-89c4c8fb499a.PNG)
