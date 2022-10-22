@@ -21,6 +21,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     override func loadView() {
         view = gameInterface.gameView
+        view.isMultipleTouchEnabled = false
         
         gameInterface.setupSubviews()
         gameInterface.setupConstraints()
@@ -42,6 +43,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         navigationController?.toolbar.isHidden = true
+        
         
         //Tap Gesture Settings:
         NotificationCenter.default.addObserver(self,
@@ -70,6 +72,10 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         print("selectedCardSet: \(Properties.selectedCollection)")
         
         //debugging Constraints error message:
+    }
+    
+    override var editingInteractionConfiguration: UIEditingInteractionConfiguration {
+        return .none
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -544,6 +550,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                 cardButton.setTitleColor(Properties.debugFontColor, for: .normal)
                 cardButton.titleLabel?.font = UIFont(name: "Helvetica", size: Properties.debugFontSize)
                 cardButton.layer.borderWidth = 0
+                cardButton.isExclusiveTouch = true //multiple touch disable
                 
                 cardButton.layer.borderColor = UIColor.systemBrown.cgColor
                 cardButton.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)

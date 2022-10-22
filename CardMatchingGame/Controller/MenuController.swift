@@ -21,6 +21,7 @@ class MenuController: UIViewController {
     static let gameController = GameController()
     var contentLoader = ContentLoader()
     var gestureRecognizer: UITapGestureRecognizer?
+    let recipientEmail = "twinpairsgame@gmail.com"
     
     override func loadView() {
         view = menuInterface.menuView
@@ -345,26 +346,76 @@ class MenuController: UIViewController {
     //MARK: - Contact Button
     
     @objc func contactButtonTapped(_ sender: UIButton) {
+          
         let audioFX = AudioFX()
         //animation:
         sender.bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
-        guard MFMailComposeViewController.canSendMail() else {
-            //show alert informing the user
-            return
+        
+        if MFMailComposeViewController.canSendMail() {
+            self.sendEmail()
+        } else {
+            if let emailUrl = createEmailUrl(to: recipientEmail,
+                                             subject: "Subject", body: "Send from my iPhone") {
+                UIApplication.shared.open(emailUrl)
+            }
         }
-        
-        //extension: MFMailComposeViewControllerDelegate
-        
+    }
+    
+    func sendEmail(){
         let composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
         composer.setToRecipients(["twinpairsgame@gmail.com"])
         composer.setSubject("Twin Pairs Game Feedback")
-        
-        present(composer, animated: true)
+        self.present(composer, animated: true, completion: nil)
     }
+    
+    private func createEmailUrl(to: String, subject: String, body: String) -> URL? {
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let gmailUrl = URL(string: "googlegmail://co?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let outlookUrl = URL(string: "ms-outlook://compose?to=\(to)&subject=\(subjectEncoded)")
+        let yahooMail = URL(string: "ymail://mail/compose?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let sparkUrl = URL(string: "readdle-spark://compose?recipient=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let defaultUrl = URL(string: "mailto:\(to)?subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        
+        if let gmailUrl = gmailUrl, UIApplication.shared.canOpenURL(gmailUrl) {
+            return gmailUrl
+        } else if let outlookUrl = outlookUrl, UIApplication.shared.canOpenURL(outlookUrl) {
+            return outlookUrl
+        } else if let yahooMail = yahooMail, UIApplication.shared.canOpenURL(yahooMail) {
+            return yahooMail
+        } else if let sparkUrl = sparkUrl, UIApplication.shared.canOpenURL(sparkUrl) {
+            return sparkUrl
+        }
+        
+        return defaultUrl
+    }
+    
+//    @objc func contactButtonTapped(_ sender: UIButton) {
+//        let audioFX = AudioFX()
+//        //animation:
+//        sender.bounce(sender)
+//        //audioFX:
+//        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//
+//        guard MFMailComposeViewController.canSendMail() else {
+//            //show alert informing the user
+//            return
+//        }
+//
+//        //extension: MFMailComposeViewControllerDelegate
+//
+//        let composer = MFMailComposeViewController()
+//        composer.mailComposeDelegate = self
+//        composer.setToRecipients(["twinpairsgame@gmail.com"])
+//        composer.setSubject("Twin Pairs Game Feedback")
+//
+//        present(composer, animated: true)
+//    }
     
     //MARK: - Restore Button:
     

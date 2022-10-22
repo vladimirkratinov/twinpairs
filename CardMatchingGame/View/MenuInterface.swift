@@ -325,7 +325,8 @@ class MenuInterface: UIView {
         button.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.centerTextAndImage(spacing: 5)
         button.tintColor = .black
-        button.alpha = 1
+        button.alpha = 0.3
+        button.isEnabled = false
         button.backgroundColor = .systemGreen
         return button
     }()
@@ -347,7 +348,7 @@ class MenuInterface: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
-        button.alpha = 0.3
+        button.alpha = 0
         button.setTitle("restore purchases", for: .normal)
         button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 16)

@@ -104,7 +104,7 @@
 		F7A9B63928F4CA6700768407 /* ShopExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopExtensions.swift; sourceTree = "<group>"; };
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7CA229128FA20220073721D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		F7CA229728FA31040073721D /* Twin Pairs.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Twin Pairs.storekit"; sourceTree = "<group>"; };
+		F7CA229728FA31040073721D /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Staatliches-Regular.ttf"; sourceTree = "<group>"; };
 		F7E1652128C2BA63004089E9 /* CardListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListModel.swift; sourceTree = "<group>"; };
 		F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		F711937D2890C5EF00BC1DAA = {
 			isa = PBXGroup;
 			children = (
-				F7CA229728FA31040073721D /* Twin Pairs.storekit */,
+				F7CA229728FA31040073721D /* Configuration.storekit */,
 				F7C2626128B1C62700A24724 /* Images.bundle */,
 				F71193882890C5EF00BC1DAA /* CardMatchingGame */,
 				F71193872890C5EF00BC1DAA /* Products */,
