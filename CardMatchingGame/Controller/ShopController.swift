@@ -106,7 +106,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
                           completion: nil)
         
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if counter1 == 0 {
             let imageName = newArray1WithoutDuplicates[counter1]
@@ -136,7 +136,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
                           completion: nil)
         
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if counter2 == 0 {
             let imageName = newArray2WithoutDuplicates[counter2]
@@ -172,7 +172,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             sender.setImage(UIImage(named: FigmaKey.cardCover3.rawValue), for: .normal)
 
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
 
         } else {
             //flip animation:
@@ -185,7 +185,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             sender.setImage(UIImage(named: FigmaKey.shop_cover_1.rawValue), for: .normal)
 
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
         
     }
@@ -202,7 +202,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             sender.setImage(UIImage(named: FigmaKey.cardCover3.rawValue), for: .normal)
             
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
             
         } else {
             //flip animation:
@@ -215,7 +215,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
             sender.setImage(UIImage(named: FigmaKey.shop_cover_2.rawValue), for: .normal)
             
             //audioFX:
-            audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
     }
     
@@ -225,7 +225,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //payment:
         if !Properties.cardSet1isUnlocked {
@@ -254,7 +254,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //payment:
         if !Properties.cardSet2isUnlocked {
@@ -283,7 +283,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //payment:
         if !Properties.coverSet1isUnlocked {
@@ -312,7 +312,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //payment:
         if !Properties.coverSet2isUnlocked {
@@ -464,7 +464,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //animation:
 //        (sender as UIButton).bounce(sender)
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         print("restore button tapped!")
         SKPaymentQueue.default().restoreCompletedTransactions()
         
@@ -477,7 +477,7 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
     func handlePurchase(_ id: String) {
         print("handle purchase method id  = \(id)")
         //audioFX:
-        self.audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+        self.audioFX.playFirstSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
         
         switch id {
         case Product.cardset1.rawValue:

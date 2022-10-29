@@ -48,6 +48,16 @@
 		F7A9B63A28F4CA6700768407 /* ShopExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A9B63928F4CA6700768407 /* ShopExtensions.swift */; };
 		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
 		F7CA229228FA20220073721D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CA229128FA20220073721D /* StoreKit.framework */; };
+		F7D0963F290D08FE001339AA /* track2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09639290D08FE001339AA /* track2.mp3 */; };
+		F7D09640290D08FE001339AA /* track3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963A290D08FE001339AA /* track3.mp3 */; };
+		F7D09641290D08FE001339AA /* track4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963B290D08FE001339AA /* track4.mp3 */; };
+		F7D09642290D08FE001339AA /* track5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963C290D08FE001339AA /* track5.mp3 */; };
+		F7D09643290D08FE001339AA /* track6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963D290D08FE001339AA /* track6.mp3 */; };
+		F7D09644290D08FE001339AA /* track1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963E290D08FE001339AA /* track1.mp3 */; };
+		F7D09649290D1024001339AA /* Dreamland.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09645290D1023001339AA /* Dreamland.mp3 */; };
+		F7D0964A290D1024001339AA /* TheGentlemen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09646290D1024001339AA /* TheGentlemen.mp3 */; };
+		F7D0964B290D1024001339AA /* KingPorter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09647290D1024001339AA /* KingPorter.mp3 */; };
+		F7D0964C290D1024001339AA /* Allegro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09648290D1024001339AA /* Allegro.mp3 */; };
 		F7D7D5AD28D501BC0004F936 /* Staatliches-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */; };
 		F7E1652228C2BA63004089E9 /* CardListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E1652128C2BA63004089E9 /* CardListModel.swift */; };
 		F7E50B1728B0C02D00DCA3BF /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */; };
@@ -111,6 +121,16 @@
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		F7CA229128FA20220073721D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F7CA229728FA31040073721D /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		F7D09639290D08FE001339AA /* track2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track2.mp3; sourceTree = "<group>"; };
+		F7D0963A290D08FE001339AA /* track3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track3.mp3; sourceTree = "<group>"; };
+		F7D0963B290D08FE001339AA /* track4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track4.mp3; sourceTree = "<group>"; };
+		F7D0963C290D08FE001339AA /* track5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track5.mp3; sourceTree = "<group>"; };
+		F7D0963D290D08FE001339AA /* track6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track6.mp3; sourceTree = "<group>"; };
+		F7D0963E290D08FE001339AA /* track1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track1.mp3; sourceTree = "<group>"; };
+		F7D09645290D1023001339AA /* Dreamland.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dreamland.mp3; sourceTree = "<group>"; };
+		F7D09646290D1024001339AA /* TheGentlemen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TheGentlemen.mp3; sourceTree = "<group>"; };
+		F7D09647290D1024001339AA /* KingPorter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KingPorter.mp3; sourceTree = "<group>"; };
+		F7D09648290D1024001339AA /* Allegro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Allegro.mp3; sourceTree = "<group>"; };
 		F7D7D5AC28D501BC0004F936 /* Staatliches-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Staatliches-Regular.ttf"; sourceTree = "<group>"; };
 		F7E1652128C2BA63004089E9 /* CardListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListModel.swift; sourceTree = "<group>"; };
 		F7E50B1628B0C02D00DCA3BF /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
@@ -250,12 +270,17 @@
 		F781AD8328931C4F002993E7 /* AudioFX */ = {
 			isa = PBXGroup;
 			children = (
+				F7D0964D290D102A001339AA /* Background */,
+				F7D0963E290D08FE001339AA /* track1.mp3 */,
+				F7D09639290D08FE001339AA /* track2.mp3 */,
+				F7D0963A290D08FE001339AA /* track3.mp3 */,
+				F7D0963B290D08FE001339AA /* track4.mp3 */,
+				F7D0963C290D08FE001339AA /* track5.mp3 */,
+				F7D0963D290D08FE001339AA /* track6.mp3 */,
 				F7F0A7D828B9D2D400AD5EA3 /* magic.flac */,
 				F7F0A7D628B9D2CD00AD5EA3 /* shiny.flac */,
 				F7F0A7DC28B9D32600AD5EA3 /* padlock.wav */,
 				F7F0A7DA28B9D2DE00AD5EA3 /* lockSound.wav */,
-				F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */,
-				F7EDF98628A636D2009CA17B /* Snowfall.mp3 */,
 				F781AD7C28931C40002993E7 /* creepy.mp3 */,
 				F781AD8428931CC5002993E7 /* flip1.wav */,
 				F781AD8628934D67002993E7 /* flip2.wav */,
@@ -268,6 +293,19 @@
 				F781AD8D2893508E002993E7 /* tinyButtonPress.wav */,
 			);
 			path = AudioFX;
+			sourceTree = "<group>";
+		};
+		F7D0964D290D102A001339AA /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				F7EDF98728A636D2009CA17B /* Ceremonial.mp3 */,
+				F7EDF98628A636D2009CA17B /* Snowfall.mp3 */,
+				F7D09648290D1024001339AA /* Allegro.mp3 */,
+				F7D09645290D1023001339AA /* Dreamland.mp3 */,
+				F7D09647290D1024001339AA /* KingPorter.mp3 */,
+				F7D09646290D1024001339AA /* TheGentlemen.mp3 */,
+			);
+			path = Background;
 			sourceTree = "<group>";
 		};
 		F7D7D5A928D501380004F936 /* Fonts */ = {
@@ -339,20 +377,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7F0A7D928B9D2D400AD5EA3 /* magic.flac in Resources */,
+				F7D0963F290D08FE001339AA /* track2.mp3 in Resources */,
 				F7C2626228B1C62700A24724 /* Images.bundle in Resources */,
 				F781AD8E2893508E002993E7 /* tinyButtonPress.wav in Resources */,
 				F7D7D5AD28D501BC0004F936 /* Staatliches-Regular.ttf in Resources */,
+				F7D09643290D08FE001339AA /* track6.mp3 in Resources */,
 				F781AD8A28934FBA002993E7 /* matchIgnite.wav in Resources */,
+				F7D09649290D1024001339AA /* Dreamland.mp3 in Resources */,
+				F7D09640290D08FE001339AA /* track3.mp3 in Resources */,
 				F781AD8028931C40002993E7 /* victory.wav in Resources */,
 				F71193962890C5F000BC1DAA /* LaunchScreen.storyboard in Resources */,
+				F7D0964B290D1024001339AA /* KingPorter.mp3 in Resources */,
 				F71193932890C5F000BC1DAA /* Assets.xcassets in Resources */,
 				F7F0A7DB28B9D2DE00AD5EA3 /* lockSound.wav in Resources */,
 				F7EDF98928A636D2009CA17B /* Ceremonial.mp3 in Resources */,
+				F7D0964A290D1024001339AA /* TheGentlemen.mp3 in Resources */,
 				F781AD8728934D67002993E7 /* flip2.wav in Resources */,
+				F7D09644290D08FE001339AA /* track1.mp3 in Resources */,
 				F7F0A7DD28B9D32600AD5EA3 /* padlock.wav in Resources */,
 				F7F0A7E328B9DCBF00AD5EA3 /* flip3.wav in Resources */,
 				F781AD8528931CC5002993E7 /* flip1.wav in Resources */,
 				F7F0A7D728B9D2CD00AD5EA3 /* shiny.flac in Resources */,
+				F7D09642290D08FE001339AA /* track5.mp3 in Resources */,
+				F7D09641290D08FE001339AA /* track4.mp3 in Resources */,
+				F7D0964C290D1024001339AA /* Allegro.mp3 in Resources */,
 				F781AD7E28931C40002993E7 /* gameOver.wav in Resources */,
 				F781AD8128931C40002993E7 /* creepy.mp3 in Resources */,
 				F781AD7F28931C40002993E7 /* victory_old.wav in Resources */,

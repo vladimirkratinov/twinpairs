@@ -223,7 +223,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell: \(indexPath)")
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
@@ -263,7 +263,7 @@ extension CollectionController: CollectionViewCellDelegate {
             
             //audioFX:
             let shiny = AudioFileKey.shiny.rawValue
-            audioFX.playSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 //if locked:
@@ -276,7 +276,7 @@ extension CollectionController: CollectionViewCellDelegate {
                         
                         //audioFX2:
                         let magic = AudioFileKey.magic.rawValue
-                        self.audioFX.playAnotherSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
+                        self.audioFX.playSecondSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
                         
                         //Locker Model:
                         LockerModel.unlock(cell: cell, price: price, index: indexPath.item)
@@ -323,7 +323,7 @@ extension CollectionController: CollectionViewCellDelegate {
             
             //audioFX:
             let tinyButton = AudioFileKey.tinyButtonPress.rawValue
-            audioFX.playSoundFX(name: tinyButton, isMuted: Properties.soundMutedSwitcher)
+            audioFX.playFirstSoundFX(name: tinyButton, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 

@@ -35,10 +35,10 @@ struct Properties {
     static var gameIsOver = false
     
     //debug background Music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = true
+    static var muteBackgroundMusic = false
     
     //unlock price:
-    static var unlockPriceGlobal: Int = 50
+    static var unlockPriceGlobal: Int = 100
     
     //Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)
@@ -46,9 +46,6 @@ struct Properties {
     //Card View Configuration:
     static var rows = 3
     static var columns = 2
-    
-    //background switcher state:
-    static var backgroundGradientSwitcher = 1
     
     //CollectionView InfoButton message:
     static let infoMessage = "Game Version: ver 0.5 (stable build) \n Unlock items in Collections Shop! \n Collect 🪙 coins in Game Mode \n 10 match pairs = 1 coin \n New Game Modes coming soon!"
@@ -121,9 +118,9 @@ struct Properties {
     var isPaused = false
     
     //Animations timing block:
-    var flipAnimationTime = 0.4
-    var flipBackAnimationTime = 0.4
-    var timeToShowBothCards = 1.0
+    var flipAnimationTime =         0.4
+    var flipBackAnimationTime =     0.4
+    var timeToShowBothCards =       1.0
     var syncDisableAnimation: Double {
         flipBackAnimationTime + timeToShowBothCards
     }
@@ -134,9 +131,9 @@ struct Properties {
     static var vibrationMutedSwitcher = true
     
     //Settings labels:
-    static var defaultMusicButtonLabel = "ON"
-    static var defaultSoundButtonLabel = "ON"
-    static var defaultVibrationButtonLabel = "ON"
+    static var defaultMusicButtonLabel =        "ON"
+    static var defaultSoundButtonLabel =        "ON"
+    static var defaultVibrationButtonLabel =    "ON"
     
     //Settings buttons color:
     static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.green

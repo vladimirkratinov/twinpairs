@@ -21,7 +21,7 @@ class SettingsController {
         //set to have an access in viewDidLoad() to control volume level
         Properties.musicMutedSwitcher = muted
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:
@@ -38,6 +38,7 @@ class SettingsController {
             sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
             
             AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioFX.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
             Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.musicButton.rawValue)
@@ -50,6 +51,7 @@ class SettingsController {
             Properties.defaultMusicButtonLabel = "OFF"
             sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
             AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioFX.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         }
         print("Music is Muted: \(muted)")
     }
@@ -66,7 +68,7 @@ class SettingsController {
         Properties.soundMutedSwitcher = muted
         
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:
@@ -83,8 +85,8 @@ class SettingsController {
             sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
             
             //audio:
-            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
             Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.soundButton.rawValue)
@@ -99,8 +101,8 @@ class SettingsController {
             Properties.defaultSoundButtonLabel = "OFF"
             sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
             
-            AudioFX.audioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.additionalAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioFX.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         }
         print("Sound is Muted: \(muted)")
     }
@@ -117,7 +119,7 @@ class SettingsController {
         Properties.vibrationMutedSwitcher = muted
         
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:
@@ -146,40 +148,4 @@ class SettingsController {
         }
         print("Vibration is Muted: \(muted)")
     }
-    
-    //MARK: - Background Button Tapped:
-    
-    static func backgroundButtonTapped(sender: UIButton) {
-        let audioFX = AudioFX()
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        
-        //Changing color: first delete sublayer - than replace it with proper gradient
-        Properties.backgroundGradientSwitcher += 1
-//        changingBackgroundGradient()
-        
-        print(Properties.backgroundGradientSwitcher)
-    }
-    
-    //turned off
-//    static func changingBackgroundGradient() {
-//        if Properties.backgroundGradientSwitcher == 1 {
-//            GameInterface.backgroundImageView.layer.sublayers = nil
-//            GameInterface.backgroundImageView.setGradientBackground1()
-//
-//        } else if Properties.backgroundGradientSwitcher == 2 {
-//            GameInterface.backgroundImageView.layer.sublayers = nil
-//            GameInterface.backgroundImageView.setGradientBackground2()
-//
-//        } else if Properties.backgroundGradientSwitcher == 3 {
-//            GameInterface.backgroundImageView.layer.sublayers = nil
-//            GameInterface.backgroundImageView.setGradientBackground3()
-//        } else {
-//            Properties.backgroundGradientSwitcher = 1
-//            GameInterface.backgroundImageView.layer.sublayers = nil
-//            GameInterface.backgroundImageView.setGradientBackground1()
-//        }
-//    }
 }

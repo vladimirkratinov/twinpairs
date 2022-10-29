@@ -175,7 +175,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @objc func backTapped(sender: UIBarButtonItem) {
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         UIView.animate(withDuration: 1, animations:  {
             self.collectionView?.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -263,7 +263,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "DetailController") as? DetailController else { return }
         
