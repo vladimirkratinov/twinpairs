@@ -450,15 +450,9 @@ class MenuInterface: UIView {
             settingsButton.widthAnchor.constraint(equalToConstant: 40),
             settingsButton.heightAnchor.constraint(equalToConstant: 40),
             
-//            settingsButton.topAnchor.constraint(equalTo: hub.topAnchor, constant: 6),
-//            settingsButton.bottomAnchor.constraint(equalTo: hub.bottomAnchor, constant: -6),
-//            settingsButton.trailingAnchor.constraint(equalTo: hub.trailingAnchor, constant: -14),
-//            settingsButton.widthAnchor.constraint(equalToConstant: 40),
-//            settingsButton.heightAnchor.constraint(equalToConstant: 40),
-            
             //MARK: - Labels:
             
-            titleLabel.bottomAnchor.constraint(equalTo: menuView.bottomAnchor, constant: -45),
+            titleLabel.bottomAnchor.constraint(equalTo: menuView.layoutMarginsGuide.bottomAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),

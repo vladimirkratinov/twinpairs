@@ -16,23 +16,11 @@ class GameInterface: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.alpha = 0.5
+        label.alpha = 0.2
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.text = "settings"
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
-        return label
-    }()
-    
-    lazy var titleTipLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0.5
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.text = ""
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
         return label
     }()
     
@@ -102,7 +90,7 @@ class GameInterface: UIView {
         return hub
     }()
     
-    static var backgroundImageView: UIImageView = {
+     var backgroundImageView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.alpha = 1
         view.image = UIImage(named: FigmaKey.backgroundMenu.rawValue)
@@ -688,7 +676,7 @@ class GameInterface: UIView {
     
     func setupSubviews() {
         //Views:
-        gameView.addSubview(GameInterface.backgroundImageView)
+        gameView.addSubview(backgroundImageView)
         gameView.addSubview(buttonsView)
         gameView.addSubview(gameOverView)
         gameView.addSubview(plusCoinsAnimationsLabel)
@@ -705,7 +693,6 @@ class GameInterface: UIView {
         settingsView.addSubview(settingsBackground)
         settingsView.sendSubviewToBack(settingsBackground)
         settingsView.addSubview(titleLabel)
-        settingsView.addSubview(titleTipLabel)
         settingsView.addSubview(quitButton)
         settingsView.addSubview(rateButton)
         
@@ -782,6 +769,11 @@ class GameInterface: UIView {
         NSLayoutConstraint.activate([
             //MARK: - Settings:
             
+            backgroundImageView.topAnchor.constraint(equalTo: gameView.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor),
+            
             settingsView.leadingAnchor.constraint(equalTo: gameView.leadingAnchor, constant: 0),
             settingsView.trailingAnchor.constraint(equalTo: gameView.trailingAnchor, constant: 0),
             settingsView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300),
@@ -809,15 +801,10 @@ class GameInterface: UIView {
             settingsVibration.topAnchor.constraint(equalTo: settingsSound.bottomAnchor, constant: 23),
             settingsVibration.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 50),
             
-            titleLabel.bottomAnchor.constraint(equalTo: gameView.bottomAnchor, constant: -45),
+            titleLabel.bottomAnchor.constraint(equalTo: gameView.layoutMarginsGuide.bottomAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
-            
-            titleTipLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -20),
-            titleTipLabel.leadingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.leadingAnchor),
-            titleTipLabel.trailingAnchor.constraint(equalTo: gameView.layoutMarginsGuide.trailingAnchor),
-            titleTipLabel.centerXAnchor.constraint(equalTo: gameView.centerXAnchor),
             
             //MARK: - Settings Buttons:
             
@@ -865,16 +852,17 @@ class GameInterface: UIView {
 //            gameOverLabel.topAnchor.constraint(equalTo: gameOverView.topAnchor, constant: 99),
             gameOverLabel.centerXAnchor.constraint(equalTo: gameOverView.centerXAnchor),
             
-            statisticsView.topAnchor.constraint(equalTo: gameOverLabel.bottomAnchor, constant: 20),
-            statisticsView.bottomAnchor.constraint(greaterThanOrEqualTo: menuButton.topAnchor, constant: -50),
+            statisticsView.topAnchor.constraint(equalTo: gameOverLabel.bottomAnchor, constant: 10),
+//            statisticsView.bottomAnchor.constraint(greaterThanOrEqualTo: menuButton.topAnchor, constant: -50),
             statisticsView.leadingAnchor.constraint(equalTo: gameOverView.leadingAnchor, constant: 20),
             statisticsView.trailingAnchor.constraint(equalTo: gameOverView.trailingAnchor, constant: -20),
 
-            menuButton.topAnchor.constraint(equalTo: statisticsView.bottomAnchor, constant: 30),
+            menuButton.topAnchor.constraint(greaterThanOrEqualTo: statisticsView.bottomAnchor, constant: 10),
+            menuButton.bottomAnchor.constraint(greaterThanOrEqualTo: gameOverView.bottomAnchor, constant: -200),
 //            menuButton.bottomAnchor.constraint(equalTo: gameOverView.bottomAnchor, constant: -150),
             menuButton.centerXAnchor.constraint(equalTo: gameOverView.centerXAnchor),
             menuButton.widthAnchor.constraint(equalToConstant: 160),
-            menuButton.heightAnchor.constraint(equalToConstant: 60),
+            menuButton.heightAnchor.constraint(equalToConstant: 50),
 
             separatorLine.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor),
             separatorLine.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor),
@@ -951,19 +939,19 @@ class GameInterface: UIView {
             yourResultScoreView.leadingAnchor.constraint(equalTo: verticalRightSeparatorLine.trailingAnchor, constant: 5),
             yourResultScoreView.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor, constant: -10),
             
-            yourResultTimeLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor, constant: 2),
+            yourResultTimeLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
             yourResultTimeLabel.centerXAnchor.constraint(equalTo: yourResultTimeView.centerXAnchor),
             yourResultTimeLabel.bottomAnchor.constraint(equalTo: horizontalUpSeparatorLine.topAnchor),
             
-            yourResultPairsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor, constant: 2),
+            yourResultPairsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
             yourResultPairsLabel.centerXAnchor.constraint(equalTo: yourResultPairsView.centerXAnchor),
             yourResultPairsLabel.bottomAnchor.constraint(equalTo: horizontalUpSeparatorLine.topAnchor),
 
-            yourResultFlipsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor, constant: 2),
+            yourResultFlipsLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
             yourResultFlipsLabel.centerXAnchor.constraint(equalTo: yourResultFlipsView.centerXAnchor),
             yourResultFlipsLabel.bottomAnchor.constraint(equalTo: horizontalUpSeparatorLine.topAnchor),
             
-            yourResultScoreLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor, constant: 2),
+            yourResultScoreLabel.topAnchor.constraint(equalTo: yourResultLabel.bottomAnchor),
             yourResultScoreLabel.centerXAnchor.constraint(equalTo: yourResultScoreView.centerXAnchor),
             yourResultScoreLabel.bottomAnchor.constraint(equalTo: horizontalUpSeparatorLine.topAnchor),
 
@@ -1004,19 +992,19 @@ class GameInterface: UIView {
             bestResultScoreView.leadingAnchor.constraint(equalTo: verticalRightSeparatorLine.trailingAnchor, constant: 5),
             bestResultScoreView.trailingAnchor.constraint(equalTo: statisticsView.trailingAnchor, constant: -10),
             
-            bestResultTimeLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 2),
+            bestResultTimeLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
             bestResultTimeLabel.centerXAnchor.constraint(equalTo: bestResultTimeView.centerXAnchor),
             bestResultTimeLabel.bottomAnchor.constraint(equalTo: horizontalDownSeparatorLine.topAnchor),
             
-            bestResultPairsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 2),
+            bestResultPairsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
             bestResultPairsLabel.centerXAnchor.constraint(equalTo: bestResultPairsView.centerXAnchor),
             bestResultPairsLabel.bottomAnchor.constraint(equalTo: horizontalDownSeparatorLine.topAnchor),
 
-            bestResultFlipsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 2),
+            bestResultFlipsLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
             bestResultFlipsLabel.centerXAnchor.constraint(equalTo: bestResultFlipsView.centerXAnchor),
             bestResultFlipsLabel.bottomAnchor.constraint(equalTo: horizontalDownSeparatorLine.topAnchor),
 
-            bestResultScoreLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor, constant: 2),
+            bestResultScoreLabel.topAnchor.constraint(equalTo: bestResultLabel.bottomAnchor),
             bestResultScoreLabel.centerXAnchor.constraint(equalTo: bestResultScoreView.centerXAnchor),
             bestResultScoreLabel.bottomAnchor.constraint(equalTo: horizontalDownSeparatorLine.topAnchor),
             

@@ -54,10 +54,11 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
         
-        let restore = UIBarButtonItem(title: "Restore Purchases",
+        let restore = UIBarButtonItem(title: "Restore",
                                       style: .plain,
                                       target: self,
                                       action: #selector(restoreButtonTapped))
+        
         navigationItem.rightBarButtonItem = restore
         
         //observer:

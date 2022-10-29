@@ -10,10 +10,8 @@ import AVFoundation
 import StoreKit
 import MessageUI
 import StoreKit
-import CardSlider
 
-class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognizerDelegate {
-    var data = [Item]()
+class MenuController: UIViewController, UIGestureRecognizerDelegate {
     var prop = Properties()
     var audioFX = AudioFX()
     let menuInterface = MenuInterface()
@@ -62,9 +60,7 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
         print(Properties.tutorialList)
         
         //loadFiles:
-        for i in 1...Properties.listOfSets.count {
-            contentLoader.loadSet(setNumber: i)
-        }
+        loadFiles()
         
         //load Audio: (fix background music interruption)
         do {
@@ -143,6 +139,14 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
             print("audio is playing")
         }
 
+    }
+    
+    //MARK: - Load Files:
+    
+    func loadFiles() {
+        for i in 1...Properties.listOfSets.count {
+            contentLoader.loadSet(setNumber: i)
+        }
     }
     
     //MARK: - PlayButtonTapped:
@@ -507,64 +511,8 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-            
-            
-//            presentCardSliderController()
         default: return
         }
     }
-    
-
 }
 
-extension MenuController: CardSliderDismissDelegate {
-
-    struct Item: CardSliderItem {
-        var image: UIImage
-        var rating: Int?
-        var title: String
-        var subtitle: String?
-        var description: String?
-    }
-
-    func didTapDismissButton() {
-        print("delegate didTapDismissButton fired")
-        self.dismiss(animated: true)
-    }
-    
-    //CardSlider protocol:
-    
-    func item(for index: Int) -> CardSlider.CardSliderItem {
-        return data[index]
-    }
-    
-    func numberOfItems() -> Int {
-        return data.count
-    }
-    
-    func loadCardSlider() {
-        data.append(Item(image: UIImage(named: FigmaKey.backgroundGame.rawValue)!,
-                         title: "Title: Slide 1",
-                         subtitle: "subtitle here",
-                         description: "description of this slide"))
-        data.append(Item(image: UIImage(named: FigmaKey.backgroundMenu.rawValue)!,
-                         title: "Title: Slide 2",
-                         subtitle: "subtitle here",
-                         description: "description of this slide"))
-        data.append(Item(image: UIImage(named: FigmaKey.backgroundGameOver.rawValue)!,
-                         title: "Title: Slide 3",
-                         subtitle: "subtitle here",
-                         description: "description of this slide"))
-        
-//        present CardSlider:
-        presentCardSliderController()
-    }
-    
-    func presentCardSliderController() {
-        let vc = CardSliderViewController.with(dataSource: self)
-        vc.dismissDelegate = self
-        vc.title = "Tutorial"
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-}

@@ -264,7 +264,7 @@ class ShopInterface: UIView {
         button.isEnabled = true
         button.isUserInteractionEnabled = true
         button.alpha = 1
-        button.setTitle("restore purchases", for: .normal)
+        button.setTitle("restore", for: .normal)
         button.setImage(UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
         button.setTitleColor(UIColor.black, for: .normal)

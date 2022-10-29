@@ -158,28 +158,28 @@ class SettingsController {
         
         //Changing color: first delete sublayer - than replace it with proper gradient
         Properties.backgroundGradientSwitcher += 1
-        changingBackgroundGradient()
+//        changingBackgroundGradient()
         
         print(Properties.backgroundGradientSwitcher)
     }
     
     //turned off
-    static func changingBackgroundGradient() {
-        if Properties.backgroundGradientSwitcher == 1 {
-            GameInterface.backgroundImageView.layer.sublayers = nil
-            GameInterface.backgroundImageView.setGradientBackground1()
- 
-        } else if Properties.backgroundGradientSwitcher == 2 {
-            GameInterface.backgroundImageView.layer.sublayers = nil
-            GameInterface.backgroundImageView.setGradientBackground2()
-
-        } else if Properties.backgroundGradientSwitcher == 3 {
-            GameInterface.backgroundImageView.layer.sublayers = nil
-            GameInterface.backgroundImageView.setGradientBackground3()
-        } else {
-            Properties.backgroundGradientSwitcher = 1
-            GameInterface.backgroundImageView.layer.sublayers = nil
-            GameInterface.backgroundImageView.setGradientBackground1()
-        }
-    }
+//    static func changingBackgroundGradient() {
+//        if Properties.backgroundGradientSwitcher == 1 {
+//            GameInterface.backgroundImageView.layer.sublayers = nil
+//            GameInterface.backgroundImageView.setGradientBackground1()
+//
+//        } else if Properties.backgroundGradientSwitcher == 2 {
+//            GameInterface.backgroundImageView.layer.sublayers = nil
+//            GameInterface.backgroundImageView.setGradientBackground2()
+//
+//        } else if Properties.backgroundGradientSwitcher == 3 {
+//            GameInterface.backgroundImageView.layer.sublayers = nil
+//            GameInterface.backgroundImageView.setGradientBackground3()
+//        } else {
+//            Properties.backgroundGradientSwitcher = 1
+//            GameInterface.backgroundImageView.layer.sublayers = nil
+//            GameInterface.backgroundImageView.setGradientBackground1()
+//        }
+//    }
 }
