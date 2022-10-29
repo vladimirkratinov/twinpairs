@@ -279,7 +279,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best180Easy.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "3m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best180Easy.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best180Easy.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best180Easy.score)
@@ -303,7 +303,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best180Medium.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "3m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best180Medium.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best180Medium.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best180Medium.score)
@@ -328,7 +328,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best180Hard.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "3m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best180Hard.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best180Hard.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best180Hard.score)
@@ -360,7 +360,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best300Easy.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "5m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best300Easy.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best300Easy.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best300Easy.score)
@@ -384,7 +384,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best300Medium.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "5m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best300Medium.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best300Medium.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best300Medium.score)
@@ -409,7 +409,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best300Hard.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "5m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best300Hard.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best300Hard.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best300Hard.score)
@@ -441,7 +441,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best600Easy.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "10m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best600Easy.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best600Easy.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best600Easy.score)
@@ -465,7 +465,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best600Medium.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "10m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best600Medium.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best600Medium.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best600Medium.score)
@@ -490,7 +490,7 @@ extension GameController {
                     
                     //update UI:
                     DispatchQueue.main.async {
-                        self.gameInterface.bestResultTimeViewLabel.text =  String(best600Hard.time)
+                        self.gameInterface.bestResultTimeViewLabel.text =  "10m."
                         self.gameInterface.bestResultFlipsViewLabel.text = String(best600Hard.flips)
                         self.gameInterface.bestResultPairsViewLabel.text = String(best600Hard.pairs)
                         self.gameInterface.bestResultScoreViewLabel.text = String(best600Hard.score)
@@ -507,7 +507,13 @@ extension GameController {
 
         //Update score label:
         DispatchQueue.main.async {
-            self.gameInterface.yourResultTimeViewLabel.text =   String(Properties.standardTimeCounter)
+            switch Properties.standardTimeCounter {
+            case 180: self.gameInterface.yourResultTimeViewLabel.text =   "3m."
+            case 300: self.gameInterface.yourResultTimeViewLabel.text =   "5m."
+            case 600: self.gameInterface.yourResultTimeViewLabel.text =   "10m."
+            default: return
+            }
+//            self.gameInterface.yourResultTimeViewLabel.text =   String(Properties.standardTimeCounter)
             self.gameInterface.yourResultFlipsViewLabel.text =  String(self.gameInterface.flipsCounter)
             self.gameInterface.yourResultPairsViewLabel.text =  String(self.gameInterface.pairsCounter)
             self.gameInterface.yourResultScoreViewLabel.text =  String(result.score)
@@ -520,21 +526,21 @@ extension GameController {
                     
                 case DifficultyKey.easy.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best180Easy.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "3m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best180Easy.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best180Easy.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best180Easy.score)
                     
                 case DifficultyKey.medium.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best180Medium.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "3m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best180Medium.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best180Medium.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best180Medium.score)
                     
                 case DifficultyKey.hard.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best180Hard.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "3m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best180Hard.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best180Hard.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best180Hard.score)
@@ -547,21 +553,21 @@ extension GameController {
                     
                 case DifficultyKey.easy.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best300Easy.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "5m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best300Easy.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best300Easy.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best300Easy.score)
                     
                 case DifficultyKey.medium.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best300Medium.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "5m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best300Medium.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best300Medium.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best300Medium.score)
                     
                 case DifficultyKey.hard.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best300Hard.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "5m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best300Hard.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best300Hard.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best300Hard.score)
@@ -574,21 +580,21 @@ extension GameController {
                     
                 case DifficultyKey.easy.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best600Easy.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "10m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best600Easy.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best600Easy.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best600Easy.score)
                     
                 case DifficultyKey.medium.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best600Medium.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "10m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best600Medium.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best600Medium.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best600Medium.score)
                     
                 case DifficultyKey.hard.rawValue:
                     
-                    self.gameInterface.bestResultTimeViewLabel.text =   String(best600Hard.time)
+                    self.gameInterface.bestResultTimeViewLabel.text =   "10m."
                     self.gameInterface.bestResultFlipsViewLabel.text =  String(best600Hard.flips)
                     self.gameInterface.bestResultPairsViewLabel.text =  String(best600Hard.pairs)
                     self.gameInterface.bestResultScoreViewLabel.text =  String(best600Hard.score)

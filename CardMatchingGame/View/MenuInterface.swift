@@ -243,14 +243,17 @@ class MenuInterface: UIView {
         let settingsButton = UIButton()
         settingsButton.alpha = 1
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.setImage(UIImage(named: ImageKey.SettingsButton.rawValue), for: .normal)
+//        settingsButton.setImage(UIImage(named: ImageKey.SettingsButton.rawValue), for: .normal)
+        settingsButton.setImage(UIImage(named: "gears"), for: .normal)
+        settingsButton.tintColor = .black
         settingsButton.isUserInteractionEnabled = true
-        settingsButton.layer.shadowColor = UIColor.black.cgColor
-        settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        settingsButton.layer.shadowRadius = 1
-        settingsButton.layer.shadowOpacity = 1.0
-        settingsButton.layer.shouldRasterize = true
-        settingsButton.layer.rasterizationScale = UIScreen.main.scale
+//        settingsButton.imageEdgeInsets = UIEdgeInsets(top: -10, left: -30, bottom: -10, right: -30)
+//        settingsButton.layer.shadowColor = UIColor.black.cgColor
+//        settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        settingsButton.layer.shadowRadius = 1
+//        settingsButton.layer.shadowOpacity = 1.0
+//        settingsButton.layer.shouldRasterize = true
+//        settingsButton.layer.rasterizationScale = UIScreen.main.scale
         return settingsButton
     }()
     
@@ -440,12 +443,18 @@ class MenuInterface: UIView {
     
             coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
             coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
-
+            
             settingsButton.topAnchor.constraint(equalTo: hub.topAnchor, constant: 6),
             settingsButton.bottomAnchor.constraint(equalTo: hub.bottomAnchor, constant: -6),
             settingsButton.trailingAnchor.constraint(equalTo: hub.trailingAnchor, constant: -14),
             settingsButton.widthAnchor.constraint(equalToConstant: 40),
             settingsButton.heightAnchor.constraint(equalToConstant: 40),
+            
+//            settingsButton.topAnchor.constraint(equalTo: hub.topAnchor, constant: 6),
+//            settingsButton.bottomAnchor.constraint(equalTo: hub.bottomAnchor, constant: -6),
+//            settingsButton.trailingAnchor.constraint(equalTo: hub.trailingAnchor, constant: -14),
+//            settingsButton.widthAnchor.constraint(equalToConstant: 40),
+//            settingsButton.heightAnchor.constraint(equalToConstant: 40),
             
             //MARK: - Labels:
             
@@ -479,6 +488,7 @@ class MenuInterface: UIView {
             
             //MARK: - Buttons:
             
+//            playButton.topAnchor.constraint(equalTo: hub.bottomAnchor, constant: 50),
             playButton.bottomAnchor.constraint(equalTo: difficultyButton.topAnchor, constant: -40),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 80), // 50
@@ -490,7 +500,7 @@ class MenuInterface: UIView {
             difficultyButton.widthAnchor.constraint(equalToConstant: 137),
             
             timeModeButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            timeModeButton.centerYAnchor.constraint(equalTo: menuView.centerYAnchor),
+            timeModeButton.centerYAnchor.constraint(equalTo: menuView.centerYAnchor, constant: -30),
             timeModeButton.heightAnchor.constraint(equalToConstant: 57),
             timeModeButton.widthAnchor.constraint(equalToConstant: 137),
 

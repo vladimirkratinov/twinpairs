@@ -314,6 +314,7 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
             menuInterface.playButton.isHidden =                     true
             menuInterface.difficultyButton.isHidden =               true
             menuInterface.timeModeButton.isHidden =                 true
+            menuInterface.tutorialButton.isHidden =                 true
             menuInterface.titleLabel.text = "settings"
    
         } else {
@@ -325,6 +326,7 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
             menuInterface.playButton.isHidden =                     false
             menuInterface.difficultyButton.isHidden =               false
             menuInterface.timeModeButton.isHidden =                 false
+            menuInterface.tutorialButton.isHidden =                 false
             menuInterface.titleLabel.text = "Twin Pairs"
         }
         
