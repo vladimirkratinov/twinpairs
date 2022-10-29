@@ -138,6 +138,7 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
             AudioFX.backgroundMusic?.play()
             print("audio is playing")
         }
+
     }
     
     //MARK: - PlayButtonTapped:

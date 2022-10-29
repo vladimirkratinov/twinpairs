@@ -99,19 +99,16 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Welcome!"
-        
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .black
-        
+
         //transparent NavigationBar:
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
+        navigationController?.isToolbarHidden = false
         navigationController?.view.backgroundColor = .clear
+        navigationController?.toolbar.tintColor = .black
     }
     
     override func viewDidLayoutSubviews() {
@@ -123,16 +120,16 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //enable gestures:
+        title = ""
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.toolbar.isHidden = true
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.backItem?.backButtonTitle = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     

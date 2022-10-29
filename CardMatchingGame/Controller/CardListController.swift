@@ -34,6 +34,13 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     var orderedNoDuplicates = [String]()
     var selectedSetName = String()
     
+    var collectionContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(frame: .zero)
         backgroundImageView.alpha = 1
@@ -42,6 +49,52 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
     }()
+    
+    override func loadView() {
+        super.loadView()
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 0
+
+//        layout.itemSize = CGSize(width: (view.frame.width/3), height: (view.frame.height/4.2))
+        
+        let width = (self.view.frame.size.width - 10) / 2 //some width
+        let height = width * 1.5 //ratio
+        
+        layout.itemSize = CGSize(width: width, height: height)
+
+        collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        guard let collectionView = collectionView else { return }
+        
+        collectionView.register(CardListViewCell.self, forCellWithReuseIdentifier: CardListViewCell.identifier)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.isPagingEnabled = false
+        collectionView.isScrollEnabled = true
+        collectionView.isUserInteractionEnabled = true
+        collectionView.alwaysBounceVertical = false
+        collectionView.backgroundColor = .clear
+        
+        view.addSubview(collectionContainerView)
+        collectionContainerView.addSubview(backgroundImageView)
+        collectionContainerView.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            collectionView.trailingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+        ])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,76 +110,42 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.view.backgroundColor = .clear
         navigationController?.toolbar.tintColor = .black
 
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-
-        layout.itemSize = CGSize(width: (view.frame.width/3), height: (view.frame.height/4.2))
-
-        collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        guard let collectionView = collectionView else { return }
-        
-        collectionView.register(CardListViewCell.self, forCellWithReuseIdentifier: CardListViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.frame = view.bounds
-        collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = true                      //stop scrollable
-        collectionView.backgroundColor = .clear
-        collectionView.layer.zPosition = 0
-        
         configureAnimation()
 
         orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
         print(orderedNoDuplicates.count)
-        
-        view.addSubview(backgroundImageView)
-        view.addSubview(collectionView)
+ 
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-    }
-    
+
     //MARK: - ViewDidAppear:
     
     //ViewAnimator:
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        title = ""
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.isHidden = false
+        
         //slide animation only after CollectionView:
         if !animationHasBeenShown {
             let fromAnimation = AnimationType.from(direction: .bottom, offset: 40)
             collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             animationHasBeenShown = true
         }
-        
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        title = ""
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.toolbar.isHidden = true
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView?.animateVisibleCells()
+        
+        //slide animation only after CollectionView:
+        if !animationHasBeenShown {
+            let fromAnimation = AnimationType.from(direction: .bottom, offset: 40)
+            collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
+            animationHasBeenShown = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -81,20 +81,16 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //enable gestures:
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
         title = ""
-//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.tintColor = .black
-        
-        navigationController?.toolbar.isHidden = true
         navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.backItem?.backButtonTitle = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - cardSet Image Buttons:

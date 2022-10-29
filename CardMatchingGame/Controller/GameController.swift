@@ -349,15 +349,15 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     }
 
                     //animation:
-                    UIView.transition(with: Properties.activatedButtons.last!, duration: 0.7, options: .transitionCurlUp, animations: {
-                        Properties.activatedButtons.last?.layer.cornerRadius = 35
+                    UIView.transition(with: Properties.activatedButtons.last!, duration: 0.7, options: .transitionCrossDissolve, animations: {
+//                        Properties.activatedButtons.last?.layer.cornerRadius = 35
                         Properties.activatedButtons.last?.alpha = 0.3
                         Properties.activatedButtons.last?.isEnabled = false
                         Properties.activatedButtons.last?.pulsateRemove()
                     })
                     
-                    UIView.transition(with: Properties.activatedButtons.first!, duration: 0.7, options: .transitionCurlUp, animations: {
-                        Properties.activatedButtons.first?.layer.cornerRadius = 35
+                    UIView.transition(with: Properties.activatedButtons.first!, duration: 0.7, options: .transitionCrossDissolve, animations: {
+//                        Properties.activatedButtons.first?.layer.cornerRadius = 35
                         Properties.activatedButtons.first?.alpha = 0.3
                         Properties.activatedButtons.first?.isEnabled = false
                         Properties.activatedButtons.first?.pulsateRemove()

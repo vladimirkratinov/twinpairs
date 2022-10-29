@@ -24,7 +24,7 @@ class ShopInterface: UIView {
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.isUserInteractionEnabled = true
             scrollView.isScrollEnabled = true
-            scrollView.alwaysBounceVertical = true
+            scrollView.alwaysBounceVertical = false
 //            scrollView.backgroundColor = .orange
             return scrollView
         }()

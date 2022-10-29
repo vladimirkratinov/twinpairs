@@ -138,15 +138,16 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //enable gestures:
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         title = ""
-//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.toolbar.isHidden = true
         navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.backItem?.backButtonTitle = ""
+        
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.toolbar.isHidden = true
+//        navigationController?.setNavigationBarHidden(false, animated: false)
         
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()

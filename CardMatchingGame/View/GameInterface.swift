@@ -31,7 +31,7 @@ class GameInterface: UIView {
         label.alpha = 0.5
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.text = "(tap to dismiss)"
+        label.text = ""
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
         return label
     }()
@@ -867,7 +867,7 @@ class GameInterface: UIView {
             buttonsView.topAnchor.constraint(equalTo: hub.bottomAnchor, constant: 10),
             buttonsView.leadingAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             buttonsView.trailingAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            buttonsView.bottomAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            buttonsView.bottomAnchor.constraint(equalTo: gameView.bottomAnchor, constant: -20),
             
             //MARK: - GameOverView:
             
