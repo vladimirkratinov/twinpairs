@@ -48,6 +48,18 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         //Gesture recognizer:
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
+        //transparent NavigationBar:
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        
+        let restore = UIBarButtonItem(title: "Restore Purchases",
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(restoreButtonTapped))
+        navigationItem.rightBarButtonItem = restore
+        
         //observer:
         SKPaymentQueue.default().add(self)
         
@@ -68,7 +80,21 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //enable gestures:
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        title = ""
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
+        
+        navigationController?.toolbar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //MARK: - cardSet Image Buttons:
@@ -437,9 +463,9 @@ class ShopController: UIViewController, UIGestureRecognizerDelegate, SKPaymentTr
         }
     }
     
-    @objc func restoreButtonTapped(_ sender: UIButton) {
+    @objc func restoreButtonTapped(_ sender: Any) {
         //animation:
-        sender.bounce(sender)
+//        (sender as UIButton).bounce(sender)
         //audioFX:
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         print("restore button tapped!")

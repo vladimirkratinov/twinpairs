@@ -45,37 +45,25 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.backgroundColor = palette.imperialPrimer
-//        let name = Properties.selectedSetName
-//        title = "\(name)"
-//
-        navigationController?.isToolbarHidden = true
+
+        //Gesture recognizer:
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+        //transparent NavigationBar:
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.isToolbarHidden = false
+        navigationController?.view.backgroundColor = .clear
         navigationController?.toolbar.tintColor = .black
-        navigationController?.toolbar.barTintColor = palette.wildCarribeanGrean
-        navigationController?.toolbar.layer.zPosition = 1
-        
-        
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = -10
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        
-        //vertical View x6: (standard)
-//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/4))
-        
-        //vertical View x2 (looks good)
-//        layout.itemSize = CGSize(width: (view.frame.width/1.3), height: (view.frame.height/2.1))
-        
-        
+
         layout.itemSize = CGSize(width: (view.frame.width/3), height: (view.frame.height/4.2))
 
-        //horisontal View x6:
-//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/2.5))
-        
-        //horisontal View x4:
-//        layout.itemSize = CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.size.width/2)-4, height: (view.safeAreaLayoutGuide.layoutFrame.size.height/3)-4)
-        
         collectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: layout)
         
         guard let collectionView = collectionView else { return }
@@ -85,23 +73,11 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.frame = view.bounds
         collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = false                      //stop scrollable
+        collectionView.isPagingEnabled = true                      //stop scrollable
         collectionView.backgroundColor = .clear
         collectionView.layer.zPosition = 0
         
         configureAnimation()
-        
-        var tabPanel = [UIBarButtonItem]()
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-
-        //title:
-        selectButton = UIBarButtonItem(title: CardListController.selectedString, style: .plain, target: self, action: #selector(selectTapped))
-        
-        tabPanel.append(space)
-        tabPanel.append(selectButton)
-        tabPanel.append(space)
-        
-        toolbarItems = tabPanel
 
         orderedNoDuplicates = NSOrderedSet(array: Properties.selectedCollection).map ({ $0 as! String})
         print(orderedNoDuplicates.count)
@@ -114,7 +90,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLayoutSubviews()
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -137,18 +113,25 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             collectionView?.animate(animations: [fromAnimation], delay: 0, duration: 0.5)
             animationHasBeenShown = true
         }
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        title = ""
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.toolbar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         collectionView?.animateVisibleCells()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //DON'T TOUCH THIS!:
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - SelectTapped:

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90765A0D54793B202D0CD5AB /* Pods_CardMatchingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA09A4659C693D8F8D53DF9 /* Pods_CardMatchingGame.framework */; };
 		F700123328AEED89007DEA94 /* CardListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123228AEED89007DEA94 /* CardListViewCell.swift */; };
 		F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F700123428AEEDA1007DEA94 /* CardListController.swift */; };
 		F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71193892890C5EF00BC1DAA /* AppDelegate.swift */; };
@@ -22,6 +23,8 @@
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
 		F72ED08628B9345F007FE584 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ED08528B9345F007FE584 /* AlertController.swift */; };
+		F733F029290C928B0013883E /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F028290C928B0013883E /* TutorialController.swift */; };
+		F733F02B290C92E40013883E /* TutorialViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F02A290C92E40013883E /* TutorialViewCell.swift */; };
 		F75CEBF528E65AC9001A646D /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75CEBF428E65AC9001A646D /* ShopController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
@@ -63,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		8439CCBB8C3DFF5EE3EFDEE3 /* Pods-CardMatchingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.debug.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.debug.xcconfig"; sourceTree = "<group>"; };
+		EBA09A4659C693D8F8D53DF9 /* Pods_CardMatchingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardMatchingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05A91FD5F7828A56AF9DC38 /* Pods-CardMatchingGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardMatchingGame.release.xcconfig"; path = "Target Support Files/Pods-CardMatchingGame/Pods-CardMatchingGame.release.xcconfig"; sourceTree = "<group>"; };
 		F700123228AEED89007DEA94 /* CardListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewCell.swift; sourceTree = "<group>"; };
 		F700123428AEEDA1007DEA94 /* CardListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
 		F72ED08528B9345F007FE584 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		F733F028290C928B0013883E /* TutorialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
+		F733F02A290C92E40013883E /* TutorialViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewCell.swift; sourceTree = "<group>"; };
 		F75CEBF428E65AC9001A646D /* ShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7CA229228FA20220073721D /* StoreKit.framework in Frameworks */,
+				90765A0D54793B202D0CD5AB /* Pods_CardMatchingGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				F7CA229128FA20220073721D /* StoreKit.framework */,
+				EBA09A4659C693D8F8D53DF9 /* Pods_CardMatchingGame.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,6 +202,7 @@
 				F711BF28289238C300C3E0E8 /* MenuController.swift */,
 				F711938D2890C5EF00BC1DAA /* GameController.swift */,
 				F774A79B28C6AC3000AAB936 /* HardcoreController.swift */,
+				F733F028290C928B0013883E /* TutorialController.swift */,
 				F72837BF28ADA788000B9567 /* CollectionController.swift */,
 				F700123428AEEDA1007DEA94 /* CardListController.swift */,
 				F72837C328ADC167000B9567 /* DetailController.swift */,
@@ -209,6 +218,7 @@
 			children = (
 				F7E53529289F6AE10019B770 /* MenuInterface.swift */,
 				F760AF6A289C6EA2007ABE11 /* GameInterface.swift */,
+				F733F02A290C92E40013883E /* TutorialViewCell.swift */,
 				F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */,
 				F700123228AEED89007DEA94 /* CardListViewCell.swift */,
 				F72837C528ADC2E8000B9567 /* DetailInterface.swift */,
@@ -402,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */,
+				F733F02B290C92E40013883E /* TutorialViewCell.swift in Sources */,
 				F7F2343828B5B609005C75A4 /* LockerModel.swift in Sources */,
 				F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */,
 				F72ED08628B9345F007FE584 /* AlertController.swift in Sources */,
@@ -410,6 +421,7 @@
 				F781AD7828931921002993E7 /* AudioFX.swift in Sources */,
 				F711938E2890C5EF00BC1DAA /* GameController.swift in Sources */,
 				F711939E28910ECE00BC1DAA /* Extensions.swift in Sources */,
+				F733F029290C928B0013883E /* TutorialController.swift in Sources */,
 				F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */,
 				F764E17428B478BE00F4575F /* SettingsController.swift in Sources */,
 				F711938A2890C5EF00BC1DAA /* AppDelegate.swift in Sources */,
@@ -578,7 +590,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 905;
+				CURRENT_PROJECT_VERSION = 906;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
@@ -613,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 905;
+				CURRENT_PROJECT_VERSION = 906;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;

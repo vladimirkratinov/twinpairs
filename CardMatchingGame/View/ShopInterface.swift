@@ -76,7 +76,7 @@ class ShopInterface: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.text = "card sets:"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 55)
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 40)
         return label
     }()
     
@@ -88,7 +88,7 @@ class ShopInterface: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.text = "card covers:"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 55)
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 40)
         return label
     }()
     
@@ -308,8 +308,8 @@ class ShopInterface: UIView {
         contentBlock2.addSubview(coverSet2ImageButton)
         contentBlock2.addSubview(coverSet2UnlockButton)
         
-        scrollView.addSubview(restoreButton)
-        scrollView.bringSubviewToFront(restoreButton)
+//        scrollView.addSubview(restoreButton)
+//        scrollView.bringSubviewToFront(restoreButton)
         
     }
     
@@ -424,8 +424,8 @@ class ShopInterface: UIView {
             contentBlock2.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -10),
             contentBlock2.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
             
-            restoreButton.topAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: 40),
-            restoreButton.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
+//            restoreButton.topAnchor.constraint(equalTo: contentBlock2.bottomAnchor, constant: 40),
+//            restoreButton.centerXAnchor.constraint(equalTo: contentBlock2.centerXAnchor),
             
             verticalSeparatorInBlock2.topAnchor.constraint(equalTo: contentBlock2.topAnchor),
             verticalSeparatorInBlock2.bottomAnchor.constraint(equalTo: contentBlock2.bottomAnchor),

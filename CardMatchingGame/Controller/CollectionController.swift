@@ -7,7 +7,6 @@
 
 import UIKit
 import Gemini
-import ViewAnimator
 
 class CollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -86,11 +85,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         
         view.addSubview(collectionContainerView)
         collectionContainerView.addSubview(backgroundImageView)
-        collectionContainerView.addSubview(hub)
-        collectionContainerView.addSubview(coinLabel)
         collectionContainerView.addSubview(collectionView)
-        collectionContainerView.bringSubviewToFront(hub)
-        collectionContainerView.bringSubviewToFront(coinLabel)
+        
+//        collectionContainerView.addSubview(hub)
+//        collectionContainerView.addSubview(coinLabel)
+//        collectionContainerView.bringSubviewToFront(hub)
+//        collectionContainerView.bringSubviewToFront(coinLabel)
 
         NSLayoutConstraint.activate([
             collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -98,15 +98,16 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            hub.leadingAnchor.constraint(equalTo: collectionContainerView.leadingAnchor),
-            hub.trailingAnchor.constraint(equalTo: collectionContainerView.trailingAnchor),
-            hub.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor, constant: 0),
-            hub.widthAnchor.constraint(equalTo: collectionContainerView.widthAnchor),
+//            hub.leadingAnchor.constraint(equalTo: collectionContainerView.leadingAnchor),
+//            hub.trailingAnchor.constraint(equalTo: collectionContainerView.trailingAnchor),
+//            hub.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor, constant: 0),
+//            hub.widthAnchor.constraint(equalTo: collectionContainerView.widthAnchor),
+//
+//            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
+//            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
             
-            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
-            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
-            
-            collectionView.topAnchor.constraint(equalTo: coinLabel.bottomAnchor),
+//            collectionView.topAnchor.constraint(equalTo: hub.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             collectionView.trailingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
@@ -120,10 +121,12 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.interactivePopGestureRecognizer?.delegate = self
 
         //transparent NavigationBar:
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.isToolbarHidden = false
+        navigationController?.view.backgroundColor = .clear
+        navigationController?.toolbar.tintColor = .black
     }
     
     override func viewDidLayoutSubviews() {
@@ -137,9 +140,13 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidAppear(animated)
         //enable gestures:
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        title = ""
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.toolbar.isHidden = true
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()
@@ -148,7 +155,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     //MARK: - InfoTapped:

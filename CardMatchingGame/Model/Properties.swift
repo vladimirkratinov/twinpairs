@@ -35,7 +35,7 @@ struct Properties {
     static var gameIsOver = false
     
     //debug background Music:
-    static var generalBackgroundSoundIsMutedForTestPurposes = false
+    static var generalBackgroundSoundIsMutedForTestPurposes = true
     
     //unlock price:
     static var unlockPriceGlobal: Int = 50
@@ -63,6 +63,8 @@ struct Properties {
                              "Canada",
                              "Ukraine"
     ]
+    
+    static let tutorialList = ["set1_food01", "set1_food02", "set1_food03"]
     
     //Shop unlocked list:
     static var cardSet1isUnlocked = defaults.bool(forKey: "cardSet1isUnlocked")

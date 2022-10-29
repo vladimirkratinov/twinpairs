@@ -8,7 +8,7 @@
 import UIKit
 import ViewAnimator
 
-class DetailController: UIViewController {
+class DetailController: UIViewController, UIGestureRecognizerDelegate {
     
     let detailInterface = DetailInterface()
     let audioFX = AudioFX()
@@ -28,6 +28,19 @@ class DetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = ""
+        
+        //Gesture recognizer:
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+        //transparent NavigationBar:
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.isToolbarHidden = false
+        navigationController?.view.backgroundColor = .clear
+        navigationController?.toolbar.tintColor = .black
         
         //gesture observer:
         NotificationCenter.default.addObserver(self,
@@ -51,6 +64,24 @@ class DetailController: UIViewController {
             
             detailInterface.detailImageButton.setImage(image, for: .normal)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        title = ""
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.toolbar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - Card Tapped:

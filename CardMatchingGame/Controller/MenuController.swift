@@ -10,10 +10,10 @@ import AVFoundation
 import StoreKit
 import MessageUI
 import StoreKit
+import CardSlider
 
-class MenuController: UIViewController {
-    //SKPaymentTransactionObserver
-    
+class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognizerDelegate {
+    var data = [Item]()
     var prop = Properties()
     var audioFX = AudioFX()
     let menuInterface = MenuInterface()
@@ -36,6 +36,7 @@ class MenuController: UIViewController {
         menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
         menuInterface.shopButton.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
+        menuInterface.tutorialButton.addTarget(self, action: #selector(tutorialButtonTapped), for: .touchUpInside)
         menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
         menuInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
@@ -49,7 +50,13 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //Gesture recognizer:
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         
+        //CardSlider Library:
+//        loadCardSlider()
+
         //loadFiles:
         for i in 1...Properties.listOfSets.count {
             contentLoader.loadSet(setNumber: i)
@@ -114,10 +121,6 @@ class MenuController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //background:
-//        menuInterface.setGradientBackground()
-        //animation:
-//        menuInterface.backgroundImageView.pulsateSlow()
         //update Coins label:
         menuInterface.coins = Properties.coins
         
@@ -127,9 +130,6 @@ class MenuController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        
         //updateSettingsUIButtonsColor:
         updateSettingsUIButtonsColor()
         
@@ -149,39 +149,6 @@ class MenuController: UIViewController {
         audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         //transition:
         transitionToVC(duration: 0.2, identifier: "GameController")
-    }
-    
-    //MARK: - HardcoreButtonTapped:
-    
-    @objc func hardcoreButtonTapped(_ sender: UIButton) {
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        //transition:
-//        transitionToVC(duration: 0.2, identifier: "HardcoreController")
-    }
-    
-    //MARK: - CollectionButtonTapped:
-    
-    @objc func collectionButtonTapped(_ sender: UIButton) {
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        //transition:
-        transitionToVC(duration: 0.2, identifier: "CollectionController")
-    }
-    
-    //MARK: - ShopButtonTapped:
-    
-    @objc func shopButtonTapped(_ sender: UIButton) {
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        //transition:
-        transitionToVC(duration: 0.2, identifier: "ShopController")
     }
     
     //MARK: - DifficultyButtonTapped:
@@ -242,6 +209,39 @@ class MenuController: UIViewController {
         }
     }
     
+    //MARK: - CollectionButtonTapped:
+    
+    @objc func collectionButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+        transitionToVC(duration: 0.2, identifier: "CollectionController")
+    }
+    
+    //MARK: - ShopButtonTapped:
+    
+    @objc func shopButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+        transitionToVC(duration: 0.2, identifier: "ShopController")
+    }
+    
+    //MARK: - TutorialButtonTapped:
+    
+    @objc func tutorialButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+        transitionToVC(duration: 0.2, identifier: "TutorialController")
+    }
+    
     //MARK: - Reset Button:
     
     @objc func resetButtonTapped(_ sender: UIButton) {
@@ -277,6 +277,17 @@ class MenuController: UIViewController {
         print("properties.coins = \(Properties.coins)")
         print("menuInterface.coins = \(menuInterface.coins)")
         print("gameInterface.coins = \(gameInterface.coins)")
+    }
+    
+    //MARK: - HardcoreButtonTapped:
+    
+    @objc func hardcoreButtonTapped(_ sender: UIButton) {
+        //animation:
+        sender.bounce(sender)
+        //audioFX:
+        audioFX.playSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        //transition:
+//        transitionToVC(duration: 0.2, identifier: "HardcoreController")
     }
     
     //MARK: - Settings Buttons:
@@ -395,28 +406,6 @@ class MenuController: UIViewController {
         return defaultUrl
     }
     
-//    @objc func contactButtonTapped(_ sender: UIButton) {
-//        let audioFX = AudioFX()
-//        //animation:
-//        sender.bounce(sender)
-//        //audioFX:
-//        audioFX.playSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-//
-//        guard MFMailComposeViewController.canSendMail() else {
-//            //show alert informing the user
-//            return
-//        }
-//
-//        //extension: MFMailComposeViewControllerDelegate
-//
-//        let composer = MFMailComposeViewController()
-//        composer.mailComposeDelegate = self
-//        composer.setToRecipients(["twinpairsgame@gmail.com"])
-//        composer.setSubject("Twin Pairs Game Feedback")
-//
-//        present(composer, animated: true)
-//    }
-    
     //MARK: - Restore Button:
     
     @objc func restorePurchasesButtonTapped(_ sender: UIButton) {
@@ -505,7 +494,70 @@ class MenuController: UIViewController {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
+        case "TutorialController":
+            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? TutorialController else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+            
+            
+//            presentCardSliderController()
         default: return
         }
+    }
+    
+
+}
+
+extension MenuController: CardSliderDismissDelegate {
+
+    struct Item: CardSliderItem {
+        var image: UIImage
+        var rating: Int?
+        var title: String
+        var subtitle: String?
+        var description: String?
+    }
+
+    func didTapDismissButton() {
+        print("delegate didTapDismissButton fired")
+        self.dismiss(animated: true)
+    }
+    
+    //CardSlider protocol:
+    
+    func item(for index: Int) -> CardSlider.CardSliderItem {
+        return data[index]
+    }
+    
+    func numberOfItems() -> Int {
+        return data.count
+    }
+    
+    func loadCardSlider() {
+        data.append(Item(image: UIImage(named: FigmaKey.backgroundGame.rawValue)!,
+                         title: "Title: Slide 1",
+                         subtitle: "subtitle here",
+                         description: "description of this slide"))
+        data.append(Item(image: UIImage(named: FigmaKey.backgroundMenu.rawValue)!,
+                         title: "Title: Slide 2",
+                         subtitle: "subtitle here",
+                         description: "description of this slide"))
+        data.append(Item(image: UIImage(named: FigmaKey.backgroundGameOver.rawValue)!,
+                         title: "Title: Slide 3",
+                         subtitle: "subtitle here",
+                         description: "description of this slide"))
+        
+//        present CardSlider:
+        presentCardSliderController()
+    }
+    
+    func presentCardSliderController() {
+        let vc = CardSliderViewController.with(dataSource: self)
+        vc.dismissDelegate = self
+        vc.title = "Tutorial"
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }

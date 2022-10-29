@@ -77,7 +77,7 @@ class MenuInterface: UIView {
         let difficultyDescriptionLabel = UILabel()
         difficultyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         difficultyDescriptionLabel.textColor = .white
-        difficultyDescriptionLabel.alpha = 0.5
+        difficultyDescriptionLabel.alpha = 0
         difficultyDescriptionLabel.textAlignment = .left
         difficultyDescriptionLabel.adjustsFontSizeToFitWidth = true
 //        difficultyDescriptionLabel.text = "< difficulty"
@@ -90,7 +90,7 @@ class MenuInterface: UIView {
         let timeModeDescriptionLabel = UILabel()
         timeModeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         timeModeDescriptionLabel.textColor = .white
-        timeModeDescriptionLabel.alpha = 0.5
+        timeModeDescriptionLabel.alpha = 0
         timeModeDescriptionLabel.textAlignment = .left
         timeModeDescriptionLabel.adjustsFontSizeToFitWidth = true
 //        timeModeDescriptionLabel.text = "< time"
@@ -203,6 +203,18 @@ class MenuInterface: UIView {
         let button = UIButton()
         button.setTitle("shop", for: .normal)
         button.setImage(UIImage(systemName: "tag")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        setupAppearence(button)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+//        button.backgroundColor = UIColor(red: 1.00, green: 0.42, blue: 0.42, alpha: 1.00) //pink
+        button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
+        return button
+    }()
+    
+    lazy var tutorialButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("tutorial", for: .normal)
+        button.setImage(UIImage(systemName: "questionmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
         setupAppearence(button)
         button.titleLabel?.textAlignment = .center
         button.centerTextAndImage(spacing: 5)
@@ -379,6 +391,7 @@ class MenuInterface: UIView {
         menuView.addSubview(collectionButton)
         menuView.addSubview(difficultyButton)
         menuView.addSubview(shopButton)
+        menuView.addSubview(tutorialButton)
         menuView.addSubview(resetButton)
         menuView.addSubview(addCoinButton)
         
@@ -490,6 +503,11 @@ class MenuInterface: UIView {
             shopButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             shopButton.heightAnchor.constraint(equalToConstant: 57),
             shopButton.widthAnchor.constraint(equalToConstant: 137),
+            
+            tutorialButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 15),
+            tutorialButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            tutorialButton.heightAnchor.constraint(equalToConstant: 57),
+            tutorialButton.widthAnchor.constraint(equalToConstant: 137),
 
             resetButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 30),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),

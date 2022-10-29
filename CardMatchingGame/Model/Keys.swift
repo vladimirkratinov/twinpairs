@@ -33,6 +33,7 @@ enum FigmaKey: String {
     case cardCover3 = "CardCover3"
     case shop_cover_1 = "shop_cover_1"
     case shop_cover_2 = "shop_cover_2"
+    case shop_cover_3 = "shop_cover_3"
 }
 
 enum ImageKey: String {
