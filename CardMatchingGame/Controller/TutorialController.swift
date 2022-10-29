@@ -63,7 +63,7 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
-        collectionView.showsHorizontalScrollIndicator = true
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.delaysContentTouches = false
         collectionView.backgroundColor = .clear
 //        collectionView.isScrollEnabled = true
@@ -85,7 +85,7 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
 
         NSLayoutConstraint.activate([
             collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectionContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             

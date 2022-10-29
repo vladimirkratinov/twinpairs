@@ -80,6 +80,7 @@ class TutorialViewCell: GeminiCell {
         myLabel.text = label
         myLabel.adjustsFontSizeToFitWidth = true
         myImageView.image = image
+        myImageView.contentMode = .scaleAspectFill
     }
     
     override func prepareForReuse() {

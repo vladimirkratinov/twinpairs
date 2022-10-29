@@ -12,6 +12,12 @@ class ContentLoader {
     var generatedArray = [String]()
     static var generatedList = CardList(id: 0, card: ["one","two"])
     
+    func loadTutorial() {
+        for i in 1...10 {
+            Properties.tutorialList.append("tutorial\(i)")
+        }
+    }
+    
     func loadSet(setNumber: Int) {
         
         let fileManager = FileManager.default

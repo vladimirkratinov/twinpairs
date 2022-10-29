@@ -56,7 +56,11 @@ class MenuController: UIViewController, CardSliderDataSource, UIGestureRecognize
         
         //CardSlider Library:
 //        loadCardSlider()
-
+        
+        //load tutorial:
+        contentLoader.loadTutorial()
+        print(Properties.tutorialList)
+        
         //loadFiles:
         for i in 1...Properties.listOfSets.count {
             contentLoader.loadSet(setNumber: i)
