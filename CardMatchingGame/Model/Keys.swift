@@ -131,12 +131,14 @@ enum AudioFileKey: String {
     case match =                "match"
     case matchIgnite =          "matchIgnite"
     case victory =              "victory"
+    case victory_old =          "victory_old"
     case buttonPress =          "buttonPress"
     case tinyButtonPress =      "tinyButtonPress"
     case shiny =                "shiny"
     case lockSound =            "lockSound"
     case magic =                "magic"
     case padlock =              "padlock"
+    case cardShuffle =          "cardShuffle"
 }
 
 enum AudioTypeKey: String {

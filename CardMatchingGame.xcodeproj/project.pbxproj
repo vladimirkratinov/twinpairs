@@ -22,6 +22,7 @@
 		F72837C228ADAF9A000B9567 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */; };
 		F72837C428ADC167000B9567 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C328ADC167000B9567 /* DetailController.swift */; };
 		F72837C628ADC2E8000B9567 /* DetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72837C528ADC2E8000B9567 /* DetailInterface.swift */; };
+		F72D29E5290E2564002889C8 /* cardShuffle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F72D29E4290E2564002889C8 /* cardShuffle.mp3 */; };
 		F72ED08628B9345F007FE584 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ED08528B9345F007FE584 /* AlertController.swift */; };
 		F733F029290C928B0013883E /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F028290C928B0013883E /* TutorialController.swift */; };
 		F733F02B290C92E40013883E /* TutorialViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F02A290C92E40013883E /* TutorialViewCell.swift */; };
@@ -94,6 +95,7 @@
 		F72837C128ADAF9A000B9567 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		F72837C328ADC167000B9567 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F72837C528ADC2E8000B9567 /* DetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterface.swift; sourceTree = "<group>"; };
+		F72D29E4290E2564002889C8 /* cardShuffle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cardShuffle.mp3; sourceTree = "<group>"; };
 		F72ED08528B9345F007FE584 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F733F028290C928B0013883E /* TutorialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		F733F02A290C92E40013883E /* TutorialViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				F7F0A7D628B9D2CD00AD5EA3 /* shiny.flac */,
 				F7F0A7DC28B9D32600AD5EA3 /* padlock.wav */,
 				F7F0A7DA28B9D2DE00AD5EA3 /* lockSound.wav */,
+				F72D29E4290E2564002889C8 /* cardShuffle.mp3 */,
 				F781AD7C28931C40002993E7 /* creepy.mp3 */,
 				F781AD8428931CC5002993E7 /* flip1.wav */,
 				F781AD8628934D67002993E7 /* flip2.wav */,
@@ -396,6 +399,7 @@
 				F7D09644290D08FE001339AA /* track1.mp3 in Resources */,
 				F7F0A7DD28B9D32600AD5EA3 /* padlock.wav in Resources */,
 				F7F0A7E328B9DCBF00AD5EA3 /* flip3.wav in Resources */,
+				F72D29E5290E2564002889C8 /* cardShuffle.mp3 in Resources */,
 				F781AD8528931CC5002993E7 /* flip1.wav in Resources */,
 				F7F0A7D728B9D2CD00AD5EA3 /* shiny.flac in Resources */,
 				F7D09642290D08FE001339AA /* track5.mp3 in Resources */,
@@ -638,7 +642,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 906;
+				CURRENT_PROJECT_VERSION = 910;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;
@@ -676,7 +680,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 906;
+				CURRENT_PROJECT_VERSION = 910;
 				DEVELOPMENT_TEAM = 53V48VAMPV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CardMatchingGame/Info.plist;

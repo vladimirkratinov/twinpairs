@@ -113,7 +113,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     func nextLevel() {
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        audioFX.playFirstSoundFX(name: AudioFileKey.magic.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //randomizer nextLevelLabel.text:
         let randomCongratulation = Int.random(in: 1...5)
@@ -138,6 +138,11 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
 //            self.gameInterface.buttonsView.alpha = 0
             self.gameInterface.nextLevelLabel.alpha = 0
         })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            //audioFX (cardShuffle):
+            self.audioFX.playSecondSoundFX(name: AudioFileKey.cardShuffle.rawValue, isMuted: Properties.soundMutedSwitcher)
+        }
                 
         //reset level:
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -153,6 +158,8 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     self.gameInterface.buttonsView.alpha = 1
                     self.setupButtons(rows: Properties.rows, columns: Properties.columns)
                 })
+                
+                
                 self.loadLevel()
             }
 
@@ -176,7 +183,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.gameOver.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX(name: AudioFileKey.victory_old.rawValue, isMuted: Properties.soundMutedSwitcher)
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.gameOverLabel.alpha = 1
@@ -377,7 +384,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
-                    self.audioFX.playSecondSoundFX(name: AudioFileKey.matchIgnite.rawValue, isMuted: Properties.soundMutedSwitcher)
+                    self.audioFX.playSecondSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
                     
                     //haptics:
                     if Properties.vibrationMutedSwitcher {

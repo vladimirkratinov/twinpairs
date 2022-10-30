@@ -25,11 +25,13 @@ class AudioFX {
     let flip3 =             AudioFileKey.flip3.rawValue
     let matchIgnite =       AudioFileKey.matchIgnite.rawValue
     let victory =           AudioFileKey.victory.rawValue
+    let victory_old =       AudioFileKey.victory_old.rawValue
     let gameOver =          AudioFileKey.gameOver.rawValue
     let shiny =             AudioFileKey.shiny.rawValue
     let lockSound =         AudioFileKey.lockSound.rawValue
     let padlock =           AudioFileKey.padlock.rawValue
     let magic =             AudioFileKey.magic.rawValue
+    let cardShuffle =       AudioFileKey.cardShuffle.rawValue
     
     func stopMusic() {
         AudioFX.backgroundMusic?.stop()
@@ -123,11 +125,13 @@ class AudioFX {
             case flip3:         try? openFirstFX(file: flip3, type: wav)
             case matchIgnite:   try? openSecondFX(file: matchIgnite, type: wav)
             case victory:       try? openFirstFX(file: victory, type: wav)
+            case victory_old:   try? openFirstFX(file: victory_old, type: wav)
             case gameOver:      try? openFirstFX(file: gameOver, type: wav)
             case shiny:         try? openFirstFX(file: shiny, type: flac)
             case magic:         try? openFirstFX(file: magic, type: flac)
             case lockSound:     try? openFirstFX(file: lockSound, type: flac)
             case padlock:       try? openFirstFX(file: padlock, type: flac)
+            case cardShuffle:   try? openFirstFX(file: cardShuffle, type: mp3)
             default:            return
             }
         default: return
@@ -146,11 +150,13 @@ class AudioFX {
             case flip3:         try? openFirstFX(file: flip3, type: wav)
             case matchIgnite:   try? openSecondFX(file: matchIgnite, type: wav)
             case victory:       try? openFirstFX(file: victory, type: wav)
+            case victory_old:   try? openFirstFX(file: victory_old, type: wav)
             case gameOver:      try? openFirstFX(file: gameOver, type: wav)
             case shiny:         try? openFirstFX(file: shiny, type: flac)
             case magic:         try? openFirstFX(file: magic, type: flac)
             case lockSound:     try? openFirstFX(file: lockSound, type: flac)
             case padlock:       try? openFirstFX(file: padlock, type: flac)
+            case cardShuffle:   try? openFirstFX(file: cardShuffle, type: mp3)
             default:            return
             }
         default: return
