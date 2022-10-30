@@ -60,6 +60,14 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //load Audio: (fix background music interruption)
         audioFX.loadAudio()
         
+        //present tutorial at the first launch:
+        if !Properties.tutorialCompleted {
+            transitionToVC(duration: 0.5, identifier: "TutorialController")
+            Properties.tutorialCompleted = true
+            Properties.defaults.set(true, forKey: "tutorialCompleted")
+        }
+        
+        
         //shop observer:
 //        SKPaymentQueue.default().add(self)
         
@@ -128,6 +136,9 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
             AudioFX.backgroundMusic?.play()
             print("audio is playing")
         }
+        
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.toolbar.isHidden = true
 
     }
     
@@ -309,7 +320,7 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
             menuInterface.difficultyButton.isHidden =               true
             menuInterface.timeModeButton.isHidden =                 true
             menuInterface.tutorialButton.isHidden =                 true
-            menuInterface.titleLabel.text = "settings"
+            menuInterface.largeTitleLabel.text = "settings"
    
         } else {
             menuInterface.settingsView.isHidden =                   true
@@ -321,7 +332,7 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
             menuInterface.difficultyButton.isHidden =               false
             menuInterface.timeModeButton.isHidden =                 false
             menuInterface.tutorialButton.isHidden =                 false
-            menuInterface.titleLabel.text = "Twin Pairs"
+            menuInterface.largeTitleLabel.text = "Twin Pairs"
         }
         
     }

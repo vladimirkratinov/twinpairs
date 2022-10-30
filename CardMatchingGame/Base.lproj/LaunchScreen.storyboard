@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,40 +16,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yGu-1R-vN3">
-                                <rect key="frame" x="197" y="498" width="36" height="37"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver 0.9 (build 906)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1b-L5-XX1">
-                                <rect key="frame" x="153" y="475" width="124" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="mzM-d8-uEp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-4M-PhH">
+                                <rect key="frame" x="0.0" y="398" width="430" height="69"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="54"/>
+                                <color key="textColor" red="0.10972794606818354" green="0.40769974226804129" blue="0.16654869493119376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-4M-PhH">
-                                <rect key="frame" x="127" y="435" width="176" height="37"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
-                                <color key="textColor" systemColor="systemBrownColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver 0.9 (build 906)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1b-L5-XX1">
+                                <rect key="frame" x="88" y="456" width="124" height="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kri-yw-nxB"/>
-                        <color key="backgroundColor" red="0.31278547104052845" green="0.71144885789367296" blue="0.54439030096511709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.4862957368121717" green="0.95319338108954921" blue="0.66540123398715467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yGu-1R-vN3" firstAttribute="top" secondItem="J1b-L5-XX1" secondAttribute="bottom" constant="2" id="8jg-fS-KB8"/>
-                            <constraint firstItem="yGu-1R-vN3" firstAttribute="centerX" secondItem="J1b-L5-XX1" secondAttribute="centerX" id="HUX-Z1-Myk"/>
-                            <constraint firstItem="aOc-4M-PhH" firstAttribute="centerX" secondItem="J1b-L5-XX1" secondAttribute="centerX" id="HUa-7G-mUg"/>
-                            <constraint firstItem="yGu-1R-vN3" firstAttribute="centerX" secondItem="fw4-dv-eBi" secondAttribute="centerX" id="QbI-aP-zOs"/>
-                            <constraint firstItem="yGu-1R-vN3" firstAttribute="leading" secondItem="kri-yw-nxB" secondAttribute="leading" constant="197" id="fz4-d8-Wth"/>
-                            <constraint firstItem="aOc-4M-PhH" firstAttribute="top" secondItem="kri-yw-nxB" secondAttribute="top" constant="376" id="u9R-2W-LJS"/>
-                            <constraint firstItem="J1b-L5-XX1" firstAttribute="top" secondItem="aOc-4M-PhH" secondAttribute="bottom" constant="3" id="uZL-d5-gIx"/>
-                            <constraint firstAttribute="bottom" secondItem="J1b-L5-XX1" secondAttribute="bottom" constant="436" id="vXY-av-zJl"/>
-                            <constraint firstItem="J1b-L5-XX1" firstAttribute="leading" secondItem="kri-yw-nxB" secondAttribute="leading" constant="153" id="yUp-ly-UY4"/>
-                            <constraint firstItem="aOc-4M-PhH" firstAttribute="leading" secondItem="kri-yw-nxB" secondAttribute="leading" constant="127" id="zBY-uI-1fd"/>
+                            <constraint firstItem="J1b-L5-XX1" firstAttribute="top" secondItem="kri-yw-nxB" secondAttribute="top" constant="397" id="BGZ-c1-z0H"/>
+                            <constraint firstItem="J1b-L5-XX1" firstAttribute="centerY" secondItem="fw4-dv-eBi" secondAttribute="centerY" id="HWP-eP-HME"/>
+                            <constraint firstItem="kri-yw-nxB" firstAttribute="trailing" secondItem="J1b-L5-XX1" secondAttribute="trailing" constant="218" id="MyX-16-mNg"/>
+                            <constraint firstItem="aOc-4M-PhH" firstAttribute="centerX" secondItem="fw4-dv-eBi" secondAttribute="centerX" id="UJ9-CM-33B"/>
+                            <constraint firstItem="aOc-4M-PhH" firstAttribute="leading" secondItem="kri-yw-nxB" secondAttribute="leading" id="WoG-R1-JT6"/>
+                            <constraint firstItem="kri-yw-nxB" firstAttribute="bottom" secondItem="aOc-4M-PhH" secondAttribute="bottom" constant="431" id="aLg-TB-mW0"/>
+                            <constraint firstItem="aOc-4M-PhH" firstAttribute="top" secondItem="kri-yw-nxB" secondAttribute="top" constant="339" id="k8a-Gf-4VY"/>
+                            <constraint firstItem="J1b-L5-XX1" firstAttribute="leading" secondItem="kri-yw-nxB" secondAttribute="leading" constant="88" id="nyl-VJ-hgE"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -59,9 +48,4 @@
             <point key="canvasLocation" x="51.627906976744185" y="374.03433476394855"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

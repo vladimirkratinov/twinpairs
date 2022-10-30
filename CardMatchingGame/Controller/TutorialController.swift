@@ -106,7 +106,8 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        navigationController?.isToolbarHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.toolbar.isHidden = true
         navigationController?.view.backgroundColor = .clear
         navigationController?.toolbar.tintColor = .black
     }
@@ -124,6 +125,7 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
+        navigationController?.toolbar.isHidden = true
         navigationController?.navigationBar.backItem?.backButtonTitle = ""
     }
     

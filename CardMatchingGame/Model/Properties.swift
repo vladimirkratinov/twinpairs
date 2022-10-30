@@ -62,6 +62,7 @@ struct Properties {
     ]
     
     static var tutorialList = [String]()
+    static var tutorialCompleted = defaults.bool(forKey: "tutorialCompleted")
     
     //Shop unlocked list:
     static var cardSet1isUnlocked = defaults.bool(forKey: "cardSet1isUnlocked")

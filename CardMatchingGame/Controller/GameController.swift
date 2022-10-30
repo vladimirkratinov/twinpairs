@@ -30,10 +30,10 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.setupButtons(rows: Properties.rows, columns: Properties.columns)
         }
-        gameInterface.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
-        gameInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
+        gameInterface.menuStatisticsButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        gameInterface.continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         gameInterface.settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
-        gameInterface.quitButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        gameInterface.menuSettingsButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         gameInterface.muteMusicButton.addTarget(self, action: #selector(muteMusicTapped), for: .touchUpInside)
         gameInterface.muteSoundButton.addTarget(self, action: #selector(muteSoundTapped), for: .touchUpInside)
         gameInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
@@ -181,8 +181,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.gameOverLabel.alpha = 1
             self.gameInterface.gameOverView.alpha = 1
-            self.gameInterface.menuButton.alpha = 1
-            self.gameInterface.restartButton.alpha = 1
+            self.gameInterface.menuStatisticsButton.alpha = 1
             self.gameInterface.gameOverLabel.pulsate()
         })
         
@@ -235,13 +234,50 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     //MARK: - Rate Button Tapped:
     
-    @objc func rateButtonTapped(_ sender: UIButton) {
+    @objc func continueButtonTapped(_ sender: UIButton) {
         //animation:
         sender.bounce(sender)
         //audioFX:
         audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
-        gameInterface.settingsView.isHidden = true
-        gameOver()
+        
+        //UI Hide/Enable
+        if gameInterface.settingsView.isHidden {
+            self.gameInterface.settingsView.isHidden = false
+            self.gameInterface.settingsView.alpha = 0
+            
+            UIView.animate(withDuration: 0.3) {
+                self.gameInterface.settingsView.alpha = 1
+                self.gameInterface.buttonsView.alpha = 0.5
+                self.gameInterface.buttonsView.isUserInteractionEnabled = false
+            }
+            
+        } else if !gameInterface.settingsView.isHidden {
+            
+            UIView.animate(withDuration: 0.3) {
+                self.gameInterface.settingsView.alpha = 0
+                self.gameInterface.buttonsView.alpha = 1
+                self.gameInterface.buttonsView.isUserInteractionEnabled = true
+            }
+            
+            self.gameInterface.settingsView.isHidden = true
+        }
+
+        print("settings Button is Hidden: \(gameInterface.settingsView.isHidden)")
+        
+        //Pause & Resume Timer
+        //Check if timer is nil
+        if prop.timer != nil {
+            print("Settings: timer is NOT NIL")
+            if prop.isPaused {
+                setupTimer()
+                prop.isPaused = false
+            } else {
+                prop.timer.invalidate()
+                prop.isPaused = true
+            }
+        } else {
+            print("Settings: timer is NIL")
+        }
     }
     
     //MARK: - cardTapped:

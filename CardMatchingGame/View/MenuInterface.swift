@@ -20,108 +20,108 @@ class MenuInterface: UIView {
     }()
 
     var backgroundImageView: UIImageView = {
-        let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 1
-        backgroundImageView.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundImageView
+        let imageView = UIImageView(frame: .zero)
+        imageView.alpha = 1
+        imageView.image = UIImage(named: FigmaKey.backgroundGame.rawValue)
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     var coverImageView: UIImageView = {
-        let coverImageView = UIImageView(frame: .zero)
-        coverImageView.isHidden = true
-        coverImageView.alpha = 1
-        coverImageView.image = UIImage(named: FigmaKey.backgroundSettings.rawValue)
-        coverImageView.contentMode = .scaleAspectFill
-        coverImageView.translatesAutoresizingMaskIntoConstraints = false
-        return coverImageView
+        let imageView = UIImageView(frame: .zero)
+        imageView.isHidden = true
+        imageView.alpha = 1
+        imageView.image = UIImage(named: FigmaKey.backgroundSettings.rawValue)
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     lazy var hub: UIView = {
-        let hub = UIView()
-        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
-        hub.translatesAutoresizingMaskIntoConstraints = false
-        hub.layer.borderWidth = 0
-        hub.alpha = 0
-        return hub
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 0
+        view.alpha = 0
+        return view
     }()
     
     //MARK: - Labels:
     
-    lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textColor = .white
-        titleLabel.alpha = 0.2
-        titleLabel.textAlignment = .center
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.text = "twin pairs"
-        titleLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
-        return titleLabel
+    lazy var largeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0.2
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "twin pairs"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 96)
+        return label
     }()
     
     lazy var classicModeDescriptionLabel: UILabel = {
-        let classicModeDescriptionLabel = UILabel()
-        classicModeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        classicModeDescriptionLabel.textColor = .white
-        classicModeDescriptionLabel.alpha = 0
-        classicModeDescriptionLabel.textAlignment = .left
-        classicModeDescriptionLabel.adjustsFontSizeToFitWidth = true
-        classicModeDescriptionLabel.text = "classic mode >"
-        classicModeDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return classicModeDescriptionLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "classic mode >"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        return label
     }()
     
     lazy var difficultyDescriptionLabel: UILabel = {
-        let difficultyDescriptionLabel = UILabel()
-        difficultyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        difficultyDescriptionLabel.textColor = .white
-        difficultyDescriptionLabel.alpha = 0
-        difficultyDescriptionLabel.textAlignment = .left
-        difficultyDescriptionLabel.adjustsFontSizeToFitWidth = true
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
 //        difficultyDescriptionLabel.text = "< difficulty"
-        difficultyDescriptionLabel.text = "difficulty >"
-        difficultyDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return difficultyDescriptionLabel
+        label.text = "difficulty >"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        return label
     }()
     
     lazy var timeModeDescriptionLabel: UILabel = {
-        let timeModeDescriptionLabel = UILabel()
-        timeModeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeModeDescriptionLabel.textColor = .white
-        timeModeDescriptionLabel.alpha = 0
-        timeModeDescriptionLabel.textAlignment = .left
-        timeModeDescriptionLabel.adjustsFontSizeToFitWidth = true
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
 //        timeModeDescriptionLabel.text = "< time"
-        timeModeDescriptionLabel.text = "time >"
-        timeModeDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return timeModeDescriptionLabel
+        label.text = "time >"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        return label
     }()
     
     lazy var hardcoreDescriptionLabel: UILabel = {
-        let hardcoreDescriptionLabel = UILabel()
-        hardcoreDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        hardcoreDescriptionLabel.textColor = .white
-        hardcoreDescriptionLabel.alpha = 0.5
-        hardcoreDescriptionLabel.textAlignment = .left
-        hardcoreDescriptionLabel.adjustsFontSizeToFitWidth = true
-        hardcoreDescriptionLabel.text = "hard mode >"
-        hardcoreDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        hardcoreDescriptionLabel.isHidden = true
-        return hardcoreDescriptionLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0.5
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "hard mode >"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        label.isHidden = true
+        return label
     }()
     
     lazy var collectionDescriptionLabel: UILabel = {
-        let collectionDescriptionLabel = UILabel()
-        collectionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        collectionDescriptionLabel.textColor = .white
-        collectionDescriptionLabel.alpha = 0
-        collectionDescriptionLabel.textAlignment = .left
-        collectionDescriptionLabel.adjustsFontSizeToFitWidth = true
-        collectionDescriptionLabel.text = "card sets >"
-        collectionDescriptionLabel.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return collectionDescriptionLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.alpha = 0
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "card sets >"
+        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
+        return label
     }()
     
     var coins: Int = Properties.coins {
@@ -131,72 +131,71 @@ class MenuInterface: UIView {
     }
     
     lazy var coinLabel: UILabel = {
-        let coinLabel = UILabel()
-        coinLabel.translatesAutoresizingMaskIntoConstraints = false
-        coinLabel.textColor = UIColor.black
-        coinLabel.textAlignment = .left
-        coinLabel.text = "🪙 \(coins)"
-        coinLabel.font = UIFont(name: Properties.uiLabelsFont, size: Properties.uiLabelsSize)
-        return coinLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.black
+        label.textAlignment = .left
+        label.text = "🪙 \(coins)"
+        label.font = UIFont(name: Properties.uiLabelsFont, size: Properties.uiLabelsSize)
+        return label
     }()
 
     //MARK: - Buttons:
 
     lazy var playButton: UIButton = {
-        let playButton = UIButton()
-        playButton.setTitle("Play", for: .normal)
-//        playButton.setImage(UIImage(systemName: "hand.tap")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        playButton.titleLabel?.textAlignment = .center
-        playButton.centerTextAndImage(spacing: 5)
-        setupAppearence(playButton)
-        playButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 36)
-        playButton.backgroundColor = palette.UIGreen
-        return playButton
+        let button = UIButton()
+        button.setTitle("Play", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        setupAppearence(button)
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 36)
+        button.backgroundColor = palette.UIGreen
+        return button
     }()
     
     lazy var difficultyButton: UIButton = {
-        let difficultyButton = UIButton()
-        difficultyButton.setTitle("Easy", for: .normal)
-        difficultyButton.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        difficultyButton.titleLabel?.textAlignment = .center
-        difficultyButton.centerTextAndImage(spacing: 5)
-        setupAppearence(difficultyButton)
-        difficultyButton.backgroundColor = .green
-        return difficultyButton
+        let button = UIButton()
+        button.setTitle("Easy", for: .normal)
+        button.setImage(UIImage(systemName: "hand.point.right")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        setupAppearence(button)
+        button.backgroundColor = .green
+        return button
     }()
     
     lazy var timeModeButton: UIButton = {
-        let timeModeButton = UIButton()
-        timeModeButton.setTitle("3 min.", for: .normal)
-        timeModeButton.setImage(UIImage(systemName: "timer")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        timeModeButton.titleLabel?.textAlignment = .center
-        timeModeButton.centerTextAndImage(spacing: 5)
-        setupAppearence(timeModeButton)
-        timeModeButton.backgroundColor = .green
-        return timeModeButton
+        let button = UIButton()
+        button.setTitle("3 min.", for: .normal)
+        button.setImage(UIImage(systemName: "timer")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        setupAppearence(button)
+        button.backgroundColor = .green
+        return button
     }()
     
     lazy var hardcoreModeButton: UIButton = {
-        let hardcoreModeButton = UIButton()
-        hardcoreModeButton.setTitle("Hardcore", for: .normal)
-        hardcoreModeButton.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        setupAppearence(hardcoreModeButton)
-        hardcoreModeButton.titleLabel?.textAlignment = .center
-        hardcoreModeButton.centerTextAndImage(spacing: 5)
-        hardcoreModeButton.backgroundColor = UIColor(red: 0.86, green: 0.44, blue: 0.44, alpha: 1.00)
-        hardcoreModeButton.isHidden = true
-        return hardcoreModeButton
+        let button = UIButton()
+        button.setTitle("hardcore", for: .normal)
+        button.setImage(UIImage(systemName: "flame")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        setupAppearence(button)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        button.backgroundColor = UIColor(red: 0.86, green: 0.44, blue: 0.44, alpha: 1.00)
+        button.isHidden = true
+        return button
     }()
     
     lazy var collectionButton: UIButton = {
-        let collectionButton = UIButton()
-        collectionButton.setTitle("Collection", for: .normal)
-        collectionButton.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        setupAppearence(collectionButton)
-        collectionButton.titleLabel?.textAlignment = .center
-        collectionButton.centerTextAndImage(spacing: 5)
-        collectionButton.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
-        return collectionButton
+        let button = UIButton()
+        button.setTitle("collection", for: .normal)
+        button.setImage(UIImage(systemName: "crown")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        setupAppearence(button)
+        button.titleLabel?.textAlignment = .center
+        button.centerTextAndImage(spacing: 5)
+        button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
+        return button
     }()
     
     lazy var shopButton: UIButton = {
@@ -240,41 +239,33 @@ class MenuInterface: UIView {
     //MARK: - Settings:
     
     lazy var settingsButton: UIButton = {
-        let settingsButton = UIButton()
-        settingsButton.alpha = 1
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-//        settingsButton.setImage(UIImage(named: ImageKey.SettingsButton.rawValue), for: .normal)
-        settingsButton.setImage(UIImage(named: "gears"), for: .normal)
-        settingsButton.tintColor = .black
-        settingsButton.isUserInteractionEnabled = true
-//        settingsButton.imageEdgeInsets = UIEdgeInsets(top: -10, left: -30, bottom: -10, right: -30)
-//        settingsButton.layer.shadowColor = UIColor.black.cgColor
-//        settingsButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        settingsButton.layer.shadowRadius = 1
-//        settingsButton.layer.shadowOpacity = 1.0
-//        settingsButton.layer.shouldRasterize = true
-//        settingsButton.layer.rasterizationScale = UIScreen.main.scale
-        return settingsButton
+        let button = UIButton()
+        button.alpha = 1
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "gears"), for: .normal)
+        button.tintColor = .black
+        button.isUserInteractionEnabled = true
+        return button
     }()
     
     lazy var settingsView: UIView = {
-        let settingsView = UIView()
-        settingsView.translatesAutoresizingMaskIntoConstraints = false
-        settingsView.isHidden = true
-        settingsView.alpha = 1
-        settingsView.layer.borderWidth = 0
-        settingsView.layer.cornerRadius = 0
-        settingsView.layer.borderColor = UIColor.black.cgColor
-        return settingsView
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        view.alpha = 1
+        view.layer.borderWidth = 0
+        view.layer.cornerRadius = 0
+        view.layer.borderColor = UIColor.black.cgColor
+        return view
     }()
     
     lazy var settingsBackground: UIImageView = {
-        let settingsBackground = UIImageView(frame: .zero)
-        settingsBackground.alpha = 1
-        settingsBackground.image = UIImage(named: FigmaKey.settings.rawValue)
-        settingsBackground.contentMode = .redraw
-        settingsBackground.translatesAutoresizingMaskIntoConstraints = false
-        return settingsBackground
+        let imageView = UIImageView(frame: .zero)
+        imageView.alpha = 1
+        imageView.image = UIImage(named: FigmaKey.settings.rawValue)
+        imageView.contentMode = .redraw
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     //MARK: - Settings - Labels:
@@ -380,13 +371,13 @@ class MenuInterface: UIView {
         menuView.addSubview(coverImageView)
         menuView.addSubview(hub)
         
-        menuView.addSubview(titleLabel)
+        menuView.addSubview(largeTitleLabel)
         menuView.addSubview(coinLabel)
-        menuView.addSubview(classicModeDescriptionLabel)
-        menuView.addSubview(difficultyDescriptionLabel)
-        menuView.addSubview(timeModeDescriptionLabel)
-        menuView.addSubview(hardcoreDescriptionLabel)
-        menuView.addSubview(collectionDescriptionLabel)
+//        menuView.addSubview(classicModeDescriptionLabel)
+//        menuView.addSubview(difficultyDescriptionLabel)
+//        menuView.addSubview(timeModeDescriptionLabel)
+//        menuView.addSubview(hardcoreDescriptionLabel)
+//        menuView.addSubview(collectionDescriptionLabel)
         
         menuView.addSubview(playButton)
         menuView.addSubview(timeModeButton)
@@ -419,7 +410,6 @@ class MenuInterface: UIView {
         menuView.bringSubviewToFront(settingsButton)
         menuView.bringSubviewToFront(settingsView)
         menuView.bringSubviewToFront(coinLabel)
-        
     }
     
     //MARK: - setupConstraints:
@@ -452,33 +442,34 @@ class MenuInterface: UIView {
             
             //MARK: - Labels:
             
-            titleLabel.bottomAnchor.constraint(equalTo: menuView.layoutMarginsGuide.bottomAnchor, constant: 15),
-            titleLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+            largeTitleLabel.topAnchor.constraint(equalTo: tutorialButton.bottomAnchor, constant: 10),
+            largeTitleLabel.bottomAnchor.constraint(equalTo: menuView.layoutMarginsGuide.bottomAnchor, constant: 10),
+            largeTitleLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
+            largeTitleLabel.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
+            largeTitleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             
-            classicModeDescriptionLabel.topAnchor.constraint(equalTo: playButton.topAnchor),
-            classicModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-            classicModeDescriptionLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10),
-            classicModeDescriptionLabel.bottomAnchor.constraint(equalTo: playButton.bottomAnchor),
-                     
-            difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
-            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: difficultyButton.leadingAnchor, constant: -10),
-            difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
-            
-            timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
-            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: timeModeButton.leadingAnchor, constant: -10),
-            timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
-            
-            hardcoreDescriptionLabel.topAnchor.constraint(equalTo: hardcoreModeButton.topAnchor),
-            hardcoreDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-            hardcoreDescriptionLabel.trailingAnchor.constraint(equalTo: hardcoreModeButton.leadingAnchor, constant: -10),
-            hardcoreDescriptionLabel.bottomAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor),
-            
-            collectionDescriptionLabel.topAnchor.constraint(equalTo: collectionButton.topAnchor),
-            collectionDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-            collectionDescriptionLabel.trailingAnchor.constraint(equalTo: collectionButton.leadingAnchor, constant: -10),
-            collectionDescriptionLabel.bottomAnchor.constraint(equalTo: collectionButton.bottomAnchor),
+//            classicModeDescriptionLabel.topAnchor.constraint(equalTo: playButton.topAnchor),
+//            classicModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
+//            classicModeDescriptionLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10),
+//            classicModeDescriptionLabel.bottomAnchor.constraint(equalTo: playButton.bottomAnchor),
+//
+//            difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
+//            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: difficultyButton.leadingAnchor, constant: -10),
+//            difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
+//
+//            timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
+//            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: timeModeButton.leadingAnchor, constant: -10),
+//            timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
+//
+//            hardcoreDescriptionLabel.topAnchor.constraint(equalTo: hardcoreModeButton.topAnchor),
+//            hardcoreDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
+//            hardcoreDescriptionLabel.trailingAnchor.constraint(equalTo: hardcoreModeButton.leadingAnchor, constant: -10),
+//            hardcoreDescriptionLabel.bottomAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor),
+//
+//            collectionDescriptionLabel.topAnchor.constraint(equalTo: collectionButton.topAnchor),
+//            collectionDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
+//            collectionDescriptionLabel.trailingAnchor.constraint(equalTo: collectionButton.leadingAnchor, constant: -10),
+//            collectionDescriptionLabel.bottomAnchor.constraint(equalTo: collectionButton.bottomAnchor),
             
             //MARK: - Buttons:
             
@@ -513,7 +504,7 @@ class MenuInterface: UIView {
             tutorialButton.heightAnchor.constraint(equalToConstant: 57),
             tutorialButton.widthAnchor.constraint(equalToConstant: 137),
 
-            resetButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 30),
+            resetButton.topAnchor.constraint(equalTo: tutorialButton.bottomAnchor, constant: 30),
             resetButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             resetButton.heightAnchor.constraint(equalToConstant: 30),
             resetButton.widthAnchor.constraint(equalToConstant: 80),
@@ -522,7 +513,7 @@ class MenuInterface: UIView {
             addCoinButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             addCoinButton.heightAnchor.constraint(equalToConstant: 30),
             addCoinButton.widthAnchor.constraint(equalToConstant: 80),
-            addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: titleLabel.topAnchor, constant: -50),
+            addCoinButton.bottomAnchor.constraint(greaterThanOrEqualTo: largeTitleLabel.topAnchor, constant: -50),
             
             //MARK: - Settings:
             
@@ -650,6 +641,7 @@ class MenuInterface: UIView {
     
     func setupSettingsLabels(_ label: UILabel) {
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
         label.textAlignment = .left
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 26)
     }

@@ -124,15 +124,16 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        navigationController?.isToolbarHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.isToolbarHidden = true
         navigationController?.view.backgroundColor = .clear
         navigationController?.toolbar.tintColor = .black
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print("\(view.bounds.width) x \(view.bounds.height)")
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        print("\(view.bounds.width) x \(view.bounds.height)")
+//    }
     
     //MARK: - viewDidAppear:
         
@@ -143,11 +144,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
+        navigationController?.toolbar.isHidden = true
         navigationController?.navigationBar.backItem?.backButtonTitle = ""
-        
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.toolbar.isHidden = true
-//        navigationController?.setNavigationBarHidden(false, animated: false)
         
         //load Locker Mechanism in CollectionView:
         LockerModel.loadLockerModel()
