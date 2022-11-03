@@ -153,6 +153,10 @@ enum AudioKey: String {
     case vibrationIsMuted =     "vibrationIsMuted"
     case musicVolumeLevel =     "musicVolumeLevel"
     case soundVolumeLevel =     "soundVolumeLevel"
+    
+    case defaultMusicButtonLabel =      "defaultMusicButtonLabel"
+    case defaultSoundButtonLabel =      "defaultSoundButtonLabel"
+    case defaultVibrationButtonLabel =  "defaultVibrationButtonLabel"
 }
 
 enum ColorKey: String {

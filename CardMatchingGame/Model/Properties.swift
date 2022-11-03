@@ -29,7 +29,7 @@ struct Properties {
     static var cardCoverImage = UIImage(named: FigmaKey.cardCover3.rawValue)
     
     //Admin Functions:
-    static var hideAdminButtons = true
+    static var hideAdminButtons = false
     
     //debug Game Over:
     static var gameIsOver = false
@@ -121,7 +121,7 @@ struct Properties {
     //Animations timing block:
     var flipAnimationTime =         0.4
     var flipBackAnimationTime =     0.4
-    var timeToShowBothCards =       1.0
+    var timeToShowBothCards =       0.7
     var syncDisableAnimation: Double {
         flipBackAnimationTime + timeToShowBothCards
     }
@@ -132,9 +132,13 @@ struct Properties {
     static var vibrationMutedSwitcher = true
     
     //Settings labels:
-    static var defaultMusicButtonLabel =        "ON"
-    static var defaultSoundButtonLabel =        "ON"
-    static var defaultVibrationButtonLabel =    "ON"
+//    static var defaultMusicButtonLabel =        "ON"
+//    static var defaultSoundButtonLabel =        "ON"
+//    static var defaultVibrationButtonLabel =    "ON"
+    
+    static var defaultMusicButtonLabel =        defaults.string(forKey: AudioKey.defaultMusicButtonLabel.rawValue) ?? "ON"
+    static var defaultSoundButtonLabel =        defaults.string(forKey: AudioKey.defaultSoundButtonLabel.rawValue) ?? "ON"
+    static var defaultVibrationButtonLabel =    defaults.string(forKey: AudioKey.defaultVibrationButtonLabel.rawValue) ?? "ON"
     
     //Settings buttons color:
     static let defaultMusicButtonColor = defaults.colorForKey(key: ColorKey.musicButton.rawValue) ?? UIColor.green

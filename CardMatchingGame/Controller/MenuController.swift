@@ -16,6 +16,7 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
     var audioFX = AudioFX()
     let menuInterface = MenuInterface()
     let gameInterface = GameInterface()
+    let defaults = UserDefaults.standard
     static let gameController = GameController()
     var contentLoader = ContentLoader()
     var gestureRecognizer: UITapGestureRecognizer?
@@ -67,6 +68,11 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
             Properties.defaults.set(true, forKey: "tutorialCompleted")
         }
         
+        //turn off sound defaults:
+        if defaults.bool(forKey: AudioKey.soundIsMuted.rawValue) {
+            Properties.soundMutedSwitcher = false
+        }
+        
         
         //shop observer:
 //        SKPaymentQueue.default().add(self)
@@ -105,7 +111,7 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
 //            }
 //        }
         
-        if !Properties.muteBackgroundMusic {
+        if !defaults.bool(forKey: AudioKey.musicIsMuted.rawValue) { //  !Properties.muteBackgroundMusic
             if AudioFX.myQueuePlayer == nil {
                 audioFX.playQueueBackgroundMusic()
                 // instantiate the AVQueuePlayer with all avItems
@@ -156,7 +162,9 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //transition:
         transitionToVC(duration: 0.2, identifier: "GameController")
     }
@@ -167,7 +175,9 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+//        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
         if sender.titleLabel?.text == "Difficulty" {
             sender.setTitle("Easy", for: .normal)
@@ -200,7 +210,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
         if sender.titleLabel?.text == TimeKey.threeMinutes.rawValue {
             sender.setTitle("5 min.", for: .normal)
@@ -225,7 +236,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //transition:
         transitionToVC(duration: 0.2, identifier: "CollectionController")
     }
@@ -236,7 +248,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //transition:
         transitionToVC(duration: 0.2, identifier: "ShopController")
     }
@@ -247,7 +260,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //transition:
         transitionToVC(duration: 0.2, identifier: "TutorialController")
     }
@@ -258,7 +272,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //reset Defaults:
         DispatchQueue.main.async { [self] in
             UserDefaults.resetDefaults()
@@ -276,7 +291,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //add Coin:
         menuInterface.coins += 1000
         Properties.coins += 1000
@@ -295,7 +311,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         //transition:
 //        transitionToVC(duration: 0.2, identifier: "HardcoreController")
     }
@@ -307,7 +324,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         sender.bounce(sender)
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
         //UI: Hide/Enable
         if menuInterface.settingsView.isHidden {
@@ -356,7 +374,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
         guard let scene = menuInterface.menuView.window?.windowScene else {
             print("no scene")
@@ -374,7 +393,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
         
         if MFMailComposeViewController.canSendMail() {
@@ -425,7 +445,8 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.buttonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioFX.playFirstSoundFX( name: AudioFileKey.buttonPress.rawValue,
+                                  isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue))
         
 //        if (SKPaymentQueue.canMakePayments()) {
 //          SKPaymentQueue.default().restoreCompletedTransactions()

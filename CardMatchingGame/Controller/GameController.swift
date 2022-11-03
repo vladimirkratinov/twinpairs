@@ -13,6 +13,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     var audioFX = AudioFX()
     var prop = Properties()
+    let defaults = UserDefaults.standard
     var contentLoader = ContentLoader()
     let gameInterface = GameInterface()
     let menuInterface = MenuInterface()
@@ -181,6 +182,10 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         if prop.timer != nil {
             prop.timer.invalidate()
         }
+        
+        //disable settings button:
+        gameInterface.settingsButton.isEnabled = false
+        gameInterface.settingsButton.alpha = 0.5
         
         //audioFX:
         audioFX.playFirstSoundFX(name: AudioFileKey.victory_old.rawValue, isMuted: Properties.soundMutedSwitcher)
@@ -387,7 +392,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     self.audioFX.playSecondSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
                     
                     //haptics:
-                    if Properties.vibrationMutedSwitcher {
+                    if !self.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue) {
                         HapticsManager.shared.vibrate(for: .success)
                     }
 
@@ -426,7 +431,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     self.audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
                     
                     //haptics:
-                    if Properties.vibrationMutedSwitcher {
+                    if !self.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue) {
                         HapticsManager.shared.vibrate(for: .error)
                     }
                     
