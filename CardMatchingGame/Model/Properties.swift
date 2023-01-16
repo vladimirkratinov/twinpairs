@@ -130,7 +130,8 @@ struct Properties {
     static var musicMutedSwitcher = true
     static var soundMutedSwitcher = true
     static var vibrationMutedSwitcher = true
-        
+    
+    /// Settings Labels:
     static var defaultMusicButtonLabel =        defaults.string(forKey: AudioKey.defaultMusicButtonLabel.rawValue) ?? "ON"
     static var defaultSoundButtonLabel =        defaults.string(forKey: AudioKey.defaultSoundButtonLabel.rawValue) ?? "ON"
     static var defaultVibrationButtonLabel =    defaults.string(forKey: AudioKey.defaultVibrationButtonLabel.rawValue) ?? "ON"
