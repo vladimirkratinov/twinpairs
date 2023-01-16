@@ -11,13 +11,13 @@ import ViewAnimator
 
 class GameController: UIViewController, UIGestureRecognizerDelegate {
     
-    var audioFX = AudioFX()
+    var audioManager = AudioManager()
     var prop = Properties()
     let defaults = UserDefaults.standard
-    var contentLoader = ContentLoader()
+    var contentManager = ContentManager()
     let gameInterface = GameInterface()
     let menuInterface = MenuInterface()
-    var gameLogic = GameLogic()
+    var gameLogic = GameLogicManager()
     var gestureRecognizer: UITapGestureRecognizer?
     
     override func loadView() {
@@ -142,7 +142,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             //audioFX (cardShuffle):
-            self.audioFX.playSecondSoundFX(name: AudioFileKey.cardShuffle.rawValue, isMuted: Properties.soundMutedSwitcher)
+            self.audioManager.playSecondSoundFX(name: AudioFileKey.cardShuffle.rawValue, isMuted: Properties.soundMutedSwitcher)
         }
                 
         //reset level:
@@ -188,7 +188,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         gameInterface.settingsButton.alpha = 0.5
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.victory_old.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.victory_old.rawValue, isMuted: Properties.soundMutedSwitcher)
         //labels animations:
         UIView.animate(withDuration: 0.5, animations:  {
             self.gameInterface.gameOverLabel.alpha = 1
@@ -222,7 +222,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.resetCards()
@@ -250,7 +250,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         //animation:
         sender.bounce(sender)
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //UI Hide/Enable
         if gameInterface.settingsView.isHidden {
@@ -296,7 +296,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func cardTapped(_ sender: UIButton) {
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //flip card:
         if !Properties.activatedButtons.contains(sender) {
@@ -334,7 +334,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
             UIView.transition(with: sender, duration: prop.flipAnimationTime, options: .transitionFlipFromLeft, animations: nil, completion: nil)
             
             //audioFX
-            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioManager.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
             
             //kill pulse animation:
             DispatchQueue.main.asyncAfter(deadline: .now() + prop.flipAnimationTime) {
@@ -389,7 +389,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
-                    self.audioFX.playSecondSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
+                    self.audioManager.playSecondSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
                     
                     //haptics:
                     if !self.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue) {
@@ -428,7 +428,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + prop.timeToShowBothCards) {
                     //audioFX:
-                    self.audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+                    self.audioManager.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
                     
                     //haptics:
                     if !self.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue) {
@@ -477,7 +477,7 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
         sender.bounce(sender)
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         //UI Hide/Enable
         if gameInterface.settingsView.isHidden {

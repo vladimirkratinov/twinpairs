@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ContentLoader {
+class ContentManager {
     var prop = Properties()
     var generatedArray = [String]()
     static var generatedList = CardList(id: 0, card: ["one","two"])
     
     func loadTutorial() {
-        for i in 1...10 {
+        for i in 1...9 {
             Properties.tutorialList.append("tutorial\(i)")
         }
     }
@@ -37,13 +37,13 @@ class ContentLoader {
                         generatedArray.sort()
                     }
                     //FIRST CUTTED METHOD:
-                    ContentLoader.generatedList = CardList(id: setNumber, card: generatedArray)
+                    ContentManager.generatedList = CardList(id: setNumber, card: generatedArray)
                 }
             }
             generatedArray.removeAll()
             
             //SECOND CUTTED METHOD:
-            Properties.cardCollection.append(ContentLoader.generatedList.card)
+            Properties.cardCollection.append(ContentManager.generatedList.card)
         }
         catch let error as NSError {
             print(error)

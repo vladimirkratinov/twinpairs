@@ -11,7 +11,7 @@ import ViewAnimator
 class DetailController: UIViewController, UIGestureRecognizerDelegate {
     
     let detailInterface = DetailInterface()
-    let audioFX = AudioFX()
+    let audioManager = AudioManager()
     let palette = Palette()
     var prop = Properties()
     var isTapped = false
@@ -90,7 +90,7 @@ class DetailController: UIViewController, UIGestureRecognizerDelegate {
         
         if !isTapped {
             //audioFX:
-            audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioManager.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
             
             print(selectedImage!)
             
@@ -123,7 +123,7 @@ class DetailController: UIViewController, UIGestureRecognizerDelegate {
    
         } else {
             //audioFX
-            audioFX.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
+            audioManager.playFirstSoundFX(name: AudioFileKey.flip2.rawValue, isMuted: Properties.soundMutedSwitcher)
             //pulsate:
 //            detailInterface.detailImageButton.pulsateSlow()
             
@@ -147,7 +147,7 @@ class DetailController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc private func closeDetailView(_ tapGestureRecognizer: UITapGestureRecognizer) {
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.flip3.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.flip3.rawValue, isMuted: Properties.soundMutedSwitcher)
     
         // Remove the image view
         let location = tapGestureRecognizer.location(in: detailInterface.detailImageButton)

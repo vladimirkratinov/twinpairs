@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GameLogic {
+public class GameLogicManager {
     var filteredListOfIndexes = [Int]()
     var filteredSelectedArray = [Int]()
     var listOfIndexes = [[Int]]()

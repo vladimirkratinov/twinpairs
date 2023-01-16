@@ -1,14 +1,10 @@
-//
-//  AudioFX.swift
-//  hangman
-//
+//  AudioManager.swift
 //  Created by Vladimir Kratinov on 2022/1/21.
-//
 
 import UIKit
 import AVFoundation
 
-class AudioFX {
+class AudioManager {
     static var firstAudioFX: AVAudioPlayer?
     static var secondAudioFX: AVAudioPlayer?
     static var backgroundMusic: AVAudioPlayer?
@@ -34,7 +30,7 @@ class AudioFX {
     let cardShuffle =       AudioFileKey.cardShuffle.rawValue
     
     func stopMusic() {
-        AudioFX.backgroundMusic?.stop()
+        AudioManager.backgroundMusic?.stop()
     }
     
     func openFirstFX(file: String, type: String) throws {
@@ -45,9 +41,9 @@ class AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            AudioFX.firstAudioFX = try AVAudioPlayer(contentsOf: url)
-            AudioFX.firstAudioFX?.volume = 0.1
-            AudioFX.firstAudioFX?.play()
+            AudioManager.firstAudioFX = try AVAudioPlayer(contentsOf: url)
+            AudioManager.firstAudioFX?.volume = 0.1
+            AudioManager.firstAudioFX?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
@@ -64,9 +60,9 @@ class AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            AudioFX.secondAudioFX = try AVAudioPlayer(contentsOf: url)
-            AudioFX.secondAudioFX?.volume = 0.1
-            AudioFX.secondAudioFX?.play()
+            AudioManager.secondAudioFX = try AVAudioPlayer(contentsOf: url)
+            AudioManager.secondAudioFX?.volume = 0.1
+            AudioManager.secondAudioFX?.play()
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
@@ -83,10 +79,10 @@ class AudioFX {
         guard let pathToSound = Bundle.main.path(forResource: file, ofType: type) else { return }
         let url = URL(fileURLWithPath: pathToSound)
         do {
-            AudioFX.backgroundMusic = try AVAudioPlayer(contentsOf: url)
-            AudioFX.backgroundMusic?.volume = 0.2
-            AudioFX.backgroundMusic?.play()
-            AudioFX.backgroundMusic?.numberOfLoops = 5
+            AudioManager.backgroundMusic = try AVAudioPlayer(contentsOf: url)
+            AudioManager.backgroundMusic?.volume = 0.2
+            AudioManager.backgroundMusic?.play()
+            AudioManager.backgroundMusic?.numberOfLoops = 5
         } catch {
             print("\(file).\(type) was not found.")
             throw AudioError.FileNotExist
@@ -107,7 +103,7 @@ class AudioFX {
         for clip in mySongs {
             guard let pathToSound = Bundle.main.path(forResource: clip, ofType: ".mp3") else { return }
             let url = URL(fileURLWithPath: pathToSound)
-            AudioFX.avItems.append(AVPlayerItem(url: url))
+            AudioManager.avItems.append(AVPlayerItem(url: url))
         }
     }
     

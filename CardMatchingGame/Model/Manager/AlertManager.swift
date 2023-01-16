@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlertController {
+class AlertManager {
     
     static func presentAC(_ action1: UIAlertAction, _ action2: UIAlertAction, price: Int) -> UIAlertController {
         //attributed AlertController:

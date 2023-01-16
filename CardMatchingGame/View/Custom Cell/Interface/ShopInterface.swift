@@ -278,18 +278,12 @@ class ShopInterface: UIView {
         contentView.addSubview(scrollView)
         scrollView.addSubview(shopView)
         scrollView.addSubview(horizontalSeparatorLine)
-        
-        //new code
         shopView.addSubview(topContainer)
         shopView.addSubview(bottomContainer)
-        
         topContainer.addSubview(title1)
         topContainer.addSubview(contentBlock1)
-        
         bottomContainer.addSubview(title2)
         bottomContainer.addSubview(contentBlock2)
-        
-        
         contentBlock1.addSubview(cardSet1Label)
         contentBlock1.addSubview(cardSet2Label)
         contentBlock1.addSubview(verticalSeparatorInBlock1)
@@ -299,7 +293,6 @@ class ShopInterface: UIView {
         contentBlock1.addSubview(cardSet2UnlockButton)
         contentBlock1.addSubview(cardSet1DescriptionLabel)
         contentBlock1.addSubview(cardSet2DescriptionLabel)
-        
         contentBlock2.addSubview(coverSet1Label)
         contentBlock2.addSubview(coverSet2Label)
         contentBlock2.addSubview(verticalSeparatorInBlock2)
@@ -307,10 +300,6 @@ class ShopInterface: UIView {
         contentBlock2.addSubview(coverSet1UnlockButton)
         contentBlock2.addSubview(coverSet2ImageButton)
         contentBlock2.addSubview(coverSet2UnlockButton)
-        
-//        scrollView.addSubview(restoreButton)
-//        scrollView.bringSubviewToFront(restoreButton)
-        
     }
     
     func setupConstraints() {

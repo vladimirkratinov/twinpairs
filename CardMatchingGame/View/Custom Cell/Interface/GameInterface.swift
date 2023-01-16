@@ -215,7 +215,7 @@ class GameInterface: UIView {
         label.alpha = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "game over"
+        label.text = "time is up"
         label.font = UIFont(name: FontKey.staatliches.rawValue, size: 85)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor(red: 0.85, green: 0.95, blue: 0.63, alpha: 1.00)

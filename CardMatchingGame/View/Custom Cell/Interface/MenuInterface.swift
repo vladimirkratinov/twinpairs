@@ -200,6 +200,7 @@ class MenuInterface: UIView {
     
     lazy var shopButton: UIButton = {
         let button = UIButton()
+        button.isHidden = true
         button.setTitle("shop", for: .normal)
         button.setImage(UIImage(systemName: "tag")?.withRenderingMode(.alwaysTemplate), for: .normal)
         setupAppearence(button)
@@ -494,12 +495,12 @@ class MenuInterface: UIView {
             collectionButton.heightAnchor.constraint(equalToConstant: 57),
             collectionButton.widthAnchor.constraint(equalToConstant: 137),
             
-            shopButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 15),
-            shopButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            shopButton.heightAnchor.constraint(equalToConstant: 57),
-            shopButton.widthAnchor.constraint(equalToConstant: 137),
+//            shopButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 15),
+//            shopButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
+//            shopButton.heightAnchor.constraint(equalToConstant: 57),
+//            shopButton.widthAnchor.constraint(equalToConstant: 137),
             
-            tutorialButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 15),
+            tutorialButton.topAnchor.constraint(equalTo: collectionButton.bottomAnchor, constant: 15),
             tutorialButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             tutorialButton.heightAnchor.constraint(equalToConstant: 57),
             tutorialButton.widthAnchor.constraint(equalToConstant: 137),

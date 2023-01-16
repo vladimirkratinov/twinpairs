@@ -14,7 +14,7 @@ class SettingsController {
     //MARK: - Mute Music Tapped:
     
     static func muteMusicTapped(sender: UIButton) {
-        let audioFX = AudioFX()
+        let audioManager = AudioManager()
         //animation:
         sender.bounce(sender)
         //set UserProperties.defaults:
@@ -22,7 +22,7 @@ class SettingsController {
         //set to have an access in viewDidLoad() to control volume level
         Properties.musicMutedSwitcher = muted
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:
@@ -39,16 +39,16 @@ class SettingsController {
             Properties.defaultMusicButtonLabel = "ON"
             sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
 
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
-            AudioFX.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioManager.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioManager.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
             
-            if AudioFX.myQueuePlayer == nil {
-                audioFX.playQueueBackgroundMusic()
+            if AudioManager.myQueuePlayer == nil {
+                audioManager.playQueueBackgroundMusic()
                 // instantiate the AVQueuePlayer with all avItems
-                AudioFX.myQueuePlayer = AVQueuePlayer(items: AudioFX.avItems)
+                AudioManager.myQueuePlayer = AVQueuePlayer(items: AudioManager.avItems)
                 // start playing
-                AudioFX.myQueuePlayer?.play()
-                AudioFX.myQueuePlayer?.volume = 0.2
+                AudioManager.myQueuePlayer?.play()
+                AudioManager.myQueuePlayer?.volume = 0.2
             }
         } else {
             //set UserProperties.defaults:
@@ -62,8 +62,8 @@ class SettingsController {
             sender.backgroundColor = Properties.defaults.colorForKey(key: ColorKey.musicButton.rawValue)
             Properties.defaultMusicButtonLabel = "OFF"
             sender.setTitle(Properties.defaultMusicButtonLabel, for: .normal)
-            AudioFX.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
-            AudioFX.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioManager.backgroundMusic?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
+            AudioManager.myQueuePlayer?.volume = Properties.defaults.float(forKey: AudioKey.musicVolumeLevel.rawValue)
         }
         print("Music is Muted: \(muted)")
     }
@@ -71,7 +71,7 @@ class SettingsController {
     //MARK: - Mute Sound Tapped:
     
     static func muteSoundTapped(sender: UIButton) {
-        let audioFX = AudioFX()
+        let audioManager = AudioManager()
         //animation:
         sender.bounce(sender)
         //set UserProperties.defaults:
@@ -80,7 +80,7 @@ class SettingsController {
         Properties.soundMutedSwitcher = muted
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:
@@ -98,8 +98,8 @@ class SettingsController {
             sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
             
             //audio:
-            AudioFX.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioManager.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioManager.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         } else {
             //set UserProperties.defaults:
             Properties.defaults.setColor(color: UIColor.gray, forKey: ColorKey.soundButton.rawValue)
@@ -115,8 +115,8 @@ class SettingsController {
             Properties.defaultSoundButtonLabel = "OFF"
             sender.setTitle(Properties.defaultSoundButtonLabel, for: .normal)
             
-            AudioFX.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
-            AudioFX.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioManager.firstAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
+            AudioManager.secondAudioFX?.volume = Properties.defaults.float(forKey: AudioKey.soundVolumeLevel.rawValue)
         }
         print("Sound is Muted: \(muted)")
     }
@@ -124,7 +124,7 @@ class SettingsController {
     //MARK: - Mute Vibration Tapped:
     
     static func muteVibrationTapped(sender: UIButton) {
-        let audioFX = AudioFX()
+        let audioManager = AudioManager()
         //animation:
         sender.bounce(sender)
         //set UserProperties.defaults:
@@ -133,7 +133,7 @@ class SettingsController {
         Properties.vibrationMutedSwitcher = muted
         
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.tinyButtonPress.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         if muted {
             //set UserProperties.defaults:

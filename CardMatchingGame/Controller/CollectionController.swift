@@ -14,8 +14,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     var activatedCells = [CollectionViewCell]()
     var prop = Properties()
     let palette = Palette()
-    var contentLoader = ContentLoader()
-    let audioFX = AudioFX()
+    var contentManager = ContentManager()
+    let audioManager = AudioManager()
     var temporaryIndexPath = Int()
     
     var collectionContainerView: UIView = {
@@ -160,7 +160,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     //MARK: - InfoTapped:
     
     @objc func infoTapped(_ sender: UIBarButtonItem) {
-        let ac = AlertController.informationAC()
+        let ac = AlertManager.informationAC()
         present(ac, animated: true)
     }
     
@@ -221,7 +221,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell: \(indexPath)")
         //audioFX:
-        audioFX.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
+        audioManager.playFirstSoundFX(name: AudioFileKey.flip1.rawValue, isMuted: Properties.soundMutedSwitcher)
         
         Properties.selectedSetName = Properties.listOfSets[indexPath.item]
         
@@ -261,7 +261,7 @@ extension CollectionController: CollectionViewCellDelegate {
             
             //audioFX:
             let shiny = AudioFileKey.shiny.rawValue
-            audioFX.playFirstSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
+            audioManager.playFirstSoundFX(name: shiny, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 //if locked:
@@ -274,7 +274,7 @@ extension CollectionController: CollectionViewCellDelegate {
                         
                         //audioFX2:
                         let magic = AudioFileKey.magic.rawValue
-                        self.audioFX.playSecondSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
+                        self.audioManager.playSecondSoundFX(name: magic, isMuted: Properties.soundMutedSwitcher)
                         
                         //Locker Model:
                         LockerModel.unlock(cell: cell, price: price, index: indexPath.item)
@@ -305,7 +305,7 @@ extension CollectionController: CollectionViewCellDelegate {
                         Properties.collectionOfLockedSets[indexPath.item].isLocked = true
                     }
                     
-                    let ac = AlertController.presentAC(confirm, cancel, price: price)
+                    let ac = AlertManager.presentAC(confirm, cancel, price: price)
                     
                     self.present(ac, animated: true, completion: nil)
                 }
@@ -321,7 +321,7 @@ extension CollectionController: CollectionViewCellDelegate {
             
             //audioFX:
             let tinyButton = AudioFileKey.tinyButtonPress.rawValue
-            audioFX.playFirstSoundFX(name: tinyButton, isMuted: Properties.soundMutedSwitcher)
+            audioManager.playFirstSoundFX(name: tinyButton, isMuted: Properties.soundMutedSwitcher)
             
             if indexPath.item == Properties.collectionOfLockedSets[indexPath.item].cellNumber {
                 

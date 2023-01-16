@@ -309,8 +309,7 @@ extension GameController {
                         self.gameInterface.bestResultScoreViewLabel.text = String(best180Medium.score)
                     }
                 }
-                
-                
+   
             case DifficultyKey.hard.rawValue:
                 
                 if gameInterface.pairsCounter > best180Hard.pairs {
@@ -390,8 +389,7 @@ extension GameController {
                         self.gameInterface.bestResultScoreViewLabel.text = String(best300Medium.score)
                     }
                 }
-                
-                
+
             case DifficultyKey.hard.rawValue:
                 
                 if gameInterface.pairsCounter > best300Hard.pairs {
@@ -471,7 +469,6 @@ extension GameController {
                         self.gameInterface.bestResultScoreViewLabel.text = String(best600Medium.score)
                     }
                 }
-                
                 
             case DifficultyKey.hard.rawValue:
                 

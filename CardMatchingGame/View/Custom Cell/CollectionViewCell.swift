@@ -22,7 +22,6 @@ class CollectionViewCell: GeminiCell {
     var myImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
-//        imageView.backgroundColor = .red
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = false
@@ -30,71 +29,69 @@ class CollectionViewCell: GeminiCell {
     }()
     
     var myShadowView: UIImageView = {
-        let myShadowView = UIImageView()
-        myShadowView.translatesAutoresizingMaskIntoConstraints = false
-        myShadowView.backgroundColor = .black
-        myShadowView.alpha = 0.4
-        myShadowView.contentMode = .scaleToFill
-        myShadowView.clipsToBounds = true
-        return myShadowView
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .black
+        imageView.alpha = 0.4
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     var lockerImageView: UIImageView = {
-        let lockerImageView = UIImageView()
-        lockerImageView.translatesAutoresizingMaskIntoConstraints = false
-        lockerImageView.image = UIImage(named: FigmaKey.lock.rawValue)
-//        lockerImageView.backgroundColor = .blue
-        lockerImageView.tintColor = UIColor.systemPink
-        lockerImageView.contentMode = .scaleAspectFit
-        lockerImageView.clipsToBounds = false
-        return lockerImageView
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: FigmaKey.lock.rawValue)
+        imageView.tintColor = UIColor.systemPink
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = false
+        return imageView
     }()
     
     var unlockButton: UIButton = {
-        let unlockButton = UIButton()
-        unlockButton.alpha = 1
-        unlockButton.translatesAutoresizingMaskIntoConstraints = false
-        unlockButton.setTitle(" Unlock ", for: .normal)
-        unlockButton.backgroundColor = UIColor.systemGreen
-        unlockButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 24)
-        unlockButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        unlockButton.setTitleColor(UIColor.black, for: .normal)
-        unlockButton.layer.borderColor = UIColor.black.cgColor
-        unlockButton.tag += 1
-        unlockButton.layer.borderWidth = 0
-        unlockButton.layer.cornerRadius = 10
-        unlockButton.isUserInteractionEnabled = true
-        
-        unlockButton.layer.shadowColor = UIColor.black.cgColor
-        unlockButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        unlockButton.layer.shadowRadius = 3
-        unlockButton.layer.shadowOpacity = 1.0
-        unlockButton.layer.shouldRasterize = true
-        unlockButton.layer.rasterizationScale = UIScreen.main.scale
-        return unlockButton
+        let button = UIButton()
+        button.alpha = 1
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(" Unlock ", for: .normal)
+        button.backgroundColor = UIColor.systemGreen
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 24)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.tag += 1
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 10
+        button.isUserInteractionEnabled = true
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        button.layer.shadowRadius = 3
+        button.layer.shadowOpacity = 1.0
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        return button
     }()
     
     var selectButton: UIButton = {
-        let selectButton = UIButton()
-        selectButton.alpha = 1
-        selectButton.translatesAutoresizingMaskIntoConstraints = false
-        selectButton.setTitle(" Select ", for: .normal)
-        selectButton.backgroundColor = UIColor(red: 0.28, green: 0.92, blue: 0.18, alpha: 1.00)
-        selectButton.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
-        selectButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        selectButton.setTitleColor(UIColor.black, for: .normal)
-        selectButton.layer.borderColor = UIColor.black.cgColor
-        selectButton.tag += 1
-        selectButton.layer.borderWidth = 0
-        selectButton.layer.cornerRadius = 10
-        selectButton.isUserInteractionEnabled = true
-        selectButton.layer.shadowColor = UIColor.black.cgColor
-        selectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        selectButton.layer.shadowRadius = 3
-        selectButton.layer.shadowOpacity = 1.0
-        selectButton.layer.shouldRasterize = true
-        selectButton.layer.rasterizationScale = UIScreen.main.scale
-        return selectButton
+        let button = UIButton()
+        button.alpha = 1
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(" Select ", for: .normal)
+        button.backgroundColor = UIColor(red: 0.28, green: 0.92, blue: 0.18, alpha: 1.00)
+        button.titleLabel?.font = UIFont(name: FontKey.staatliches.rawValue, size: 20)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.tag += 1
+        button.layer.borderWidth = 0
+        button.layer.cornerRadius = 10
+        button.isUserInteractionEnabled = true
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        button.layer.shadowRadius = 3
+        button.layer.shadowOpacity = 1.0
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        return button
     }()
     
     var myLabel: UILabel = {

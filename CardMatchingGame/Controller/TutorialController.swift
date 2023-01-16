@@ -14,8 +14,8 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
     var activatedCells = [TutorialViewCell]()
     var prop = Properties()
     let palette = Palette()
-    var contentLoader = ContentLoader()
-    let audioFX = AudioFX()
+    var contentManager = ContentManager()
+    let audioManager = AudioManager()
     var temporaryIndexPath = Int()
     
     var collectionContainerView: UIView = {
