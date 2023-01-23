@@ -61,69 +61,6 @@ class MenuInterface: UIView {
         return label
     }()
     
-    lazy var classicModeDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0
-        label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-        label.text = "classic mode >"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return label
-    }()
-    
-    lazy var difficultyDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0
-        label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-//        difficultyDescriptionLabel.text = "< difficulty"
-        label.text = "difficulty >"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return label
-    }()
-    
-    lazy var timeModeDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0
-        label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-//        timeModeDescriptionLabel.text = "< time"
-        label.text = "time >"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return label
-    }()
-    
-    lazy var hardcoreDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0.5
-        label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-        label.text = "hard mode >"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        label.isHidden = true
-        return label
-    }()
-    
-    lazy var collectionDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.alpha = 0
-        label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-        label.text = "card sets >"
-        label.font = UIFont(name: FontKey.staatliches.rawValue, size: 23)
-        return label
-    }()
-    
     var coins: Int = Properties.coins {
         didSet {
             coinLabel.text = "🪙 \(coins)"
@@ -206,7 +143,6 @@ class MenuInterface: UIView {
         setupAppearence(button)
         button.titleLabel?.textAlignment = .center
         button.centerTextAndImage(spacing: 5)
-//        button.backgroundColor = UIColor(red: 1.00, green: 0.42, blue: 0.42, alpha: 1.00) //pink
         button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
         return button
     }()
@@ -218,7 +154,6 @@ class MenuInterface: UIView {
         setupAppearence(button)
         button.titleLabel?.textAlignment = .center
         button.centerTextAndImage(spacing: 5)
-//        button.backgroundColor = UIColor(red: 1.00, green: 0.42, blue: 0.42, alpha: 1.00) //pink
         button.backgroundColor = UIColor(red: 0.07, green: 0.75, blue: 0.89, alpha: 1.00) //blue
         return button
     }()
@@ -374,12 +309,6 @@ class MenuInterface: UIView {
         
         menuView.addSubview(largeTitleLabel)
         menuView.addSubview(coinLabel)
-//        menuView.addSubview(classicModeDescriptionLabel)
-//        menuView.addSubview(difficultyDescriptionLabel)
-//        menuView.addSubview(timeModeDescriptionLabel)
-//        menuView.addSubview(hardcoreDescriptionLabel)
-//        menuView.addSubview(collectionDescriptionLabel)
-        
         menuView.addSubview(playButton)
         menuView.addSubview(timeModeButton)
         menuView.addSubview(hardcoreModeButton)
@@ -448,33 +377,8 @@ class MenuInterface: UIView {
             largeTitleLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
             largeTitleLabel.trailingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.trailingAnchor),
             largeTitleLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
-            
-//            classicModeDescriptionLabel.topAnchor.constraint(equalTo: playButton.topAnchor),
-//            classicModeDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-//            classicModeDescriptionLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10),
-//            classicModeDescriptionLabel.bottomAnchor.constraint(equalTo: playButton.bottomAnchor),
-//
-//            difficultyDescriptionLabel.topAnchor.constraint(equalTo: difficultyButton.topAnchor),
-//            difficultyDescriptionLabel.trailingAnchor.constraint(equalTo: difficultyButton.leadingAnchor, constant: -10),
-//            difficultyDescriptionLabel.bottomAnchor.constraint(equalTo: difficultyButton.bottomAnchor),
-//
-//            timeModeDescriptionLabel.topAnchor.constraint(equalTo: timeModeButton.topAnchor),
-//            timeModeDescriptionLabel.trailingAnchor.constraint(equalTo: timeModeButton.leadingAnchor, constant: -10),
-//            timeModeDescriptionLabel.bottomAnchor.constraint(equalTo: timeModeButton.bottomAnchor),
-//
-//            hardcoreDescriptionLabel.topAnchor.constraint(equalTo: hardcoreModeButton.topAnchor),
-//            hardcoreDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-//            hardcoreDescriptionLabel.trailingAnchor.constraint(equalTo: hardcoreModeButton.leadingAnchor, constant: -10),
-//            hardcoreDescriptionLabel.bottomAnchor.constraint(equalTo: hardcoreModeButton.bottomAnchor),
-//
-//            collectionDescriptionLabel.topAnchor.constraint(equalTo: collectionButton.topAnchor),
-//            collectionDescriptionLabel.leadingAnchor.constraint(equalTo: menuView.layoutMarginsGuide.leadingAnchor),
-//            collectionDescriptionLabel.trailingAnchor.constraint(equalTo: collectionButton.leadingAnchor, constant: -10),
-//            collectionDescriptionLabel.bottomAnchor.constraint(equalTo: collectionButton.bottomAnchor),
-            
+     
             //MARK: - Buttons:
-            
-//            playButton.topAnchor.constraint(equalTo: hub.bottomAnchor, constant: 50),
             playButton.bottomAnchor.constraint(equalTo: difficultyButton.topAnchor, constant: -40),
             playButton.centerXAnchor.constraint(equalTo: menuView.centerXAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 80), // 50
@@ -567,10 +471,7 @@ class MenuInterface: UIView {
             contactButton.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor, constant: -50),
             contactButton.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor, constant: -117),
             contactButton.widthAnchor.constraint(equalToConstant: 120),
-            contactButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            restorePurchasesButton.topAnchor.constraint(equalTo: contactButton.bottomAnchor, constant: 40),
-            restorePurchasesButton.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor),
+            contactButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     

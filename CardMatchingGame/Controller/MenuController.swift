@@ -31,9 +31,7 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         menuInterface.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         menuInterface.difficultyButton.addTarget(self, action: #selector(difficultyButtonTapped), for: .touchUpInside)
         menuInterface.timeModeButton.addTarget(self, action: #selector(timeModeButtonTapped), for: .touchUpInside)
-        menuInterface.hardcoreModeButton.addTarget(self, action: #selector(hardcoreButtonTapped), for: .touchUpInside)
         menuInterface.collectionButton.addTarget(self, action: #selector(collectionButtonTapped), for: .touchUpInside)
-        menuInterface.shopButton.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
         menuInterface.tutorialButton.addTarget(self, action: #selector(tutorialButtonTapped), for: .touchUpInside)
         menuInterface.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuInterface.addCoinButton.addTarget(self, action: #selector(addCoinButtonTapped), for: .touchUpInside)
@@ -43,7 +41,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         menuInterface.muteVibrationButton.addTarget(self, action: #selector(muteVibrationTapped), for: .touchUpInside)
         menuInterface.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
         menuInterface.contactButton.addTarget(self, action: #selector(contactButtonTapped), for: .touchUpInside)
-        menuInterface.restorePurchasesButton.addTarget(self, action: #selector(restorePurchasesButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -72,10 +69,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
             Properties.soundMutedSwitcher = false
         }
         
-        
-        //shop observer:
-//        SKPaymentQueue.default().add(self)
-        
         //DEBUGGING:
 //        print("Properties.listOfSets.count: \(Properties.listOfSets.count)")
 //        print("PROPERTIES: CARD COLLECTION: \(Properties.cardCollection) \n")
@@ -99,16 +92,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.navigationController?.setToolbarHidden(true, animated: true)
         }, completion: nil)
-    
-        //Background AudioFX:
-
-//        if !Properties.muteBackgroundMusic {
-//            switch randomNumber {
-//            case 1: try? self.audioFX.playBackgroundMusic(file: snowfall, type: mp3File)
-//            case 2: try? self.audioFX.playBackgroundMusic(file: ceremonial, type: mp3File)
-//            default: return
-//            }
-//        }
         
         if !defaults.bool(forKey: AudioKey.musicIsMuted.rawValue) { //  !Properties.muteBackgroundMusic
             if AudioManager.myQueuePlayer == nil {
@@ -247,20 +230,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         transitionToVC(duration: 0.2, identifier: "CollectionController")
     }
     
-    //MARK: - ShopButtonTapped:
-    
-    @objc func shopButtonTapped(_ sender: UIButton) {
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioManager.playFirstSoundFX(
-            name: AudioFileKey.buttonPress.rawValue,
-            isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
-        )
-        //transition:
-        transitionToVC(duration: 0.2, identifier: "ShopController")
-    }
-    
     //MARK: - TutorialButtonTapped:
     
     @objc func tutorialButtonTapped(_ sender: UIButton) {
@@ -318,18 +287,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         print("gameInterface.coins = \(gameInterface.coins)")
     }
     
-    //MARK: - HardcoreButtonTapped:
-    
-    @objc func hardcoreButtonTapped(_ sender: UIButton) {
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioManager.playFirstSoundFX(
-            name: AudioFileKey.buttonPress.rawValue,
-            isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
-        )
-    }
-    
     //MARK: - Settings Buttons:
     
     @objc func settingsButtonTapped(_ sender: UIButton) {
@@ -346,9 +303,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         if menuInterface.settingsView.isHidden {
             menuInterface.settingsView.isHidden =                   false
             menuInterface.coverImageView.isHidden =                 false
-            menuInterface.classicModeDescriptionLabel.isHidden =    true
-            menuInterface.difficultyDescriptionLabel.isHidden =     true
-            menuInterface.timeModeDescriptionLabel.isHidden =       true
             menuInterface.playButton.isHidden =                     true
             menuInterface.difficultyButton.isHidden =               true
             menuInterface.timeModeButton.isHidden =                 true
@@ -358,9 +312,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             menuInterface.settingsView.isHidden =                   true
             menuInterface.coverImageView.isHidden =                 true
-            menuInterface.classicModeDescriptionLabel.isHidden =    false
-            menuInterface.difficultyDescriptionLabel.isHidden =     false
-            menuInterface.timeModeDescriptionLabel.isHidden =       false
             menuInterface.playButton.isHidden =                     false
             menuInterface.difficultyButton.isHidden =               false
             menuInterface.timeModeButton.isHidden =                 false
@@ -457,46 +408,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
         return defaultUrl
     }
     
-    //MARK: - Restore Button:
-    
-    @objc func restorePurchasesButtonTapped(_ sender: UIButton) {
-        print("tapped")
-        //animation:
-        sender.bounce(sender)
-        //audioFX:
-        audioManager.playFirstSoundFX(
-            name: AudioFileKey.buttonPress.rawValue,
-            isMuted: !Properties.defaults.bool(forKey: AudioKey.soundIsMuted.rawValue)
-        )
-        
-//        if (SKPaymentQueue.canMakePayments()) {
-//          SKPaymentQueue.default().restoreCompletedTransactions()
-//        }
-    }
-    
-//    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-//        print("Received Payment Transaction Response from Apple");
-//        for transaction in transactions {
-//            switch transaction.transactionState {
-//            case .purchased:
-//                print("menu controller: purchased")
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
-//            case .restored:
-//                print("menu controller: restored")
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
-//            case .failed:
-//                print("menu controller: failed")
-//                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
-//                break
-//            default:
-//                print("default")
-//                break
-//            }
-//        }
-//    }
-    
     //MARK: - updateSettingsUIButtonsColor:
     
     func updateSettingsUIButtonsColor() {
@@ -542,12 +453,6 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-//        case "ShopController":
-//            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? ShopController else { return }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-//                self.navigationController?.view.layer.add(transition, forKey: nil)
-//                self.navigationController?.pushViewController(vc, animated: false)
-//            }
         case "TutorialController":
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? TutorialController else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {

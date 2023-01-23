@@ -77,36 +77,17 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.isUserInteractionEnabled = true
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .clear
-//        collectionView.backgroundView = backgroundImageView
-//        collectionView.frame = view.frame
-        
-        //implement animations:
-//        configureAnimation()
         
         view.addSubview(collectionContainerView)
         collectionContainerView.addSubview(backgroundImageView)
         collectionContainerView.addSubview(collectionView)
-        
-//        collectionContainerView.addSubview(hub)
-//        collectionContainerView.addSubview(coinLabel)
-//        collectionContainerView.bringSubviewToFront(hub)
-//        collectionContainerView.bringSubviewToFront(coinLabel)
 
         NSLayoutConstraint.activate([
             collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-//            hub.leadingAnchor.constraint(equalTo: collectionContainerView.leadingAnchor),
-//            hub.trailingAnchor.constraint(equalTo: collectionContainerView.trailingAnchor),
-//            hub.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor, constant: 0),
-//            hub.widthAnchor.constraint(equalTo: collectionContainerView.widthAnchor),
-//
-//            coinLabel.topAnchor.constraint(equalTo: hub.topAnchor, constant: 12),
-//            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
-            
-//            collectionView.topAnchor.constraint(equalTo: hub.bottomAnchor),
+
             collectionView.topAnchor.constraint(equalTo: collectionContainerView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
@@ -241,8 +222,8 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
             return true
         }
    }
-    
 }
+
 //MARK: - Delegate
 
 extension CollectionController: CollectionViewCellDelegate {
@@ -346,8 +327,8 @@ extension CollectionController: CollectionViewCellDelegate {
                     }
                     
                     //update select buttons from the Shop view:
-//                    Properties.cardSet1isSelected = false
-//                    Properties.cardSet2isSelected = false
+                    Properties.cardSet1isSelected = false
+                    Properties.cardSet2isSelected = false
                 }
             }
         }
