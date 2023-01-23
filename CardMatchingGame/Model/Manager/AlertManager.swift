@@ -69,37 +69,5 @@ class AlertManager {
         ac.addAction(action2)
         
         return ac
-    }
-    
-    static func informationAC() -> UIAlertController {
-        
-        let titleAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 25)!,
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-        ]
-        
-          let titleString = NSAttributedString(string: "Information", attributes: titleAttributes)
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        
-        let messageText = NSAttributedString(
-            string: Properties.infoMessage,
-            attributes: [
-                NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                NSAttributedString.Key.foregroundColor : UIColor.black,
-                NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 13)!,
-            ]
-        )
-        
-        let ac = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        ac.setValue(titleString, forKey: "attributedTitle")
-        ac.setValue(messageText, forKey: "attributedMessage")
-        
-        let cancel = UIAlertAction(title: "Ok", style: .cancel)
-        ac.addAction(cancel)
-        
-        return ac
-    }
-    
+    }    
 }

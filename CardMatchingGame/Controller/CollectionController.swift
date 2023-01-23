@@ -107,7 +107,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
 //            coinLabel.leadingAnchor.constraint(equalTo: hub.leadingAnchor, constant: 11),
             
 //            collectionView.topAnchor.constraint(equalTo: hub.bottomAnchor),
-            collectionView.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: collectionContainerView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             collectionView.trailingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
@@ -130,10 +130,10 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.toolbar.tintColor = .black
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 //        print("\(view.bounds.width) x \(view.bounds.height)")
-//    }
+    }
     
     //MARK: - viewDidAppear:
         
@@ -157,12 +157,6 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
-    //MARK: - InfoTapped:
-    
-    @objc func infoTapped(_ sender: UIBarButtonItem) {
-        let ac = AlertManager.informationAC()
-        present(ac, animated: true)
-    }
     
     //MARK: - Configure Animations:
     
@@ -188,7 +182,7 @@ class CollectionController: UIViewController, UICollectionViewDelegate, UICollec
     }
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Properties.listOfSets.count - 2
+        return Properties.listOfSets.count
     }
     
     //MARK: - cellForItemAt
@@ -352,8 +346,8 @@ extension CollectionController: CollectionViewCellDelegate {
                     }
                     
                     //update select buttons from the Shop view:
-                    Properties.cardSet1isSelected = false
-                    Properties.cardSet2isSelected = false
+//                    Properties.cardSet1isSelected = false
+//                    Properties.cardSet2isSelected = false
                 }
             }
         }

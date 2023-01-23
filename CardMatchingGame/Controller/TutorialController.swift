@@ -24,31 +24,11 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    lazy var hub: UIView = {
-        let hub = UIView()
-        hub.backgroundColor = UIColor(red: 1.00, green: 0.37, blue: 0.25, alpha: 0.5)
-        hub.translatesAutoresizingMaskIntoConstraints = false
-        hub.layer.borderWidth = 10
-        hub.alpha = 1
-        return hub
-    }()
-
-    var backgroundImageView: UIImageView = {
-        let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.alpha = 1
-//        backgroundImageView.image = UIImage(named: FigmaKey.backgroundCardList2.rawValue)
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundImageView
-    }()
 
     override func loadView() {
         super.loadView()
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-//        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 1, right: 5)
         layout.itemSize = CGSize(width: (view.frame.width), height: (view.frame.height))
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -66,22 +46,12 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delaysContentTouches = false
         collectionView.backgroundColor = .clear
-//        collectionView.isScrollEnabled = true
-//        collectionView.isUserInteractionEnabled = true
-//        collectionView.alwaysBounceHorizontal = true
-//        collectionView.alwaysBounceVertical = true
-        
-//        collectionView.backgroundView = backgroundImageView
-//        collectionView.frame = view.frame
         
         //implement animations:
         configureAnimation()
         
         view.addSubview(collectionContainerView)
-        collectionContainerView.addSubview(backgroundImageView)
-        collectionContainerView.addSubview(hub)
         collectionContainerView.addSubview(collectionView)
-        collectionContainerView.bringSubviewToFront(hub)
 
         NSLayoutConstraint.activate([
             collectionContainerView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -165,9 +135,8 @@ class TutorialController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TutorialViewCell.identifier, for: indexPath) as! TutorialViewCell
         //Load Label & Image:
         let name = Properties.tutorialList[indexPath.item]
-        let label = Properties.tutorialList[indexPath.item]
 
-        if let imageString = UIImage(named: label) {
+        if let imageString = UIImage(named: name) {
             let image = imageString
             cell.configure(label: name, image: image)
             cell.layoutSubviews()

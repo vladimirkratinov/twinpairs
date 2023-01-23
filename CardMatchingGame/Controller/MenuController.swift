@@ -7,7 +7,6 @@
 
 import UIKit
 import AVFoundation
-import StoreKit
 import MessageUI
 import StoreKit
 
@@ -543,12 +542,12 @@ class MenuController: UIViewController, UIGestureRecognizerDelegate {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-        case "ShopController":
-            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? ShopController else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                self.navigationController?.view.layer.add(transition, forKey: nil)
-                self.navigationController?.pushViewController(vc, animated: false)
-            }
+//        case "ShopController":
+//            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? ShopController else { return }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+//                self.navigationController?.view.layer.add(transition, forKey: nil)
+//                self.navigationController?.pushViewController(vc, animated: false)
+//            }
         case "TutorialController":
             guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: identifier) as? TutorialController else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {

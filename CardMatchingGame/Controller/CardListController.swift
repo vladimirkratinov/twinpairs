@@ -89,7 +89,7 @@ class CardListController: UIViewController, UICollectionViewDelegate, UICollecti
             collectionContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: collectionContainerView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: collectionContainerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             collectionView.trailingAnchor.constraint(equalTo: collectionContainerView.safeAreaLayoutGuide.trailingAnchor, constant: -5),

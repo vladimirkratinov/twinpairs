@@ -332,8 +332,8 @@ class MenuInterface: UIView {
         button.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.centerTextAndImage(spacing: 5)
         button.tintColor = .black
-        button.alpha = 0.3
-        button.isEnabled = false
+        button.alpha = 1
+        button.isEnabled = true
         button.backgroundColor = .systemGreen
         return button
     }()

@@ -159,8 +159,6 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     self.gameInterface.buttonsView.alpha = 1
                     self.setupButtons(rows: Properties.rows, columns: Properties.columns)
                 })
-                
-                
                 self.loadLevel()
             }
 
@@ -380,17 +378,10 @@ class GameController: UIViewController, UIGestureRecognizerDelegate {
                     print(Properties.pairList.count)
                 }
                 
-                //add Coin each 10 pairs:
-//                if gameInterface.pairsCounter.isMultiple(of: 10) {
-//                    print("+ COIN!")
-//                    addCoin()
-//                }
-                
                 //timer to show both cards:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     //audioFX2:
                     self.audioManager.playSecondSoundFX(name: AudioFileKey.victory.rawValue, isMuted: Properties.soundMutedSwitcher)
-                    
                     //haptics:
                     if !self.defaults.bool(forKey: AudioKey.vibrationIsMuted.rawValue) {
                         HapticsManager.shared.vibrate(for: .success)

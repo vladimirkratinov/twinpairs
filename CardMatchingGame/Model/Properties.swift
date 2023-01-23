@@ -29,7 +29,7 @@ struct Properties {
     static var cardCoverImage = UIImage(named: FigmaKey.cardCover3.rawValue)
     
     ///Admin Functions:
-    static var hideAdminButtons = true
+    static var hideAdminButtons = false
     
     ///debug Game Over:
     static var gameIsOver = false
@@ -46,9 +46,7 @@ struct Properties {
     ///Card View Configuration:
     static var rows = 3
     static var columns = 2
-    
-    ///CollectionView InfoButton message:
-    static let infoMessage = "Game Version: ver 0.5 (stable build) \n Unlock items in Collections Shop! \n Collect 🪙 coins in Game Mode \n 10 match pairs = 1 coin \n New Game Modes coming soon!"
+
     
     ///CollectionView list:
     static let listOfSets = ["Food",
@@ -56,9 +54,7 @@ struct Properties {
                              "Music",
                              "Space",
                              "Flowers",
-                             "Art",
-                             "Canada",
-                             "Ukraine"
+                             "Art"
     ]
     
     static var tutorialList = [String]()

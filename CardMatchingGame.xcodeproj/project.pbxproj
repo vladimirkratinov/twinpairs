@@ -26,11 +26,9 @@
 		F72ED08628B9345F007FE584 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ED08528B9345F007FE584 /* AlertManager.swift */; };
 		F733F029290C928B0013883E /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F028290C928B0013883E /* TutorialController.swift */; };
 		F733F02B290C92E40013883E /* TutorialViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F733F02A290C92E40013883E /* TutorialViewCell.swift */; };
-		F75CEBF528E65AC9001A646D /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75CEBF428E65AC9001A646D /* ShopController.swift */; };
 		F760AF6B289C6EA2007ABE11 /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6A289C6EA2007ABE11 /* GameInterface.swift */; };
 		F760AF6D289C7CE8007ABE11 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760AF6C289C7CE8007ABE11 /* Properties.swift */; };
 		F764E17428B478BE00F4575F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E17328B478BE00F4575F /* SettingsController.swift */; };
-		F774A79C28C6AC3000AAB936 /* HardcoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F774A79B28C6AC3000AAB936 /* HardcoreController.swift */; };
 		F781AD7828931921002993E7 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F781AD7728931921002993E7 /* AudioManager.swift */; };
 		F781AD7E28931C40002993E7 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7928931C40002993E7 /* gameOver.wav */; };
 		F781AD7F28931C40002993E7 /* victory_old.wav in Resources */ = {isa = PBXBuildFile; fileRef = F781AD7A28931C40002993E7 /* victory_old.wav */; };
@@ -44,11 +42,8 @@
 		F7835BF628A71D3D00081C6B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7835BF528A71D3D00081C6B /* Palette.swift */; };
 		F79528C328F0D5F3000C11D0 /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79528C228F0D5F3000C11D0 /* StatisticsModel.swift */; };
 		F79528C728F0F34B000C11D0 /* StatisticsUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79528C628F0F34B000C11D0 /* StatisticsUpdate.swift */; };
-		F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795C8E128E7866A003A29E7 /* ShopInterface.swift */; };
 		F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79BF3C6289F1EDC00A8C51F /* Keys.swift */; };
-		F7A9B63A28F4CA6700768407 /* ShopExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A9B63928F4CA6700768407 /* ShopExtensions.swift */; };
 		F7C2626228B1C62700A24724 /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7C2626128B1C62700A24724 /* Images.bundle */; };
-		F7CA229228FA20220073721D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CA229128FA20220073721D /* StoreKit.framework */; };
 		F7D0963F290D08FE001339AA /* track2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D09639290D08FE001339AA /* track2.mp3 */; };
 		F7D09640290D08FE001339AA /* track3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963A290D08FE001339AA /* track3.mp3 */; };
 		F7D09641290D08FE001339AA /* track4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F7D0963B290D08FE001339AA /* track4.mp3 */; };
@@ -99,11 +94,9 @@
 		F72ED08528B9345F007FE584 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		F733F028290C928B0013883E /* TutorialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		F733F02A290C92E40013883E /* TutorialViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewCell.swift; sourceTree = "<group>"; };
-		F75CEBF428E65AC9001A646D /* ShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		F760AF6A289C6EA2007ABE11 /* GameInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
 		F760AF6C289C7CE8007ABE11 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		F764E17328B478BE00F4575F /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		F774A79B28C6AC3000AAB936 /* HardcoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcoreController.swift; sourceTree = "<group>"; };
 		F781AD7728931921002993E7 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		F781AD7928931C40002993E7 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		F781AD7A28931C40002993E7 /* victory_old.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory_old.wav; sourceTree = "<group>"; };
@@ -117,12 +110,8 @@
 		F7835BF528A71D3D00081C6B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F79528C228F0D5F3000C11D0 /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
 		F79528C628F0F34B000C11D0 /* StatisticsUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsUpdate.swift; sourceTree = "<group>"; };
-		F795C8E128E7866A003A29E7 /* ShopInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInterface.swift; sourceTree = "<group>"; };
 		F79BF3C6289F1EDC00A8C51F /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
-		F7A9B63928F4CA6700768407 /* ShopExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopExtensions.swift; sourceTree = "<group>"; };
 		F7C2626128B1C62700A24724 /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
-		F7CA229128FA20220073721D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		F7CA229728FA31040073721D /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F7D09639290D08FE001339AA /* track2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track2.mp3; sourceTree = "<group>"; };
 		F7D0963A290D08FE001339AA /* track3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track3.mp3; sourceTree = "<group>"; };
 		F7D0963B290D08FE001339AA /* track4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track4.mp3; sourceTree = "<group>"; };
@@ -154,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7CA229228FA20220073721D /* StoreKit.framework in Frameworks */,
 				90765A0D54793B202D0CD5AB /* Pods_CardMatchingGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +153,6 @@
 		12E8F55D501AEE3815F787CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F7CA229128FA20220073721D /* StoreKit.framework */,
 				EBA09A4659C693D8F8D53DF9 /* Pods_CardMatchingGame.framework */,
 			);
 			name = Frameworks;
@@ -183,7 +170,6 @@
 		F711937D2890C5EF00BC1DAA = {
 			isa = PBXGroup;
 			children = (
-				F7CA229728FA31040073721D /* Configuration.storekit */,
 				F7C2626128B1C62700A24724 /* Images.bundle */,
 				F71193882890C5EF00BC1DAA /* CardMatchingGame */,
 				F71193872890C5EF00BC1DAA /* Products */,
@@ -245,8 +231,6 @@
 				F7E53529289F6AE10019B770 /* MenuInterface.swift */,
 				F760AF6A289C6EA2007ABE11 /* GameInterface.swift */,
 				F72837C528ADC2E8000B9567 /* DetailInterface.swift */,
-				F795C8E128E7866A003A29E7 /* ShopInterface.swift */,
-				F7A9B63928F4CA6700768407 /* ShopExtensions.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -274,12 +258,10 @@
 			children = (
 				F711BF28289238C300C3E0E8 /* MenuController.swift */,
 				F711938D2890C5EF00BC1DAA /* GameController.swift */,
-				F774A79B28C6AC3000AAB936 /* HardcoreController.swift */,
 				F733F028290C928B0013883E /* TutorialController.swift */,
 				F72837BF28ADA788000B9567 /* CollectionController.swift */,
 				F700123428AEEDA1007DEA94 /* CardListController.swift */,
 				F72837C328ADC167000B9567 /* DetailController.swift */,
-				F75CEBF428E65AC9001A646D /* ShopController.swift */,
 				F764E17328B478BE00F4575F /* SettingsController.swift */,
 			);
 			path = Controller;
@@ -520,18 +502,14 @@
 				F79528C728F0F34B000C11D0 /* StatisticsUpdate.swift in Sources */,
 				F79528C328F0D5F3000C11D0 /* StatisticsModel.swift in Sources */,
 				F700123528AEEDA1007DEA94 /* CardListController.swift in Sources */,
-				F795C8E228E7866A003A29E7 /* ShopInterface.swift in Sources */,
 				F7835BF628A71D3D00081C6B /* Palette.swift in Sources */,
-				F774A79C28C6AC3000AAB936 /* HardcoreController.swift in Sources */,
 				F72837C428ADC167000B9567 /* DetailController.swift in Sources */,
 				F7EDF98328A634D2009CA17B /* HapticsManager.swift in Sources */,
-				F75CEBF528E65AC9001A646D /* ShopController.swift in Sources */,
 				F711BF29289238C300C3E0E8 /* MenuController.swift in Sources */,
 				F711938C2890C5EF00BC1DAA /* SceneDelegate.swift in Sources */,
 				F72837C028ADA788000B9567 /* CollectionController.swift in Sources */,
 				F7E5352A289F6AE10019B770 /* MenuInterface.swift in Sources */,
 				F7E1652228C2BA63004089E9 /* CardListModel.swift in Sources */,
-				F7A9B63A28F4CA6700768407 /* ShopExtensions.swift in Sources */,
 				F700123328AEED89007DEA94 /* CardListViewCell.swift in Sources */,
 				F7E50B1728B0C02D00DCA3BF /* GameLogicManager.swift in Sources */,
 				F79BF3C7289F1EDC00A8C51F /* Keys.swift in Sources */,

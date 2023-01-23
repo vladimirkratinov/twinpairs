@@ -44,9 +44,7 @@ struct LockerModel: Codable {
         //unlock first cell in UI and in Bool list:
         Properties.collectionOfLockedSets[0].isLocked = false
         Properties.unlockedList[0] = false
-        
-        //select first set default:
-        
+
         
         //select first set default:
         if !Properties.cardSet1isSelected || !Properties.cardSet1isSelected {
@@ -56,14 +54,7 @@ struct LockerModel: Codable {
         } else {
             Properties.collectionOfLockedSets[0].isSelected = false
         }
-        
-//        if Properties.selectedList.isEmpty {
-//            Properties.collectionOfLockedSets[0].isSelected = true
-//        } else {
-//            Properties.collectionOfLockedSets[0].isSelected = false
-//        }
-
-        print("loading Locker Model: \(Properties.collectionOfLockedSets)")
+//        print("loading Locker Model: \(Properties.collectionOfLockedSets)")
     }
     
     //MARK: - Unlock:
@@ -145,7 +136,7 @@ struct LockerModel: Codable {
         Properties.collectionOfLockedSets[index].isSelected = true
         Properties.selectedList[index] = Properties.collectionOfLockedSets[index].isSelected
         
-        print("Selected Locker Model: \(Properties.collectionOfLockedSets)")
+//        print("Selected Locker Model: \(Properties.collectionOfLockedSets)")
         print("selected list: \(Properties.selectedList)")
     }
     
