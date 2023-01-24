@@ -93,7 +93,6 @@ class AudioManager {
     }
     
     func playQueueBackgroundMusic() {
-        
 //        let mySongs: [String] = ["track1", "track2", "track3", "track4", "track5", "track6"]
 //        var mySongs: [String] = ["Snowfall", "Ceremonial", "Allegro", "Dreamland", "KingPorter", "TheGentlemen"]
         var mySongs: [String] = ["Snowfall", "Ceremonial", "Allegro", "Dreamland"]

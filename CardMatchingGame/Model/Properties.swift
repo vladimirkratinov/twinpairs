@@ -38,7 +38,7 @@ struct Properties {
     static var muteBackgroundMusic = false
     
     ///unlock price:
-    static var unlockPriceGlobal: Int = 100
+    static var unlockPriceGlobal: Int = 200
     
     ///Coins:
     static var coins = defaults.integer(forKey: CoinsKey.coins.rawValue)

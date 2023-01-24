@@ -11,9 +11,10 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <imageView key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundCardList1" id="d9e-lr-NxR">
+                    <imageView key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundGame" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="ExX-cU-q2E">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                     </imageView>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,6 +23,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackgroundCardList1" width="428" height="926"/>
+        <image name="BackgroundGame" width="428" height="926"/>
     </resources>
 </document>

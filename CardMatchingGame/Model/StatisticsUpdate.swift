@@ -510,7 +510,7 @@ extension GameController {
             case 600: self.gameInterface.yourResultTimeViewLabel.text =   "10m."
             default: return
             }
-//            self.gameInterface.yourResultTimeViewLabel.text =   String(Properties.standardTimeCounter)
+            
             self.gameInterface.yourResultFlipsViewLabel.text =  String(self.gameInterface.flipsCounter)
             self.gameInterface.yourResultPairsViewLabel.text =  String(self.gameInterface.pairsCounter)
             self.gameInterface.yourResultScoreViewLabel.text =  String(result.score)
