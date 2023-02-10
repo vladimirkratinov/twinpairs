@@ -1,29 +1,48 @@
 # 🎮 Twin Pairs
-Twin Pairs is a memory game where you need to match pairs of cards <br />
-Playing is very simple - you turn over one card and then try to find a matching card
+With beautiful graphics and fun, addictive gameplay, this game is sure to keep you entertained for hours. </br>
+Download now and start the search for the perfect pairs!
+
+Introducing Twin Pairs - the ultimate card-matching game, now available on the App Store! </br>
+Put your memory and observation skills to the test as you search for pairs of matching cards in a sea of options. </br>
+
+Twin Pairs is a challenging memory game where one must find and match pairs of cards, increasing the difficulty level and the total number of cards on the screen.
 
 # ❓ How to play:
-Try to match the cards with its respective pair with as few moves as possible
 
 * Reveal cards by clicking on them
 * Only two cards can be revealed at a time
-* If the symbols on the cards do not match the cards will revert to the original position
-* If the symbols match the revealed cards will remain open
-* Game is successfully completed when all pairs of cards have been matched to each other
+* If the pictures on the cards do not match, the cards will revert to their original position
+* If the images match, the revealed cards will remain open
+* Get two coins for each matched pair
+* The game is completed when all pairs of cards have been matched to each other
 
 # 🚀 Features: 
 
-- Twin Pairs is a challenging memory game where one must find and match pairs of cards, <br /> increasing the difficulty level and the total number of cards on the screen
-- This application is written in Swift and uses UIKit as the main framework
-- The game’s main feature is a unique graphic design with smooth and entertaining UI animations <br /> that improve and complements the user experience
-- Added additional CocoaPods libraries to diversify the gameplay and present customized animations <br /> within collections of cards available to the player
-- The impactful sound design emphasizes gameplay, including immersive background music and various effects
-- Used UICollectionView to organize and sort the pack of cards
-- Implemented StoreKit for the In-App purchases
+- Twin Pairs is a challenging memory game where one must find and match pairs of cards,
+increasing the difficulty level and the total number of cards on the screen.
+- This application is written in Swift and uses UIKit as the main framework.
+- Used MVC Design Pattern.
+- The game’s main feature is a unique graphic design with smooth and entertaining UI animations that improve and complement the user experience.
+- Added additional CocoaPods libraries to customize UICollectionView.
+- The impactful sound design emphasizes gameplay, including immersive background
+music and various effects.
+
 
 # 📷 Version History:
 
-## ver. 0.9 (New!)
+## ver. 1.0 (Release!)
+
+January 28, 2023 - AppStore release </br>
+https://apps.apple.com/us/app/twin-pairs/id6443835807
+
+![1](https://user-images.githubusercontent.com/78992253/218183525-6abad2b9-5b53-446c-adee-b17e6c4dfce7.png)
+![2](https://user-images.githubusercontent.com/78992253/218183527-82893620-6b65-48df-a1fd-a7a4f3732743.png)
+![3](https://user-images.githubusercontent.com/78992253/218183529-37cd4891-0be3-4198-90f6-2aa2acbcf163.png)
+![5](https://user-images.githubusercontent.com/78992253/218183531-e560d2a0-76eb-4838-b3a0-bfdf2581cf3e.png)
+![6](https://user-images.githubusercontent.com/78992253/218183534-6f1c2955-b000-453a-9973-12bb4125d23e.png)
+![7](https://user-images.githubusercontent.com/78992253/218183537-472494e0-60c8-4e7e-bb2f-a83bac595488.png)
+
+## ver. 0.9
 
 - [x] [Design] Add “Unlock” image to Unlock button in the ShopController
 - [x] [Design] Add “Select” image to Select button in the ShopController
@@ -58,8 +77,6 @@ Try to match the cards with its respective pair with as few moves as possible
 - [x] Rework Design: collectionView background item color
 - [x] Rework: GameOver Statistics (9 different)
 - [x] Fix: music stop play when game turn on
-
-
 
 ## ver. 0.7 
 
